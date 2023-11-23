@@ -5,6 +5,7 @@
     <title>Coffee-House</title>
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/preview.css">
+    <link rel="stylesheet" href="styles/section-favorite.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -32,10 +33,9 @@
     </header>
     <main>
         <section class="preview">
-            <div class="hero">
                 <div class="container-hero">
                     <div class="offer">
-                        <h1 class="head-text"><span class="enjoy">Enjoy</span> premium coffee at our charming cafe</h1>
+                        <h1 class="head-text"><i class="enjoy">Enjoy</i> premium coffee at our charming cafe</h1>
                         <p class="def-text">With its inviting atmosphere and delicious coffee options, the Coffee House Resource is a popular destination for coffee lovers and those seeking a warm and inviting space to enjoy their favorite beverage.</p>
                         <button class="menu-button">
                             <span class="button-text">Menu</span>
@@ -46,6 +46,47 @@
                                 <path d="M13.333 9.16675H15.4163C16.5669 9.16675 17.4997 10.0995 17.4997 11.2501C17.4997 12.4007 16.5669 13.3334 15.4163 13.3334H14.1663" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
+                    </div>
+                </div>
+        </section>
+        <section class="favorite">
+            <div class="container-favorite">
+                <p class="fav-text">Choose your <span class="favorite-word"><i>favorite</i></span> coffee</p>
+                <div class="slider">
+                    <div class="slide">
+                        <a class="arrow">
+                            <svg display="none">
+                                <symbol id="l-arrow" viewBox="0 0 24 24">
+                                    <path d="M18.5 12H6M6 12L12 6M6 12L12 18" stroke-linecap="round" stroke-linejoin="round"/>
+                                </symbol>
+                            </svg>
+                            <svg class="arrow-svg">
+                                <use href="#l-arrow"></use>
+                            </svg>
+                        </a>
+                        <figure class="product">
+                            <img src="images/coffee-slider-1.svg" alt="frapucino" width="480px" height="480px">
+                            <figcaption class="description">
+                                <p class="drink">S&#8217mores Frappuccino</p>
+                                <p class="description-text">This new drink takes an espresso and mixes it with brown sugar and cinnamon before being topped with oat milk.</p>
+                                <p class="price">$5.50</p>
+                            </figcaption>
+                        </figure>
+                        <a class="arrow">
+                            <svg display="none">
+                                <symbol id="r-arrow" viewBox="0 0 24 24">
+                                    <path d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18" stroke-linecap="round" stroke-linejoin="round"/>
+                                </symbol>
+                            </svg>
+                            <svg class="arrow-svg">
+                                <use href="#r-arrow"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="controls">
+                        <div class="control"></div>
+                        <div class="control-off"></div>
+                        <div class="control-off"></div>
                     </div>
                 </div>
             </div>
