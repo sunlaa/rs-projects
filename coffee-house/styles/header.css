@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #E1D4C9;
     margin: 0 auto;
@@ -13,6 +17,11 @@ body {
     align-items: center;    
 }
 
+.logo-link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .links {
     width: 1188px;
     height: 60px;
@@ -23,6 +32,7 @@ body {
 }
 
 .link {
+    text-decoration: none;
     position: relative;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
@@ -31,6 +41,7 @@ body {
 }
 
 .link-menu {
+    text-decoration: none;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     color: #403F3D;

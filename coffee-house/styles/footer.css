@@ -1,0 +1,138 @@
+.container-footer {
+    box-sizing: border-box;
+    height: 450px;
+    margin: 100px 40px 40px 40px;
+    padding: 100px;
+    border-radius: 40px;
+    background-color: #665F55;
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+
+.contact-text {
+    width: 530px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.sip-text {
+    margin: 0;
+    font-family: 'Inter';
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 125%;
+    color: #E1D4C9;
+}
+
+.coffee-time-word {
+    color: #B0907A;
+}
+
+.socials {
+    width: 204px;
+    height: 60px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.social {
+    text-decoration: none;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    border: solid 1px #C1B6AD;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: none;
+    transition: background-color 500ms ease-out;
+}
+
+.social:hover {
+    background-color: #E1D4C9;
+}
+
+
+.twitter-svg, .instagram-svg, .facebook-svg {
+    stroke: #E1D4C9;
+    fill: none;
+    width: 24px;
+    height: 24px;
+    transition: stroke 500ms ease-out;
+}
+
+.social:hover .twitter-svg,
+.social:hover .instagram-svg,
+.social:hover .facebook-svg {
+    stroke: #403F3D;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.contact-info-text {
+    margin: 0;
+    font-family: 'Inter';
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 125%;
+    color: #E1D4C9;
+}
+
+.contact-links {
+    width: 262px;
+    height: 116px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+}
+
+.contact-link-map, .contact-link-phone, .contact-link {
+    text-decoration: none;
+    position: relative;
+    margin: 0;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 150%;
+    color: #E1D4C9;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.contact-link-map::after {
+    position: absolute;
+    width: 182px;
+    content: '';
+    height: 2px;
+    background-color: #E1D4C9;
+    bottom: -5px;
+    transform: scaleX(0);
+    transition: transform 500ms ease-out;
+}
+
+.contact-link-phone::after {
+    position: absolute;
+    width: 175px;
+    content: '';
+    height: 2px;
+    background-color: #E1D4C9;
+    bottom: -5px;
+    transform: scaleX(0);
+    transition: transform 500ms ease-out;
+}
+
+.contact-link-map:hover::after,
+.contact-link-phone:hover::after {
+    transform: scaleX(1);
+}
