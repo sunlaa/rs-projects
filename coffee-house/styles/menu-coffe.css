@@ -1,0 +1,89 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin: 16px 40px 0 40px;
+}
+
+.offer {
+    width: 100%;
+    height: 236px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.offer-text {
+    width: 800px;
+    height: auto;
+    margin: 0;
+    text-align: center;
+    font-family: Inter;
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 125%;
+    color: #403F3D;
+}
+
+.amazing-word {
+    color: #B0907A;
+}
+
+.tabs {
+    display: flex;
+    gap: 16px;
+}
+
+.tab {
+    border: solid 1px #C1B6AD;
+    border-radius: 100px;
+    padding: 8px 16px 8px 8px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.emoji {
+    padding: 3px 7px;
+    width: 16px;
+    height: 24px;
+    border-radius: 100px;
+    background: #C1B6AD;
+}
+
+.tab-text {
+    margin: 0;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 150%;
+    color: #403F3D; 
+}
+
+.tab-coffee {
+    border-radius: 100px;
+    background-color: #665F55;
+    padding: 8px 16px 8px 8px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.emoji-coffee {
+    padding: 3px 7px;
+    width: 16px;
+    height: 24px;
+    border-radius: 100px;
+    background: #E1D4C9;
+}
+
+.tab-text-coffee {
+    margin: 0;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 150%;
+    color: #E1D4C9; 
+}
