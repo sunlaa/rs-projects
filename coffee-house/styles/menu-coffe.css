@@ -87,3 +87,135 @@
     line-height: 150%;
     color: #E1D4C9; 
 }
+
+.grid {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 40px;
+  justify-content: center;
+}
+
+.item {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: solid 1px #C1B6AD;
+    border-radius: 40px;
+    width: 310px;
+    height: 506px;
+}
+
+.image-1,
+.image-2,
+.image-3,
+.image-4,
+.image-5,
+.image-6,
+.image-7,
+.image-8 {
+    width: 310px;
+    height: 310px;
+    border-radius: 40px;
+}
+
+.image-1 {
+    background: url(/images/coffee-1.svg);
+    background-size: 110%;
+    transition: background-size 500ms ease-out;
+    background-position: center;
+
+}
+
+.image-2 {
+    background: url(/images/coffee-2.svg);
+    background-size: 110%;
+    transition: background-size 500ms ease-out;
+    background-position: center;
+}
+
+.image-3 {
+    background: url(/images/coffee-3.svg);
+    background-size: 110%;
+    transition: background-size 500ms ease-out;
+    background-position: center;
+}
+
+.image-4 {
+    background: url(/images/coffee-4.svg);
+    background-size: 110%;
+    transition: background-size 500ms ease-out;
+    background-position: center;
+}
+
+.image-5 {
+    background: url(/images/coffee-5.svg);
+    background-size: 110%;
+    transition: background-size 500ms ease-out;
+    background-position: center;
+}
+
+.image-6 {
+    background: url(/images/coffee-6.svg);
+    background-size: 110%;
+    transition: background-size 500ms ease-out;
+    background-position: center;
+}
+
+.image-7 {
+    background: url(/images/coffee-7.svg);
+    background-size: 110%;
+    transition: background-size 500ms ease-out;
+    background-position: center;
+}
+
+.image-8 {
+    background: url(/images/coffee-8.svg);
+    background-size: 110%;
+    transition: background-size 500ms ease-out;
+    background-position: center;
+}
+
+.item:hover .image-1,
+.item:hover .image-2,
+.item:hover .image-3,
+.item:hover .image-4,
+.item:hover .image-5,
+.item:hover .image-6,
+.item:hover .image-7,
+.item:hover .image-8 {
+    background-size: 100%;
+}
+
+.description {
+    box-sizing: border-box;
+    height: 196px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.coffee-name, .price {
+    margin: 0;
+    font-family: 'Inter';
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 125%;
+    color: #403F3D;
+}
+
+.coffee-description {
+    margin: 0;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+    color: #403F3D;
+}
