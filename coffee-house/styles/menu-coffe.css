@@ -6,6 +6,24 @@
     margin: 16px 40px 0 40px;
 }
 
+.coffee-menu-page {
+    cursor: pointer;
+    position: relative;
+    width: 72px;
+    height: 28px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.coffee-menu-page::before {
+    position: absolute;
+    content: '';
+    top: 24px;
+    width: 100%;
+    height: 2px;
+    background-color: #403F3D;
+}
+
 .offer {
     width: 100%;
     height: 236px;
@@ -37,12 +55,22 @@
 }
 
 .tab {
+    cursor: pointer;
     border: solid 1px #C1B6AD;
     border-radius: 100px;
     padding: 8px 16px 8px 8px;
     display: flex;
     gap: 8px;
     align-items: center;
+    background-color: none;
+    transition: 
+    background-color 500ms ease-out,
+    border 500ms ease-out;
+}
+
+.tab:hover {
+    background-color: #665F55;
+    border-color: #665F55;
 }
 
 .emoji {
@@ -50,7 +78,12 @@
     width: 16px;
     height: 24px;
     border-radius: 100px;
-    background: #C1B6AD;
+    background-color: #C1B6AD;
+    transition: background-color 500ms ease-out ;
+}
+
+.tab:hover .emoji {
+    background-color: #E1D4C9;
 }
 
 .tab-text {
@@ -60,9 +93,15 @@
     font-weight: 600;
     line-height: 150%;
     color: #403F3D; 
+    transition: color 500ms ease-out;
+}
+
+.tab:hover .tab-text {
+    color: #E1D4C9;
 }
 
 .tab-coffee {
+    cursor: pointer;
     border-radius: 100px;
     background-color: #665F55;
     padding: 8px 16px 8px 8px;
@@ -96,6 +135,7 @@
 }
 
 .item {
+    cursor: pointer;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
