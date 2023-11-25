@@ -160,7 +160,7 @@
 }
 
 .image-1 {
-    background: url(/images/coffee-1.svg);
+    background: url(../images/coffee-1.svg);
     background-size: 110%;
     transition: background-size 500ms ease-out;
     background-position: center;
@@ -168,49 +168,49 @@
 }
 
 .image-2 {
-    background: url(/images/coffee-2.svg);
+    background: url(../images/coffee-2.svg);
     background-size: 110%;
     transition: background-size 500ms ease-out;
     background-position: center;
 }
 
 .image-3 {
-    background: url(/images/coffee-3.svg);
+    background: url(../images/coffee-3.svg);
     background-size: 110%;
     transition: background-size 500ms ease-out;
     background-position: center;
 }
 
 .image-4 {
-    background: url(/images/coffee-4.svg);
+    background: url(../images/coffee-4.svg);
     background-size: 110%;
     transition: background-size 500ms ease-out;
     background-position: center;
 }
 
 .image-5 {
-    background: url(/images/coffee-5.svg);
+    background: url(../images/coffee-5.svg);
     background-size: 110%;
     transition: background-size 500ms ease-out;
     background-position: center;
 }
 
 .image-6 {
-    background: url(/images/coffee-6.svg);
+    background: url(../images/coffee-6.svg);
     background-size: 110%;
     transition: background-size 500ms ease-out;
     background-position: center;
 }
 
 .image-7 {
-    background: url(/images/coffee-7.svg);
+    background: url(../images/coffee-7.svg);
     background-size: 110%;
     transition: background-size 500ms ease-out;
     background-position: center;
 }
 
 .image-8 {
-    background: url(/images/coffee-8.svg);
+    background: url(../images/coffee-8.svg);
     background-size: 110%;
     transition: background-size 500ms ease-out;
     background-position: center;

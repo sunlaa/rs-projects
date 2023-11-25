@@ -35,7 +35,7 @@
     width: 660px;
     height: 590px;
     border-radius: 20px;
-    background: url(/images/about-1.svg);
+    background: url(../images/about-1.svg);
     background-size: 110%;
     background-position: center;
     transition: background-size 500ms ease-out;
@@ -45,7 +45,7 @@
     width: 660px;
     height: 430px;
     border-radius: 20px;
-    background: url(/images/about-2.svg);
+    background: url(../images/about-2.svg);
     background-size: 110%;
     background-position: center;
     transition: background-size 500ms ease-out;
@@ -55,7 +55,7 @@
     width: 660px;
     height: 430px;
     border-radius: 20px;
-    background: url(/images/about-3.svg);
+    background: url(../images/about-3.svg);
     background-size: 110%;
     background-position: center;
     transition: background-size 500ms ease-out;
@@ -65,7 +65,7 @@
     width: 660px;
     height: 590px;
     border-radius: 20px;
-    background: url(/images/about-4.svg);
+    background: url(../images/about-4.svg);
     background-size: 110%;
     background-position: center;
     transition: background-size 500ms ease-out;
