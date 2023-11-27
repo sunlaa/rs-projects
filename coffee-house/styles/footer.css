@@ -73,6 +73,7 @@
 }
 
 .contact-info {
+    height: 186px;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -92,7 +93,7 @@
     height: 116px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
     justify-content: center;
 }
 

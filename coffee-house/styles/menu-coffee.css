@@ -101,7 +101,7 @@
 }
 
 .tab-coffee {
-    cursor: pointer;
+    cursor: default;
     border-radius: 100px;
     background-color: #665F55;
     padding: 8px 16px 8px 8px;
