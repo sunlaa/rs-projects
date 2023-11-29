@@ -1,5 +1,5 @@
 .container-about {
-    margin: 100px 40px 0 40px;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,4 +73,26 @@
 
 .about-1:hover, .about-2:hover, .about-3:hover, .about-4:hover {
     background-size: 100%;
+}
+
+
+@media (max-width: 768px) {
+    .about-2, .about-3 {
+        display: none;
+    }
+
+    .about-1, .about-4 {
+        width: 43rem;
+        background-size: 105%;
+    }
+
+    .about-1:hover, .about-4:hover {
+        background-size: 105%;
+    }
+
+    .images {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
 }

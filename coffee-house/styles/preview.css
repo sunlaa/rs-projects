@@ -1,7 +1,7 @@
 .container-hero {
     box-sizing: border-box;
     height: 644px;
-    margin: 16px 40px 0 40px;
+    margin-top: 16px;
     padding: 100px;
     background: url(../images/img-hero.jpg);
     background-position: center;
@@ -77,4 +77,22 @@
 
 .menu-button:hover .coffee-cup {
     opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .container-hero {
+        padding: 6.25rem 3.75rem;
+    }
+
+    .menu-button {
+        cursor: default;
+    }
+
+    .button-text {
+        transform: translateX(-15px);
+    }
+
+    .coffee-cup {
+        opacity: 1;
+    }
 }

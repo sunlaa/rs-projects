@@ -1,6 +1,5 @@
 .container-mobile-app {
-    height: 630px;
-    margin: 100px 40px 0 40px;
+    margin-top: 100px;
     display: flex;
     align-items: center;
     gap: 100px;
@@ -102,4 +101,34 @@
 
 .apple:hover .apple-svg, .google:hover .google-svg {
     fill: #E1D4C9
+}
+
+@media (max-width: 768px)  {
+    .container-mobile-app {
+        flex-direction: column;
+    }
+
+    .offer-app {
+        width: 43rem;
+    }
+
+    .apple, .google {
+        cursor: default;
+    }
+
+    .apple:hover, .google:hover {
+        background-color: #E1D4C9;
+    }
+
+    .apple:hover .avalibale-text, 
+    .apple:hover .store-text, 
+    .google:hover .avalibale-text, 
+    .google:hover .store-text {
+        color: #403F3D;
+    }
+
+    .apple:hover .apple-svg, .google:hover .google-svg {
+        fill: #403F3D
+    }
+    
 }

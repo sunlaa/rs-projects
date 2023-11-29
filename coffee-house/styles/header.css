@@ -4,14 +4,12 @@ html {
 
 body {
     background-color: #E1D4C9;
-    margin: 0 auto;
-    max-width: 1440px;
-    width: 100%;
-   
+    margin: 0 40px;
+    overflow-x: hidden;
 }
 
 .header-menu {
-    margin: 20px 40px 0 40px;
+    margin-top: 1.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;    
@@ -23,7 +21,6 @@ body {
 }
 
 .links {
-    width: 1188px;
     height: 60px;
     display: flex;
     justify-content: center;
@@ -86,3 +83,24 @@ body {
     transform: scaleX(1);
 }
 
+.menu-burger {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .links, .coffee-menu {
+        display: none;
+    }  
+    
+    .menu-burger {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 100px;
+        border: 1px solid #665F55;
+        justify-content: center;
+        align-items: center;
+    }
+}
