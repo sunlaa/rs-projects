@@ -1,7 +1,6 @@
 .container-mobile-app {
     margin-top: 100px;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     gap: 100px;
 }
@@ -99,6 +98,12 @@
 
 .apple:hover .apple-svg, .google:hover .google-svg {
     fill: #E1D4C9
+}
+
+@media (min-width: 769px) and (max-width: 1439px) {
+    .container-mobile-app {
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 768px)  {
