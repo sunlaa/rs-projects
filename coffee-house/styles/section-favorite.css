@@ -1,6 +1,5 @@
 .container-favorite {
-    height: 799px;
-    margin: 100px 40px 0 40px;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -21,22 +20,23 @@
 }
 
 .slider {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 40px;
 }
 
-.slide {
+.slide {                                
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 40px;
+
 }
 
 .product {
     margin: 0;
-    width: 1152px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,7 +45,7 @@
 
 .description {
     width: 480px;
-    height: 140px;
+    /* height: 140px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,6 +80,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     transition:
     background-color 500ms ease-out, 
     border-color 500ms ease-out;
@@ -119,3 +120,52 @@
  background-color: #C1B6AD;
 }
 
+@media (max-width: 768px) {
+    .fav-text {
+        text-align: center;
+    }
+
+    .product {
+        width: 480px;
+        max-width: 348px; 
+    } 
+
+    .arrow {
+        transition: none;
+        
+    }
+
+    .arrow:hover {
+        border: 1px solid #665F55;
+        background-color: #E1D4C9;   
+    }
+
+    .arrow:hover .arrow-svg {
+        stroke: #665F55;
+    }
+
+}
+
+@media  (max-width: 670px) {
+    .slide {
+        justify-content: center;
+    }
+
+    .arrow {
+        display: none;
+    }
+
+    .fav-text {
+        margin: 0;
+        font-size: 32px;
+    }
+
+    .frapucino {
+        width: 21.75rem;
+        height: 21.75rem;
+    }
+
+    .description {
+        width: 100%;
+    }
+}
