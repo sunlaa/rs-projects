@@ -106,3 +106,9 @@ body {
         align-items: center;
     }
 }
+
+@media (max-width: 380px) {
+    body {
+        margin: 0 1rem;
+    }
+}

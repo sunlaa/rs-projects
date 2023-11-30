@@ -45,7 +45,7 @@
 
 .description {
     width: 480px;
-    height: 140px;
+    /* height: 140px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,14 +120,15 @@
  background-color: #C1B6AD;
 }
 
-@media  (max-width: 768px) {
+@media (max-width: 768px) {
     .fav-text {
         text-align: center;
     }
 
     .product {
         width: 480px;
-    }
+        max-width: 348px; 
+    } 
 
     .arrow {
         transition: none;
@@ -143,4 +144,28 @@
         stroke: #665F55;
     }
 
+}
+
+@media  (max-width: 670px) {
+    .slide {
+        justify-content: center;
+    }
+
+    .arrow {
+        display: none;
+    }
+
+    .fav-text {
+        margin: 0;
+        font-size: 32px;
+    }
+
+    .frapucino {
+        width: 21.75rem;
+        height: 21.75rem;
+    }
+
+    .description {
+        width: 100%;
+    }
 }

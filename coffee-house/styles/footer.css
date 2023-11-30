@@ -144,7 +144,6 @@
     .container-footer {
         margin-bottom: 2.5rem;
         flex-direction: column;
-        height: 46rem;
         padding: 6.25rem 3.75rem;
         align-items: flex-start;
         gap: 6.25rem;
@@ -170,6 +169,19 @@
 
     .contact-link-map::after, .contact-link-phone::after {
         display: none;
+    }
+
+}
+
+@media (max-width: 670px) {
+    .container-footer {
+        padding: 3.75rem 1rem;
+        gap: 2.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .sip-text {
+        font-size: 32px;
     }
 
 }

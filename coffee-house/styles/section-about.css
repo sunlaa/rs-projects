@@ -20,7 +20,7 @@
 }
 
 .images {
-    justify-content: flex-start;
+    justify-content: space-between;
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
@@ -84,8 +84,8 @@
     }
 
     .about-1, .about-4 {
-        width: 43rem;
         background-size: 105%;
+        width: 688px;
     }
 
     .about-1:hover, .about-4:hover {
@@ -93,8 +93,25 @@
     }
 
     .images {
+        align-items: center;
         flex-direction: column;
         gap: 40px;
     }
     
+}
+
+@media (max-width: 670px) {
+    .about-text {
+        font-size: 32px;
+    }
+
+    .about-1, .about-4 {
+        width: 348px;
+        height: 590px;
+        background-size: 210%;
+    }
+
+    .about-1:hover, .about-4:hover {
+        background-size: 210%;
+    }
 }

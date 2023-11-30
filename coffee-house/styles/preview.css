@@ -1,6 +1,6 @@
 .container-hero {
     box-sizing: border-box;
-    height: 644px;
+    /* height: 644px; */
     margin-top: 16px;
     padding: 100px;
     background: url(../images/img-hero.jpg);
@@ -16,7 +16,6 @@
     gap: 40px;
     margin: 0px;
     width: 530px;
-    height: 444px;
 }
 
 .head-text {
@@ -94,5 +93,20 @@
 
     .coffee-cup {
         opacity: 1;
+    }
+} 
+
+@media (max-width: 670px) {
+    .container-hero {
+        padding: 3.75rem 1rem;
+    }
+     .head-text {
+        font-size: 42px;
+        line-height: 115%;
+    }
+
+    .offer {
+        width: 100%;
+        gap: 2.5rem;
     }
 }

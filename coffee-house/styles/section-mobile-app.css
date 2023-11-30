@@ -7,8 +7,6 @@
 }
 
 .offer-app {
-    width: 630px;
-    height: 342px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -38,13 +36,12 @@
 }
 
 .buttons {
-    width: 420px;
-    height: 64px;
     display: flex;
     gap: 20px;
 }
 
 .apple, .google {
+    box-sizing: border-box;
     text-decoration: none;
     cursor: pointer;
     display: flex;
@@ -110,7 +107,8 @@
     }
 
     .offer-app {
-        width: 43rem;
+        width: 100%;
+        height: auto;
     }
 
     .apple, .google {
@@ -132,4 +130,38 @@
         fill: #403F3D
     }
     
+}
+
+@media (max-width: 670px) {
+    .container-mobile-app {
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .mobile-screen {
+        width: 348px;
+        height: 348px;
+    }
+
+    .offer-app {
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .download-text {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 125%; 
+        color: #403F3D;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .apple, .google {
+        box-sizing: border-box;
+        width: 200px;
+    }
 }
