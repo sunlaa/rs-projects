@@ -20,7 +20,9 @@
 }
 
 .images {
+    justify-content: flex-start;
     display: flex;
+    flex-wrap: wrap;
     gap: 40px;
 }
 

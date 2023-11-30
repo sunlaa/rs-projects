@@ -3,9 +3,11 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     background-color: #E1D4C9;
     margin: 0 40px;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 .header-menu {
