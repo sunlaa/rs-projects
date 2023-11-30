@@ -1,5 +1,8 @@
 html {
     scroll-behavior: smooth;
+    margin: 0 auto;
+    max-width: 1440px;
+
 }
 
 body {
@@ -7,7 +10,6 @@ body {
     flex-direction: column;
     background-color: #E1D4C9;
     margin: 0 40px;
-    /* overflow-x: hidden; */
 }
 
 .header-menu {
