@@ -92,6 +92,10 @@ body {
 }
 
 @media (max-width: 768px) {
+    .logo-link{
+        cursor: default;
+    }
+
     .links, .coffee-menu {
         display: none;
     }  

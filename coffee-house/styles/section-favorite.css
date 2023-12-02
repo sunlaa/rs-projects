@@ -132,6 +132,7 @@
 
     .arrow {
         transition: none;
+        cursor: default;
         
     }
 
