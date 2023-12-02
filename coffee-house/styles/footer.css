@@ -154,6 +154,7 @@
     }
 
     .social:hover {
+        cursor: default;
         background-color: #665F55;
     }
 
