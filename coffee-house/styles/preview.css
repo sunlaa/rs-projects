@@ -62,10 +62,6 @@
     transition: transform 300ms ease-in;
 }
 
-.menu-button:hover .button-text {
-    transform: translateX(-15px);
-}
-
 .coffee-cup {
     position: absolute;
     right: 65px;
@@ -74,9 +70,6 @@
     transition: opacity 300ms ease-in;
 }
 
-.menu-button:hover .coffee-cup {
-    opacity: 1;
-}
 
 @media (max-width: 768px) {
     .container-hero {
@@ -109,4 +102,24 @@
         width: 100%;
         gap: 2.5rem;
     }
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+    .button-text {
+        transform: translateX(0);
+    }
+
+    .coffee-cup {
+        opacity: 0;
+    }
+
+    .menu-button:hover .button-text {
+        transform: translateX(-15px);
+    }
+
+    .menu-button:hover .coffee-cup {
+        opacity: 1;
+    }
+    
 }

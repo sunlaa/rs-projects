@@ -42,7 +42,6 @@
 .apple, .google {
     box-sizing: border-box;
     text-decoration: none;
-    cursor: pointer;
     display: flex;
     gap: 8px;
     align-items: center;
@@ -52,10 +51,6 @@
     border-radius: 100px;
     background-color: none;
     transition: background-color 500ms ease-in;
-}
-
-.apple:hover, .google:hover {
-    background-color: #665F55;
 }
 
 
@@ -82,22 +77,11 @@
     transition: color 500ms ease-in;
 }
 
-.apple:hover .avalibale-text, 
-.apple:hover .store-text, 
-.google:hover .avalibale-text, 
-.google:hover .store-text {
-    color: #E1D4C9;
-}
-
 .apple-svg, .google-svg {
     width: 36px;
     height: 36px;
     fill: #403F3D;
     transition: fill 500ms ease-in;
-}
-
-.apple:hover .apple-svg, .google:hover .google-svg {
-    fill: #E1D4C9
 }
 
 @media (min-width: 769px) and (max-width: 1439px) {
@@ -135,6 +119,27 @@
         fill: #403F3D
     }
     
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .apple:hover, .google:hover {
+        background-color: #665F55;
+    }
+
+    .apple:hover .avalibale-text, 
+    .apple:hover .store-text, 
+    .google:hover .avalibale-text, 
+    .google:hover .store-text {
+        color: #E1D4C9;
+    }
+
+    .apple:hover .apple-svg, .google:hover .google-svg {
+        fill: #E1D4C9
+    }
+
+    .apple, .google {
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 670px) {
