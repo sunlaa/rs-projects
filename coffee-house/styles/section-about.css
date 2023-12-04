@@ -73,8 +73,10 @@
     transition: background-size 500ms ease-out;
 }
 
-.about-1:hover, .about-2:hover, .about-3:hover, .about-4:hover {
-    background-size: 100%;
+@media (hover: hover) and (pointer: fine) {
+    .about-1:hover, .about-2:hover, .about-3:hover, .about-4:hover {
+        background-size: 100%;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1439px) {
@@ -82,7 +84,6 @@
         justify-content: center;
     }
 }
-
 
 @media (max-width: 768px) {
     .about-2, .about-3 {
@@ -103,8 +104,15 @@
         flex-direction: column;
         gap: 40px;
     }
-    
+
+    @media (hover: hover) and (pointer: fine) {
+        .about-1:hover, .about-4:hover {
+            background-size: 100%;
+        }
+    }
+     
 }
+
 
 @media (max-width: 670px) {
     .about-text {
@@ -120,4 +128,12 @@
     .about-1:hover, .about-4:hover {
         background-size: 210%;
     }
+
+    @media (hover: hover) and (pointer: fine) {
+        .about-1:hover, .about-4:hover {
+            background-size: 190%;
+        }
+    }
+
+
 }
