@@ -60,10 +60,6 @@ body {
     transition: transform 500ms ease-out;
 }
 
-.link:hover::before {
-    transform: scaleX(1);
-}
-
 .coffee-menu {
     position: relative;
     width: 72px;
@@ -83,19 +79,27 @@ body {
     transition: transform 500ms ease-out;
 }
 
-.coffee-menu:hover::before {
-    transform: scaleX(1);
-}
+
 
 .menu-burger {
     display: none;
 }
 
-@media (max-width: 768px) {
-    .logo-link{
-        cursor: default;
+@media (hover: hover) and (pointer: fine) {
+    .link:hover::before {
+        transform: scaleX(1);
     }
 
+    .coffee-menu:hover::before {
+        transform: scaleX(1);
+    }
+
+    .menu-burger {
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 768px) {
     .links, .coffee-menu {
         display: none;
     }  

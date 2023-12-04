@@ -1,6 +1,5 @@
 .container-footer {
     box-sizing: border-box;
-    /* height: 450px; */
     margin-top: 100px;
     margin-bottom: 40px;
     padding: 100px;
@@ -43,7 +42,6 @@
 
 .social {
     text-decoration: none;
-    cursor: pointer;
     width: 60px;
     height: 60px;
     border: solid 1px #C1B6AD;
@@ -55,10 +53,6 @@
     transition: background-color 500ms ease-out;
 }
 
-.social:hover {
-    background-color: #E1D4C9;
-}
-
 
 .twitter-svg, .instagram-svg, .facebook-svg {
     stroke: #E1D4C9;
@@ -66,12 +60,6 @@
     width: 24px;
     height: 24px;
     transition: stroke 500ms ease-out;
-}
-
-.social:hover .twitter-svg,
-.social:hover .instagram-svg,
-.social:hover .facebook-svg {
-    stroke: #403F3D;
 }
 
 .contact-info {
@@ -135,11 +123,6 @@
     transition: transform 500ms ease-out;
 }
 
-.contact-link-map:hover::after,
-.contact-link-phone:hover::after {
-    transform: scaleX(1);
-}
-
 @media (max-width: 768px) {
     .container-footer {
         margin-bottom: 2.5rem;
@@ -154,7 +137,6 @@
     }
 
     .social:hover {
-        cursor: default;
         background-color: #665F55;
     }
 
@@ -163,15 +145,34 @@
     .social:hover .facebook-svg {
         stroke: #E1D4C9;
     }
-
-    .contact-link-map, .contact-link-phone, .contact-link {
-        cursor: default;
-    }
-
+    
     .contact-link-map::after, .contact-link-phone::after {
         display: none;
     }
 
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .social:hover {
+        background-color: #E1D4C9;
+        cursor: pointer;
+    }
+
+    .social:hover .twitter-svg,
+    .social:hover .instagram-svg,
+    .social:hover .facebook-svg {
+        stroke: #403F3D;
+    }
+
+    .contact-link-map::after, .contact-link-phone::after {
+        display: block;
+    }
+
+    .contact-link-map:hover::after,
+    .contact-link-phone:hover::after {
+        cursor: pointer;
+        transform: scaleX(1);
+    }
 }
 
 @media (max-width: 670px) {
