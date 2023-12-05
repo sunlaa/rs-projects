@@ -87,6 +87,8 @@
 @media (min-width: 769px) and (max-width: 1439px) {
     .container-mobile-app {
         flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
     }
 }
 
