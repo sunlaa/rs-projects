@@ -92,7 +92,7 @@
 
     .about-1, .about-4 {
         background-size: 105%;
-        width: 688px;
+        width: 90vw;
     }
 
     .about-1:hover, .about-4:hover {
@@ -120,7 +120,7 @@
     }
 
     .about-1, .about-4 {
-        width: 348px;
+        width: 90vw;
         height: 590px;
         background-size: 210%;
     }
@@ -136,4 +136,10 @@
     }
 
 
+}
+
+@media (min-width: 460px) and (max-width: 670px) {
+    .about-1, .about-4 {
+        background-size: 150%;
+    }
 }
