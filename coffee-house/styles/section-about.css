@@ -140,4 +140,14 @@
     .about-1, .about-4 {
         background-size: 150%;
     }
+
+    .about-1:hover, .about-4:hover {
+        background-size: 150%;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        .about-1:hover, .about-4:hover {
+            background-size: 170%;
+        }
+    }
 }
