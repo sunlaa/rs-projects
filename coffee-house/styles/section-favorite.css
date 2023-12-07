@@ -36,12 +36,24 @@
 
 }
 
+.slider-wrap {
+    position: relative;
+    height: 640px;
+    width: 100%;
+    max-width: 1152px;
+    min-width: 480px;
+    overflow: hidden;
+}
+
 .product {
+    position: absolute;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    width: 100%;
+    transition: all 0.5s;
 }
 
 .description {
@@ -76,7 +88,8 @@
     height: 60px;
     border-radius: 100px;
     border: 1px solid #665F55;
-    background-color: none;
+    background-color: #E1D4C9;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -84,6 +97,7 @@
     transition:
     background-color 500ms ease-out, 
     border-color 500ms ease-out;
+    z-index: 1;
 }
 
 .arrow:hover{
@@ -109,26 +123,44 @@
     gap: 12px;
 }
 
-.control, .control-off {
+.control {
     border-radius: 100px;
     width: 40px;
     height: 4px;
-    background-color: #665F55;
+    background-color: #C1B6AD;
 }
 
-.control-off {
- background-color: #C1B6AD;
+.progress {
+    position: absolute;
+    background-color: #665F55;
+    height: 4px;
+    width: 0;
+    border-radius: 100px;
+    z-index: 1;
+    animation-timing-function: linear;
+    animation-play-state: running;
+}
+
+@keyframes filling {
+    from {
+        width: 0;
+    } to {
+        width: 40px;
+    }
+}
+
+@keyframes empty {
+    from {
+        width: 10px;
+    } to {
+        width: 0;
+    }
 }
 
 @media (max-width: 768px) {
     .fav-text {
         text-align: center;
     }
-
-    .product {
-        width: 480px;
-        max-width: 348px; 
-    } 
 
 }
 
