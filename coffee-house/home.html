@@ -67,7 +67,7 @@
                 <h2 class="fav-text">Choose your <span class="favorite-word"><i>favorite</i></span> coffee</h2>
                 <div class="slider">
                     <div class="slide">
-                        <a class="arrow">
+                        <button class="arrow l-arrow">
                             <svg display="none">
                                 <symbol id="l-arrow" viewBox="0 0 24 24">
                                     <path d="M18.5 12H6M6 12L12 6M6 12L12 18" stroke-linecap="round" stroke-linejoin="round"/>
@@ -76,16 +76,34 @@
                             <svg class="arrow-svg">
                                 <use href="#l-arrow"></use>
                             </svg>
-                        </a>
-                        <figure class="product">
-                            <img class="frapucino" src="images/coffee-slider-1.svg" alt="frapucino" width="480" height="480">
-                            <figcaption class="description">
-                                <p class="drink">S&#8217;mores Frappuccino</p>
-                                <p class="description-text">This new drink takes an espresso and mixes it with brown sugar and cinnamon before being topped with oat milk.</p>
-                                <p class="price">$5.50</p>
-                            </figcaption>
-                        </figure>
-                        <a class="arrow">
+                        </button>
+                        <div class="slider-wrap">
+                            <figure class="product">
+                                <img class="coffee-slider" src="images/coffee-slider-1.svg" alt="frapucino" width="480" height="480">
+                                <figcaption class="description">
+                                    <p class="drink">S&#8217;mores Frappuccino</p>
+                                    <p class="description-text">This new drink takes an espresso and mixes it with brown sugar and cinnamon before being topped with oat milk.</p>
+                                    <p class="price">$5.50</p>
+                                </figcaption>
+                            </figure>
+                            <figure class="product">
+                                <img class="coffee-slider" src="images/coffee-slider-2.svg" alt="caramel" width="480" height="480">
+                                <figcaption class="description">
+                                    <p class="drink">Caramel Macchiato</p>
+                                    <p class="description-text">Fragrant and unique classic espresso with rich caramel-peanut syrup, with cream under whipped thick foam.</p>
+                                    <p class="price">$5.00</p>
+                                </figcaption>
+                            </figure>
+                            <figure class="product">
+                                <img class="coffee-slider" src="images/coffee-slider-3.svg" alt="ice" width="480" height="480">
+                                <figcaption class="description">
+                                    <p class="drink">Ice coffee</p>
+                                    <p class="description-text">A popular summer drink that tones and invigorates. Prepared from coffee, milk and ice.</p>
+                                    <p class="price">$4.50</p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <button class="arrow r-arrow">
                             <svg display="none">
                                 <symbol id="r-arrow" viewBox="0 0 24 24">
                                     <path d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18" stroke-linecap="round" stroke-linejoin="round"/>
@@ -94,12 +112,12 @@
                             <svg class="arrow-svg">
                                 <use href="#r-arrow"></use>
                             </svg>
-                        </a>
+                        </button>
                     </div>
                     <div class="controls">
-                        <div class="control"></div>
-                        <div class="control-off"></div>
-                        <div class="control-off"></div>
+                        <div class="control"><div class="progress"></div></div>
+                        <div class="control"><div class="progress"></div></div>
+                        <div class="control"><div class="progress"></div></div>
                     </div>
                 </div>
             </div>
@@ -244,5 +262,6 @@
             </div>
         </div>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
