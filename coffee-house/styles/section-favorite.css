@@ -28,7 +28,8 @@
     gap: 40px;
 }
 
-.slide {                                
+.slide { 
+    position: relative;                               
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -37,23 +38,27 @@
 }
 
 .slider-wrap {
-    position: relative;
-    height: 640px;
+    height: auto;
     width: 100%;
     max-width: 1152px;
-    min-width: 480px;
+    min-width: 380px;
     overflow: hidden;
 }
 
+.slider-track {
+    display: flex;
+}
+
 .product {
-    position: absolute;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-shrink: 0;
     gap: 20px;
     width: 100%;
-    transition: all 0.5s;
+    max-width: 1152px;
+    min-width: 380px;
 }
 
 .description {
@@ -176,6 +181,11 @@
 }
 
 @media  (max-width: 670px) {
+    .fav-text {
+        margin: 0;
+        font-size: 32px;
+    }
+
     .slide {
         justify-content: center;
     }
@@ -184,17 +194,12 @@
         display: none;
     }
 
-    .fav-text {
-        margin: 0;
-        font-size: 32px;
-    }
-
-    .frapucino {
+    .coffee-slider {
         width: 21.75rem;
         height: 21.75rem;
     }
 
     .description {
-        width: 100%;
+        width: 348px;
     }
 }
