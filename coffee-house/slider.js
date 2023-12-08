@@ -121,8 +121,7 @@ function swipeStart(event) {
 function swipeMove(event) {
     let style = sliderTrack.style.transform;
     let transform = +style.match(search)[0];
-    console.log(transform);
-
+    
     shift = current - event.touches[0].clientX;
     current = event.touches[0].clientX;
 
