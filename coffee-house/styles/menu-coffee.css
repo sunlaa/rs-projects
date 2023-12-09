@@ -68,7 +68,7 @@
     border 500ms ease-out;
 }
 
-.emoji {
+.tab .emoji {
     padding: 3px 7px;
     width: 16px;
     height: 24px;
@@ -77,7 +77,7 @@
     transition: background-color 500ms ease-out ;
 }
 
-.tab-text {
+.tab .tab-text {
     margin: 0;
     font-family: 'Inter';
     font-size: 16px;
@@ -87,17 +87,18 @@
     transition: color 500ms ease-out;
 }
 
-.tab-coffee {
+.tab.active {
     cursor: default;
     border-radius: 100px;
-    background-color: #665F55;
+    background-color: #665F55;  
+    border-color: #665F55;         
     padding: 8px 16px 8px 8px;
     display: flex;
     gap: 8px;
     align-items: center;
 }
 
-.emoji-coffee {
+.tab.active .emoji {
     padding: 3px 7px;
     width: 16px;
     height: 24px;
@@ -105,7 +106,7 @@
     background: #E1D4C9;
 }
 
-.tab-text-coffee {
+.tab.active .tab-text{
     margin: 0;
     font-family: 'Inter';
     font-size: 16px;
@@ -121,90 +122,33 @@
   justify-content: center;
 }
 
-.item,
-.item-5,
-.item-6,
-.item-7,
-.item-8 {
+.item {
     cursor: pointer;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
     border: solid 1px #C1B6AD;
     border-radius: 40px;
     width: 310px;
     height: 506px;
+    transition: all 700ms;
 }
 
-.image-1,
-.image-2,
-.image-3,
-.image-4,
-.image-5,
-.image-6,
-.image-7,
-.image-8 {
+.image-wraper {
+    display: flex;
     width: 310px;
     height: 310px;
     border-radius: 40px;
-}
-
-.image-1 {
-    background: url(../images/coffee-1.svg);
-    background-size: 110%;
-    transition: background-size 500ms ease-out;
-    background-position: center;
+    overflow: hidden;
 
 }
 
-.image-2 {
-    background: url(../images/coffee-2.svg);
-    background-size: 110%;
-    transition: background-size 500ms ease-out;
-    background-position: center;
-}
-
-.image-3 {
-    background: url(../images/coffee-3.svg);
-    background-size: 110%;
-    transition: background-size 500ms ease-out;
-    background-position: center;
-}
-
-.image-4 {
-    background: url(../images/coffee-4.svg);
-    background-size: 110%;
-    transition: background-size 500ms ease-out;
-    background-position: center;
-}
-
-.image-5 {
-    background: url(../images/coffee-5.svg);
-    background-size: 110%;
-    transition: background-size 500ms ease-out;
-    background-position: center;
-}
-
-.image-6 {
-    background: url(../images/coffee-6.svg);
-    background-size: 110%;
-    transition: background-size 500ms ease-out;
-    background-position: center;
-}
-
-.image-7 {
-    background: url(../images/coffee-7.svg);
-    background-size: 110%;
-    transition: background-size 500ms ease-out;
-    background-position: center;
-}
-
-.image-8 {
-    background: url(../images/coffee-8.svg);
-    background-size: 110%;
-    transition: background-size 500ms ease-out;
-    background-position: center;
+.image { 
+    transform: scale(1.1);
+    object-fit: cover;
+    transition: all 500ms ease;
 }
 
 .description {
@@ -253,35 +197,8 @@
         width: 100%;
     }
 
-    .tab {
-        cursor: default;
-    }
-
-    .tab:hover {
-        background-color: #E1D4C9;
-        border-color: #C1B6AD;
-    }
-
-    .tab:hover .emoji {
-        background-color: #C1B6AD;
-    }
-
-    .tab:hover .tab-text {
-        color: #403F3D;
-    }
-
-    .item:hover .image-1,
-    .item:hover .image-2,
-    .item:hover .image-3,
-    .item:hover .image-4,
-    .item:hover .image-5,
-    .item:hover .image-6,
-    .item:hover .image-7,
-    .item:hover .image-8 {
-        background-size: 110%;
-    }
-
     .refresh {
+        cursor: pointer;
         display: flex;
         width: 60px;
         height: 60px;
@@ -289,13 +206,13 @@
         align-items: center;
         border-radius: 100px;
         border: 1px solid #665F55;
+        stroke: #403F3D;
+        transition: all 500ms ease-out;
     }
 
-    .item-5,
-    .item-6,
-    .item-7,
-    .item-8 {
-        display: none;
+    .refresh:hover {
+        stroke: #E1D4C9;
+        background-color: #665F55;
     }
 }
 
@@ -314,15 +231,8 @@
         color: #E1D4C9;
     }
 
-    .item:hover .image-1,
-    .item:hover .image-2,
-    .item:hover .image-3,
-    .item:hover .image-4,
-    .item-5:hover .image-5,
-    .item-6:hover .image-6,
-    .item-7:hover .image-7,
-    .item-8:hover .image-8 {
-        background-size: 100%;
+    .item:hover .image {
+        transform: scale(1);
     } 
 
 }
