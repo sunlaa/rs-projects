@@ -54,6 +54,7 @@
 }
 
 .tab {
+    user-select: none;
     cursor: pointer;
     border: solid 1px #C1B6AD;
     border-radius: 100px;

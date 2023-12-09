@@ -1,4 +1,4 @@
-import json from "/product.js";
+import json from "./product.js";
 
 const product = JSON.parse(json);
 const grid = document.querySelector(".grid");
