@@ -29,6 +29,7 @@
 }
 
 .slide { 
+    touch-action: pan-y;
     position: relative;                               
     width: 100%;
     display: flex;
