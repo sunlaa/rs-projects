@@ -190,6 +190,10 @@
 }
 
 @media (max-width: 768px) {
+    .item {
+        display: flex;
+        transition: all 700ms;
+    }
     .coffee-menu-page {
         display: none;
     }
@@ -209,11 +213,6 @@
         border: 1px solid #665F55;
         stroke: #403F3D;
         transition: all 500ms ease-out;
-    }
-
-    .refresh:hover {
-        stroke: #E1D4C9;
-        background-color: #665F55;
     }
 }
 
@@ -235,6 +234,11 @@
     .item:hover .image {
         transform: scale(1);
     } 
+
+    .refresh:hover {
+        stroke: #E1D4C9;
+        background-color: #665F55;
+    }
 
 }
 

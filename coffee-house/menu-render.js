@@ -36,11 +36,7 @@ function render(i) {
                 </div>
             </div>`
 
-        grid.innerHTML += card;
-
-        let item = document.querySelector(".item");
-        
-        
+        grid.innerHTML += card;        
 
 }
 
@@ -49,8 +45,8 @@ window.addEventListener("resize", () => {
     count(document.querySelectorAll(".item"));
 })
 
-function count(arr) {
-    arr.forEach((elem, index) => {
+function count() {
+    document.querySelectorAll(".item").forEach((elem, index) => {
         if (screenWidth <= 768 && index >= 4) {
             elem.style.display = "none";
             refresh.style.display = "flex";
@@ -60,7 +56,6 @@ function count(arr) {
             refresh.style.display = "none";
         }  
 
-        elem.style.opacity = "0";
         setTimeout(() => elem.style.opacity = "1", 30)
     })
 }
@@ -88,9 +83,9 @@ function coffee() {
         }
     }
     
-    items = document.querySelectorAll(".item");
+    document.querySelectorAll(".item").forEach((elem) => elem.style.opacity = "0")
     screenWidth = window.innerWidth;
-    count(items);
+    count();
 }
 
 function tea() {
@@ -102,9 +97,9 @@ function tea() {
         }
     } 
     
-    items = document.querySelectorAll(".item");
+    document.querySelectorAll(".item").forEach((elem) => elem.style.opacity = "0")
     screenWidth = window.innerWidth;
-    count(items);
+    count();
     refresh.style.display = "none"
 
 
@@ -119,9 +114,9 @@ function dessert() {
         }
     }  
 
-    items = document.querySelectorAll(".item");
+    document.querySelectorAll(".item").forEach((elem) => elem.style.opacity = "0")
     screenWidth = window.innerWidth;
-    count(items);
+    count();
 
 }
 
