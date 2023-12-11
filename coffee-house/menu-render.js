@@ -215,6 +215,7 @@ function renderModal(i) {
 
     document.querySelector(".modal-area").innerHTML = modal;
     document.querySelector(".overlay").classList.add("gray");
+    document.documentElement.style.overflow = "hidden";
 
     backGray = document.querySelector(".gray")
     modalWind = document.querySelector(".modal");
@@ -236,7 +237,7 @@ function renderModal(i) {
             document.querySelector(".overlay").classList.remove("gray");
             document.querySelector(".modal-area").innerHTML = "";
         }, 600)
-        
+        document.documentElement.style.overflow = "visible";
     }
 
     btnCloseModal.addEventListener("click", closeModal);
