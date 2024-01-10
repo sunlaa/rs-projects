@@ -1,5 +1,51 @@
 const body = document.querySelector("body");
 
+const answers = [
+  "FIRE",
+  "TELEPHONE",
+  "AGE",
+  "MIRROR",
+  "PROMISE",
+  "NAME",
+  "CARROT",
+  "CANDLE",
+  "CHERRY",
+  "SHADOW",
+];
+const hints = new Map();
+
+hints.set(
+  "FIRE",
+  "Give me a drink, and I will die. Feed me, and I'll get bigger. What am I?"
+);
+hints.set("TELEPHONE", "What has many rings but no fingers?");
+hints.set("AGE", "What goes up but never comes back down?");
+hints.set(
+  "MIRROR",
+  "If you drop me, I'm sure to crack, but smile at me and I'll smile back. What am I?"
+);
+hints.set(
+  "PROMISE",
+  "What can you break, even if you never pick it up or touch it?"
+);
+hints.set("NAME", "What is yours but mostly used by others?");
+hints.set(
+  "CARROT",
+  "What's bright orange with green on top and sounds like a parrot?"
+);
+hints.set(
+  "CANDLE",
+  "I'm tall when I'm young, and I'm short when I'm old. What am I?"
+);
+hints.set(
+  "CHERRY",
+  "I'm red and small, and I have a heart of stone. What am I?"
+);
+hints.set(
+  "SHADOW",
+  "I follow you all the time and copy your every move, but you can't touch or catch me. What am I?"
+);
+
 function create(tag, cls, prnt) {
   let elem = document.createElement(`${tag}`);
   elem.classList.add(`${cls}`);
@@ -13,11 +59,11 @@ const playZone = create("section", "play-zone", body);
 const gallows = create("img", "gallows", hanged);
 gallows.src = "./images/gallows.png";
 
-const ginger = create("img", "ginger", hanged);
-ginger.src = "./images/ginger-5.png";
+// const ginger = create("img", "ginger", hanged);
+// ginger.src = "./images/ginger-5.png";
 
 const riddle = create("div", "riddle", playZone);
-const keyboard = create("div", "keyboard", playZone)
+const keyboard = create("div", "keyboard", playZone);
 
 const word = create("h1", "word", riddle);
 const attempt = create("p", "attempt", riddle);
@@ -27,7 +73,18 @@ const alphabet = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
 
 for (let i = 0; i < alphabet.length; i++) {
   let k = create("a", "key", keyboard);
-  k.textContent = `${alphabet[i]}`
+  k.textContent = `${alphabet[i]}`;
 }
 
 const keys = document.querySelectorAll(".key");
+
+let atmpt = 6;
+
+function chooseQuiz() {
+  let selectedWord = answers[Math.floor(Math.random() * 10)];
+  word.textContent = "_ ".repeat(selectedWord.length);
+  hint.textContent = hints.get(selectedWord);
+  attempt.textContent = `Attempts: ${atmpt}/6`
+}
+
+chooseQuiz(); 

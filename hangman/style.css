@@ -3,7 +3,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -22,7 +23,6 @@ body {
   width: 450px;
   position: relative;
   margin: 50px;
-
 }
 
 .gallows {
@@ -36,5 +36,80 @@ body {
   width: 300px;
   left: 150px;
   top: 180px;
+}
+
+.play-zone {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.riddle {
+  width: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  background-color: #f9eadb;
+  border-radius: 30px;
+}
+
+.word,
+.attempt,
+.hint {
+  color: #593624;
+  font-family: "Inter", sans-serif;
+}
+
+.word {
+  font-size: 1.4em;
+}
+
+.attempt {
+  font-size: 1.1em;
+  color: #a29996 ;
+}
+
+.hint {
+  font-size: 1.3em;
+  text-align: center;
+}
+
+.keyboard {
+  width: 30vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+
+}
+
+.key {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #f9eadb;
+  border: solid 1px #a46948;
+  border-bottom: solid 5px #a46948;
+  border-radius: 10px;
+  color: #593624;
+  font-family: "Inter", sans-serif;
+  font-size: 1.2em;
+  transition: all 300ms linear;
+}
+
+.key:hover {
+  background-color: #e7d1ba;
+}
+
+.key:active {
+  border-bottom: solid 1px #a46948;
+  transform: translateY(4px);
 }
 
