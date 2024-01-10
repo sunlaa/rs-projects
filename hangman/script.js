@@ -72,19 +72,34 @@ const hint = create("p", "hint", riddle);
 const alphabet = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
 
 for (let i = 0; i < alphabet.length; i++) {
-  let k = create("a", "key", keyboard);
-  k.textContent = `${alphabet[i]}`;
+  let key = create("a", "key", keyboard);
+  key.textContent = `${alphabet[i]}`;
+  key.addEventListener("click", listenerVirtualKey);
 }
 
 const keys = document.querySelectorAll(".key");
 
+let selectedWord;
+let arrQuiz;
 let atmpt = 6;
 
 function chooseQuiz() {
-  let selectedWord = answers[Math.floor(Math.random() * 10)];
-  word.textContent = "_ ".repeat(selectedWord.length);
+  selectedWord = answers[Math.floor(Math.random() * 10)];
+  arrQuiz = new Array(selectedWord.length).fill("_");
+  word.textContent = arrQuiz.join(" ");
   hint.textContent = hints.get(selectedWord);
-  attempt.textContent = `Attempts: ${atmpt}/6`
+  attempt.textContent = `Attempts: ${atmpt}/6`;
 }
 
-chooseQuiz(); 
+chooseQuiz();
+
+function listenerVirtualKey(event) {
+  let letter = event.currentTarget.textContent;
+  let arrAnswer = selectedWord.split("");
+ for (let i = 0; i < arrAnswer.length; i++) {
+  if (arrAnswer[i] === letter) {
+    arrQuiz[i] = letter;
+  }
+ }
+ word.textContent = arrQuiz.join(" ");
+}
