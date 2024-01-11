@@ -1,4 +1,5 @@
 const body = document.querySelector("body");
+let attemptValue = 6;
 
 const answers = [
   "FIRE",
@@ -59,14 +60,14 @@ const playZone = create("section", "play-zone", body);
 const gallows = create("img", "gallows", hanged);
 gallows.src = "./images/gallows.png";
 
-// const ginger = create("img", "ginger", hanged);
-// ginger.src = "./images/ginger-5.png";
+const ginger = create("img", null, hanged);
 
 const riddle = create("div", "riddle", playZone);
 const keyboard = create("div", "keyboard", playZone);
 
 const word = create("h1", "word", riddle);
 const attempt = create("p", "attempt", riddle);
+attempt.textContent = `Attempts: ${attemptValue}/6`;
 const hint = create("p", "hint", riddle);
 
 const alphabet = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
@@ -74,32 +75,59 @@ const alphabet = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
 for (let i = 0; i < alphabet.length; i++) {
   let key = create("a", "key", keyboard);
   key.textContent = `${alphabet[i]}`;
-  key.addEventListener("click", listenerVirtualKey);
+  key.addEventListener("click", listenerKey);
 }
 
 const keys = document.querySelectorAll(".key");
 
 let selectedWord;
 let arrQuiz;
-let atmpt = 6;
 
 function chooseQuiz() {
   selectedWord = answers[Math.floor(Math.random() * 10)];
   arrQuiz = new Array(selectedWord.length).fill("_");
   word.textContent = arrQuiz.join(" ");
   hint.textContent = hints.get(selectedWord);
-  attempt.textContent = `Attempts: ${atmpt}/6`;
 }
 
 chooseQuiz();
 
-function listenerVirtualKey(event) {
-  let letter = event.currentTarget.textContent;
+let numOfPic = 1;
+
+function listenerKey(event) {
+  let letter = event.currentTarget.textContent || " ";
+  let keyLetter = event.key || " ";
   let arrAnswer = selectedWord.split("");
- for (let i = 0; i < arrAnswer.length; i++) {
-  if (arrAnswer[i] === letter) {
-    arrQuiz[i] = letter;
+  for (let i = 0; i < arrAnswer.length; i++) {
+    if (letter === arrAnswer[i] || event.code === `Key${arrAnswer[i]}`) {
+      arrQuiz[i] = arrAnswer[i];
+    }
   }
- }
- word.textContent = arrQuiz.join(" ");
+
+  if (
+    !selectedWord.includes(letter) &&
+    !selectedWord.includes(keyLetter.toUpperCase())
+  ) {
+    ginger.className = "ginger";
+    ginger.src = `/images/ginger-${numOfPic}.png`;
+    ginger.style.opacity = "1";
+    numOfPic++;
+
+    attemptValue--;
+    attempt.textContent = `Attempts: ${attemptValue}/6`;
+  }
+
+  if (event.currentTarget.classList) {
+    event.currentTarget.classList.add("clicked");
+  } else {
+    for (let k of keys) {
+      if (k.textContent === event.key.toUpperCase()) {
+        k.classList.add("clicked");
+      }
+    }
+  }
+
+  word.textContent = arrQuiz.join(" ");
 }
+
+document.addEventListener("keydown", listenerKey);

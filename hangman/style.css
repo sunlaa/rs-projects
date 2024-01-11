@@ -36,6 +36,8 @@ body {
   width: 300px;
   left: 150px;
   top: 180px;
+  opacity: 0;
+
 }
 
 .play-zone {
@@ -110,6 +112,15 @@ body {
 
 .key:active {
   border-bottom: solid 1px #a46948;
+  transform: translateY(4px);
+}
+
+.key.clicked {
+  pointer-events: none;
+  background-color: #a29996;
+  color: #3f3f3f;
+  border-color: #6c6c6c;
+  border-bottom: solid 1px #6c6c6c;
   transform: translateY(4px);
 }
 
