@@ -54,6 +54,7 @@ function create(tag, cls, prnt) {
   return elem;
 }
 
+
 const hanged = create("section", "hanged", body);
 const playZone = create("section", "play-zone", body);
 
@@ -128,6 +129,36 @@ function listenerKey(event) {
   }
 
   word.textContent = arrQuiz.join(" ");
+
+  if (attemptValue === 0) {
+    lose();
+  }
+
+  if (word.textContent === selectedWord) {
+  }
 }
 
+
 document.addEventListener("keydown", listenerKey);
+
+
+function lose() {
+  let popover = create("div", "outcome", body);
+  let blackout = create("div", "blackout", body);
+
+  let result = create("h2", "result", popover);
+  result.textContent = "You lose!";
+
+  let answer = create("p", "answer", popover);
+  answer.textContent = `The answer was ${selectedWord}`;
+
+  let playAgain = create("a", "play-again", popover);
+  playAgain.textContent = "Play Again!";
+
+  blackout.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+
+  document.removeEventListener("keydown", listenerKey);
+}
+
