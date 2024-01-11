@@ -1,4 +1,5 @@
 const body = document.querySelector("body");
+const snowflakesContainer = create("div", "snowflakes", body);
 let incorrectGuesses = 0;
 let selectedWord;
 let arrQuiz;
@@ -62,12 +63,11 @@ function create(tag, cls, prnt) {
   return elem;
 }
 
-const hanged = create("section", "hanged", body);
 const playZone = create("section", "play-zone", body);
+const hanged = create("section", "hanged", body);
 
 const gallows = create("img", "gallows", hanged);
-gallows.src = "./images/gallows.png";
-
+gallows.src = "images/gallows.png";
 const ginger = create("img", null, hanged);
 
 const riddle = create("div", "riddle", playZone);
@@ -133,18 +133,17 @@ function listenerKey(event) {
   if (incorrectGuesses === 6) {
     outcome();
     result.textContent = "You lose!";
-    answer.textContent = `The answer was ${selectedWord}`;
+    answer.textContent = `The answer was ${selectedWord}.`;
     playBtn.textContent = "Play Again!";
   }
 
   if (word.textContent.split(" ").join("") === selectedWord) {
     outcome();
     result.textContent = "You won!";
-    answer.textContent = `You guessed the answer ${selectedWord}`;
+    answer.textContent = `You guessed the answer ${selectedWord}.`;
     playBtn.textContent = "Play Again!";
   }
 }
-
 
 function enterListener(event) {
   if (event.code === "Enter") {
@@ -167,7 +166,7 @@ function outcome() {
 
   document.removeEventListener("keydown", listenerKey);
 
-  document.addEventListener("keydown", enterListener)
+  document.addEventListener("keydown", enterListener);
 }
 
 function playAgain() {
@@ -193,7 +192,20 @@ function playAgain() {
   document.removeEventListener("keydown", enterListener);
 }
 
+document.querySelector("body").appendChild(snowflakesContainer);
+
+function createSnow() {
+  for (let i = 0; i < 700; i++) {
+    const snowflake = create("div", "snowflake", snowflakesContainer);
+    snowflake.style.left = `${Math.random() * 100}%`;
+    snowflake.style.width = snowflake.style.height = `${Math.round(Math.random() * 5)}px`
+    snowflake.style.animationDuration = `${Math.random() * 2 + 7}s`;
+    snowflake.style.animationDelay = `-${Math.random() * 10}s`;
+  }
+}
+
 window.addEventListener("load", () => {
   chooseQuiz();
   document.addEventListener("keydown", listenerKey);
+  createSnow();
 });
