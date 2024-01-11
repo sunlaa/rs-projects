@@ -1,5 +1,13 @@
 const body = document.querySelector("body");
-let attemptValue = 6;
+let incorrectGuesses = 0;
+let selectedWord;
+let arrQuiz;
+let numOfPic = 1;
+let popover;
+let blackout;
+let result;
+let answer;
+let playBtn;
 
 const answers = [
   "FIRE",
@@ -54,7 +62,6 @@ function create(tag, cls, prnt) {
   return elem;
 }
 
-
 const hanged = create("section", "hanged", body);
 const playZone = create("section", "play-zone", body);
 
@@ -68,7 +75,7 @@ const keyboard = create("div", "keyboard", playZone);
 
 const word = create("h1", "word", riddle);
 const attempt = create("p", "attempt", riddle);
-attempt.textContent = `Attempts: ${attemptValue}/6`;
+attempt.textContent = `Incorrect guesses: ${incorrectGuesses}/6`;
 const hint = create("p", "hint", riddle);
 
 const alphabet = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
@@ -81,19 +88,13 @@ for (let i = 0; i < alphabet.length; i++) {
 
 const keys = document.querySelectorAll(".key");
 
-let selectedWord;
-let arrQuiz;
-
 function chooseQuiz() {
   selectedWord = answers[Math.floor(Math.random() * 10)];
   arrQuiz = new Array(selectedWord.length).fill("_");
   word.textContent = arrQuiz.join(" ");
   hint.textContent = hints.get(selectedWord);
+  console.log(`Answer: ${selectedWord}`);
 }
-
-chooseQuiz();
-
-let numOfPic = 1;
 
 function listenerKey(event) {
   let letter = event.currentTarget.textContent || " ";
@@ -111,11 +112,10 @@ function listenerKey(event) {
   ) {
     ginger.className = "ginger";
     ginger.src = `/images/ginger-${numOfPic}.png`;
-    ginger.style.opacity = "1";
     numOfPic++;
 
-    attemptValue--;
-    attempt.textContent = `Attempts: ${attemptValue}/6`;
+    incorrectGuesses++;
+    attempt.textContent = `Incorrect guesses: ${incorrectGuesses}/6`;
   }
 
   if (event.currentTarget.classList) {
@@ -130,35 +130,70 @@ function listenerKey(event) {
 
   word.textContent = arrQuiz.join(" ");
 
-  if (attemptValue === 0) {
-    lose();
+  if (incorrectGuesses === 6) {
+    outcome();
+    result.textContent = "You lose!";
+    answer.textContent = `The answer was ${selectedWord}`;
+    playBtn.textContent = "Play Again!";
   }
 
-  if (word.textContent === selectedWord) {
+  if (word.textContent.split(" ").join("") === selectedWord) {
+    outcome();
+    result.textContent = "You won!";
+    answer.textContent = `You guessed the answer ${selectedWord}`;
+    playBtn.textContent = "Play Again!";
   }
 }
 
 
-document.addEventListener("keydown", listenerKey);
+function enterListener(event) {
+  if (event.code === "Enter") {
+    playAgain();
+  }
+}
 
+function outcome() {
+  popover = create("div", "outcome", body);
+  blackout = create("div", "blackout", body);
 
-function lose() {
-  let popover = create("div", "outcome", body);
-  let blackout = create("div", "blackout", body);
-
-  let result = create("h2", "result", popover);
-  result.textContent = "You lose!";
-
-  let answer = create("p", "answer", popover);
-  answer.textContent = `The answer was ${selectedWord}`;
-
-  let playAgain = create("a", "play-again", popover);
-  playAgain.textContent = "Play Again!";
+  result = create("h2", "result", popover);
+  answer = create("p", "answer", popover);
+  playBtn = create("a", "play-again", popover);
+  playBtn.addEventListener("click", playAgain);
 
   blackout.addEventListener("click", (event) => {
     event.stopPropagation();
   });
 
   document.removeEventListener("keydown", listenerKey);
+
+  document.addEventListener("keydown", enterListener)
 }
 
+function playAgain() {
+  popover.remove();
+  blackout.remove();
+
+  chooseQuiz();
+
+  for (let k of keys) {
+    k.classList.remove("clicked");
+  }
+
+  numOfPic = 1;
+
+  ginger.className = " ";
+  ginger.src = "";
+
+  incorrectGuesses = 0;
+  attempt.textContent = `Incorrect guesses: ${incorrectGuesses}/6`;
+
+  document.addEventListener("keydown", listenerKey);
+
+  document.removeEventListener("keydown", enterListener);
+}
+
+window.addEventListener("load", () => {
+  chooseQuiz();
+  document.addEventListener("keydown", listenerKey);
+});
