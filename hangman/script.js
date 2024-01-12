@@ -126,7 +126,7 @@ function listenerKey(event) {
   ) {
     // console.log("not work");
     ginger.className = "ginger";
-    ginger.src = `/images/ginger-${numOfPic}.png`;
+    ginger.src = `images/ginger-${numOfPic}.png`;
     numOfPic++;
 
     incorrectGuesses++;
