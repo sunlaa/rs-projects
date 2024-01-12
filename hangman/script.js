@@ -21,6 +21,11 @@ const answers = [
   "CANDLE",
   "CHERRY",
   "SHADOW",
+  "COMPASS",
+  "PIANO",
+  "EGG",
+  "KANGAROO",
+  "ANTEATER",
 ];
 const hints = new Map();
 
@@ -55,6 +60,14 @@ hints.set(
   "SHADOW",
   "I follow you all the time and copy your every move, but you can't touch or catch me. What am I?"
 );
+hints.set(
+  "COMPASS",
+  "I am so simple that I can only point, yet I guide people all over the world."
+);
+hints.set("PIANO", "What has keys but can't open locks?");
+hints.set("EGG", "What has to be broken before you can use it?");
+hints.set("KANGAROO", "I jump when I walk and sit when I stand. What am I?");
+hints.set("ANTEATER", "I am an animal named after the animal that I eat.");
 
 function create(tag, cls, prnt) {
   let elem = document.createElement(`${tag}`);
@@ -89,16 +102,17 @@ for (let i = 0; i < alphabet.length; i++) {
 const keys = document.querySelectorAll(".key");
 
 function chooseQuiz() {
-  selectedWord = answers[Math.floor(Math.random() * 10)];
+  selectedWord = answers[Math.floor(Math.random() * 15)];
   arrQuiz = new Array(selectedWord.length).fill("_");
+
   word.textContent = arrQuiz.join(" ");
   hint.textContent = hints.get(selectedWord);
   console.log(`Answer: ${selectedWord}`);
 }
 
 function listenerKey(event) {
-  let letter = event.currentTarget.textContent || " ";
-  let keyLetter = event.key || " ";
+  const letter = event.currentTarget.textContent || " ";
+  const keyLetter = event.key || " ";
   let arrAnswer = selectedWord.split("");
   for (let i = 0; i < arrAnswer.length; i++) {
     if (letter === arrAnswer[i] || event.code === `Key${arrAnswer[i]}`) {
@@ -110,6 +124,7 @@ function listenerKey(event) {
     !selectedWord.includes(letter) &&
     !selectedWord.includes(keyLetter.toUpperCase())
   ) {
+    // console.log("not work");
     ginger.className = "ginger";
     ginger.src = `/images/ginger-${numOfPic}.png`;
     numOfPic++;
@@ -158,7 +173,9 @@ function outcome() {
   result = create("h2", "result", popover);
   answer = create("p", "answer", popover);
   playBtn = create("a", "play-again", popover);
-  playBtn.addEventListener("click", playAgain);
+  playBtn.addEventListener("click", () => {
+    setTimeout(playAgain, 300);
+  });
 
   blackout.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -192,13 +209,15 @@ function playAgain() {
   document.removeEventListener("keydown", enterListener);
 }
 
-document.querySelector("body").appendChild(snowflakesContainer);
+body.append(snowflakesContainer);
 
 function createSnow() {
   for (let i = 0; i < 700; i++) {
     const snowflake = create("div", "snowflake", snowflakesContainer);
     snowflake.style.left = `${Math.random() * 100}%`;
-    snowflake.style.width = snowflake.style.height = `${Math.round(Math.random() * 5)}px`
+    snowflake.style.width = snowflake.style.height = `${Math.round(
+      Math.random() * 5
+    )}px`;
     snowflake.style.animationDuration = `${Math.random() * 2 + 7}s`;
     snowflake.style.animationDelay = `-${Math.random() * 10}s`;
   }

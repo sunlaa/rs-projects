@@ -9,21 +9,22 @@ body {
 }
 
 body {
+  background-color: #aabcd6;
   background-image: url("images/background.png");
-  background-size: 100%;
-  background-position-y: 100%;
+  background-size: cover;
+  background-position: bottom;
   background-repeat: no-repeat;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-end;
+  gap: 30px;
 }
 
 .hanged {
   display: flex;
-  width: 450px;
+  flex-basis: 45%;
   position: relative;
-  margin-bottom: 3%;
-  margin-right: 20%;
+  margin-bottom: 3vh;
 }
 
 .gallows {
@@ -45,8 +46,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 30px;
-  margin: 5%;
+  gap: 20vh;
+  margin-bottom: 5vh;
 }
 
 .riddle {
@@ -87,13 +88,10 @@ body {
 
 .keyboard {
   width: 80%;
-  padding: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 5px;
-  background-color: #e7d1ba73;
-  border-radius: 30px;
 }
 
 .key {
@@ -106,7 +104,7 @@ body {
   background-color: #f9eadb;
   border: solid 1px #a46948;
   border-bottom: solid 5px #a46948;
-  border-radius: 15px;
+  border-radius: 30%;
   color: #593624;
   font-family: "Inter", sans-serif;
   font-size: 1.2em;
@@ -163,13 +161,12 @@ body {
 }
 
 .result {
-  font-size: 3em
+  font-size: 3em;
 }
 
 .answer {
   font-size: 1.5em;
   color: #7c6961;
-
 }
 
 .play-again {
@@ -178,13 +175,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color:#f9eadb;
+  color: #f9eadb;
   font-size: 1.3em;
   width: 20%;
   height: 20%;
   background-color: #a46948;
   border: solid 1px #593624;
-  border-bottom: solid 7px #593624; ;
+  border-bottom: solid 7px #593624;
   border-radius: 30px;
   transition: all 200ms linear;
 }
@@ -193,13 +190,11 @@ body {
   cursor: pointer;
   background-color: #d4a081;
   border-bottom: solid 5px #593624;
-
 }
 
 .play-again:active {
   border-bottom: solid 1px #593624;
   transform: translateY(6px);
-
 }
 
 .snowflakes {
@@ -225,5 +220,109 @@ body {
   }
   100% {
     transform: translateY(100vh);
+  }
+}
+
+@media screen and (max-width: 1140px) {
+  .play-again {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    background-attachment: fixed;
+    background-position-x: 0%;
+    flex-direction: row-reverse;
+  }
+
+  .hanged {
+    flex-basis: 60%;
+  }
+
+  .gallows {
+    width: 100%;
+    height: auto;
+  }
+
+  .ginger {
+    width: 75%;
+    height: auto;
+    top: 30%;
+    left: 13%;
+  }
+
+  .play-zone {
+    align-self: center;
+    justify-content: space-around;
+    height: 100%;
+  }
+
+  .riddle {
+    width: 100%;
+    margin-right: 410px;
+    margin-top: 10%;
+  }
+
+  .attempt {
+    font-size: 0.8em;
+  }
+  
+  .hint {
+    font-size: 1.1em;
+  }
+
+
+  .keyboard {
+    margin: 10px;
+    width: auto;
+    margin-bottom: 5vh;
+  }
+
+  .key {
+    width: 35px;
+    height: 35px;
+  }
+
+  .outcome {
+    width: 80%;
+  }
+
+  .play-again {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 595px) and (min-width: 360px) {
+  body {
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .play-zone {
+    justify-content: space-between;
+  }
+
+  .hanged {
+    margin-left: 10px;
+    margin-bottom: 200px;
+  }
+
+
+  .riddle {
+    margin-right: 100px;
+    margin-top: 10vh;
+  }
+
+  .keyboard {
+    gap: 2px;
+    z-index: 10;
+    width: 240%;
+    margin-right: 156%;
+    margin-bottom: 5px ;
+  }
+
+  .outcome {
+    height: 50%;
   }
 }
