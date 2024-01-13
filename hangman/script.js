@@ -82,7 +82,6 @@ const riddle = create("section", "riddle", wrapper);
 const hanged = create("section", "hanged", wrapper);
 const keyboard = create("section", "keyboard", wrapper);
 
-
 const gallows = create("img", "gallows", hanged);
 gallows.src = "images/gallows.png";
 const ginger = create("img", null, hanged);
@@ -92,7 +91,8 @@ const attempt = create("p", "attempt", riddle);
 attempt.textContent = `Incorrect guesses: ${incorrectGuesses}/6`;
 const hint = create("p", "hint", riddle);
 
-const alphabet = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+const alphabetString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const alphabet = [...alphabetString];
 
 for (let i = 0; i < alphabet.length; i++) {
   let key = create("a", "key", keyboard);
@@ -111,9 +111,19 @@ function chooseQuiz() {
   console.log(`Answer: ${selectedWord}`);
 }
 
+let pushed = "";
+
 function listenerKey(event) {
   const letter = event.currentTarget.textContent || " ";
-  const keyLetter = event.key || " ";
+  const keyLetter = event.key.toUpperCase() || " ";
+
+  if (!alphabetString.includes(keyLetter) || pushed.includes(keyLetter)) {
+    return;
+  }
+
+  pushed += keyLetter;
+  
+  console.log(pushed);
   let arrAnswer = selectedWord.split("");
   for (let i = 0; i < arrAnswer.length; i++) {
     if (letter === arrAnswer[i] || event.code === `Key${arrAnswer[i]}`) {
@@ -123,9 +133,8 @@ function listenerKey(event) {
 
   if (
     !selectedWord.includes(letter) &&
-    !selectedWord.includes(keyLetter.toUpperCase())
+    !selectedWord.includes(keyLetter)
   ) {
-    // console.log("not work");
     ginger.className = "ginger";
     ginger.src = `images/ginger-${numOfPic}.png`;
     numOfPic++;
@@ -197,6 +206,8 @@ function playAgain() {
     k.classList.remove("clicked");
   }
 
+  pushed = "";
+
   numOfPic = 1;
 
   ginger.className = " ";
@@ -227,5 +238,5 @@ function createSnow() {
 window.addEventListener("load", () => {
   chooseQuiz();
   document.addEventListener("keydown", listenerKey);
-  // createSnow();
+  createSnow();
 });
