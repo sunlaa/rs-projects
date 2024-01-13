@@ -76,22 +76,23 @@ function create(tag, cls, prnt) {
   return elem;
 }
 
-const playZone = create("section", "play-zone", body);
-const hanged = create("section", "hanged", body);
+const wrapper = create("section", "wrapper", body);
+
+const riddle = create("section", "riddle", wrapper);
+const hanged = create("section", "hanged", wrapper);
+const keyboard = create("section", "keyboard", wrapper);
 
 const gallows = create("img", "gallows", hanged);
 gallows.src = "images/gallows.png";
 const ginger = create("img", null, hanged);
-
-const riddle = create("div", "riddle", playZone);
-const keyboard = create("div", "keyboard", playZone);
 
 const word = create("h1", "word", riddle);
 const attempt = create("p", "attempt", riddle);
 attempt.textContent = `Incorrect guesses: ${incorrectGuesses}/6`;
 const hint = create("p", "hint", riddle);
 
-const alphabet = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+const alphabetString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const alphabet = [...alphabetString];
 
 for (let i = 0; i < alphabet.length; i++) {
   let key = create("a", "key", keyboard);
@@ -110,9 +111,19 @@ function chooseQuiz() {
   console.log(`Answer: ${selectedWord}`);
 }
 
+let pushed = "";
+
 function listenerKey(event) {
   const letter = event.currentTarget.textContent || " ";
-  const keyLetter = event.key || " ";
+  const keyLetter = event.key.toUpperCase() || " ";
+
+  if (!alphabetString.includes(keyLetter) || pushed.includes(keyLetter)) {
+    return;
+  }
+
+  pushed += keyLetter;
+
+  console.log(pushed);
   let arrAnswer = selectedWord.split("");
   for (let i = 0; i < arrAnswer.length; i++) {
     if (letter === arrAnswer[i] || event.code === `Key${arrAnswer[i]}`) {
@@ -120,11 +131,7 @@ function listenerKey(event) {
     }
   }
 
-  if (
-    !selectedWord.includes(letter) &&
-    !selectedWord.includes(keyLetter.toUpperCase())
-  ) {
-    // console.log("not work");
+  if (!selectedWord.includes(letter) && !selectedWord.includes(keyLetter)) {
     ginger.className = "ginger";
     ginger.src = `images/ginger-${numOfPic}.png`;
     numOfPic++;
@@ -196,10 +203,12 @@ function playAgain() {
     k.classList.remove("clicked");
   }
 
+  pushed = "";
+
   numOfPic = 1;
 
-  ginger.className = " ";
-  ginger.src = "";
+  ginger.className = "";
+  ginger.src = "images/transparent.png";
 
   incorrectGuesses = 0;
   attempt.textContent = `Incorrect guesses: ${incorrectGuesses}/6`;
@@ -212,7 +221,7 @@ function playAgain() {
 body.append(snowflakesContainer);
 
 function createSnow() {
-  for (let i = 0; i < 700; i++) {
+  for (let i = 0; i < 500; i++) {
     const snowflake = create("div", "snowflake", snowflakesContainer);
     snowflake.style.left = `${Math.random() * 100}%`;
     snowflake.style.width = snowflake.style.height = `${Math.round(
