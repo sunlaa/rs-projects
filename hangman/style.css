@@ -48,6 +48,10 @@ body {
   top: 140px;
 }
 
+.ginger.transparent {
+  display: none;
+}
+
 .riddle {
   width: 70%;
   padding: 15px;

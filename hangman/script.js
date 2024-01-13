@@ -91,7 +91,7 @@ const attempt = create("p", "attempt", riddle);
 attempt.textContent = `Incorrect guesses: ${incorrectGuesses}/6`;
 const hint = create("p", "hint", riddle);
 
-const alphabetString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const alphabetString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const alphabet = [...alphabetString];
 
 for (let i = 0; i < alphabet.length; i++) {
@@ -122,7 +122,7 @@ function listenerKey(event) {
   }
 
   pushed += keyLetter;
-  
+
   console.log(pushed);
   let arrAnswer = selectedWord.split("");
   for (let i = 0; i < arrAnswer.length; i++) {
@@ -131,10 +131,7 @@ function listenerKey(event) {
     }
   }
 
-  if (
-    !selectedWord.includes(letter) &&
-    !selectedWord.includes(keyLetter)
-  ) {
+  if (!selectedWord.includes(letter) && !selectedWord.includes(keyLetter)) {
     ginger.className = "ginger";
     ginger.src = `images/ginger-${numOfPic}.png`;
     numOfPic++;
@@ -210,8 +207,8 @@ function playAgain() {
 
   numOfPic = 1;
 
-  ginger.className = " ";
-  ginger.src = " ";
+  ginger.className = "";
+  ginger.src = "images/transparent.png";
 
   incorrectGuesses = 0;
   attempt.textContent = `Incorrect guesses: ${incorrectGuesses}/6`;
