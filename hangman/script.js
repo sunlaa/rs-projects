@@ -125,14 +125,16 @@ function chooseQuiz() {
 let pushed = "";
 
 function listenerKey(event) {
-  const letter = event.currentTarget.textContent || " ";
-  const keyLetter = event.code.replace("Key", "") || " ";
+  const letter = `${event.currentTarget.textContent}`;
+  const keyLetter = `${event.code}`.replace("Key", "");
 
-  if (!alphabetString.includes(keyLetter) || pushed.includes(keyLetter)) {
+  if (!(alphabetString + "undefined").includes(keyLetter) || pushed.includes(keyLetter)) {
     return;
   }
 
-  pushed += keyLetter;
+  if (keyLetter !== "undefined") {
+    pushed += keyLetter;
+  }
 
   let arrAnswer = selectedWord.split("");
   for (let i = 0; i < arrAnswer.length; i++) {
