@@ -84,7 +84,8 @@ const keyboard = create("section", "keyboard", wrapper);
 
 const gallows = create("img", "gallows", hanged);
 gallows.src = "images/gallows.png";
-const ginger = create("img", null, hanged);
+const ginger = create("img", "ginger", hanged);
+ginger.src = `images/transparent.png`;
 
 const word = create("h1", "word", riddle);
 const attempt = create("p", "attempt", riddle);
@@ -102,8 +103,18 @@ for (let i = 0; i < alphabet.length; i++) {
 
 const keys = document.querySelectorAll(".key");
 
+let current;
+
 function chooseQuiz() {
   selectedWord = answers[Math.floor(Math.random() * 15)];
+
+  if (current === selectedWord) {
+    chooseQuiz();
+    return;
+  }
+
+  current = selectedWord;
+
   arrQuiz = new Array(selectedWord.length).fill("_");
 
   word.textContent = arrQuiz.join(" ");
@@ -123,7 +134,6 @@ function listenerKey(event) {
 
   pushed += keyLetter;
 
-  console.log(pushed);
   let arrAnswer = selectedWord.split("");
   for (let i = 0; i < arrAnswer.length; i++) {
     if (letter === arrAnswer[i] || event.code === `Key${arrAnswer[i]}`) {
@@ -132,7 +142,6 @@ function listenerKey(event) {
   }
 
   if (!selectedWord.includes(letter) && !selectedWord.includes(keyLetter)) {
-    ginger.className = "ginger";
     ginger.src = `images/ginger-${numOfPic}.png`;
     numOfPic++;
 
@@ -207,7 +216,6 @@ function playAgain() {
 
   numOfPic = 1;
 
-  ginger.className = "";
   ginger.src = "images/transparent.png";
 
   incorrectGuesses = 0;
