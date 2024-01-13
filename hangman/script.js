@@ -126,7 +126,7 @@ let pushed = "";
 
 function listenerKey(event) {
   const letter = event.currentTarget.textContent || " ";
-  const keyLetter = event.key.toUpperCase() || " ";
+  const keyLetter = event.code.replace("Key", "") || " ";
 
   if (!alphabetString.includes(keyLetter) || pushed.includes(keyLetter)) {
     return;
@@ -245,3 +245,5 @@ window.addEventListener("load", () => {
   document.addEventListener("keydown", listenerKey);
   createSnow();
 });
+
+
