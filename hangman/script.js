@@ -76,15 +76,16 @@ function create(tag, cls, prnt) {
   return elem;
 }
 
-const playZone = create("section", "play-zone", body);
-const hanged = create("section", "hanged", body);
+const wrapper = create("section", "wrapper", body);
+
+const riddle = create("section", "riddle", wrapper);
+const hanged = create("section", "hanged", wrapper);
+const keyboard = create("section", "keyboard", wrapper);
+
 
 const gallows = create("img", "gallows", hanged);
 gallows.src = "images/gallows.png";
 const ginger = create("img", null, hanged);
-
-const riddle = create("div", "riddle", playZone);
-const keyboard = create("div", "keyboard", playZone);
 
 const word = create("h1", "word", riddle);
 const attempt = create("p", "attempt", riddle);
@@ -199,7 +200,7 @@ function playAgain() {
   numOfPic = 1;
 
   ginger.className = " ";
-  ginger.src = "";
+  ginger.src = " ";
 
   incorrectGuesses = 0;
   attempt.textContent = `Incorrect guesses: ${incorrectGuesses}/6`;
@@ -212,7 +213,7 @@ function playAgain() {
 body.append(snowflakesContainer);
 
 function createSnow() {
-  for (let i = 0; i < 700; i++) {
+  for (let i = 0; i < 500; i++) {
     const snowflake = create("div", "snowflake", snowflakesContainer);
     snowflake.style.left = `${Math.random() * 100}%`;
     snowflake.style.width = snowflake.style.height = `${Math.round(
@@ -226,5 +227,5 @@ function createSnow() {
 window.addEventListener("load", () => {
   chooseQuiz();
   document.addEventListener("keydown", listenerKey);
-  createSnow();
+  // createSnow();
 });

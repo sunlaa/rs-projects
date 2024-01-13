@@ -14,17 +14,25 @@ body {
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 30px;
+  background-attachment: fixed;
+}
+
+.wrapper {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas:
+    "riddle gallows"
+    "keyboard gallows";
 }
 
 .hanged {
-  display: flex;
-  flex-basis: 45%;
+  margin-bottom: 20px;
   position: relative;
-  margin-bottom: 3vh;
+  grid-area: gallows;
+  align-self: end;
+
 }
 
 .gallows {
@@ -40,18 +48,8 @@ body {
   top: 140px;
 }
 
-.play-zone {
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20vh;
-  margin-bottom: 5vh;
-}
-
 .riddle {
-  width: 80%;
+  width: 70%;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -59,6 +57,8 @@ body {
   gap: 15px;
   background-color: #f9eadb;
   border-radius: 30px;
+  grid-area: riddle;
+ place-self: end center;
 }
 
 .word,
@@ -87,11 +87,14 @@ body {
 }
 
 .keyboard {
-  width: 80%;
+  width: 60%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 5px;
+  grid-area: keyboard;
+  place-self: center center;
+
 }
 
 .key {
@@ -133,7 +136,7 @@ body {
 .outcome {
   box-sizing: border-box;
   position: absolute;
-  width: 50%;
+  width: 60%;
   height: 40%;
   left: 50%;
   top: 50%;
@@ -170,6 +173,7 @@ body {
 }
 
 .play-again {
+  width: 30%;
   position: absolute;
   bottom: 10%;
   display: flex;
@@ -177,12 +181,11 @@ body {
   justify-content: center;
   color: #f9eadb;
   font-size: 1.3em;
-  width: 20%;
   height: 20%;
   background-color: #a46948;
   border: solid 1px #593624;
   border-bottom: solid 7px #593624;
-  border-radius: 30px;
+  border-radius: 50px;
   transition: all 200ms linear;
 }
 
@@ -230,99 +233,94 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-  body {
-    background-attachment: fixed;
-    background-position-x: 0%;
-    flex-direction: row-reverse;
+  .wrapper {
+    grid-template-areas:
+    "riddle riddle"
+    "gallows keyboard";
   }
 
-  .hanged {
-    flex-basis: 60%;
-  }
-
-  .gallows {
-    width: 100%;
-    height: auto;
-  }
-
-  .ginger {
-    width: 75%;
-    height: auto;
-    top: 30%;
-    left: 13%;
-  }
-
-  .play-zone {
-    align-self: center;
-    justify-content: space-around;
-    height: 100%;
+  .keyboard {
+    width: 90%;
   }
 
   .riddle {
-    width: 100%;
-    margin-right: 410px;
-    margin-top: 10%;
+    place-self: center;
+  }
+
+  .outcome {
+    width: 70%;
+    height: 60%;
+  }
+}
+
+@media screen and (max-width: 595px) {
+  body {
+    background-position-x: 0;
+  }
+
+  .wrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr 0.8fr;
+    grid-template-areas:
+    "riddle"
+    "gallows"
+    "keyboard";
+  }
+
+  .riddle {
+    gap: 5px;
+    width: 80%;
+  }
+
+  .word, .hint, .answer, .play-again {
+    font-size: 1em;
   }
 
   .attempt {
     font-size: 0.8em;
   }
-  
-  .hint {
-    font-size: 1.1em;
+
+  .hanged {
+    place-self: end center;
+    margin-bottom: 0;
   }
 
+  .gallows {
+    width: 300px;
+    height: auto;
+  }
+
+  .ginger {
+    top: 100px;
+    width: 200px;
+    height: auto;
+  }
 
   .keyboard {
-    margin: 10px;
-    width: auto;
-    margin-bottom: 5vh;
+    width: 95%;
+    gap: 3px;
+    place-self: center;
+    margin-bottom: 10px;
   }
 
   .key {
-    width: 35px;
-    height: 35px;
-  }
-
-  .outcome {
-    width: 80%;
-  }
-
-  .play-again {
-    width: 60%;
-  }
-}
-
-@media screen and (max-width: 595px) and (min-width: 360px) {
-  body {
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .play-zone {
-    justify-content: space-between;
-  }
-
-  .hanged {
-    margin-left: 10px;
-    margin-bottom: 200px;
-  }
-
-
-  .riddle {
-    margin-right: 100px;
-    margin-top: 10vh;
-  }
-
-  .keyboard {
-    gap: 2px;
-    z-index: 10;
-    width: 240%;
-    margin-right: 156%;
-    margin-bottom: 5px ;
+    width: 33px;
+    height: 33px;
   }
 
   .outcome {
     height: 50%;
+    width: 90%;
+  }
+
+  .result {
+    font-size: 2.5em;
+  }
+}
+
+@media  screen and (max-width: 357px) {
+  .key {
+    width: 30px;
+    height: 30px;
   }
 }
