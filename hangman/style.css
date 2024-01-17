@@ -32,7 +32,6 @@ body {
   position: relative;
   grid-area: gallows;
   align-self: end;
-
 }
 
 .gallows {
@@ -48,9 +47,8 @@ body {
   top: 140px;
 }
 
-/*  */
-
 .riddle {
+  position: relative;
   width: 70%;
   padding: 15px;
   display: flex;
@@ -58,9 +56,32 @@ body {
   align-items: center;
   gap: 15px;
   background-color: #f9eadb;
+  border-bottom: solid 15px #f7e2cc;
   border-radius: 30px;
   grid-area: riddle;
- place-self: end center;
+  place-self: end center;
+}
+
+.riddle::after {
+  content: "";
+  position: absolute;
+  width: 75%;
+  height: 15px;
+  background-color: #fbf6f1;
+  border-radius: 30px;
+  top: 8px;
+  left: 30px;
+}
+
+.riddle::before {
+  content: "";
+  position: absolute;
+  width: 10%;
+  height: 15px;
+  background-color: #fbf6f1;
+  border-radius: 30px;
+  top: 8px;
+  right: 30px;
 }
 
 .word,
@@ -75,6 +96,7 @@ body {
 }
 
 .word {
+  margin-top: 20px;
   font-size: 1.4em;
 }
 
@@ -96,10 +118,10 @@ body {
   gap: 5px;
   grid-area: keyboard;
   place-self: center center;
-
 }
 
 .key {
+  position: relative;
   user-select: none;
   cursor: pointer;
   display: flex;
@@ -107,9 +129,8 @@ body {
   align-items: center;
   width: 40px;
   height: 40px;
-  background-color: #f9eadb;
-  border: solid 1px #a46948;
-  border-bottom: solid 5px #a46948;
+  background-color: #eab685;
+  border-bottom: solid 5px #dfa067;
   border-radius: 30%;
   color: #593624;
   font-family: "Inter", sans-serif;
@@ -117,12 +138,36 @@ body {
   transition: all 300ms linear;
 }
 
+.key::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 20px;
+  background-color: #f0cca9;
+  border-radius: 30px;
+  bottom: 4px;
+  right: 4px;
+  transition: all 300ms linear;
+}
+
+.key::before {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 9px;
+  background-color: #f0cca9;
+  border-radius: 30px;
+  top: 4px;
+  right: 4px;
+  transition: all 300ms linear;
+}
+
 .key:hover {
-  background-color: #e7d1ba;
+  background-color: #f0cca9;
 }
 
 .key:active {
-  border-bottom: solid 1px #a46948;
+  border-bottom: solid 1px #dfa067;
   transform: translateY(4px);
 }
 
@@ -130,10 +175,14 @@ body {
   cursor: default;
   pointer-events: none;
   background-color: #a29996;
-  color: #3f3f3f;
-  border-color: #6c6c6c;
-  border-bottom: solid 1px #6c6c6c;
+  color: #6b6a6a;
+  border-bottom: solid 1px #838282;
   transform: translateY(4px);
+}
+
+.key.clicked::after,
+.key.clicked::before {
+  background-color: #bab0ad;
 }
 
 .outcome {
@@ -176,8 +225,9 @@ body {
 }
 
 .play-again {
+  position: relative;
   user-select: none;
-  width: 30%;
+  width: 20%;
   position: absolute;
   bottom: 10%;
   display: flex;
@@ -187,16 +237,40 @@ body {
   font-size: 1.3em;
   height: 20%;
   background-color: #a46948;
-  border: solid 1px #593624;
   border-bottom: solid 7px #593624;
   border-radius: 50px;
   transition: all 200ms linear;
 }
 
+.play-again::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 9px;
+  background-color: #c18868;
+  border-radius: 30px;
+  top: 5px;
+  left: 20px;
+  transition: all 300ms linear;
+}
+
+.play-again::before {
+  content: "";
+  position: absolute;
+  width: 10%;
+  height: 9px;
+  background-color: #c18868;
+  border-radius: 30px;
+  top: 5px;
+  right: 20px;
+  transition: all 300ms linear;
+}
+
 .play-again:hover {
   cursor: pointer;
-  background-color: #d4a081;
+  background-color: #c18868;
   border-bottom: solid 5px #593624;
+  color: #f5dcc4;
 }
 
 .play-again:active {
@@ -234,13 +308,21 @@ body {
   .play-again {
     width: 50%;
   }
+
+  .riddle::after {
+    width: 70%;
+  }
+
+  .riddle::before {
+    width: 10%;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .wrapper {
     grid-template-areas:
-    "riddle riddle"
-    "gallows keyboard";
+      "riddle riddle"
+      "gallows keyboard";
   }
 
   .keyboard {
@@ -255,6 +337,11 @@ body {
     width: 70%;
     height: 60%;
   }
+
+  .play-again::after,
+  .play-again::before {
+    top: 10px;
+  }
 }
 
 @media screen and (max-width: 595px) {
@@ -266,9 +353,9 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 3fr 0.8fr;
     grid-template-areas:
-    "riddle"
-    "gallows"
-    "keyboard";
+      "riddle"
+      "gallows"
+      "keyboard";
   }
 
   .riddle {
@@ -276,7 +363,10 @@ body {
     width: 80%;
   }
 
-  .word, .hint, .answer, .play-again {
+  .word,
+  .hint,
+  .answer,
+  .play-again {
     font-size: 1em;
   }
 
@@ -312,6 +402,19 @@ body {
     height: 33px;
   }
 
+  .key::after {
+    width: 4px;
+    height: 15px;
+    right: 3px;
+  }
+
+  .key::before {
+    width: 4px;
+    height: 7px;
+    right: 3px;
+    top: 5px;
+  }
+
   .outcome {
     height: 50%;
     width: 90%;
@@ -322,7 +425,7 @@ body {
   }
 }
 
-@media  screen and (max-width: 357px) {
+@media screen and (max-width: 357px) {
   .key {
     width: 30px;
     height: 30px;

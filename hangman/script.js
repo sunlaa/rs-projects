@@ -128,7 +128,10 @@ function listenerKey(event) {
   const letter = `${event.currentTarget.textContent}`;
   const keyLetter = `${event.code}`.replace("Key", "");
 
-  if (!(alphabetString + "undefined").includes(keyLetter) || pushed.includes(keyLetter)) {
+  if (
+    !(alphabetString + "undefined").includes(keyLetter) ||
+    pushed.includes(keyLetter)
+  ) {
     return;
   }
 
@@ -231,7 +234,7 @@ function playAgain() {
 body.append(snowflakesContainer);
 
 function createSnow() {
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 600; i++) {
     const snowflake = create("div", "snowflake", snowflakesContainer);
     snowflake.style.left = `${Math.random() * 100}%`;
     snowflake.style.width = snowflake.style.height = `${Math.round(
@@ -247,5 +250,3 @@ window.addEventListener("load", () => {
   document.addEventListener("keydown", listenerKey);
   createSnow();
 });
-
-
