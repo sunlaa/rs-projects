@@ -48,21 +48,25 @@ for (let grade of grades) {
 
 function selectPic(event) {
   table.innerHTML = '';
-  const name = event.target.textContent;
+  const levels = levelList.querySelectorAll('.level');
+  levels.forEach((elem) => elem.classList.remove('selected'));
+  const elem = event.target;
+  const name = elem.textContent;
   const index = answers.findIndex((elem) => elem.name === name);
+  elem.classList.add('selected');
   picNumber(index);
 }
 
 
 function openMenu() {
-  levelMenu.style.left = '0';
+  levelMenu.style.transform = 'translateX(0)'
   easy.classList.add('chosen');
   fillList('easy');
 }
 menu.addEventListener('click', openMenu);
 
 function closeMenu() {
-  levelMenu.style.left = '-100%';
+  levelMenu.style.transform = 'translateX(-110%)'
   medium.classList.remove('chosen');
   hard.classList.remove('chosen');
   setTimeout(() => (levelList.innerHTML = ''), 700);

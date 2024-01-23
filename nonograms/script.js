@@ -18,10 +18,10 @@ const theme = create('a', 'theme', configPanel);
 const volume = create('a', 'volume', configPanel);
 export const menu = create('a', 'menu', configPanel);
 
-const score = create('span', 'score', header);
-
-const title = create('h1', 'title', body);
+const title = create('h1', 'title', header);
 title.textContent = 'Nonogram';
+
+const score = create('span', 'score', header);
 
 const game = create('section', 'game', body);
 

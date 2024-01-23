@@ -138,9 +138,9 @@ body {
 /* Level Menu*/
 
 .level-menu {
-  position: relative;
   position: fixed;
-  left: -100%;
+  transform: translateX(-110%);
+  align-self: flex-start;
   height: 70%;
   width: 350px;
   background-color: #ffff;
@@ -152,7 +152,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   gap: 30px;
-  transition: all ease-in-out 700ms;
+  transition: all linear 350ms;
 }
 
 .greens {
@@ -235,6 +235,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
   font-size: 15px;
   color: #443a28;
   border: solid 1px gray;
@@ -244,7 +245,16 @@ body {
 
 .level.visible {
   opacity: 1;
-  transition: opacity linear 500ms;
+  transition: opacity linear 500ms, filter linear 300ms, border-color linear 200ms;
+}
+
+.level.visible:hover {
+  filter: brightness(0.95);
+}
+
+.level.visible.selected {
+  filter: brightness(0.9);
+  border-color: #ffffff00;
 }
 
 /* Table */
