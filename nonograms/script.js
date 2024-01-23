@@ -10,7 +10,6 @@ export function create(tag, cls, prnt) {
   return elem;
 }
 
-
 const header = create('header', 'header', body);
 
 const configPanel = create('div', 'config-panel', header);
@@ -38,6 +37,10 @@ reset.textContent = 'Reset';
 const solution = create('a', 'solution', gameBtns);
 solution.textContent = 'Solution';
 
+const footer = create('footer', 'footer', body);
+const gameModeBtns = create('div', 'game-mode', footer);
+const random = create('a', 'random', gameModeBtns);
+const lastGame = create('a', 'last-game', gameModeBtns);
 
 function getClues(matrix, direction) {
   const clues = [];
@@ -179,7 +182,5 @@ table.addEventListener('click', (e) => {
   if (!e.target.classList.contains('ceil-box')) return;
   timer.start();
 });
-
-
 
 picNumber(0);
