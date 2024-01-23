@@ -10,17 +10,36 @@ export function create(tag, cls, prnt) {
   return elem;
 }
 
+// const treeOne = create('img', 'tree tree-1', body);
+// treeOne.src = './images/tree-1.png'
+// const treeTwo = create('img', 'tree tree-2', body);
+// treeTwo.src = './images/tree-2.png'
+// const treeThree = create('img', 'tree tree-3', body);
+// treeThree.src = './images/tree-3.png'
+// const treeFour = create('img', 'tree tree-4', body);
+// treeFour.src = './images/tree-4.png'
+const branchesOne = create('img', 'branch-1 branch', body);
+branchesOne.src = './images/branches-3.png'
+const branchesTwo = create('img', 'branch-2 branch', body);
+branchesTwo.src = './images/branches-2.png'
+
 const header = create('header', 'header', body);
 
+
 const configPanel = create('div', 'config-panel', header);
+
 const theme = create('a', 'theme', configPanel);
 const volume = create('a', 'volume', configPanel);
 export const menu = create('a', 'menu', configPanel);
+const score = create('span', 'score', configPanel);
+
 
 const title = create('h1', 'title', header);
 title.textContent = 'Nonogram';
 
-const score = create('span', 'score', header);
+
+
+
 
 const game = create('section', 'game', body);
 

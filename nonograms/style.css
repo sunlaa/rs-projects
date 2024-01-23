@@ -1,3 +1,5 @@
+/* сделать Title - flex center, config-panel - position fixed - top: 0*/
+
 * {
   margin: 0;
   padding: 0;
@@ -11,25 +13,64 @@ body {
 body {
   font-family: 'Dancing Script', cursive;
   background-color: #ffff;
+  /* background-color: rgb(0, 0, 0); */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Images */
+
+.tree {
+  position: fixed;
+  width: 500px;
+}
+
+.branch {
+  z-index: -1;
+  position: fixed;
+  width: 500px;
+}
+
+.branch-1 {
+  filter: brightness(1.2);
+  left: 0;
+  width: 700px;
+  top: -40px;
+  left: -150px;
+}
+
+.branch-2 {
+  filter: brightness(0.6);
+  right: 0;
+}
 /* Header */
 
 .header {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1.5fr 2fr;
+  justify-content: center;
+  align-items: center;
 }
 
+.title {
+  font-size: 60px;
+  justify-self: flex-start;
+}
+
+
 .config-panel {
+  justify-self: flex-start;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: 3%;
-  margin: 10px;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.816);
+  border-radius: 30px;
+  width: 200px;
+  height: 40px;
 }
 
 .theme,
@@ -77,15 +118,11 @@ body {
   background-size: 140%;
 }
 
-.title {
-  font-size: 60px;
-}
-
 .score {
   cursor: pointer;
   width: 35px;
   height: 35px;
-  background-size: 60%;
+  background-size: 50%;
   background-repeat: no-repeat;
   background-position: center;
   background-image: url('./images/trophy.png');
@@ -144,6 +181,7 @@ table {
   font-size: 20px;
   border-collapse: collapse;
   border: solid 1px #181818;
+  background-color: #fff;
 }
 
 .ceil {
@@ -168,7 +206,6 @@ table {
   background-color: black;
   transition: all linear 300ms;
 }
-
 
 .ceil-box {
   position: relative;
@@ -227,6 +264,7 @@ table {
 /* Level Menu*/
 
 .level-menu {
+  z-index: 99;
   position: fixed;
   transform: translateX(-110%);
   align-self: flex-start;
@@ -248,7 +286,7 @@ table {
   position: absolute;
   width: 120%;
   left: -35px;
-  bottom: -125px;
+  bottom: -130px;
 }
 
 .complexity {
