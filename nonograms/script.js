@@ -19,12 +19,11 @@ export function create(tag, cls, prnt) {
 // const treeFour = create('img', 'tree tree-4', body);
 // treeFour.src = './images/tree-4.png'
 const branchesOne = create('img', 'branch-1 branch', body);
-branchesOne.src = './images/branches-3.png'
+branchesOne.src = './images/branches-3.png';
 const branchesTwo = create('img', 'branch-2 branch', body);
-branchesTwo.src = './images/branches-2.png'
+branchesTwo.src = './images/branches-2.png';
 
 const header = create('header', 'header', body);
-
 
 const configPanel = create('div', 'config-panel', header);
 
@@ -33,13 +32,8 @@ const volume = create('a', 'volume', configPanel);
 export const menu = create('a', 'menu', configPanel);
 const score = create('span', 'score', configPanel);
 
-
 const title = create('h1', 'title', header);
 title.textContent = 'Nonogram';
-
-
-
-
 
 const game = create('section', 'game', body);
 
@@ -47,7 +41,7 @@ const timerBlock = create('div', 'timer', game);
 timerBlock.textContent = '00 : 00';
 const timer = new Timer(timerBlock);
 
-export const table = create('table', 'table', game);
+// export const table = create('table', 'table', game);
 
 const gameBtns = create('div', 'game-btns', game);
 
@@ -58,8 +52,18 @@ solution.textContent = 'Solution';
 
 const footer = create('footer', 'footer', body);
 const gameModeBtns = create('div', 'game-mode', footer);
+
 const random = create('a', 'random', gameModeBtns);
+random.textContent = 'Random Game';
+random.addEventListener('click', () => {
+  // table.innerHTML = '';
+  document.querySelector('.table').remove()
+  picNumber(Math.floor(Math.random() * 10));
+  // console.log(Math.floor(Math.random() * 10))
+})
+
 const lastGame = create('a', 'last-game', gameModeBtns);
+lastGame.textContent = 'Play the last game';
 
 function getClues(matrix, direction) {
   const clues = [];
@@ -86,6 +90,7 @@ function getClues(matrix, direction) {
 }
 
 function renderTable(n, leftClues, topClues) {
+  const table = create('table', 'table', game);
   for (let i = 0; i < n + 1; i++) {
     const row = create('tr', i === 0 ? 'row-clues row' : 'row-box row', table);
     if (i % 5 === 0 && i !== n) {
@@ -114,6 +119,10 @@ function renderTable(n, leftClues, topClues) {
   }
   table.addEventListener('click', paintCell);
   table.addEventListener('contextmenu', crossCell);
+  table.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('ceil-box')) return;
+    timer.start();
+  });
 }
 
 function fillClues(cell, cluesArray, current, numbers, num) {
@@ -140,7 +149,7 @@ function crossCell(event) {
 }
 
 function solveNonogram(matrix) {
-  const rows = table.querySelectorAll('.row-box');
+  const rows = document.querySelectorAll('.row-box');
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[0].length; j++) {
       const cell = rows[i].querySelectorAll('.ceil-box')[j];
@@ -197,9 +206,5 @@ function isCorrect(answer) {
   return matrix.flat().join('') === answer.flat().join('');
 }
 
-table.addEventListener('click', (e) => {
-  if (!e.target.classList.contains('ceil-box')) return;
-  timer.start();
-});
 
 picNumber(0);

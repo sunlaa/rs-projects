@@ -1,4 +1,4 @@
-import { create, body, table, menu, picNumber } from './script.js';
+import { create, body, menu, picNumber } from './script.js';
 import { answers } from './nonogram.js';
 
 const levelMenu = create('aside', 'level-menu', body);
@@ -47,7 +47,9 @@ for (let grade of grades) {
 }
 
 function selectPic(event) {
-  table.innerHTML = '';
+  // table.innerHTML = '';
+  const table = document.querySelector('.table');
+  table.remove()
   const levels = levelList.querySelectorAll('.level');
   levels.forEach((elem) => elem.classList.remove('selected'));
   const elem = event.target;
