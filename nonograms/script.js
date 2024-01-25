@@ -22,10 +22,10 @@ backAudio.loop = true;
 backAudio.volume = 0.1;
 // backAudio.src = './images/back-music.mp3';
 
-const paintAudio = create('audio', 'paint-audio', body);
-paintAudio.style.display = 'none';
-paintAudio.src = './images/paint.mp3';
-paintAudio.volume = 0.1;
+const clickAudio = create('audio', 'paint-audio', body);
+clickAudio.style.display = 'none';
+clickAudio.src = './images/paint.mp3';
+clickAudio.volume = 0.1;
 
 const unPaintAudio = create('audio', 'paint-audio', body);
 unPaintAudio.style.display = 'none';
@@ -75,8 +75,8 @@ random.addEventListener('click', () => {
   document.querySelector('.table').remove();
   document.querySelector('.solution').remove();
   timer.stop();
-  picNumber(Math.round(Math.random() * 10));
-  paintAudio.play();
+  picNumber(Math.round(Math.random() * 14));
+  clickAudio.play();
 });
 
 const lastGame = create('a', 'last-game', gameModeBtns);
@@ -156,7 +156,7 @@ function paintCell(event) {
   cell.classList.remove('cross');
   cell.classList.toggle('painted');
   if (cell.classList.contains('painted')) {
-    paintAudio.play();
+    clickAudio.play();
   } else {
     unPaintAudio.currentTime = 0;
     unPaintAudio.play();
@@ -169,7 +169,7 @@ function crossCell(event) {
   if (!cell.classList.contains('ceil-box')) return;
   cell.classList.remove('painted');
   cell.classList.toggle('cross');
-  paintAudio.play();
+  clickAudio.play();
 }
 
 function solveNonogram(matrix) {
@@ -259,7 +259,6 @@ export function picNumber(n) {
     solveNonogram(answers[n].pic);
     table.classList.add('unclick');
     timer.stop();
-    paintAudio.play();
   });
 
   reset.addEventListener('click', () => {
@@ -269,7 +268,6 @@ export function picNumber(n) {
       cell.classList.remove('painted');
       timer.stop();
     }
-    paintAudio.play();
   });
 
   table.addEventListener('click', () => {
