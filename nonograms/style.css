@@ -219,6 +219,10 @@ table {
   animation: opacity 500ms ease-out forwards;
 }
 
+.table.unclick {
+  pointer-events: none;
+}
+
 .ceil {
   border: solid 1px #181818;
 }

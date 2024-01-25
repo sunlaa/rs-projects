@@ -20,7 +20,7 @@ backAudio.style.display = 'none';
 backAudio.autoplay = true;
 backAudio.loop = true;
 backAudio.volume = 0.1;
-backAudio.src = './images/back-music.mp3';
+// backAudio.src = './images/back-music.mp3';
 
 const paintAudio = create('audio', 'paint-audio', body);
 paintAudio.style.display = 'none';
@@ -257,11 +257,13 @@ export function picNumber(n) {
 
   solution.addEventListener('click', () => {
     solveNonogram(answers[n].pic);
+    table.classList.add('unclick');
     timer.stop();
     paintAudio.play();
   });
 
   reset.addEventListener('click', () => {
+    table.classList.remove('unclick');
     const cells = document.querySelectorAll('.ceil-box');
     for (let cell of cells) {
       cell.classList.remove('painted');
