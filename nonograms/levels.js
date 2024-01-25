@@ -7,6 +7,7 @@ const levelList = create('div', 'level-list', levelMenu);
 const greens = create('img', 'greens', levelMenu);
 greens.src = './images/greens.png';
 greens.alt = 'Greens';
+let overlay;
 
 const easy = create('div', 'easy grade', complexity);
 easy.textContent = 'Easy';
@@ -60,6 +61,8 @@ function selectPic(event) {
 
 function openMenu() {
   levelMenu.style.transform = 'translateX(0)';
+  overlay = create('div', 'overlay', body);
+  overlay.addEventListener('click', closeMenu);
   easy.classList.add('chosen');
   fillList('easy');
 }
@@ -67,6 +70,7 @@ menu.addEventListener('click', openMenu);
 
 function closeMenu() {
   levelMenu.style.transform = 'translateX(-110%)';
+  overlay.remove();
   medium.classList.remove('chosen');
   hard.classList.remove('chosen');
   setTimeout(() => (levelList.innerHTML = ''), 700);

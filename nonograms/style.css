@@ -307,8 +307,8 @@ table {
   position: fixed;
   transform: translateX(-110%);
   align-self: flex-start;
-  height: 70%;
-  width: 350px;
+  height: 85%;
+  width: 450px;
   background-color: #ffff;
   border-bottom-right-radius: 20px;
   border: solid 0.5px gray;
@@ -324,13 +324,13 @@ table {
 .greens {
   position: absolute;
   width: 120%;
-  left: -35px;
-  bottom: -130px;
+  left: -50px;
+  bottom: -170px;
 }
 
 .complexity {
   width: 90%;
-  height: 35px;
+  height: 45px;
   display: flex;
   justify-content: space-around;
   gap: 5px;
@@ -340,7 +340,7 @@ table {
   cursor: pointer;
   user-select: none;
   width: 25%;
-  height: 30px;
+  height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -348,10 +348,10 @@ table {
   border: solid 1px #ffff;
   color: #ffff;
   border-top: none;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   font-size: 17px;
-  transition: all ease 300ms;
+  transition: all ease 400ms;
 }
 
 .grade:hover {
@@ -360,7 +360,7 @@ table {
 }
 
 .grade.chosen {
-  height: 40px;
+  height: 45px;
   width: 50%;
   filter: brightness(1.4);
 }
@@ -397,15 +397,15 @@ table {
   cursor: pointer;
   user-select: none;
   width: 60%;
-  height: 40px;
+  height: 55px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   color: #443a28;
   border: solid 1px gray;
-  border-radius: 20px;
+  border-radius: 30px;
   opacity: 0;
 }
 
@@ -471,6 +471,9 @@ table {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.532);
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  animation: opacity 300ms ease-out forwards;
 }
 
 .modal {

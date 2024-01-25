@@ -244,7 +244,7 @@ function win(n) {
   }
   const next = create('a', 'next', modal);
   next.textContent = 'Next Game';
-  next.addEventListener('click', nextGame)
+  next.addEventListener('click', nextGame);
 }
 
 export function picNumber(n) {
@@ -269,9 +269,10 @@ export function picNumber(n) {
     }
     paintAudio.play();
   });
+
   table.addEventListener('click', () => {
     win(n);
   });
 }
-
+ 
 picNumber(0);
