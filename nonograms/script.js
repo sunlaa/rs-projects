@@ -10,6 +10,8 @@ export function create(tag, cls, prnt) {
   return elem;
 }
 
+let pictureNumber;
+
 const branchesOne = create('img', 'branch-1 branch', body);
 branchesOne.src = './images/branches-3.png';
 const branchesTwo = create('img', 'branch-2 branch', body);
@@ -66,6 +68,15 @@ reset.textContent = 'Reset';
 
 const save = create('a', 'save', gameBtns);
 save.textContent = 'Save Game';
+save.addEventListener('click', saveGame);
+
+function saveGame() {
+  localStorage.clear();
+  localStorage.setItem('min', timer.min);
+  localStorage.setItem('sec', timer.sec);
+  localStorage.setItem('pic', pictureNumber);
+  localStorage.setItem('table', document.querySelector('.table').innerHTML);
+}
 
 const gameModeBtns = create('div', 'game-mode', body);
 
@@ -81,6 +92,22 @@ random.addEventListener('click', () => {
 
 const lastGame = create('a', 'last-game', gameModeBtns);
 lastGame.textContent = 'Play the last game';
+lastGame.addEventListener('click', loadGame)
+
+function loadGame() {
+  const min = localStorage.getItem('min');
+  const sec = localStorage.getItem('sec');
+  timer.min = min;
+  timer.sec = sec;
+  document.querySelector('.timer').textContent = `${timer.mod(min)} : ${timer.mod(sec)}`;
+  timer.start();
+  const n = localStorage.getItem('pic');
+  const table = localStorage.getItem('table');
+  document.querySelector('.solution').remove();
+  document.querySelector('.table').remove();
+  picNumber(n);
+  document.querySelector('.table').innerHTML = table;
+}
 
 function getClues(matrix, direction) {
   const clues = [];
@@ -249,6 +276,7 @@ function win(n, time) {
 }
 
 export function picNumber(n) {
+  pictureNumber = n;
   const left = getClues(answers[n].pic, 'left');
   const top = getClues(answers[n].pic, 'top');
   const table = renderTable(answers[n].size, left, top);
