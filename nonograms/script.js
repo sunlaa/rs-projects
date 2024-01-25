@@ -135,10 +135,6 @@ function renderTable(size, leftClues, topClues) {
   }
   table.addEventListener('click', paintCell);
   table.addEventListener('contextmenu', crossCell);
-  table.addEventListener('click', (e) => {
-    if (!e.target.classList.contains('ceil-box')) return;
-    timer.start();
-  });
   return table;
 }
 
@@ -151,6 +147,7 @@ function fillClues(cell, cluesArray, current, numbers, num) {
 }
 
 function paintCell(event) {
+  timer.start();
   const cell = event.target;
   if (!cell.classList.contains('ceil-box')) return;
   cell.classList.remove('cross');
@@ -165,6 +162,7 @@ function paintCell(event) {
 
 function crossCell(event) {
   event.preventDefault();
+  timer.start();
   const cell = event.target;
   if (!cell.classList.contains('ceil-box')) return;
   cell.classList.remove('painted');
@@ -216,19 +214,22 @@ function win(n, time) {
     modal.remove();
     document.querySelector('.solution').remove();
     document.querySelector('.table').remove();
-    if (n + 1 <= 10) {
+    if (n + 1 < 15) {
       picNumber(n + 1);
     } else {
       picNumber(0);
     }
   }
   overlay.addEventListener('click', nextGame);
+
   const modal = create('div', 'modal', body);
+
   const text = create('div', 'modal-text', modal);
   const congrats = create('h1', 'congrats', text);
   congrats.textContent = "Congratulations, you've won!";
   const phrase = create('p', 'phrase', text);
   phrase.innerHTML = `You solved the puzzle in ${time} seconds!`;
+
   const solved = create('table', 'solved', modal);
   for (let i = 0; i < answers[n].size; i++) {
     const row = create('tr', 'solved-row', solved);
@@ -270,8 +271,10 @@ export function picNumber(n) {
     }
   });
 
-  table.addEventListener('click', () => {
-    const time = timer.time
+  table.addEventListener('click', (event) => {
+    const cell = event.target;
+    if (!cell.classList.contains('ceil-box')) return;
+    const time = timer.time;
     win(n, time);
   });
 }
