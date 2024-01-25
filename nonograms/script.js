@@ -30,13 +30,22 @@ backAudio.loop = true;
 backAudio.volume = 0.2;
 backAudio.src = './images/back-music.mp3';
 
+const paintAudio = create('audio', 'paint-audio', body);
+paintAudio.style.display = 'none';
+paintAudio.src = './images/paint.mp3';
+paintAudio.volume = 0.2;
+
+const unPaintAudio = create('audio', 'paint-audio', body);
+unPaintAudio.style.display = 'none';
+unPaintAudio.src = './images/unpaint.mp3';
+unPaintAudio.volume = 0.2;
+
 const header = create('header', 'header', body);
 
 const configPanel = create('div', 'config-panel', header);
 
 const theme = create('a', 'theme', configPanel);
 const volume = create('a', 'volume off', configPanel);
-
 
 volume.addEventListener('click', () => {
   volume.classList.toggle('off');
@@ -62,6 +71,9 @@ const gameBtns = create('div', 'game-btns', game);
 
 const reset = create('a', 'reset', gameBtns);
 reset.textContent = 'Reset';
+
+const save = create('a', 'save', gameBtns);
+save.textContent = 'Save Game';
 
 const gameModeBtns = create('div', 'game-mode', body);
 
@@ -149,6 +161,12 @@ function paintCell(event) {
   if (!cell.classList.contains('ceil-box')) return;
   cell.classList.remove('cross');
   cell.classList.toggle('painted');
+  if (cell.classList.contains('painted')) {
+    paintAudio.play();
+  } else {
+    unPaintAudio.currentTime = 0;
+    unPaintAudio.play();
+  }
 }
 
 function crossCell(event) {
@@ -157,6 +175,7 @@ function crossCell(event) {
   if (!cell.classList.contains('ceil-box')) return;
   cell.classList.remove('painted');
   cell.classList.toggle('cross');
+  paintAudio.play();
 }
 
 function solveNonogram(matrix) {
