@@ -10,14 +10,6 @@ export function create(tag, cls, prnt) {
   return elem;
 }
 
-// const treeOne = create('img', 'tree tree-1', body);
-// treeOne.src = './images/tree-1.png'
-// const treeTwo = create('img', 'tree tree-2', body);
-// treeTwo.src = './images/tree-2.png'
-// const treeThree = create('img', 'tree tree-3', body);
-// treeThree.src = './images/tree-3.png'
-// const treeFour = create('img', 'tree tree-4', body);
-// treeFour.src = './images/tree-4.png'
 const branchesOne = create('img', 'branch-1 branch', body);
 branchesOne.src = './images/branches-3.png';
 const branchesTwo = create('img', 'branch-2 branch', body);
@@ -27,18 +19,18 @@ const backAudio = create('audio', 'back-audio', body);
 backAudio.style.display = 'none';
 backAudio.autoplay = true;
 backAudio.loop = true;
-backAudio.volume = 0.2;
-backAudio.src = './images/back-music.mp3';
+backAudio.volume = 0.1;
+// backAudio.src = './images/back-music.mp3';
 
 const paintAudio = create('audio', 'paint-audio', body);
 paintAudio.style.display = 'none';
 paintAudio.src = './images/paint.mp3';
-paintAudio.volume = 0.2;
+paintAudio.volume = 0.1;
 
 const unPaintAudio = create('audio', 'paint-audio', body);
 unPaintAudio.style.display = 'none';
 unPaintAudio.src = './images/unpaint.mp3';
-unPaintAudio.volume = 0.2;
+unPaintAudio.volume = 0.1;
 
 const header = create('header', 'header', body);
 
@@ -84,6 +76,7 @@ random.addEventListener('click', () => {
   document.querySelector('.solution').remove();
   timer.stop();
   picNumber(Math.round(Math.random() * 10));
+  paintAudio.play();
 });
 
 const lastGame = create('a', 'last-game', gameModeBtns);
@@ -146,6 +139,7 @@ function renderTable(size, leftClues, topClues) {
     if (!e.target.classList.contains('ceil-box')) return;
     timer.start();
   });
+  return table;
 }
 
 function fillClues(cell, cluesArray, current, numbers, num) {
@@ -180,11 +174,8 @@ function crossCell(event) {
 
 function solveNonogram(matrix) {
   const rows = document.querySelectorAll('.row-box');
-  console.log(rows.length);
-  console.log(matrix[0].length);
   for (let i = 0; i < matrix.length && i < rows.length; i++) {
     for (let j = 0; j < matrix[0].length; j++) {
-      console.log('i:', i, 'j:', j);
       const cell = rows[i].querySelectorAll('.ceil-box')[j];
       cell.classList.remove('painted');
       cell.classList.remove('cross');
@@ -196,6 +187,7 @@ function solveNonogram(matrix) {
 }
 
 function getMatrix() {
+  const table = document.querySelector('.table');
   const rows = table.querySelectorAll('.row-box');
   const size = rows.length;
   const matrix = Array.from({ length: size }, () => Array(size).fill(0));
@@ -207,14 +199,58 @@ function getMatrix() {
       }
     }
   }
-  console.log(matrix);
-  // return matrix;
+  return matrix;
+}
+
+function isCorrect(answer) {
+  const matrix = getMatrix();
+  return matrix.flat().join('') === answer.flat().join('');
+}
+
+function win(n) {
+  if (!isCorrect(answers[n].pic)) return;
+  timer.stop();
+  const overlay = create('div', 'overlay', body);
+  function nextGame() {
+    overlay.remove();
+    modal.remove();
+    document.querySelector('.solution').remove();
+    document.querySelector('.table').remove();
+    if (n + 1 <= 10) {
+      picNumber(n + 1);
+    } else {
+      picNumber(0);
+    }
+  }
+  overlay.addEventListener('click', nextGame);
+  const modal = create('div', 'modal', body);
+  const text = create('div', 'modal-text', modal);
+  const congrats = create('h1', 'congrats', text);
+  congrats.textContent = "Congratulations, you've won!";
+  const phrase = create('p', 'phrase', text);
+  phrase.innerHTML = `You solved the puzzle in ${timer.time} seconds!`;
+  const solved = create('table', 'solved', modal);
+  for (let i = 0; i < answers[n].size; i++) {
+    const row = create('tr', 'solved-row', solved);
+    for (let j = 0; j < answers[n].size; j++) {
+      const cell = create('td', 'solved-cell', row);
+      if (answers[n].size === 5) cell.classList.add('small');
+      if (answers[n].size === 10) cell.classList.add('medium');
+      if (answers[n].size === 15) cell.classList.add('big');
+      if (answers[n].pic[i][j] === 1) {
+        cell.classList.add('painted');
+      }
+    }
+  }
+  const next = create('a', 'next', modal);
+  next.textContent = 'Next Game';
+  next.addEventListener('click', nextGame)
 }
 
 export function picNumber(n) {
   const left = getClues(answers[n].pic, 'left');
   const top = getClues(answers[n].pic, 'top');
-  renderTable(answers[n].size, left, top);
+  const table = renderTable(answers[n].size, left, top);
 
   const solution = create('a', 'solution', gameBtns);
   solution.textContent = 'Solution';
@@ -222,22 +258,20 @@ export function picNumber(n) {
   solution.addEventListener('click', () => {
     solveNonogram(answers[n].pic);
     timer.stop();
+    paintAudio.play();
   });
+
   reset.addEventListener('click', () => {
     const cells = document.querySelectorAll('.ceil-box');
     for (let cell of cells) {
       cell.classList.remove('painted');
       timer.stop();
     }
+    paintAudio.play();
   });
-  // table.addEventListener('click', () => {
-  //   console.log(isCorrect(answers[n].pic));
-  // });
-}
-
-function isCorrect(answer) {
-  const matrix = getMatrix();
-  return matrix.flat().join('') === answer.flat().join('');
+  table.addEventListener('click', () => {
+    win(n);
+  });
 }
 
 picNumber(0);

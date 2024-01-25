@@ -1,6 +1,7 @@
 export class Timer {
   constructor(elem) {
     this.elem = elem;
+    this.time = 0;
     this.sec = 0;
     this.min = 0;
     this.timerId = null;
@@ -15,6 +16,7 @@ export class Timer {
   }
 
   stop() {
+    this.time = 0;
     this.sec = 0;
     this.min = 0;
     this.render();
@@ -24,6 +26,7 @@ export class Timer {
 
   update() {
     this.sec++;
+    this.time++;
 
     if (this.sec === 60) {
       this.sec = 0;
