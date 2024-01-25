@@ -15,7 +15,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 /* Images */
@@ -41,6 +41,7 @@ body {
 
 .branch-2 {
   filter: brightness(0.6);
+  top: 0;
   right: 0;
 }
 /* Header */
@@ -57,7 +58,6 @@ body {
   font-size: 60px;
   justify-self: flex-start;
 }
-
 
 .config-panel {
   position: absolute;
@@ -104,6 +104,20 @@ body {
   transform: rotate(35deg);
 }
 
+.volume.off:hover {
+  transform: rotate(0);
+}
+
+.volume.off::after {
+  position: absolute;
+  content: '';
+  width: 1.5px;
+  height: 30px;
+  background-color: rgb(180, 23, 23);
+  transform: rotate(45deg) translate(10px, -10px);
+  transition: all ease 400ms;
+}
+
 .menu {
   background-image: url('./images/scroll.png');
   background-position: center;
@@ -138,11 +152,11 @@ body {
 
 .game {
   width: fit-content;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  gap: 20px;
 }
 
 .game-btns {
@@ -228,10 +242,21 @@ table {
   position: absolute;
   content: '';
   width: 1.5px;
-  height: 40px;
+  height: 30px;
   background-color: black;
-  top: -5px;
-  left: 14px;
+  top: -2px;
+  left: 12px;
+  opacity: 0;
+  animation: cross-opacity 300ms ease-out forwards;
+}
+
+@keyframes cross-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .ceil-box.cross::after {
@@ -324,7 +349,7 @@ table {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   font-size: 17px;
-  transition: all ease 400ms;
+  transition: all ease 300ms;
 }
 
 .grade:hover {
@@ -384,39 +409,42 @@ table {
 
 .level.visible {
   opacity: 1;
-  transition: opacity linear 500ms, filter linear 300ms,
+  transition: opacity linear 500ms, filter linear 200ms,
     border-color linear 200ms;
 }
 
 .level.visible:hover {
-  filter: brightness(0.95);
+  filter: brightness(0.9);
 }
 
 .level.visible.selected {
-  filter: brightness(0.9);
+  filter: brightness(0.8);
   border-color: #ffffff00;
 }
 
 /* Footer */
 
-.footer {
+/* .footer {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-}
+} */
 
 .game-mode {
-  margin: 30px;
+  position: fixed;
+  bottom: 0;
+  right: 30px;
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  gap: 30px;
+  gap: 40px;
 }
 
-.random, 
+.random,
 .last-game {
   cursor: pointer;
   user-select: none;
+  white-space: nowrap;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -424,19 +452,22 @@ table {
   font-size: 18px;
   color: #fff;
   border-radius: 30px;
+  width: fit-content;
   height: 40px;
-  transition: all ease 400ms;
+  padding-left: 15px;
+  padding-right: 15px;
+  transition: all ease 500ms;
 }
 
-.random:hover, 
+.random:hover,
 .last-game:hover {
   filter: brightness(1.5);
 }
 
-.random {
+/* .random {
   width: 10%;
 }
 
 .last-game {
   width: 15%;
-}
+} */

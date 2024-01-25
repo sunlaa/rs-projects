@@ -33,7 +33,7 @@ function fillList(level) {
   for (let i = 0; i < arr.length; i++) {
     const level = create('div', 'level', levelList);
     level.textContent = arr[i].name;
-    level.addEventListener('click', selectPic)
+    level.addEventListener('click', selectPic);
   }
   const levels = levelList.querySelectorAll('.level');
   setTimeout(() => {
@@ -47,9 +47,8 @@ for (let grade of grades) {
 }
 
 function selectPic(event) {
-  // table.innerHTML = '';
-  const table = document.querySelector('.table');
-  table.remove()
+  document.querySelector('.table').remove();
+  document.querySelector('.solution').remove();
   const levels = levelList.querySelectorAll('.level');
   levels.forEach((elem) => elem.classList.remove('selected'));
   const elem = event.target;
@@ -59,16 +58,15 @@ function selectPic(event) {
   picNumber(index);
 }
 
-
 function openMenu() {
-  levelMenu.style.transform = 'translateX(0)'
+  levelMenu.style.transform = 'translateX(0)';
   easy.classList.add('chosen');
   fillList('easy');
 }
 menu.addEventListener('click', openMenu);
 
 function closeMenu() {
-  levelMenu.style.transform = 'translateX(-110%)'
+  levelMenu.style.transform = 'translateX(-110%)';
   medium.classList.remove('chosen');
   hard.classList.remove('chosen');
   setTimeout(() => (levelList.innerHTML = ''), 700);

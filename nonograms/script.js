@@ -23,12 +23,29 @@ branchesOne.src = './images/branches-3.png';
 const branchesTwo = create('img', 'branch-2 branch', body);
 branchesTwo.src = './images/branches-2.png';
 
+const backAudio = create('audio', 'back-audio', body);
+backAudio.style.display = 'none';
+backAudio.autoplay = true;
+backAudio.loop = true;
+backAudio.volume = 0.2;
+backAudio.src = './images/back-music.mp3';
+
 const header = create('header', 'header', body);
 
 const configPanel = create('div', 'config-panel', header);
 
 const theme = create('a', 'theme', configPanel);
-const volume = create('a', 'volume', configPanel);
+const volume = create('a', 'volume off', configPanel);
+
+
+volume.addEventListener('click', () => {
+  volume.classList.toggle('off');
+  if (backAudio.paused) {
+    backAudio.play();
+  } else {
+    backAudio.pause();
+  }
+});
 export const menu = create('a', 'menu', configPanel);
 const score = create('span', 'score', configPanel);
 
@@ -41,26 +58,21 @@ const timerBlock = create('div', 'timer', game);
 timerBlock.textContent = '00 : 00';
 const timer = new Timer(timerBlock);
 
-// export const table = create('table', 'table', game);
-
 const gameBtns = create('div', 'game-btns', game);
 
 const reset = create('a', 'reset', gameBtns);
 reset.textContent = 'Reset';
-const solution = create('a', 'solution', gameBtns);
-solution.textContent = 'Solution';
 
-const footer = create('footer', 'footer', body);
-const gameModeBtns = create('div', 'game-mode', footer);
+const gameModeBtns = create('div', 'game-mode', body);
 
 const random = create('a', 'random', gameModeBtns);
 random.textContent = 'Random Game';
 random.addEventListener('click', () => {
-  // table.innerHTML = '';
-  document.querySelector('.table').remove()
-  picNumber(Math.floor(Math.random() * 10));
-  // console.log(Math.floor(Math.random() * 10))
-})
+  document.querySelector('.table').remove();
+  document.querySelector('.solution').remove();
+  timer.stop();
+  picNumber(Math.round(Math.random() * 10));
+});
 
 const lastGame = create('a', 'last-game', gameModeBtns);
 lastGame.textContent = 'Play the last game';
@@ -89,15 +101,14 @@ function getClues(matrix, direction) {
   return clues;
 }
 
-function renderTable(n, leftClues, topClues) {
+function renderTable(size, leftClues, topClues) {
   const table = create('table', 'table', game);
-  for (let i = 0; i < n + 1; i++) {
+  for (let i = 0; i < size + 1; i++) {
     const row = create('tr', i === 0 ? 'row-clues row' : 'row-box row', table);
-    if (i % 5 === 0 && i !== n) {
+    if (i % 5 === 0 && i !== size) {
       row.classList.add('bold');
     }
-
-    for (let j = 0; j < n + 1; j++) {
+    for (let j = 0; j < size + 1; j++) {
       let cell;
       if (i === 0) {
         cell = create('td', 'ceil-clues-col ceil', row);
@@ -112,7 +123,7 @@ function renderTable(n, leftClues, topClues) {
         cell.dataset.row = i;
         cell.dataset.col = j;
       }
-      if (j % 5 === 0 && j !== n) {
+      if (j % 5 === 0 && j !== size) {
         cell.classList.add('bold');
       }
     }
@@ -150,8 +161,11 @@ function crossCell(event) {
 
 function solveNonogram(matrix) {
   const rows = document.querySelectorAll('.row-box');
-  for (let i = 0; i < matrix.length; i++) {
+  console.log(rows.length);
+  console.log(matrix[0].length);
+  for (let i = 0; i < matrix.length && i < rows.length; i++) {
     for (let j = 0; j < matrix[0].length; j++) {
+      console.log('i:', i, 'j:', j);
       const cell = rows[i].querySelectorAll('.ceil-box')[j];
       cell.classList.remove('painted');
       cell.classList.remove('cross');
@@ -183,11 +197,13 @@ export function picNumber(n) {
   const top = getClues(answers[n].pic, 'top');
   renderTable(answers[n].size, left, top);
 
+  const solution = create('a', 'solution', gameBtns);
+  solution.textContent = 'Solution';
+
   solution.addEventListener('click', () => {
     solveNonogram(answers[n].pic);
     timer.stop();
   });
-
   reset.addEventListener('click', () => {
     const cells = document.querySelectorAll('.ceil-box');
     for (let cell of cells) {
@@ -195,7 +211,6 @@ export function picNumber(n) {
       timer.stop();
     }
   });
-
   // table.addEventListener('click', () => {
   //   console.log(isCorrect(answers[n].pic));
   // });
@@ -205,6 +220,5 @@ function isCorrect(answer) {
   const matrix = getMatrix();
   return matrix.flat().join('') === answer.flat().join('');
 }
-
 
 picNumber(0);
