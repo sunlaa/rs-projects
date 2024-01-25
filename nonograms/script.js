@@ -20,7 +20,7 @@ backAudio.style.display = 'none';
 backAudio.autoplay = true;
 backAudio.loop = true;
 backAudio.volume = 0.1;
-// backAudio.src = './images/back-music.mp3';
+backAudio.src = './images/back-music.mp3';
 
 const paintAudio = create('audio', 'paint-audio', body);
 paintAudio.style.display = 'none';
@@ -207,7 +207,7 @@ function isCorrect(answer) {
   return matrix.flat().join('') === answer.flat().join('');
 }
 
-function win(n) {
+function win(n, time) {
   if (!isCorrect(answers[n].pic)) return;
   timer.stop();
   const overlay = create('div', 'overlay', body);
@@ -228,7 +228,7 @@ function win(n) {
   const congrats = create('h1', 'congrats', text);
   congrats.textContent = "Congratulations, you've won!";
   const phrase = create('p', 'phrase', text);
-  phrase.innerHTML = `You solved the puzzle in ${timer.time} seconds!`;
+  phrase.innerHTML = `You solved the puzzle in ${time} seconds!`;
   const solved = create('table', 'solved', modal);
   for (let i = 0; i < answers[n].size; i++) {
     const row = create('tr', 'solved-row', solved);
@@ -271,8 +271,9 @@ export function picNumber(n) {
   });
 
   table.addEventListener('click', () => {
-    win(n);
+    const time = timer.time
+    win(n, time);
   });
 }
- 
+
 picNumber(0);
