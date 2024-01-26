@@ -59,7 +59,7 @@ const game = create('section', 'game', body);
 
 const timerBlock = create('div', 'timer', game);
 timerBlock.textContent = '00 : 00';
-const timer = new Timer(timerBlock);
+export const timer = new Timer(timerBlock);
 
 const gameBtns = create('div', 'game-btns', game);
 

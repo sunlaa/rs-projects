@@ -219,7 +219,7 @@ table {
   animation: opacity 500ms ease-out forwards;
 }
 
-.table.unclick {
+.unclick {
   pointer-events: none;
 }
 

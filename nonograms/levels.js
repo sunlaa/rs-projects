@@ -1,6 +1,6 @@
-import { create, body, menu, picNumber } from './script.js';
+import { create, body, menu, picNumber, timer } from './script.js';
 import { answers } from './nonogram.js';
-
+ 
 const levelMenu = create('aside', 'level-menu', body);
 const complexity = create('section', 'complexity', levelMenu);
 const levelList = create('div', 'level-list', levelMenu);
@@ -48,6 +48,7 @@ for (let grade of grades) {
 }
 
 function selectPic(event) {
+  timer.stop();
   document.querySelector('.table').remove();
   document.querySelector('.solution').remove();
   const levels = levelList.querySelectorAll('.level');
