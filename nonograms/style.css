@@ -195,6 +195,12 @@ body {
   transition: all ease 400ms;
 }
 
+.unclick-button {
+  pointer-events: none;
+  color: rgb(207, 206, 206);
+  background-color: #807f7f;
+}
+
 .save {
   order: 3;
 }

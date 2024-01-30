@@ -1,11 +1,11 @@
-import { create, body, menu, picNumber, timer } from './script.js';
+import { create, body, menu, picNumber, timer, save } from './script.js';
 import { answers } from './nonogram.js';
  
 const levelMenu = create('aside', 'level-menu', body);
 const complexity = create('section', 'complexity', levelMenu);
 const levelList = create('div', 'level-list', levelMenu);
 const greens = create('img', 'greens', levelMenu);
-greens.src = './images/greens.png';
+greens.src = './images/greens1.png';
 greens.alt = 'Greens';
 let overlay;
 
@@ -57,6 +57,7 @@ function selectPic(event) {
   const name = elem.textContent;
   const index = answers.findIndex((elem) => elem.name === name);
   elem.classList.add('selected');
+  save.classList.remove('unclick-button');
   picNumber(index);
 }
 
