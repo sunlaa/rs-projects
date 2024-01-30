@@ -22,7 +22,7 @@ backAudio.style.display = 'none';
 backAudio.autoplay = true;
 backAudio.loop = true;
 backAudio.volume = 0.1;
-// backAudio.src = './images/back-music.mp3';
+backAudio.src = './images/back-music.mp3';
 
 const clickAudio = create('audio', 'paint-audio', body);
 clickAudio.style.display = 'none';
@@ -66,11 +66,12 @@ const gameBtns = create('div', 'game-btns', game);
 const reset = create('a', 'reset', gameBtns);
 reset.textContent = 'Reset';
 
-const save = create('a', 'save', gameBtns);
+export const save = create('a', 'save', gameBtns);
 save.textContent = 'Save Game';
 save.addEventListener('click', saveGame);
 
 function saveGame() {
+  // добавить модальное окно
   localStorage.clear();
   localStorage.setItem('min', timer.min);
   localStorage.setItem('sec', timer.sec);
@@ -85,6 +86,7 @@ random.textContent = 'Random Game';
 random.addEventListener('click', () => {
   document.querySelector('.table').remove();
   document.querySelector('.solution').remove();
+  save.classList.remove('unclick-button');
   timer.stop();
   picNumber(Math.round(Math.random() * 14));
   clickAudio.play();
@@ -287,11 +289,13 @@ export function picNumber(n) {
   solution.addEventListener('click', () => {
     solveNonogram(answers[n].pic);
     table.classList.add('unclick');
+    save.classList.add('unclick-button');
     timer.stop();
   });
 
   reset.addEventListener('click', () => {
     table.classList.remove('unclick');
+    save.classList.remove('unclick-button');
     const cells = document.querySelectorAll('.ceil-box');
     for (let cell of cells) {
       cell.classList.remove('painted');
