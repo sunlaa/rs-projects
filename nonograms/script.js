@@ -22,7 +22,7 @@ backAudio.style.display = 'none';
 backAudio.autoplay = true;
 backAudio.loop = true;
 backAudio.volume = 0.1;
-// backAudio.src = './images/back-music.mp3';
+backAudio.src = './images/back-music.mp3';
 
 const clickAudio = create('audio', 'paint-audio', body);
 clickAudio.style.display = 'none';
