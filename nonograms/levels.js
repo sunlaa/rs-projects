@@ -78,3 +78,4 @@ function closeMenu() {
   setTimeout(() => (levelList.innerHTML = ''), 700);
 }
 close.addEventListener('click', closeMenu);
+

@@ -1,5 +1,6 @@
 import { answers } from './nonogram.js';
 import { Timer } from './timer.js';
+import { saveWin } from './score.js';
 
 export const body = document.querySelector('body');
 
@@ -22,7 +23,7 @@ backAudio.style.display = 'none';
 backAudio.autoplay = true;
 backAudio.loop = true;
 backAudio.volume = 0.1;
-backAudio.src = './images/back-music.mp3';
+// backAudio.src = './images/back-music.mp3';
 
 const clickAudio = create('audio', 'paint-audio', body);
 clickAudio.style.display = 'none';
@@ -50,7 +51,7 @@ volume.addEventListener('click', () => {
   }
 });
 export const menu = create('a', 'menu', configPanel);
-const score = create('span', 'score', configPanel);
+export const score = create('span', 'score', configPanel);
 
 const title = create('h1', 'title', header);
 title.textContent = 'Nonogram';
@@ -72,7 +73,6 @@ save.addEventListener('click', saveGame);
 
 function saveGame() {
   // добавить модальное окно
-  localStorage.clear();
   localStorage.setItem('min', timer.min);
   localStorage.setItem('sec', timer.sec);
   localStorage.setItem('pic', pictureNumber);
@@ -97,6 +97,8 @@ lastGame.textContent = 'Play the last game';
 lastGame.addEventListener('click', loadGame)
 
 function loadGame() {
+  // модальное если игр в сторадж нет
+  save.classList.remove('unclick-button');
   const min = localStorage.getItem('min');
   const sec = localStorage.getItem('sec');
   timer.min = min;
@@ -257,7 +259,7 @@ function win(n, time) {
   const congrats = create('h1', 'congrats', text);
   congrats.textContent = "Congratulations, you've won!";
   const phrase = create('p', 'phrase', text);
-  phrase.innerHTML = `You solved the puzzle in ${time} seconds!`;
+  phrase.textContent = `You solved the puzzle in ${time} seconds!`;
 
   const solved = create('table', 'solved', modal);
   for (let i = 0; i < answers[n].size; i++) {
@@ -275,7 +277,10 @@ function win(n, time) {
   const next = create('a', 'next', modal);
   next.textContent = 'Next Game';
   next.addEventListener('click', nextGame);
+
+  saveWin(n, time);
 }
+
 
 export function picNumber(n) {
   pictureNumber = n;
@@ -299,6 +304,7 @@ export function picNumber(n) {
     const cells = document.querySelectorAll('.ceil-box');
     for (let cell of cells) {
       cell.classList.remove('painted');
+      cell.classList.remove('cross');
       timer.stop();
     }
   });

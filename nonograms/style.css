@@ -561,3 +561,39 @@ table {
   width: 25px;
   height: 25px;
 }
+
+/* Score Modal*/
+
+.score-modal {
+  z-index: 99;
+  position: fixed;
+  width: 50%;
+  height: 60%;
+  background-color: #9ecf93;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* display: none; */
+}
+
+.overlay {
+  display: none;
+}
+
+.score-list {
+  border-collapse: collapse;
+  border: solid 1px #181818;
+}
+
+.score-head-cell {
+  font-size: 30px;
+}
+
+.score-cell {
+  padding: 10px;
+  border: solid 1px #181818;
+}
