@@ -4,9 +4,8 @@ import { answers } from './nonogram.js';
 const levelMenu = create('aside', 'level-menu', body);
 const complexity = create('section', 'complexity', levelMenu);
 const levelList = create('div', 'level-list', levelMenu);
-const greens = create('img', 'greens', levelMenu);
-greens.src = './images/greens1.png';
-greens.alt = 'Greens';
+const sakura = create('img', 'sakura', levelMenu);
+sakura.src = './images/aside-sakura.png';
 let overlay;
 
 const easy = create('div', 'easy grade', complexity);
@@ -78,3 +77,4 @@ function closeMenu() {
   setTimeout(() => (levelList.innerHTML = ''), 700);
 }
 close.addEventListener('click', closeMenu);
+

@@ -1,5 +1,6 @@
 import { answers } from './nonogram.js';
 import { Timer } from './timer.js';
+import { saveWin } from './score.js';
 
 export const body = document.querySelector('body');
 
@@ -12,17 +13,19 @@ export function create(tag, cls, prnt) {
 
 let pictureNumber;
 
+document.documentElement.className = 'dark-theme';
+
 const branchesOne = create('img', 'branch-1 branch', body);
-branchesOne.src = './images/branches-3.png';
+branchesOne.src = './images/sakura-left.png';
 const branchesTwo = create('img', 'branch-2 branch', body);
-branchesTwo.src = './images/branches-2.png';
+branchesTwo.src = './images/sakura-right.png';
 
 const backAudio = create('audio', 'back-audio', body);
 backAudio.style.display = 'none';
 backAudio.autoplay = true;
 backAudio.loop = true;
 backAudio.volume = 0.1;
-backAudio.src = './images/back-music.mp3';
+// backAudio.src = './images/back-music.mp3';
 
 const clickAudio = create('audio', 'paint-audio', body);
 clickAudio.style.display = 'none';
@@ -38,7 +41,6 @@ const header = create('header', 'header', body);
 
 const configPanel = create('div', 'config-panel', header);
 
-const theme = create('a', 'theme', configPanel);
 const volume = create('a', 'volume off', configPanel);
 
 volume.addEventListener('click', () => {
@@ -49,8 +51,19 @@ volume.addEventListener('click', () => {
     backAudio.pause();
   }
 });
+
+const theme = create('a', 'theme', configPanel);
+
+theme.addEventListener('click', () => {
+  if (document.documentElement.classList.contains('light-theme')) {
+    document.documentElement.className = 'dark-theme';
+  } else {
+    document.documentElement.className = 'light-theme';
+  }
+});
+
 export const menu = create('a', 'menu', configPanel);
-const score = create('span', 'score', configPanel);
+export const score = create('span', 'score', configPanel);
 
 const title = create('h1', 'title', header);
 title.textContent = 'Nonogram';
@@ -72,9 +85,9 @@ save.addEventListener('click', saveGame);
 
 function saveGame() {
   // добавить модальное окно
-  localStorage.clear();
   localStorage.setItem('min', timer.min);
   localStorage.setItem('sec', timer.sec);
+  localStorage.setItem('time', timer.time);
   localStorage.setItem('pic', pictureNumber);
   localStorage.setItem('table', document.querySelector('.table').innerHTML);
 }
@@ -94,16 +107,22 @@ random.addEventListener('click', () => {
 
 const lastGame = create('a', 'last-game', gameModeBtns);
 lastGame.textContent = 'Play the last game';
-lastGame.addEventListener('click', loadGame)
+lastGame.addEventListener('click', loadGame);
 
 function loadGame() {
+  // модальное если игр в сторадж нет
+  save.classList.remove('unclick-button');
   const min = localStorage.getItem('min');
   const sec = localStorage.getItem('sec');
+  const time = localStorage.getItem('time');
   timer.min = min;
   timer.sec = sec;
-  document.querySelector('.timer').textContent = `${timer.mod(min)} : ${timer.mod(sec)}`;
+  timer.time = time;
+  document.querySelector('.timer').textContent = `${timer.mod(
+    min
+  )} : ${timer.mod(sec)}`;
   timer.start();
-  const n = localStorage.getItem('pic');
+  const n = +localStorage.getItem('pic');
   const table = localStorage.getItem('table');
   document.querySelector('.solution').remove();
   document.querySelector('.table').remove();
@@ -257,7 +276,7 @@ function win(n, time) {
   const congrats = create('h1', 'congrats', text);
   congrats.textContent = "Congratulations, you've won!";
   const phrase = create('p', 'phrase', text);
-  phrase.innerHTML = `You solved the puzzle in ${time} seconds!`;
+  phrase.textContent = `You solved the puzzle in ${time} seconds!`;
 
   const solved = create('table', 'solved', modal);
   for (let i = 0; i < answers[n].size; i++) {
@@ -275,6 +294,8 @@ function win(n, time) {
   const next = create('a', 'next', modal);
   next.textContent = 'Next Game';
   next.addEventListener('click', nextGame);
+
+  saveWin(n, time);
 }
 
 export function picNumber(n) {
@@ -299,6 +320,7 @@ export function picNumber(n) {
     const cells = document.querySelectorAll('.ceil-box');
     for (let cell of cells) {
       cell.classList.remove('painted');
+      cell.classList.remove('cross');
       timer.stop();
     }
   });

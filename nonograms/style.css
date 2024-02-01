@@ -10,12 +10,41 @@ body {
 
 body {
   font-family: 'Dancing Script', cursive;
-  background-color: #ffff;
-  /* background-color: rgb(0, 0, 0); */
+  background-color: var(--back-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+}
+
+.light-theme {
+  --back-color: #ffff;
+  --game-button: #ff7691;
+  --mode-button: #393939;
+  --mode-button-font: #fff;
+  --buttons-font: #fff;
+  --fill-cell: #000000;
+  --table-back: #fff;
+  --border-table: #181818;
+  --level-border: #808080;
+  --font-color: #000000;
+  --score-border: #c5c1c1;
+  --overlay: #00000088;
+}
+
+.dark-theme {
+  --back-color: #444544;
+  --game-button: #ff7691;
+  --mode-button: #fff;
+  --mode-button-font: #393939;
+  --buttons-font: #000000;
+  --fill-cell: #fff;
+  --table-back: var(--back-color);
+  --border-table: #e1dada;
+  --level-border: #808080;
+  --font-color: #fff;
+  --score-border: #c5c1c1;
+  --overlay: #ffffffa5;
 }
 
 @keyframes opacity {
@@ -28,31 +57,21 @@ body {
 }
 
 /* Images */
-
-.tree {
-  position: fixed;
-  width: 500px;
-}
-
 .branch {
   z-index: -1;
   position: fixed;
   width: 500px;
+  top: -40px;
 }
 
 .branch-1 {
-  filter: brightness(1.2);
-  left: 0;
-  width: 700px;
-  top: -40px;
-  left: -150px;
+  left: -60px;
 }
 
 .branch-2 {
-  filter: brightness(0.6);
-  top: 0;
-  right: 0;
+  right: -110px;
 }
+
 /* Header */
 
 .header {
@@ -66,6 +85,11 @@ body {
 .title {
   font-size: 60px;
   justify-self: flex-start;
+  color: var(--font-color);
+}
+
+.dark-theme .title {
+  text-shadow: 1px 0 10px var(--font-color);
 }
 
 .config-panel {
@@ -75,7 +99,9 @@ body {
   justify-content: space-around;
   left: 10px;
   top: 10px;
-  background-color: rgba(255, 255, 255, 0.816);
+  background-color: #ffffff27;
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
   border-radius: 30px;
   width: 200px;
   height: 40px;
@@ -168,6 +194,10 @@ body {
   justify-content: space-around;
 }
 
+.timer {
+  color: var(--font-color);
+}
+
 .game-btns {
   z-index: 2;
   order: 3;
@@ -189,15 +219,16 @@ body {
   height: 40px;
   padding-left: 30px;
   padding-right: 30px;
-  background-color: #37843c;
+  background-color: var(--game-button);
   font-size: 18px;
+  /* color: var(--buttons-font); */
   color: #fff;
   transition: all ease 400ms;
 }
 
 .unclick-button {
   pointer-events: none;
-  color: rgb(207, 206, 206);
+  color: #cfcece;
   background-color: #807f7f;
 }
 
@@ -219,8 +250,9 @@ table {
   align-self: center;
   font-size: 20px;
   border-collapse: collapse;
-  border: solid 1px #181818;
-  background-color: #fff;
+  border: solid 1px var(--border-table);
+  background-color: var(--table-back);
+  box-shadow: 1px 0 70px var(--score-border);
   opacity: 0;
   animation: opacity 500ms ease-out forwards;
 }
@@ -230,15 +262,16 @@ table {
 }
 
 .ceil {
-  border: solid 1px #181818;
+  border: solid 1px var(--border-table);
+  color: var(--font-color);
 }
 
 .ceil.bold {
-  border-right: solid 2px #181818;
+  border-right: solid 3px var(--border-table);
 }
 
 .row.bold {
-  border-bottom: solid 2px #181818;
+  border-bottom: solid 2px var(--border-table);
 }
 
 .ceil-box {
@@ -248,7 +281,7 @@ table {
 }
 
 .ceil-box.painted {
-  background-color: black;
+  background-color: var(--fill-cell);
   transition: all linear 300ms;
 }
 
@@ -262,14 +295,12 @@ table {
   content: '';
   width: 1.5px;
   height: 30px;
-  background-color: black;
+  background-color: var(--fill-cell);
   top: -2px;
   left: 12px;
   opacity: 0;
   animation: opacity 300ms ease-out forwards;
 }
-
-
 
 .ceil-box.cross::after {
   transform: rotate(-45deg);
@@ -319,9 +350,8 @@ table {
   align-self: flex-start;
   height: 85%;
   width: 450px;
-  background-color: #ffff;
+  background-color: var(--back-color);
   border-bottom-right-radius: 20px;
-  border: solid 0.5px gray;
   border-top: none;
   border-left: none;
   display: flex;
@@ -331,11 +361,15 @@ table {
   transition: all linear 350ms;
 }
 
-.greens {
+.sakura {
+  /* z-index: 98; */
+  pointer-events: none;
   position: absolute;
-  width: 120%;
-  left: -50px;
-  bottom: -170px;
+  width: 110%;
+  transform-origin: bottom left;
+  transform: rotate(35deg);
+  left: -70px;
+  bottom: 50px;
 }
 
 .complexity {
@@ -354,9 +388,8 @@ table {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #327a37;
-  border: solid 1px #ffff;
-  color: #ffff;
+  background-color: var(--game-button);
+  color: #fff;
   border-top: none;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -411,10 +444,9 @@ table {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  font-size: 16px;
-  color: #443a28;
-  border: solid 1px gray;
+  background-color: #0000007f;
+  font-size: 17px;
+  color: #fff;
   border-radius: 30px;
   opacity: 0;
 }
@@ -422,16 +454,15 @@ table {
 .level.visible {
   opacity: 1;
   transition: opacity linear 500ms, filter linear 200ms,
-    border-color linear 200ms;
+    background-color linear 200ms;
 }
 
 .level.visible:hover {
-  filter: brightness(0.9);
+  background-color: #000000b0;
 }
 
 .level.visible.selected {
-  filter: brightness(0.8);
-  border-color: #ffffff00;
+  background-color: #000000d6;
 }
 
 /* Game-mode */
@@ -454,9 +485,9 @@ table {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #393939;
+  background-color: var(--mode-button);
   font-size: 18px;
-  color: #fff;
+  color: var(--mode-button-font);
   border-radius: 30px;
   width: fit-content;
   height: 40px;
@@ -470,7 +501,6 @@ table {
   filter: brightness(1.5);
 }
 
-
 /* Win Modal */
 
 .overlay {
@@ -480,7 +510,7 @@ table {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.532);
+  background-color: var(--overlay);
   opacity: 0;
   transition: opacity 300ms ease-out;
   animation: opacity 300ms ease-out forwards;
@@ -491,7 +521,7 @@ table {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #fff;
+  background-color: var(--back-color);
   width: 50%;
   height: 90%;
   border-radius: 30px;
@@ -529,9 +559,9 @@ table {
   height: 40px;
   padding-left: 30px;
   padding-right: 30px;
-  background-color: #37843c;
+  background-color: var(--game-button);
   font-size: 18px;
-  color: #fff;
+  color: var(--buttons-font);
   transition: all ease 400ms;
 }
 
@@ -544,7 +574,7 @@ table {
 }
 
 .solved-cell.painted {
-  background-color: #181818;
+  background-color: var(--fill-cell);
 }
 
 .solved-cell.small {
@@ -560,4 +590,59 @@ table {
 .solved-cell.big {
   width: 25px;
   height: 25px;
+}
+
+/* Score Modal*/
+
+.score-modal {
+  z-index: 99;
+  position: fixed;
+  width: 50%;
+  height: 70%;
+  background-color: var(--back-color);
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10%;
+  opacity: 0;
+  animation: opacity 300ms ease-out forwards;
+}
+
+.score-modal.none {
+  display: none;
+}
+
+.title-score {
+  color: var(--font-color);
+  font-size: 50px;
+}
+
+.dark-theme .title-score,
+.dark-theme .notification {
+  text-shadow: 1px 0 10px var(--font-color);
+}
+
+.notification {
+  font-size: 40px;
+  color: var(--font-color);
+  margin-top: 10%;
+}
+
+.score-list {
+  color: var(--font-color);
+  border-collapse: collapse;
+  width: 60%;
+}
+
+.score-cell {
+  text-align: center;
+  padding: 10px;
+  border: solid 1px var(--score-border);
+}
+
+.score-head-cell {
+  font-size: 25px;
 }
