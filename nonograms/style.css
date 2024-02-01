@@ -590,6 +590,10 @@ table {
   display: none;
 }
 
+.notification {
+  font-size: 30px;
+}
+
 .score-list {
   border-collapse: collapse;
   border: solid 1px #181818;

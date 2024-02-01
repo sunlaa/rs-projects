@@ -33,14 +33,18 @@ const overlay = create('div', 'overlay', document.body);
 const modalScore = create('div', 'score-modal none', document.body);
 const title = create('h1', 'title-score', modalScore);
 title.textContent = 'Score';
-if (arr.length !== 0) {
-  headScoreTable();
+let scoreList;
+
+if (arr.length === 0) {
+  const notification = create('div', 'notification', modalScore);
+  notification.textContent = "So far you haven't won a game";
+} else {
+  createHeadRow();
   writeScore();
 }
 
-let scoreList;
 
-function headScoreTable() {
+function createHeadRow() {
   scoreList = create('table', 'score-list', modalScore);
   const scoreHeadRow = create('tr', 'score-head-row', scoreList);
   for (let i = 0; i < 4; i++) {
@@ -71,7 +75,7 @@ function writeScore() {
 
   tableArr.sort((a, b) => a[0] - b[0]);
   for (let i = 0; i < tableArr.length; i++) {
-    const row = create('tr', 'score-head-row', scoreList);
+    const row = create('tr', 'score-row', scoreList);
     for (let j = 0; j < 4; j++) {
       const scoreCell = create('td', 'score-def-cell score-cell', row);
       switch (j) {
@@ -126,5 +130,10 @@ export function saveWin(n, time) {
     arr.push(inner);
   }
   localStorage.setItem('arr', JSON.stringify(arr));
+
+  document.querySelector('.score-list').remove()
+  createHeadRow();
   writeScore();
 }
+
+// console.log(writeScore())
