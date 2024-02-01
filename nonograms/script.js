@@ -16,9 +16,9 @@ let pictureNumber;
 document.documentElement.className = 'dark-theme';
 
 const branchesOne = create('img', 'branch-1 branch', body);
-branchesOne.src = './images/branches-1.png';
+branchesOne.src = './images/sakura-left.png';
 const branchesTwo = create('img', 'branch-2 branch', body);
-branchesTwo.src = './images/branches-2.png';
+branchesTwo.src = './images/sakura-right.png';
 
 const backAudio = create('audio', 'back-audio', body);
 backAudio.style.display = 'none';
@@ -60,7 +60,7 @@ theme.addEventListener('click', () => {
   } else {
     document.documentElement.className = 'light-theme';
   }
-})
+});
 
 export const menu = create('a', 'menu', configPanel);
 export const score = create('span', 'score', configPanel);
@@ -107,7 +107,7 @@ random.addEventListener('click', () => {
 
 const lastGame = create('a', 'last-game', gameModeBtns);
 lastGame.textContent = 'Play the last game';
-lastGame.addEventListener('click', loadGame)
+lastGame.addEventListener('click', loadGame);
 
 function loadGame() {
   // модальное если игр в сторадж нет
@@ -118,7 +118,9 @@ function loadGame() {
   timer.min = min;
   timer.sec = sec;
   timer.time = time;
-  document.querySelector('.timer').textContent = `${timer.mod(min)} : ${timer.mod(sec)}`;
+  document.querySelector('.timer').textContent = `${timer.mod(
+    min
+  )} : ${timer.mod(sec)}`;
   timer.start();
   const n = +localStorage.getItem('pic');
   const table = localStorage.getItem('table');
@@ -295,7 +297,6 @@ function win(n, time) {
 
   saveWin(n, time);
 }
-
 
 export function picNumber(n) {
   pictureNumber = n;

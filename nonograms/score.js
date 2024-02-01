@@ -30,8 +30,6 @@ addListeners();
 let arr = JSON.parse(localStorage.getItem('arr')) || [];
 
 const modalScore = create('div', 'score-modal none', document.body);
-const flowers = create('img', 'flowers', modalScore);
-flowers.src = './images/flowers.png'
 const title = create('h1', 'title-score', modalScore);
 title.textContent = 'Score';
 let scoreList;

@@ -19,8 +19,9 @@ body {
 
 .light-theme {
   --back-color: #ffff;
-  --game-button: #37843c;
+  --game-button: #ff7691;
   --mode-button: #393939;
+  --mode-button-font: #fff;
   --buttons-font: #fff;
   --fill-cell: #000000;
   --table-back: #fff;
@@ -28,19 +29,22 @@ body {
   --level-border: #808080;
   --font-color: #000000;
   --score-border: #c5c1c1;
+  --overlay: #00000088;
 }
 
 .dark-theme {
-  --back-color: #01090f;
-  --game-button: #37843c;
-  --mode-button: #393939;
-  --buttons-font: #fff;
+  --back-color: #444544;
+  --game-button: #ff7691;
+  --mode-button: #fff;
+  --mode-button-font: #393939;
+  --buttons-font: #000000;
   --fill-cell: #fff;
   --table-back: var(--back-color);
   --border-table: #e1dada;
   --level-border: #808080;
   --font-color: #fff;
   --score-border: #c5c1c1;
+  --overlay: #ffffffa5;
 }
 
 @keyframes opacity {
@@ -57,18 +61,15 @@ body {
   z-index: -1;
   position: fixed;
   width: 500px;
+  top: -40px;
 }
 
 .branch-1 {
-  filter: brightness(1.2);
-  left: -50px;
-  top: -50px;
+  left: -60px;
 }
 
 .branch-2 {
-  filter: brightness(0.6);
-  top: 0;
-  right: 0;
+  right: -110px;
 }
 
 /* Header */
@@ -85,6 +86,10 @@ body {
   font-size: 60px;
   justify-self: flex-start;
   color: var(--font-color);
+}
+
+.dark-theme .title {
+  text-shadow: 1px 0 10px var(--font-color);
 }
 
 .config-panel {
@@ -216,7 +221,8 @@ body {
   padding-right: 30px;
   background-color: var(--game-button);
   font-size: 18px;
-  color: var(--buttons-font);
+  /* color: var(--buttons-font); */
+  color: #fff;
   transition: all ease 400ms;
 }
 
@@ -246,7 +252,7 @@ table {
   border-collapse: collapse;
   border: solid 1px var(--border-table);
   background-color: var(--table-back);
-  box-shadow: 1px 0 20px var(--score-border);
+  box-shadow: 1px 0 70px var(--score-border);
   opacity: 0;
   animation: opacity 500ms ease-out forwards;
 }
@@ -261,7 +267,7 @@ table {
 }
 
 .ceil.bold {
-  border-right: solid 2px var(--border-table);
+  border-right: solid 3px var(--border-table);
 }
 
 .row.bold {
@@ -355,11 +361,15 @@ table {
   transition: all linear 350ms;
 }
 
-.greens {
+.sakura {
+  /* z-index: 98; */
+  pointer-events: none;
   position: absolute;
-  width: 115%;
-  bottom: -130px;
-  left: -25px;
+  width: 110%;
+  transform-origin: bottom left;
+  transform: rotate(35deg);
+  left: -70px;
+  bottom: 50px;
 }
 
 .complexity {
@@ -379,7 +389,7 @@ table {
   align-items: center;
   justify-content: center;
   background-color: var(--game-button);
-  color: var(--buttons-font);
+  color: #fff;
   border-top: none;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -434,10 +444,9 @@ table {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--back-color);
+  background-color: #0000007f;
   font-size: 17px;
-  color: var(--font-color);
-  border: solid 1px var(--level-border);
+  color: #fff;
   border-radius: 30px;
   opacity: 0;
 }
@@ -445,16 +454,15 @@ table {
 .level.visible {
   opacity: 1;
   transition: opacity linear 500ms, filter linear 200ms,
-    border-color linear 200ms;
+    background-color linear 200ms;
 }
 
 .level.visible:hover {
-  filter: brightness(0.9);
+  background-color: #000000b0;
 }
 
 .level.visible.selected {
-  filter: brightness(0.8);
-  border-color: #ffffff00;
+  background-color: #000000d6;
 }
 
 /* Game-mode */
@@ -479,7 +487,7 @@ table {
   align-items: center;
   background-color: var(--mode-button);
   font-size: 18px;
-  color: #fff;
+  color: var(--mode-button-font);
   border-radius: 30px;
   width: fit-content;
   height: 40px;
@@ -502,7 +510,7 @@ table {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.532);
+  background-color: var(--overlay);
   opacity: 0;
   transition: opacity 300ms ease-out;
   animation: opacity 300ms ease-out forwards;
@@ -594,8 +602,7 @@ table {
   background-color: var(--back-color);
   top: 50%;
   transform: translateY(-50%);
-  border-top-right-radius: 30px;
-  border-top-left-radius: 30px;
+  border-radius: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -608,20 +615,19 @@ table {
   display: none;
 }
 
-.flowers {
-  z-index: -1;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-}
-
 .title-score {
   color: var(--font-color);
   font-size: 50px;
 }
 
+.dark-theme .title-score,
+.dark-theme .notification {
+  text-shadow: 1px 0 10px var(--font-color);
+}
+
 .notification {
   font-size: 40px;
+  color: var(--font-color);
   margin-top: 10%;
 }
 
