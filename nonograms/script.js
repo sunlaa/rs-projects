@@ -75,6 +75,7 @@ function saveGame() {
   // добавить модальное окно
   localStorage.setItem('min', timer.min);
   localStorage.setItem('sec', timer.sec);
+  localStorage.setItem('time', timer.time);
   localStorage.setItem('pic', pictureNumber);
   localStorage.setItem('table', document.querySelector('.table').innerHTML);
 }
@@ -101,11 +102,13 @@ function loadGame() {
   save.classList.remove('unclick-button');
   const min = localStorage.getItem('min');
   const sec = localStorage.getItem('sec');
+  const time = localStorage.getItem('time');
   timer.min = min;
   timer.sec = sec;
+  timer.time = time;
   document.querySelector('.timer').textContent = `${timer.mod(min)} : ${timer.mod(sec)}`;
   timer.start();
-  const n = localStorage.getItem('pic');
+  const n = +localStorage.getItem('pic');
   const table = localStorage.getItem('table');
   document.querySelector('.solution').remove();
   document.querySelector('.table').remove();
@@ -239,6 +242,7 @@ function isCorrect(answer) {
 function win(n, time) {
   if (!isCorrect(answers[n].pic)) return;
   timer.stop();
+  console.log(n);
   const overlay = create('div', 'overlay', body);
   function nextGame() {
     overlay.remove();

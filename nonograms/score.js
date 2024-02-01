@@ -43,7 +43,6 @@ if (arr.length === 0) {
   writeScore();
 }
 
-
 function createHeadRow() {
   scoreList = create('table', 'score-list', modalScore);
   const scoreHeadRow = create('tr', 'score-head-row', scoreList);
@@ -71,6 +70,10 @@ function createHeadRow() {
 }
 
 function writeScore() {
+  if (document.querySelector('.notification')) {
+    document.querySelector('.notification').remove();
+  }
+
   const tableArr = [...arr];
 
   tableArr.sort((a, b) => a[0] - b[0]);
@@ -131,9 +134,9 @@ export function saveWin(n, time) {
   }
   localStorage.setItem('arr', JSON.stringify(arr));
 
-  document.querySelector('.score-list').remove()
+  if (document.querySelector('.score-list')) {
+    document.querySelector('.score-list').remove();
+  }
   createHeadRow();
   writeScore();
 }
-
-// console.log(writeScore())
