@@ -12,25 +12,26 @@ async function addListeners() {
   let score = await initScore();
   function openScore() {
     modalScore.classList.remove('none');
-    overlay.style.display = 'block';
+    overlay = create('div', 'overlay', document.body);
+    overlay.addEventListener('click', closeScore);
   }
 
   score.addEventListener('click', openScore);
 
   function closeScore() {
-    overlay.style.display = 'none';
     modalScore.classList.add('none');
+    overlay.remove();
   }
-
-  overlay.addEventListener('click', closeScore);
 }
 
+let overlay;
 addListeners();
 
 let arr = JSON.parse(localStorage.getItem('arr')) || [];
 
-const overlay = create('div', 'overlay', document.body);
 const modalScore = create('div', 'score-modal none', document.body);
+const flowers = create('img', 'flowers', modalScore);
+flowers.src = './images/flowers.png'
 const title = create('h1', 'title-score', modalScore);
 title.textContent = 'Score';
 let scoreList;

@@ -13,8 +13,10 @@ export function create(tag, cls, prnt) {
 
 let pictureNumber;
 
+document.documentElement.className = 'dark-theme';
+
 const branchesOne = create('img', 'branch-1 branch', body);
-branchesOne.src = './images/branches-3.png';
+branchesOne.src = './images/branches-1.png';
 const branchesTwo = create('img', 'branch-2 branch', body);
 branchesTwo.src = './images/branches-2.png';
 
@@ -39,7 +41,6 @@ const header = create('header', 'header', body);
 
 const configPanel = create('div', 'config-panel', header);
 
-const theme = create('a', 'theme', configPanel);
 const volume = create('a', 'volume off', configPanel);
 
 volume.addEventListener('click', () => {
@@ -50,6 +51,17 @@ volume.addEventListener('click', () => {
     backAudio.pause();
   }
 });
+
+const theme = create('a', 'theme', configPanel);
+
+theme.addEventListener('click', () => {
+  if (document.documentElement.classList.contains('light-theme')) {
+    document.documentElement.className = 'dark-theme';
+  } else {
+    document.documentElement.className = 'light-theme';
+  }
+})
+
 export const menu = create('a', 'menu', configPanel);
 export const score = create('span', 'score', configPanel);
 
@@ -242,7 +254,6 @@ function isCorrect(answer) {
 function win(n, time) {
   if (!isCorrect(answers[n].pic)) return;
   timer.stop();
-  console.log(n);
   const overlay = create('div', 'overlay', body);
   function nextGame() {
     overlay.remove();

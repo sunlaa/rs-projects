@@ -5,7 +5,7 @@ const levelMenu = create('aside', 'level-menu', body);
 const complexity = create('section', 'complexity', levelMenu);
 const levelList = create('div', 'level-list', levelMenu);
 const greens = create('img', 'greens', levelMenu);
-greens.src = './images/greens1.png';
+greens.src = './images/greens.png';
 greens.alt = 'Greens';
 let overlay;
 
