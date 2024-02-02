@@ -30,6 +30,8 @@ addListeners();
 let arr = JSON.parse(localStorage.getItem('arr')) || [];
 
 const modalScore = create('div', 'score-modal none', document.body);
+const sakura = create('img', 'score-sakura', modalScore);
+sakura.src = './images/score-sakura.png'
 const title = create('h1', 'title-score', modalScore);
 title.textContent = 'Score';
 let scoreList;
@@ -112,6 +114,7 @@ function writeScore() {
             min = 0;
             sec = time;
           }
+          scoreCell.classList.add('time')
           scoreCell.textContent = `${mod(min)} : ${mod(sec)}`;
           break;
       }

@@ -282,7 +282,7 @@ function win(n, time) {
   const congrats = create('h1', 'congrats', text);
   congrats.textContent = "Congratulations, you've won!";
   const phrase = create('p', 'phrase', text);
-  phrase.textContent = `You solved the puzzle in ${time} seconds!`;
+  phrase.textContent = `You've solved the nonogram in ${time} seconds!`;
 
   const solved = create('table', 'solved', modal);
   for (let i = 0; i < answers[n].size; i++) {
