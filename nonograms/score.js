@@ -45,7 +45,7 @@ if (arr.length === 0) {
 }
 
 function createHeadRow() {
-  scoreList = create('table', 'score-list', modalScore);
+  scoreList = create('table', 'score-table', modalScore);
   const scoreHeadRow = create('tr', 'score-head-row', scoreList);
   for (let i = 0; i < 4; i++) {
     const scoreHeadCell = create(
@@ -136,8 +136,8 @@ export function saveWin(n, time) {
   }
   localStorage.setItem('arr', JSON.stringify(arr));
 
-  if (document.querySelector('.score-list')) {
-    document.querySelector('.score-list').remove();
+  if (document.querySelector('.score-table')) {
+    document.querySelector('.score-table').remove();
   }
   createHeadRow();
   writeScore();

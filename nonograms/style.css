@@ -252,7 +252,6 @@ body {
   padding-right: 30px;
   background-color: var(--game-button);
   font-size: 18px;
-  /* color: var(--buttons-font); */
   color: #fff;
   transition: all ease 400ms;
 }
@@ -687,12 +686,13 @@ body {
   margin-top: 10%;
 }
 
-.score-list {
+.score-table {
   z-index: 98;
   background-color: var(--transparent-back);
   color: var(--font-color);
   border-collapse: collapse;
   width: 60%;
+  height: 60%;
 }
 
 .score-cell {

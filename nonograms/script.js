@@ -112,7 +112,7 @@ random.addEventListener('click', () => {
 });
 
 const lastGame = create('a', 'last-game', gameModeBtns);
-lastGame.textContent = 'Play the last game';
+lastGame.textContent = 'Continue last game';
 lastGame.addEventListener('click', loadGame);
 
 function loadGame() {
