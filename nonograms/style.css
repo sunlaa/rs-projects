@@ -9,6 +9,7 @@ body {
 }
 
 body {
+  position: relative;
   font-family: 'Dancing Script', cursive;
   background-color: var(--back-color);
   display: flex;
@@ -62,7 +63,7 @@ body {
 .branch {
   z-index: -1;
   position: absolute;
-  width: 500px;
+  width: 35%;
   top: -40px;
 }
 
@@ -731,8 +732,20 @@ body {
 
 
 @media screen and (max-width: 1000px) {
+  .branch-1 {
+    left: -40px;
+  }
+  
+  .branch-2 {
+    right: -60px;
+  }
+
   .game-mode {
     align-self: center;
+  }
+
+  .modal {
+    width: 70%;
   }
 
   .score-modal {
@@ -742,19 +755,19 @@ body {
   .score-table {
     width: 70%;
   }
-
-  .modal {
-    width: 70%;
-  }
 }
 
 @media screen and (max-width: 750px) {
-  .modal {
-    width: 90%;
+  .branch-1 {
+    left: -10px;
+  }
+  
+  .branch-2 {
+    right: -40px;
   }
 
-  .score-modal {
-    width: 80%;
+  .modal {
+    width: 90%;
   }
 
   .ceil-clues-row {
@@ -767,6 +780,10 @@ body {
     height: 75px;
   }
 
+  .score-modal {
+    width: 80%;
+  }
+
   .config-panel {
     flex-direction: column;
     padding: 5px 0 5px 0;
@@ -774,14 +791,11 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .branch {
-    display: none;
+  .branch-1,
+  .branch-2 {
+    top: -20px;
   }
-
-  .modal-text {
-    height: 15%;
-  }
-
+  
   .congrats {
     font-size: 30px;
   }
@@ -840,6 +854,10 @@ body {
 }
 
 @media screen and (max-width: 450px) {
+  .branch {
+    width: 50%;
+    top: -30px;
+  }
   .level-menu {
     width: 100%;
   }
