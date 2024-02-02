@@ -13,7 +13,7 @@ export function create(tag, cls, prnt) {
 
 let pictureNumber;
 
-document.documentElement.className = 'dark-theme';
+document.documentElement.className = 'light-theme';
 
 const branchesOne = create('img', 'branch-1 branch', body);
 branchesOne.src = './images/sakura-left.png';
@@ -52,13 +52,19 @@ volume.addEventListener('click', () => {
   }
 });
 
-const theme = create('a', 'theme', configPanel);
+const wrap = create('div', 'wrap', configPanel)
+const theme = create('div', 'theme', wrap);
+const dark = create('a', 'dark', theme);
+const light = create('a', 'light', theme);
+
 
 theme.addEventListener('click', () => {
   if (document.documentElement.classList.contains('light-theme')) {
     document.documentElement.className = 'dark-theme';
+    theme.style.transform = 'translateY(-35px)';
   } else {
     document.documentElement.className = 'light-theme';
+    theme.style.transform = 'translateY(0)';
   }
 });
 
