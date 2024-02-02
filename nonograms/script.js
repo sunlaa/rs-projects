@@ -25,7 +25,7 @@ backAudio.style.display = 'none';
 backAudio.autoplay = true;
 backAudio.loop = true;
 backAudio.volume = 0.1;
-// backAudio.src = './images/back-music.mp3';
+backAudio.src = './images/back-music.mp3';
 
 const clickAudio = create('audio', 'paint-audio', body);
 clickAudio.style.display = 'none';
@@ -61,7 +61,11 @@ const light = create('a', 'light', theme);
 theme.addEventListener('click', () => {
   if (document.documentElement.classList.contains('light-theme')) {
     document.documentElement.className = 'dark-theme';
-    theme.style.transform = 'translateY(-35px)';
+    if (document.documentElement.clientWidth > 600) {
+      theme.style.transform = 'translateY(-35px)';
+    } else {
+      theme.style.transform = 'translateY(-30px)'
+    }
   } else {
     document.documentElement.className = 'light-theme';
     theme.style.transform = 'translateY(0)';
@@ -201,9 +205,9 @@ function fillClues(cell, cluesArray, current, numbers, num) {
 }
 
 function paintCell(event) {
-  timer.start();
   const cell = event.target;
   if (!cell.classList.contains('ceil-box')) return;
+  timer.start();
   cell.classList.remove('cross');
   cell.classList.toggle('painted');
   if (cell.classList.contains('painted')) {
@@ -216,9 +220,9 @@ function paintCell(event) {
 
 function crossCell(event) {
   event.preventDefault();
-  timer.start();
   const cell = event.target;
   if (!cell.classList.contains('ceil-box')) return;
+  timer.start();
   cell.classList.remove('painted');
   cell.classList.toggle('cross');
   clickAudio.play();
@@ -315,7 +319,7 @@ export function picNumber(n) {
 
   solution.addEventListener('click', () => {
     solveNonogram(answers[n].pic);
-    table.classList.add('unclick');
+    // table.classList.add('unclick');
     save.classList.add('unclick-button');
     timer.stop();
   });

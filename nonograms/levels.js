@@ -1,6 +1,6 @@
 import { create, body, menu, picNumber, timer, save } from './script.js';
 import { answers } from './nonogram.js';
- 
+
 const levelMenu = create('aside', 'level-menu', body);
 const complexity = create('section', 'complexity', levelMenu);
 const levelList = create('div', 'level-list', levelMenu);
@@ -34,7 +34,8 @@ function fillList(level) {
     const level = create('div', 'level', levelList);
     let levelName = arr[i].name;
     if (levelName !== 'TV') {
-      levelName = levelName.charAt(0).toUpperCase() + levelName.slice(1).toLowerCase();
+      levelName =
+        levelName.charAt(0).toUpperCase() + levelName.slice(1).toLowerCase();
     }
     level.textContent = levelName;
     level.addEventListener('click', selectPic);
@@ -62,6 +63,9 @@ function selectPic(event) {
   elem.classList.add('selected');
   save.classList.remove('unclick-button');
   picNumber(index);
+  if (document.documentElement.clientWidth <= 600) {
+    closeMenu();
+  }
 }
 
 function openMenu() {
@@ -81,4 +85,3 @@ function closeMenu() {
   setTimeout(() => (levelList.innerHTML = ''), 700);
 }
 close.addEventListener('click', closeMenu);
-
