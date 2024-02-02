@@ -32,7 +32,11 @@ function fillList(level) {
   const arr = answers.filter((item) => item.level === level);
   for (let i = 0; i < arr.length; i++) {
     const level = create('div', 'level', levelList);
-    level.textContent = arr[i].name;
+    let levelName = arr[i].name;
+    if (levelName !== 'TV') {
+      levelName = levelName.charAt(0).toUpperCase() + levelName.slice(1).toLowerCase();
+    }
+    level.textContent = levelName;
     level.addEventListener('click', selectPic);
   }
   const levels = levelList.querySelectorAll('.level');
@@ -53,7 +57,7 @@ function selectPic(event) {
   const levels = levelList.querySelectorAll('.level');
   levels.forEach((elem) => elem.classList.remove('selected'));
   const elem = event.target;
-  const name = elem.textContent;
+  const name = elem.textContent.toUpperCase();
   const index = answers.findIndex((elem) => elem.name === name);
   elem.classList.add('selected');
   save.classList.remove('unclick-button');
