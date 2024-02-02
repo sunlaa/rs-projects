@@ -30,6 +30,8 @@ addListeners();
 let arr = JSON.parse(localStorage.getItem('arr')) || [];
 
 const modalScore = create('div', 'score-modal none', document.body);
+const sakura = create('img', 'score-sakura', modalScore);
+sakura.src = './images/score-sakura.png'
 const title = create('h1', 'title-score', modalScore);
 title.textContent = 'Score';
 let scoreList;
@@ -43,7 +45,7 @@ if (arr.length === 0) {
 }
 
 function createHeadRow() {
-  scoreList = create('table', 'score-list', modalScore);
+  scoreList = create('table', 'score-table', modalScore);
   const scoreHeadRow = create('tr', 'score-head-row', scoreList);
   for (let i = 0; i < 4; i++) {
     const scoreHeadCell = create(
@@ -112,6 +114,7 @@ function writeScore() {
             min = 0;
             sec = time;
           }
+          scoreCell.classList.add('time')
           scoreCell.textContent = `${mod(min)} : ${mod(sec)}`;
           break;
       }
@@ -133,8 +136,8 @@ export function saveWin(n, time) {
   }
   localStorage.setItem('arr', JSON.stringify(arr));
 
-  if (document.querySelector('.score-list')) {
-    document.querySelector('.score-list').remove();
+  if (document.querySelector('.score-table')) {
+    document.querySelector('.score-table').remove();
   }
   createHeadRow();
   writeScore();
