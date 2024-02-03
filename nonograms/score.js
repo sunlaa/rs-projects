@@ -30,8 +30,13 @@ addListeners();
 let arr = JSON.parse(localStorage.getItem('arr')) || [];
 
 const modalScore = create('div', 'score-modal none', document.body);
+const close = create('a', 'close-btn', modalScore);
+close.addEventListener('click', () => {
+  modalScore.classList.add('none');
+  overlay.remove();
+});
 const sakura = create('img', 'score-sakura', modalScore);
-sakura.src = './images/score-sakura.png'
+sakura.src = './images/score-sakura.png';
 const title = create('h1', 'title-score', modalScore);
 title.textContent = 'Score';
 let scoreList;
@@ -114,7 +119,7 @@ function writeScore() {
             min = 0;
             sec = time;
           }
-          scoreCell.classList.add('time')
+          scoreCell.classList.add('time');
           scoreCell.textContent = `${mod(min)} : ${mod(sec)}`;
           break;
       }

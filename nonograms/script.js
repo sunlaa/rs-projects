@@ -13,7 +13,7 @@ export function create(tag, cls, prnt) {
 
 let pictureNumber;
 
-document.documentElement.className = 'light-theme';
+const themeMode = localStorage.getItem('theme');
 
 const branchesOne = create('img', 'branch-1 branch', body);
 branchesOne.src = './images/sakura-left.png';
@@ -52,23 +52,34 @@ volume.addEventListener('click', () => {
   }
 });
 
-const wrap = create('div', 'wrap', configPanel)
+const wrap = create('div', 'wrap', configPanel);
 const theme = create('div', 'theme', wrap);
 const dark = create('a', 'dark', theme);
 const light = create('a', 'light', theme);
 
+if (!themeMode) {
+  document.documentElement.className = 'light-theme';
+} else if (themeMode === 'dark') {
+  document.documentElement.className = 'dark-theme';
+  theme.style.transform = 'translateY(-35px)';
+} else {
+  document.documentElement.className = 'light-theme';
+  theme.style.transform = 'translateY(0)';
+}
 
 theme.addEventListener('click', () => {
   if (document.documentElement.classList.contains('light-theme')) {
     document.documentElement.className = 'dark-theme';
+    localStorage.setItem('theme', 'dark');
     if (document.documentElement.clientWidth > 600) {
       theme.style.transform = 'translateY(-35px)';
     } else {
-      theme.style.transform = 'translateY(-30px)'
+      theme.style.transform = 'translateY(-30px)';
     }
   } else {
     document.documentElement.className = 'light-theme';
     theme.style.transform = 'translateY(0)';
+    localStorage.setItem('theme', 'light');
   }
 });
 
@@ -94,12 +105,18 @@ save.textContent = 'Save Game';
 save.addEventListener('click', saveGame);
 
 function saveGame() {
-  // добавить модальное окно
   localStorage.setItem('min', timer.min);
   localStorage.setItem('sec', timer.sec);
   localStorage.setItem('time', timer.time);
   localStorage.setItem('pic', pictureNumber);
   localStorage.setItem('table', document.querySelector('.table').innerHTML);
+  setTimeout(() => {
+    const notification = create('div', 'game-saved', body);
+    notification.textContent = 'Your game is saved!';
+    setTimeout(() => {
+      notification.remove();
+    }, 2500);
+  }, 250);
 }
 
 const gameModeBtns = create('div', 'game-mode', body);
@@ -120,7 +137,14 @@ lastGame.textContent = 'Continue last game';
 lastGame.addEventListener('click', loadGame);
 
 function loadGame() {
-  // модальное если игр в сторадж нет
+  if (!localStorage.getItem('table')) {
+    const notification = create('div', 'no-saved', body);
+    notification.textContent = "You haven't saved the game yet";
+    setTimeout(() => {
+      notification.remove();
+    }, 2500);
+    return;
+  }
   save.classList.remove('unclick-button');
   const min = localStorage.getItem('min');
   const sec = localStorage.getItem('sec');
@@ -319,7 +343,7 @@ export function picNumber(n) {
 
   solution.addEventListener('click', () => {
     solveNonogram(answers[n].pic);
-    // table.classList.add('unclick');
+    table.classList.add('unclick');
     save.classList.add('unclick-button');
     timer.stop();
   });

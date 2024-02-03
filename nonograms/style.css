@@ -32,6 +32,7 @@ body {
   --font-color: #000000;
   --score-border: #c5c1c1;
   --overlay: #00000088;
+   --notif-back: #0000008c;
 }
 
 .dark-theme {
@@ -48,6 +49,7 @@ body {
   --font-color: #fff;
   --score-border: #c5c1c1;
   --overlay: #ffffffa5;
+  --notif-back: #ffffff62;
 }
 
 @keyframes opacity {
@@ -531,6 +533,7 @@ body {
 
 .random,
 .last-game {
+  position: relative;
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
@@ -551,6 +554,42 @@ body {
 .random:hover,
 .last-game:hover {
   filter: brightness(1.5);
+}
+
+/* Notifications */
+
+.no-saved,
+.game-saved {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--notif-back);
+  color: #fff;
+  height: 25px;
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 5px;
+  opacity: 1;
+  animation: slide-up 150ms linear forwards, notify 400ms linear 2s forwards;
+}
+
+@keyframes notify {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(50px);
+  } to {
+    transform: translateY(-30px);
+  }
 }
 
 /* Win Modal */
@@ -673,6 +712,11 @@ body {
   gap: 10%;
   opacity: 0;
   animation: opacity 300ms ease-out forwards;
+}
+
+.score-modal .close-btn {
+  top: 10px;
+  right: 10px;
 }
 
 .score-modal.none {
