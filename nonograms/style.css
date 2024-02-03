@@ -9,6 +9,7 @@ body {
 }
 
 body {
+  position: relative;
   font-family: 'Dancing Script', cursive;
   background-color: var(--back-color);
   display: flex;
@@ -31,6 +32,7 @@ body {
   --font-color: #000000;
   --score-border: #c5c1c1;
   --overlay: #00000088;
+   --notif-back: #0000008c;
 }
 
 .dark-theme {
@@ -47,6 +49,7 @@ body {
   --font-color: #fff;
   --score-border: #c5c1c1;
   --overlay: #ffffffa5;
+  --notif-back: #ffffff62;
 }
 
 @keyframes opacity {
@@ -62,7 +65,7 @@ body {
 .branch {
   z-index: -1;
   position: absolute;
-  width: 500px;
+  width: 35%;
   top: -40px;
 }
 
@@ -530,6 +533,7 @@ body {
 
 .random,
 .last-game {
+  position: relative;
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
@@ -550,6 +554,42 @@ body {
 .random:hover,
 .last-game:hover {
   filter: brightness(1.5);
+}
+
+/* Notifications */
+
+.no-saved,
+.game-saved {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--notif-back);
+  color: #fff;
+  height: 25px;
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 5px;
+  opacity: 1;
+  animation: slide-up 150ms linear forwards, notify 400ms linear 2s forwards;
+}
+
+@keyframes notify {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(50px);
+  } to {
+    transform: translateY(-30px);
+  }
 }
 
 /* Win Modal */
@@ -674,6 +714,11 @@ body {
   animation: opacity 300ms ease-out forwards;
 }
 
+.score-modal .close-btn {
+  top: 10px;
+  right: 10px;
+}
+
 .score-modal.none {
   display: none;
 }
@@ -731,8 +776,20 @@ body {
 
 
 @media screen and (max-width: 1000px) {
+  .branch-1 {
+    left: -40px;
+  }
+  
+  .branch-2 {
+    right: -60px;
+  }
+
   .game-mode {
     align-self: center;
+  }
+
+  .modal {
+    width: 70%;
   }
 
   .score-modal {
@@ -742,19 +799,19 @@ body {
   .score-table {
     width: 70%;
   }
-
-  .modal {
-    width: 70%;
-  }
 }
 
 @media screen and (max-width: 750px) {
-  .modal {
-    width: 90%;
+  .branch-1 {
+    left: -10px;
+  }
+  
+  .branch-2 {
+    right: -40px;
   }
 
-  .score-modal {
-    width: 80%;
+  .modal {
+    width: 90%;
   }
 
   .ceil-clues-row {
@@ -767,6 +824,10 @@ body {
     height: 75px;
   }
 
+  .score-modal {
+    width: 80%;
+  }
+
   .config-panel {
     flex-direction: column;
     padding: 5px 0 5px 0;
@@ -774,14 +835,11 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .branch {
-    display: none;
+  .branch-1,
+  .branch-2 {
+    top: -20px;
   }
-
-  .modal-text {
-    height: 15%;
-  }
-
+  
   .congrats {
     font-size: 30px;
   }
@@ -840,6 +898,10 @@ body {
 }
 
 @media screen and (max-width: 450px) {
+  .branch {
+    width: 50%;
+    top: -30px;
+  }
   .level-menu {
     width: 100%;
   }
