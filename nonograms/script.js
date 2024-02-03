@@ -15,9 +15,10 @@ let pictureNumber;
 
 const themeMode = localStorage.getItem('theme');
 
-const branchesOne = create('img', 'branch-1 branch', body);
+const branches = create('div', 'branches', body);
+const branchesOne = create('img', 'branch', branches);
 branchesOne.src = './images/sakura-left.png';
-const branchesTwo = create('img', 'branch-2 branch', body);
+const branchesTwo = create('img', 'branch', branches);
 branchesTwo.src = './images/sakura-right.png';
 
 const backAudio = create('audio', 'back-audio', body);
@@ -71,7 +72,7 @@ theme.addEventListener('click', () => {
   if (document.documentElement.classList.contains('light-theme')) {
     document.documentElement.className = 'dark-theme';
     localStorage.setItem('theme', 'dark');
-    if (document.documentElement.clientWidth > 600) {
+    if (document.documentElement.clientWidth > 514) {
       theme.style.transform = 'translateY(-35px)';
     } else {
       theme.style.transform = 'translateY(-30px)';

@@ -9,6 +9,7 @@ body {
 }
 
 body {
+  /* overflow: hidden; */
   position: relative;
   font-family: 'Dancing Script', cursive;
   background-color: var(--back-color);
@@ -32,7 +33,7 @@ body {
   --font-color: #000000;
   --score-border: #c5c1c1;
   --overlay: #00000088;
-   --notif-back: #0000008c;
+  --notif-back: #0000008c;
 }
 
 .dark-theme {
@@ -62,19 +63,17 @@ body {
 }
 
 /* Images */
+.branches {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .branch {
   z-index: -1;
-  position: absolute;
   width: 35%;
-  top: -40px;
-}
-
-.branch-1 {
-  left: -60px;
-}
-
-.branch-2 {
-  right: -110px;
 }
 
 /* Header */
@@ -587,7 +586,8 @@ body {
 @keyframes slide-up {
   from {
     transform: translateY(50px);
-  } to {
+  }
+  to {
     transform: translateY(-30px);
   }
 }
@@ -774,16 +774,7 @@ body {
   font-size: 15px;
 }
 
-
 @media screen and (max-width: 1000px) {
-  .branch-1 {
-    left: -40px;
-  }
-  
-  .branch-2 {
-    right: -60px;
-  }
-
   .game-mode {
     align-self: center;
   }
@@ -802,14 +793,6 @@ body {
 }
 
 @media screen and (max-width: 750px) {
-  .branch-1 {
-    left: -10px;
-  }
-  
-  .branch-2 {
-    right: -40px;
-  }
-
   .modal {
     width: 90%;
   }
@@ -835,11 +818,6 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .branch-1,
-  .branch-2 {
-    top: -20px;
-  }
-  
   .congrats {
     font-size: 30px;
   }
@@ -900,8 +878,8 @@ body {
 @media screen and (max-width: 450px) {
   .branch {
     width: 50%;
-    top: -30px;
   }
+
   .level-menu {
     width: 100%;
   }
