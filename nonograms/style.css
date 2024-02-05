@@ -40,12 +40,12 @@ body {
   --font-color: #000000;
   --score-border: #c5c1c1;
   --overlay: #00000088;
-  --notif-back: #0000008c;
+  --notif-back: #00000094;
 }
 
 .dark-theme {
   --back-color: #444544;
-  --transparent-back: #00000063;
+  --transparent-back: #00000081;
   --game-button: #ff7691;
   --mode-button: #fff;
   --mode-button-font: #393939;
@@ -587,6 +587,7 @@ body {
 
 .no-saved,
 .game-saved {
+  z-index: 99;
   position: absolute;
   bottom: 0;
   display: flex;
@@ -755,6 +756,7 @@ body {
   width: 100%;
   bottom: 0;
   border-radius: 30px;
+  opacity: 0.6;
 }
 
 .title-score {

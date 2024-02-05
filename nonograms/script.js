@@ -70,7 +70,8 @@ if (!themeMode) {
   if (document.documentElement.clientWidth > 749) {
     theme.style.transform = 'translateY(calc(var(--icon-size) * -1 - 10px))';
   } else {
-    theme.style.transform = 'translateY(calc(var(--icon-size-big) * -1 - 10px))';
+    theme.style.transform =
+      'translateY(calc(var(--icon-size-big) * -1 - 10px))';
   }
 } else {
   document.documentElement.className = 'light-theme';
@@ -84,7 +85,8 @@ theme.addEventListener('click', () => {
     if (document.documentElement.clientWidth > 749) {
       theme.style.transform = 'translateY(calc(var(--icon-size) * -1 - 10px))';
     } else {
-      theme.style.transform = 'translateY(calc(var(--icon-size-big) * -1 - 10px))';
+      theme.style.transform =
+        'translateY(calc(var(--icon-size-big) * -1 - 10px))';
     }
   } else {
     document.documentElement.className = 'light-theme';
@@ -122,9 +124,11 @@ function saveGame() {
   localStorage.setItem('time', timer.time);
   localStorage.setItem('pic', pictureNumber);
   localStorage.setItem('table', document.querySelector('.table').innerHTML);
+  body.style.overflow = 'hidden';
   setTimeout(() => {
     const notification = create('div', 'game-saved', body);
     notification.textContent = 'Your game is saved!';
+    body.style.overflow = 'auto';
     setTimeout(() => {
       notification.remove();
     }, 2500);
@@ -151,6 +155,8 @@ lastGame.addEventListener('click', loadGame);
 function loadGame() {
   if (!localStorage.getItem('table')) {
     const notification = create('div', 'no-saved', body);
+    body.style.overflow = 'hidden';
+    setTimeout(() => (body.style.overflow = 'auto'), 250);
     notification.textContent = "You haven't saved the game yet";
     setTimeout(() => {
       notification.remove();
