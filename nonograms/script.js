@@ -17,30 +17,30 @@ const themeMode = localStorage.getItem('theme');
 
 const branches = create('div', 'branches', body);
 const branchesOne = create('img', 'branch', branches);
-branchesOne.src = './images/sakura-left.png';
+branchesOne.src = './assets/sakura-left.png';
 const branchesTwo = create('img', 'branch', branches);
-branchesTwo.src = './images/sakura-right.png';
+branchesTwo.src = './assets/sakura-right.png';
 
 const backAudio = create('audio', 'back-audio', body);
 backAudio.style.display = 'none';
 backAudio.autoplay = true;
 backAudio.loop = true;
 backAudio.volume = 0.1;
-backAudio.src = './images/back-music.mp3';
+backAudio.src = './assets/back-music.mp3';
 
 const clickAudio = create('audio', 'paint-audio', body);
 clickAudio.style.display = 'none';
-clickAudio.src = './images/paint.mp3';
+clickAudio.src = './assets/paint.mp3';
 clickAudio.volume = 0.1;
 
 const unPaintAudio = create('audio', 'paint-audio', body);
 unPaintAudio.style.display = 'none';
-unPaintAudio.src = './images/unpaint.mp3';
+unPaintAudio.src = './assets/unpaint.mp3';
 unPaintAudio.volume = 0.1;
 
 const winAudio = create('audio', 'win-audio', body);
 winAudio.style.display = 'none';
-winAudio.src = './images/win.mp3';
+winAudio.src = './assets/win.mp3';
 winAudio.volume = 0.3;
 
 const header = create('header', 'header', body);
@@ -67,7 +67,11 @@ if (!themeMode) {
   document.documentElement.className = 'light-theme';
 } else if (themeMode === 'dark') {
   document.documentElement.className = 'dark-theme';
-  theme.style.transform = 'translateY(-35px)';
+  if (document.documentElement.clientWidth > 749) {
+    theme.style.transform = 'translateY(calc(var(--icon-size) * -1 - 10px))';
+  } else {
+    theme.style.transform = 'translateY(calc(var(--icon-size-big) * -1 - 10px))';
+  }
 } else {
   document.documentElement.className = 'light-theme';
   theme.style.transform = 'translateY(0)';
@@ -77,10 +81,10 @@ theme.addEventListener('click', () => {
   if (document.documentElement.classList.contains('light-theme')) {
     document.documentElement.className = 'dark-theme';
     localStorage.setItem('theme', 'dark');
-    if (document.documentElement.clientWidth > 514) {
-      theme.style.transform = 'translateY(-35px)';
+    if (document.documentElement.clientWidth > 749) {
+      theme.style.transform = 'translateY(calc(var(--icon-size) * -1 - 10px))';
     } else {
-      theme.style.transform = 'translateY(-30px)';
+      theme.style.transform = 'translateY(calc(var(--icon-size-big) * -1 - 10px))';
     }
   } else {
     document.documentElement.className = 'light-theme';
@@ -90,7 +94,7 @@ theme.addEventListener('click', () => {
 });
 
 export const menu = create('a', 'menu', configPanel);
-export const score = create('span', 'score', configPanel);
+export const score = create('a', 'score', configPanel);
 
 const title = create('h1', 'title', header);
 title.textContent = 'Nonogram';
@@ -204,15 +208,15 @@ function renderTable(size, leftClues, topClues) {
     for (let j = 0; j < size + 1; j++) {
       let cell;
       if (i === 0) {
-        cell = create('td', 'ceil-clues-col ceil', row);
+        cell = create('td', `ceil-clues-col ceil size-${size}`, row);
         if (j !== 0) {
           fillClues(cell, topClues, j, 'nums-col', 'numC');
         }
       } else if (j === 0) {
-        cell = create('td', 'ceil-clues-row ceil', row);
+        cell = create('td', `ceil-clues-row ceil size-${size}`, row);
         fillClues(cell, leftClues, i, 'nums-row', 'numR');
       } else {
-        cell = create('td', 'ceil-box ceil', row);
+        cell = create('td', `ceil-box ceil size-${size}`, row);
         cell.dataset.row = i;
         cell.dataset.col = j;
       }
@@ -352,7 +356,7 @@ export function picNumber(n) {
 
   solution.addEventListener('click', () => {
     solveNonogram(answers[n].pic);
-    // table.classList.add('unclick');
+    table.classList.add('unclick');
     save.classList.add('unclick-button');
     timer.stop();
   });

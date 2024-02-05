@@ -36,7 +36,7 @@ close.addEventListener('click', () => {
   overlay.remove();
 });
 const sakura = create('img', 'score-sakura', modalScore);
-sakura.src = './images/score-sakura.png';
+sakura.src = './assets/score-sakura.png';
 const title = create('h1', 'title-score', modalScore);
 title.textContent = 'Score';
 let scoreList;

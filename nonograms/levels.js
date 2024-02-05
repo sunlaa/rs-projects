@@ -5,7 +5,7 @@ const levelMenu = create('aside', 'level-menu', body);
 const complexity = create('section', 'complexity', levelMenu);
 const levelList = create('div', 'level-list', levelMenu);
 const sakura = create('img', 'sakura', levelMenu);
-sakura.src = './images/aside-sakura.png';
+sakura.src = './assets/aside-sakura.png';
 let overlay;
 
 const easy = create('div', 'easy grade', complexity);
