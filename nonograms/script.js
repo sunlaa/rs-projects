@@ -38,6 +38,11 @@ unPaintAudio.style.display = 'none';
 unPaintAudio.src = './images/unpaint.mp3';
 unPaintAudio.volume = 0.1;
 
+const winAudio = create('audio', 'win-audio', body);
+winAudio.style.display = 'none';
+winAudio.src = './images/win.mp3';
+winAudio.volume = 0.3;
+
 const header = create('header', 'header', body);
 
 const configPanel = create('div', 'config-panel', header);
@@ -236,6 +241,7 @@ function paintCell(event) {
   cell.classList.remove('cross');
   cell.classList.toggle('painted');
   if (cell.classList.contains('painted')) {
+    clickAudio.currentTime = 0;
     clickAudio.play();
   } else {
     unPaintAudio.currentTime = 0;
@@ -291,6 +297,8 @@ function isCorrect(answer) {
 function win(n, time) {
   if (!isCorrect(answers[n].pic)) return;
   timer.stop();
+  winAudio.currentTime = 0;
+  winAudio.play();
   const overlay = create('div', 'overlay', body);
   function nextGame() {
     overlay.remove();
@@ -344,7 +352,7 @@ export function picNumber(n) {
 
   solution.addEventListener('click', () => {
     solveNonogram(answers[n].pic);
-    table.classList.add('unclick');
+    // table.classList.add('unclick');
     save.classList.add('unclick-button');
     timer.stop();
   });
