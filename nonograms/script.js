@@ -101,6 +101,8 @@ title.textContent = 'Nonogram';
 
 const game = create('section', 'game', body);
 
+const wrapTable = create('div', 'wrap-table', game);
+
 const timerBlock = create('div', 'timer', game);
 timerBlock.textContent = '00 : 00';
 export const timer = new Timer(timerBlock);
@@ -199,7 +201,7 @@ function getClues(matrix, direction) {
 }
 
 function renderTable(size, leftClues, topClues) {
-  const table = create('table', 'table', game);
+  const table = create('table', 'table', wrapTable);
   for (let i = 0; i < size + 1; i++) {
     const row = create('tr', i === 0 ? 'row-clues row' : 'row-box row', table);
     if (i % 5 === 0 && i !== size) {
@@ -323,7 +325,7 @@ function win(n, time) {
   const congrats = create('h1', 'congrats', text);
   congrats.textContent = "Congratulations, you've won!";
   const phrase = create('p', 'phrase', text);
-  phrase.textContent = `You've solved the nonogram in ${time} seconds!`;
+  phrase.textContent = `Great! You've solved the nonogram in ${time} seconds!`;
 
   const solved = create('table', 'solved', modal);
   for (let i = 0; i < answers[n].size; i++) {
