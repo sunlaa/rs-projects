@@ -32,16 +32,19 @@ const clickAudio = create('audio', 'paint-audio', body);
 clickAudio.style.display = 'none';
 clickAudio.src = './assets/paint.mp3';
 clickAudio.volume = 0.1;
+clickAudio.muted = true;
 
 const unPaintAudio = create('audio', 'paint-audio', body);
 unPaintAudio.style.display = 'none';
 unPaintAudio.src = './assets/unpaint.mp3';
 unPaintAudio.volume = 0.1;
+unPaintAudio.muted = true;
 
 const winAudio = create('audio', 'win-audio', body);
 winAudio.style.display = 'none';
 winAudio.src = './assets/win.mp3';
 winAudio.volume = 0.3;
+winAudio.muted = false;
 
 const header = create('header', 'header', body);
 
@@ -53,8 +56,14 @@ volume.addEventListener('click', () => {
   volume.classList.toggle('off');
   if (backAudio.paused) {
     backAudio.play();
+    clickAudio.muted = false;
+    unPaintAudio.muted = false;
+    winAudio.muted = false;
   } else {
     backAudio.pause();
+    clickAudio.muted = true;
+    unPaintAudio.muted = true;
+    winAudio.muted = true;
   }
 });
 
