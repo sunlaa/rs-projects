@@ -44,7 +44,7 @@ const winAudio = create('audio', 'win-audio', body);
 winAudio.style.display = 'none';
 winAudio.src = './assets/win.mp3';
 winAudio.volume = 0.3;
-winAudio.muted = false;
+winAudio.muted = true;
 
 const header = create('header', 'header', body);
 
