@@ -133,11 +133,11 @@ function saveGame() {
   localStorage.setItem('time', timer.time);
   localStorage.setItem('pic', pictureNumber);
   localStorage.setItem('table', document.querySelector('.table').innerHTML);
-  body.style.overflow = 'hidden';
   setTimeout(() => {
     const notification = create('div', 'game-saved', body);
+    body.style.overflow = 'hidden';
+    setTimeout(() => (body.style.overflow = 'auto'), 250);
     notification.textContent = 'Your game is saved!';
-    body.style.overflow = 'auto';
     setTimeout(() => {
       notification.remove();
     }, 2500);
