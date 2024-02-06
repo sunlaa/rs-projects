@@ -121,7 +121,7 @@ export const timer = new Timer(timerBlock);
 const gameBtns = create('div', 'game-btns', game);
 
 const reset = create('a', 'reset', gameBtns);
-reset.textContent = 'Reset';
+reset.textContent = 'Reset game';
 
 export const save = create('a', 'save', gameBtns);
 save.textContent = 'Save Game';
