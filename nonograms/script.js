@@ -389,12 +389,15 @@ export function picNumber(n) {
     }
   });
 
-  table.addEventListener('click', (event) => {
-    const cell = event.target;
+  function checkWin(e) {
+    const cell = e.target;
     if (!cell.classList.contains('ceil-box')) return;
     const time = timer.time;
     win(n, time);
-  });
+  }
+
+  table.addEventListener('click', checkWin);
+  table.addEventListener('contextmenu', checkWin);
 }
 
 picNumber(0);
