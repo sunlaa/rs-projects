@@ -843,11 +843,11 @@ body {
   }
 
   .ceil-clues-row.size-15 {
-    height: calc(var(--index) * 1.6);
+    height: calc(var(--index) * 1.43);
     width: calc(var(--index) * 4.5);
   }
   .ceil-clues-col.size-15 {
-    width: calc(var(--index) * 1.6);
+    width: calc(var(--index) * 1.43);
     height: calc(var(--index) * 4.5);
   }
 
