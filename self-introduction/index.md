@@ -1,0 +1,23 @@
+https://youtu.be/kYoQuNojbl0
+
+Hello, my name is Lada. I'm an aspiring front-end developer. I was born in Belarus, but now I live in Poland, in Warsaw. I am 20 years old and I've been studying web development for about a year and a half now.
+
+I started getting interested in code back in my school days when we used to draw pictures in Pascal. I kept it simple and really enjoyed it when the pictures I wanted came out.
+
+While studying at school, I was sure that in order to be a developer, I had finish university. So I decided to put this idea aside. And because I liked chemistry, after school in 2020 I entered the Belarusian State University at the Faculty of Chemistry without any problems.
+
+However, in a very short period of time I realized that chemistry is not something I want to connect my life with, so I didn't come to the university even once and decided that I would diligently prepare to enter a technical university to become a programmer. I was a few points short of getting into university in 2021. And I decided to get my education at college. Even though I studied there for about one month, it was enough for me to realize that going down this path - my goals will not be achieved soon.
+
+And sometime in the middle of 2022, the history of learning programming begins. I got a job, and at the same time began to study the basics of web development. I used free resources like learning platform Stepik, open courses by Epam, YouTube videos and various online articles. After gaining a solid knowledge of CSS and HTML, I started learning JavaScript. To do this, I immersed myself in the book 'Modern JavaScript Tutorial' by Ilya Kantor. I carefully studied topic after topic, solved problems and made an outline for each new topic.
+
+Learning a new programming language was not the fastest task, considering that I had to combine it with work. However, I managed to find a balance and I gradually expanded my knowledge. Then at the beginning of 2023 I found myself in Poland and I had much more time to study. By this time, I already had a solid base of knowledge in JavaScript. This was also the time when I first became aware of the existence of RS School courses. At this point, the main part of the course was starting in 6 months. And I continued to learn web development technologies on my own, I learned the very basic knowledge of the React framework like how components work and what JSX is. 
+
+But, while waiting for the course to start, I spent the most time improving my English language skills. From school I had good background for further language learning. So I used a grammar book to improve the quality of the language. I enhanced my listening comprehension through watching videos from native speakers. I also took time for speaking by talking to myself, recording it and correcting mistakes. And now I think I have a B1 level of English.
+
+I have currently been on a course from RS School for 4 months now. During this time I have gained a very large amount of practical experience. I have done 3 main projects - the layout of 'Coffee House', and games - 'Hangman' and 'Nonograms'. Doing these assignments taught me a lot of new things, now I know how to make a slider, what JSON-objects are for in practice, how to use modules to separate code and much more. Doing all the practical tasks and learning new things gives me a lot of satisfaction. There is no better feeling than when you understand that you have understood.
+
+My soul is very much attached to exact sciences like math. I have always been interested in solving different problems, equations, and I really enjoyed it when the calculations were smooth and accurate. If we talk about my personal qualities, my strong point is my boundless desire to learn new things, I think I don't even get tired of it. I can assume that this is also due to my technical mindset, which allows me to quickly get into new issues. Taking into account my character, I can confidently say that working in a team for me will not be a problem, I am absolutely not a confrontational person and even if there is a situation where it is necessary to argue - I will make sure that the conversation was constructive and calm.
+
+In terms of future plans, I'm of course aiming to become a full-stack developer. I definitely enjoy translating incredible designs into responsive pages, and I want to learn how to do something that makes the user say "Wow!". But I wouldn't want to leave the data work, calculations, and logic behind either. Moreover, learning new things is always very interesting.
+
+I think we’ve done here, thanks for listening and good luck with your studies!
