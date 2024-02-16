@@ -60,3 +60,8 @@ This module refreshed my knowledge of JavaScript modules. Modules are also neede
 - I learned that different cases require different configuration in the `tsconfig.json` file.
 - I learned how to properly import third-party libraries into TypeScript.
 8. **Organize Code with Namespaces in TypeScript**: [Badge](https://learn.microsoft.com/en-us/users/sunlaa-4038/achievements/uf5z2lg3)
+###### Reflection:
+- I became familiar with the concept of namespaces in TypeScript.
+- I began to be able to use namespaces within a single file and within a multi-file structure.
+- I became aware of the advantages of modules over namespaces.
+After studying this module, I learned about a new possibility for structuring and dividing a project as a namespace. Namespaces are useful for getting rid of the problem of global scope pollution, reducing the amount of code and avoiding name collisions. In my opinion, this approach has fewer advantages than the new language feature - modules.
