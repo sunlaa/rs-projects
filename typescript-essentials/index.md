@@ -46,5 +46,12 @@ By going through this module I have supplemented my knowledge of classes from Ja
 - I learned when to use classes and when to use interfaces.
 - I've implemented an interface to define the shape of the class.
 6. **Generics in TypeScript**: [Badge](https://learn.microsoft.com/en-us/users/sunlaa-4038/achievements/hygry9j8)
+###### Reflection:
+This module introduced me to a concept that was new to me - generic. I analyzed some cases when their use is useful. The main use is for situations where a variety of data types are expected to be used. We can use them in functions, classes, interfaces, etc. When using generic we can also use our own types. For example, to pass a parameter to a function that will have the same type as instances of a previously defined class have. 
+- I learned what generic is and when it's useful.
+- I discovered that generic can be used to specify multiple properties.
+- I have found out how you can restrict types in generic to handle values correctly.
+- I've practiced generic in a lot of cases.
+- I became familiar with how generic can be used with custom types.
 7. **Work with External Libraries in TypeScript**: [Badge](https://learn.microsoft.com/en-us/users/sunlaa-4038/achievements/j6e85ebt)
 8. **Organize Code with Namespaces in TypeScript**: [Badge](https://learn.microsoft.com/en-us/users/sunlaa-4038/achievements/uf5z2lg3)
