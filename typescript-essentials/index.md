@@ -27,11 +27,16 @@ This module introduced me to what types exist in TypeScript. I also learned how 
 Through this module, I learned what interfaces are and why to use them. Interfaces are a description of future objects, you can say that it is like a template, which, again, protects us from errors. Interfaces and `type` alias are similar, except that `type` we can only define once and it forbids us to add/remove new properties. I was also introduced to the concept of **index signature**. This can be used to define the type of the object whose values are of consistent types or you don't know the structure of the object you are dealing with.
 - I was introduced to the concept of interfaces.
 - I found out the benefits of using interfaces.
-- I understand the difference between interface and type alias.
+- I understand the difference between interface and `type` alias.
 - I began to know how to declare and extend interfaces.
 - I learned about other ways of using interfaces.
 - I've heard of the concept of **index signature**.
 4. **Develop Typed Functions in TypeScript**: [Badge](https://learn.microsoft.com/en-us/users/sunlaa-4038/achievements/fzuyn3gx)
+###### Reflection:
+After passing this module, I got knowledge about how and why to use functions with types. I can now define functions so that I don't call them with inappropriate parameters. I also found it useful to create function types that I can use to create multiple functions with the same structure.
+- I learned that there are similar function declarations in TypeScript as in JavaScript.
+- I became aware that in TypeScript, parameters can be explicitly mandatory and non-mandatory.
+- I found out how to define a type (template) for a function with `type` alias and interfaces. 
 5. **Declare and Instantiate Classes in TypeScript**: [Badge](https://learn.microsoft.com/en-us/users/sunlaa-4038/achievements/uf5f2bq3)
 6. **Generics in TypeScript**: [Badge](https://learn.microsoft.com/en-us/users/sunlaa-4038/achievements/hygry9j8)
 7. **Work with External Libraries in TypeScript**: [Badge](https://learn.microsoft.com/en-us/users/sunlaa-4038/achievements/j6e85ebt)
