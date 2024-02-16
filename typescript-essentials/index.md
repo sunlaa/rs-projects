@@ -54,4 +54,9 @@ This module introduced me to a concept that was new to me - generic. I analyzed 
 - I've practiced generic in a lot of cases.
 - I became familiar with how generic can be used with custom types.
 7. **Work with External Libraries in TypeScript**: [Badge](https://learn.microsoft.com/en-us/users/sunlaa-4038/achievements/j6e85ebt)
+###### Reflection:
+This module refreshed my knowledge of JavaScript modules. Modules are also needed here to divide the code into convenient components. In addition, I learned how to use third-party libraries in my TypeScript code. I also learned about new fields in the `tsconfig.json` file to configure compilation depending on what environment my code is running in.
+- I saw that modules in TypeScript work in a similar way as in JavaScript.
+- I learned that different cases require different configuration in the `tsconfig.json` file.
+- I learned how to properly import third-party libraries into TypeScript.
 8. **Organize Code with Namespaces in TypeScript**: [Badge](https://learn.microsoft.com/en-us/users/sunlaa-4038/achievements/uf5z2lg3)
