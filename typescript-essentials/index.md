@@ -38,6 +38,7 @@ After passing this module, I got knowledge about how and why to use functions wi
 - I became aware that in TypeScript, parameters can be explicitly mandatory and non-mandatory.
 - I found out how to define a type (template) for a function with `type` alias and interfaces. 
 5. **Declare and Instantiate Classes in TypeScript**: [Badge](https://learn.microsoft.com/en-us/users/sunlaa-4038/achievements/uf5f2bq3)
+###### Reflection:
 By going through this module I have supplemented my knowledge of classes from JavaScript with new functions from TypeScript. We can use classes to define the shape of our object, but unlike an interface, in classes we can define implementation details, like methods and field values, plus we can define **default** values. In TypeScript we can specify what accessibility our properties will have using **access modifiers**. In addition, there are properties that belong directly to the class itself - they are called **static**. In future projects I will use classes and interfaces, together with extensions through inheritance to improve readability and reusability of my code.
 - I found out that TypeScript classes are organized in a more complex way than JavaScript classes.
 - I learned more information about the class constructor and accessors - `get` and `set`.
