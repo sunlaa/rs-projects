@@ -47,3 +47,22 @@ export interface ResponseSources {
     status: Status.ok | Status.error;
     sources: NewsSources[];
 }
+
+export type OptionsApiKey = {
+    apiKey: string | undefined;
+};
+
+export type GetRespObj = {
+    endpoint: 'everything' | 'sources';
+    options?: {
+        sources?: string | null;
+    };
+};
+
+export function noCallback(): void {
+    console.error('No callback for GET response');
+}
+
+export type Callback = {
+    (data?: ResponseArticle | ResponseSources): void;
+};
