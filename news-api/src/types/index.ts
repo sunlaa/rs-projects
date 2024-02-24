@@ -42,15 +42,22 @@ export interface ResponseSources {
     sources: NewsSources[];
 }
 
-export type OptionsApiKey = {
-    apiKey: string | undefined;
-};
+export type OptionsApiKey =
+    | {
+          apiKey: string | undefined;
+      }
+    | undefined;
 
 export type GetRespObj = {
     endpoint: 'everything' | 'sources';
     options?: {
         sources?: string | null;
     };
+};
+
+export type RequestOptions = {
+    endpoint: GetRespObj['endpoint'];
+    options?: GetRespObj['options'];
 };
 
 export function noCallback(): void {

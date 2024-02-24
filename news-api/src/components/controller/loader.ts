@@ -1,17 +1,20 @@
-import { OptionsApiKey, GetRespObj, Callback, noCallback } from '../../types/index';
+import { OptionsApiKey, GetRespObj, Callback, noCallback, assertNonNullable, RequestOptions } from '../../types/index';
 
 class Loader {
     private baseLink: string | undefined;
     private options: OptionsApiKey;
 
-    constructor(baseLink: string, options: OptionsApiKey) {
+    constructor(baseLink: string | undefined, options: OptionsApiKey) {
         this.baseLink = baseLink;
         this.options = options;
+        assertNonNullable(this.baseLink);
+        assertNonNullable(this.options);
     }
 
     protected getResp(obj: GetRespObj, callback: Callback = noCallback) {
-        if (obj.endpoint === undefined) throw new Error('Endpoint not found');
-        this.load('GET', obj.endpoint, callback, obj.options);
+        assertNonNullable(obj.endpoint);
+        if (!obj.options) obj.options = {};
+        this.load('GET', obj, callback);
     }
 
     private errorHandler(res: Response) {
@@ -24,9 +27,10 @@ class Loader {
         return res;
     }
 
-    private makeUrl(options: GetRespObj['options'], endpoint: GetRespObj['endpoint']) {
-        const urlOptions: { [key: string]: string | null | undefined } = { ...this.options, ...options };
-        let url = `${this.baseLink}${endpoint}?`;
+    private makeUrl(input: RequestOptions) {
+        const urlOptions: { [key: string]: string | null } = { ...this.options, ...input.options };
+
+        let url = `${this.baseLink}${input.endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {
             url += `${key}=${urlOptions[key]}&`;
@@ -35,8 +39,9 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load(method: string, endpoint: GetRespObj['endpoint'], callback: Callback, options: GetRespObj['options']) {
-        fetch(this.makeUrl(options, endpoint), { method })
+    private load(method: string, urlInput: RequestOptions, callback: Callback) {
+        assertNonNullable(urlInput);
+        fetch(this.makeUrl(urlInput), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
             .then((data) => callback(data))
