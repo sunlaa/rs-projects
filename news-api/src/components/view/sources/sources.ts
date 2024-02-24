@@ -1,8 +1,14 @@
 import './sources.css';
-import { NewsSources, getElement } from '../../../types/index';
+import { NewsSources, assertNonNullable } from '../../../types/index';
 
 class Sources {
-    draw(data: NewsSources[]) {
+    private getElement<T extends HTMLElement>(container: DocumentFragment | Document, selector: string): T {
+        const element = container.querySelector<T>(selector);
+        assertNonNullable(element);
+        return element;
+    }
+
+    public draw(data: NewsSources[]) {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
         if (sourceItemTemp === null) throw Error('Element with id "newsItemTemp" not found');
@@ -14,13 +20,13 @@ class Sources {
                 throw Error('error');
             }
 
-            getElement(sourceClone, '.source__item-name').textContent = item.name;
-            getElement(sourceClone, '.source__item').setAttribute('data-source-id', item.id);
+            this.getElement(sourceClone, '.source__item-name').textContent = item.name;
+            this.getElement(sourceClone, '.source__item').setAttribute('data-source-id', item.id);
 
             fragment.append(sourceClone);
         });
 
-        getElement(document, '.sources').append(fragment);
+        this.getElement(document, '.sources').append(fragment);
     }
 }
 

@@ -2,12 +2,6 @@ export function assertNonNullable<T>(value: unknown): asserts value is NonNullab
     if (value === null || value === undefined) throw new Error(`${value} is not defined`);
 }
 
-export function getElement<T extends HTMLElement>(container: DocumentFragment | Document, selector: string): T {
-    const element = container.querySelector<T>(selector);
-    assertNonNullable(element);
-    return element;
-}
-
 enum Status {
     ok = 'ok',
     error = 'error',
