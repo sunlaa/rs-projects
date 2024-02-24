@@ -1,5 +1,5 @@
 export function assertNonNullable<T>(value: unknown): asserts value is NonNullable<T> {
-    if (value === null || value === undefined) throw new Error(`${value} is not defined`);
+    if (value === null || value === undefined) throw new Error(`${value} is not defined!`);
 }
 
 enum Status {
