@@ -1,8 +1,8 @@
 import AppLoader from './appLoader';
-import { assertNonNullable, Callback } from '../../types/index';
+import { assertNonNullable, Callback, ResponseArticle, ResponseSources } from '../../types/index';
 
 class AppController extends AppLoader {
-    public getSources(callback: Callback) {
+    public getSources(callback: Callback<ResponseSources>) {
         super.getResp(
             {
                 endpoint: 'sources',
@@ -15,7 +15,7 @@ class AppController extends AppLoader {
         if (!(value instanceof Element)) throw new Error(`${value} is no defined!`);
     }
 
-    public getNews(e: Event, callback: Callback) {
+    public getNews(e: Event, callback: Callback<ResponseArticle>) {
         let target: EventTarget | null = e.target;
         const newsContainer: EventTarget | null = e.currentTarget;
         assertNonNullable(newsContainer);

@@ -64,6 +64,6 @@ export function noCallback(): void {
     console.error('No callback for GET response');
 }
 
-export type Callback = {
-    (data?: ResponseArticle | ResponseSources): void;
+export type Callback<T> = {
+    (data?: T): void;
 };

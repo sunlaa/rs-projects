@@ -11,7 +11,7 @@ class Loader {
         assertNonNullable(this.options);
     }
 
-    protected getResp(obj: GetRespObj, callback: Callback = noCallback) {
+    protected getResp<T>(obj: GetRespObj, callback: Callback<T> = noCallback) {
         assertNonNullable(obj.endpoint);
         if (!obj.options) obj.options = {};
         this.load('GET', obj, callback);
@@ -39,7 +39,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load(method: string, urlInput: RequestOptions, callback: Callback) {
+    private load<T>(method: string, urlInput: RequestOptions, callback: Callback<T>) {
         assertNonNullable(urlInput);
         fetch(this.makeUrl(urlInput), { method })
             .then(this.errorHandler)
