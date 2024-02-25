@@ -42,27 +42,20 @@ export interface ResponseSources {
     sources: NewsSources[];
 }
 
-export type OptionsApiKey =
-    | {
-          apiKey: string | undefined;
-      }
-    | undefined;
+export type ApiKeyObj = {
+    apiKey: string;
+};
 
-export type GetRespObj = {
+type OptionsObj = {
+    sources?: string;
+};
+
+export interface GetResponseObj {
     endpoint: 'everything' | 'sources';
-    options?: {
-        sources?: string | null;
-    };
-};
-
-export type RequestOptions = {
-    endpoint: GetRespObj['endpoint'];
-    options?: GetRespObj['options'];
-};
-
-export function noCallback(): void {
-    console.error('No callback for GET response');
+    options?: OptionsObj;
 }
+
+export type URLOptions = Pick<ApiKeyObj, 'apiKey'> & Pick<OptionsObj, 'sources'>;
 
 export type Callback<T> = {
     (data?: T): void;

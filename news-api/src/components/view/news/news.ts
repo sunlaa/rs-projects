@@ -3,7 +3,7 @@ import { Article, assertNonNullable } from '../../../types/index';
 
 class News {
     private getElement<T extends HTMLElement>(container: DocumentFragment | Document, selector: string): T {
-        const element = container.querySelector<T>(selector);
+        const element: T | null = container.querySelector<T>(selector);
         assertNonNullable(element);
         return element;
     }
@@ -12,7 +12,7 @@ class News {
 
         const fragment: DocumentFragment = document.createDocumentFragment();
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
-        if (newsItemTemp === null) throw Error('Element with id "newsItemTemp" not found');
+        assertNonNullable(newsItemTemp);
 
         news.forEach((item: Article, idx: number) => {
             const newsClone: Node = newsItemTemp.content.cloneNode(true);

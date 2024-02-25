@@ -1,23 +1,22 @@
-import { OptionsApiKey, GetRespObj, Callback, noCallback, assertNonNullable, RequestOptions } from '../../types/index';
+import { ApiKeyObj, GetResponseObj, URLOptions, Callback } from '../../types/index';
 
-class Loader {
-    private baseLink: string | undefined;
-    private options: OptionsApiKey;
-
-    constructor(baseLink: string | undefined, options: OptionsApiKey) {
+export class Loader {
+    readonly baseLink: string;
+    readonly options: ApiKeyObj;
+    constructor(baseLink: string, options: ApiKeyObj) {
         this.baseLink = baseLink;
         this.options = options;
-        assertNonNullable(this.baseLink);
-        assertNonNullable(this.options);
     }
 
-    protected getResp<T>(obj: GetRespObj, callback: Callback<T> = noCallback) {
-        assertNonNullable(obj.endpoint);
+    public getResp<T>(
+        obj: GetResponseObj,
+        callback: Callback<T> = () => console.error('No callback for GET response')
+    ): void {
         if (!obj.options) obj.options = {};
         this.load('GET', obj, callback);
     }
 
-    private errorHandler(res: Response) {
+    private errorHandler(res: Response): Response {
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -27,25 +26,23 @@ class Loader {
         return res;
     }
 
-    private makeUrl(input: RequestOptions) {
-        const urlOptions: { [key: string]: string | null } = { ...this.options, ...input.options };
-
-        let url = `${this.baseLink}${input.endpoint}?`;
+    private makeUrl(obj: GetResponseObj): string {
+        const urlOptions: URLOptions = { ...this.options, ...obj.options };
+        let url: string = `${this.baseLink}${obj.endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {
-            url += `${key}=${urlOptions[key]}&`;
+            url += `${key}=${urlOptions[key as keyof URLOptions]}&`;
         });
 
         return url.slice(0, -1);
     }
 
-    private load<T>(method: string, urlInput: RequestOptions, callback: Callback<T>) {
-        assertNonNullable(urlInput);
-        fetch(this.makeUrl(urlInput), { method })
+    private load<T>(method: string, obj: GetResponseObj, callback: Callback<T>): void {
+        fetch(this.makeUrl(obj), { method })
             .then(this.errorHandler)
-            .then((res) => res.json())
-            .then((data) => callback(data))
-            .catch((err) => console.error(err));
+            .then((res: Response) => res.json())
+            .then((data: T) => callback(data))
+            .catch((err: Error) => console.error(err));
     }
 }
 
