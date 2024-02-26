@@ -1,3 +1,43 @@
+.filter {
+    cursor: pointer;
+    height: auto;
+    padding: 10px;
+    background-color: #30c5ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.lang__btn {
+    width: 5%;
+    height: 15%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #3b809b;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    transition: all 150ms linear;
+}
+
+.lang__btn:hover {
+    background-color: #d3d9e2;
+    color: #2f677e;
+}
+
+.lang__btn.active {
+    background-color: #17181c;
+    color: #68c1e4;
+}
+
+.lang__btn-name {
+    pointer-events: none;
+}
+
 body {
     color: #fff;
     background: #17181c;

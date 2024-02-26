@@ -14,6 +14,13 @@ class News {
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
         assertNonNullable(newsItemTemp);
 
+        if (news.length === 0) {
+            const report: Element = document.createElement('div');
+            report.textContent = 'No news in your language in this section';
+            report.classList.add('no-news-report');
+            fragment.append(report);
+        }
+
         news.forEach((item: Article, idx: number) => {
             const newsClone: Node = newsItemTemp.content.cloneNode(true);
 

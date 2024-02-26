@@ -1,11 +1,12 @@
 import AppLoader from './appLoader';
-import { assertNonNullable, Callback, ResponseArticle, ResponseSources } from '../../types/index';
+import { assertNonNullable, Callback, OptionsObj, ResponseArticle, ResponseSources } from '../../types/index';
 
 class AppController extends AppLoader {
-    public getSources(callback: Callback<ResponseSources>): void {
+    public getSources(callback: Callback<ResponseSources>, config: OptionsObj): void {
         super.getResp(
             {
                 endpoint: 'sources',
+                options: config,
             },
             callback
         );
@@ -15,7 +16,7 @@ class AppController extends AppLoader {
         if (!(value instanceof Element)) throw new Error(`${value} is no defined!`);
     }
 
-    public getNews(e: Event, callback: Callback<ResponseArticle>): void {
+    public getNews(e: Event, callback: Callback<ResponseArticle>, config: OptionsObj): void {
         let target: EventTarget | null = e.target;
         const newsContainer: EventTarget | null = e.currentTarget;
         assertNonNullable(newsContainer);
@@ -32,9 +33,7 @@ class AppController extends AppLoader {
                     super.getResp(
                         {
                             endpoint: 'everything',
-                            options: {
-                                sources: sourceId,
-                            },
+                            options: { ...{ sources: sourceId }, ...config },
                         },
                         callback
                     );

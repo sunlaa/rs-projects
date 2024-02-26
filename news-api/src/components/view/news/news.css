@@ -121,6 +121,13 @@
     left: 0%;
 }
 
+.no-news-report {
+    width: 100%;
+    margin-top: 15%;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
 @media (min-width: 640px) {
     .news__item {
         flex-direction: row;
@@ -164,3 +171,4 @@
         padding-left: 25px;
     }
 }
+

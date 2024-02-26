@@ -46,8 +46,11 @@ export type ApiKeyObj = {
     apiKey: string;
 };
 
-type OptionsObj = {
+export type OptionsObj = {
     sources?: string;
+    language?: string;
+    country?: string;
+    category?: string;
 };
 
 export interface GetResponseObj {
