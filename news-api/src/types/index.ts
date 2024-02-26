@@ -46,11 +46,8 @@ export type ApiKeyObj = {
     apiKey: string;
 };
 
-export type OptionsObj = {
+export type OptionsObj = Partial<NewsSources> & {
     sources?: string;
-    language?: string;
-    country?: string;
-    category?: string;
 };
 
 export interface GetResponseObj {
