@@ -34,7 +34,6 @@ export class Loader {
             url += `${key}=${urlOptions[key as keyof URLOptions]}&`;
         });
 
-        console.log(url.slice(0, -1));
         return url.slice(0, -1);
     }
 

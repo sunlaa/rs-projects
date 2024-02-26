@@ -6,4 +6,5 @@ export const app: App = new App();
 app.start({}, {});
 
 const filter: Filter = new Filter();
-filter.addLanguages();
+filter.fillFilter();
+filter.fillTopMenu();
