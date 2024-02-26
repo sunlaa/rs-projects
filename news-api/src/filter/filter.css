@@ -1,38 +1,68 @@
+.choose-lang {
+    display: none;
+}
 
 .filter {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .lang__btn {
-  cursor: pointer;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #000000;
-  box-shadow: 0.1em 0.1em 0.2em #000000;
-  color: #e7f0d7;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  transition: all 150ms linear;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    box-shadow: 0.1em 0.1em 0.2em #000000;
+    color: #e7f0d7;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    transition: all 150ms linear;
 }
 
 .lang__btn:hover {
-  background-color: #545353;
+    background-color: #545353;
 }
 
 .lang__btn.active {
-  background-color: #e7f0d7;
-  box-shadow: 0.1em 0.1em 0.5em #e7f0d7;
+    background-color: #e7f0d7;
+    box-shadow: 0.1em 0.1em 0.5em #e7f0d7;
 
-  color: #17181c;
+    color: #17181c;
 }
 
 .lang__btn-name {
-  pointer-events: none;
+    pointer-events: none;
+}
+
+@media (max-width: 640px) {
+    .filter {
+        background-color: #9198e56c;
+        backdrop-filter: blur(5px);
+        position: fixed;
+        left: 0;
+        right: 0;
+        border: solid 1px black;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        transform: translateY(-230%);
+        transition: all 300ms linear;
+    }
+
+    .choose-lang {
+        display: block;
+        height: fit-content;
+        padding: 1rem;
+        color: #e7f0d7;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.2rem;
+        background-color: #000000;
+        border-radius: 20px;
+    }
 }
