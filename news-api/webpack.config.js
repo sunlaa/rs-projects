@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const DotenvWebpackPlugin = require('dotenv-webpack');
 const EslintPlugin = require('eslint-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const baseConfig = {
     entry: path.resolve(__dirname, './src/index'),
@@ -31,7 +32,10 @@ const baseConfig = {
             filename: 'index.html',
         }),
         new CleanWebpackPlugin(),
-        new EslintPlugin({ extensions: 'ts' })
+        new EslintPlugin({ extensions: 'ts' }),
+        new CopyPlugin({
+            patterns: [{ from: path.resolve(__dirname, 'src/assets'), to: path.resolve(__dirname, 'dist/assets') }],
+        }),
     ],
 };
 

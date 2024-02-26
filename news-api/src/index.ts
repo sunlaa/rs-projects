@@ -32,7 +32,7 @@ languages.forEach((elem: string) => {
         const sources: Element | null = document.querySelector('.sources');
         assertNonNullable(sources);
         sources.innerHTML = '';
-        app.start({ language: elem }, { language: elem });
+        app.start({ language: elem }, {});
         console.log('lang: ' + elem);
     });
 

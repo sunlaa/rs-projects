@@ -31,7 +31,7 @@ class News {
             if (idx % 2) this.getElement(newsClone, '.news__item').classList.add('alt');
 
             this.getElement(newsClone, '.news__meta-photo').style.backgroundImage =
-                `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
+                `url(${item.urlToImage || '../../../assets/placeholder.png'})`;
 
             this.getElement(newsClone, '.news__meta-author').textContent = item.author || item.source.name;
             this.getElement(newsClone, '.news__meta-date').textContent = item.publishedAt
