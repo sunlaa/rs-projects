@@ -5,26 +5,29 @@
     height: auto;
     align-items: center;
     justify-content: center;
-    font: 300 1em 'Fira Sans', sans-serif;
+    font:
+        300 1em 'Fira Sans',
+        sans-serif;
 }
 
 .source__item {
     background: none;
-    border: 2px solid #30c5ff;
+    border: 2px solid #17181c;
+    border-radius: 15px;
     font: inherit;
     line-height: 1;
     margin: 0.5em;
     padding: 1em 2em;
-    color: #70d6ff;
+    color: #17181c;
     transition: 0.25s;
     cursor: pointer;
 }
 
 .source__item:hover,
 .source__item:focus {
-    border-color: #3fcc59;
-    color: #69db7e;
-    box-shadow: 0 0.5em 0.5em -0.4em #3fcc59;
+    border-color: #24281e;
+    color: #e7f0d7;
+    box-shadow: 0 0.5em 0.5em -0.4em #e7f0d7;
     transform: translateY(-0.25em);
 }
 
