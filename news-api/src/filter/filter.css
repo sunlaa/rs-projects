@@ -1,0 +1,38 @@
+
+.filter {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.lang__btn {
+  cursor: pointer;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  box-shadow: 0.1em 0.1em 0.2em #000000;
+  color: #e7f0d7;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  transition: all 150ms linear;
+}
+
+.lang__btn:hover {
+  background-color: #545353;
+}
+
+.lang__btn.active {
+  background-color: #e7f0d7;
+  box-shadow: 0.1em 0.1em 0.5em #e7f0d7;
+
+  color: #17181c;
+}
+
+.lang__btn-name {
+  pointer-events: none;
+}

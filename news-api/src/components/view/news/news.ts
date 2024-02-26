@@ -16,9 +16,10 @@ class News {
 
         if (news.length === 0) {
             const report: Element = document.createElement('div');
-            report.textContent = 'No news in your language in this section';
+            report.textContent = 'Sorry, no news in your language from this source!';
             report.classList.add('no-news-report');
             fragment.append(report);
+            console.log('hello');
         }
 
         news.forEach((item: Article, idx: number) => {

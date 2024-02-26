@@ -1,5 +1,6 @@
 import { assertNonNullable } from '../types/index';
 import { app } from '../index';
+import './filter.css';
 
 export class Filter {
     addLanguages(): void {
