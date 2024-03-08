@@ -3,6 +3,7 @@ import { BaseElement } from '../../utilits/base-elements/base-element';
 import Title from '../entry-page/title/title';
 import Greet from './greet/greet';
 import Brief from './brief/brief';
+import StartButton from './start-button/start-button';
 
 class StartPage extends BaseElement {
   constructor() {
@@ -10,7 +11,8 @@ class StartPage extends BaseElement {
       { tag: 'section', className: 'start-page' },
       new Title(),
       new Greet(),
-      new Brief()
+      new Brief(),
+      new StartButton()
     );
   }
 }
