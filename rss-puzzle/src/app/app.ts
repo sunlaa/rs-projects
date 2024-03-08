@@ -1,5 +1,6 @@
 import './global.css';
-import EntryPage from '../pages-view/entry-page/entry-page';
+// import EntryPage from '../pages-view/entry-page/entry-page';
+import StartPage from '../pages-view/start-page/start-page';
 
 export default class App {
   container: HTMLElement;
@@ -9,6 +10,6 @@ export default class App {
   }
 
   public run() {
-    this.container.append(new EntryPage().getElement());
+    this.container.append(new StartPage().getElement());
   }
 }
