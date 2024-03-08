@@ -31,7 +31,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'RSS-Puzzle',
+      template: './src/index.html',
+      filename: 'index.html',
     }),
   ],
 };
