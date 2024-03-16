@@ -1,0 +1,17 @@
+.selection-menu {
+  display: flex;
+  gap: 10px;
+}
+
+.select {
+  width: 2rem;
+  height: 1rem;
+  font-size: 0.7rem;
+  border-radius: 5px;
+  font-family: 'Madimi One', sans-serif;
+  background-color: rgb(255, 255, 255);
+}
+
+.select:focus-visible {
+  outline: none;
+}

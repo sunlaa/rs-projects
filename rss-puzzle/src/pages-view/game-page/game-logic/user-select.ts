@@ -5,7 +5,14 @@ import level4 from '../../../sources-data/wordCollectionLevel4.json';
 import level5 from '../../../sources-data/wordCollectionLevel5.json';
 import level6 from '../../../sources-data/wordCollectionLevel6.json';
 
-const sources: Sources[] = [level1, level2, level3, level4, level5, level6];
+export const sources: Sources[] = [
+  level1,
+  level2,
+  level3,
+  level4,
+  level5,
+  level6,
+];
 
 type SentenseData = {
   audioExample: string;

@@ -1,7 +1,8 @@
 import './game-page.css';
 import { BaseElement } from '../../utilits/base-elements/base-element';
 import Router from '../../utilits/servises/router';
-import RoundView from './game-space/round-view/round-view';
+// import RoundView from './game-space/round-view/round-view';
+import SelectMenu from './select-menu/select-menu';
 
 export default class Game extends BaseElement {
   router: Router;
@@ -10,8 +11,8 @@ export default class Game extends BaseElement {
     super({ tag: 'section', className: 'game-page' });
     this.router = router;
 
-    const round = new RoundView(1, 1);
+    const selectMenu = new SelectMenu(this);
 
-    this.append(round);
+    this.append(selectMenu);
   }
 }

@@ -27,7 +27,7 @@
   justify-content: center;
   color: #ffffff;
   text-shadow: 1px 1px 10px rgb(129, 129, 129);
-  font-size: 28px;
+  font-size: 1rem;
   transition: all 200ms linear;
 }
 
