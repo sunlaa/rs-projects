@@ -1,0 +1,18 @@
+.switches {
+  align-self: flex-end;
+}
+
+.switch {
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+  background-size: cover;
+}
+
+.translate-switch {
+  background-image: url('../../../../assets/translate.png');
+}
+
+.switch.disabled {
+  opacity: 0.5;
+}

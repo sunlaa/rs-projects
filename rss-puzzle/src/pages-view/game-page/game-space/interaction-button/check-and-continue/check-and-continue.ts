@@ -40,11 +40,17 @@ export default class CheckAndContinue extends Div {
     this.append(this.continueButton);
 
     this.continueButton.setStyles({ display: '' });
+
+    const switches = document.querySelector<HTMLElement>('.switches');
+    if (switches) switches.dispatchEvent(new Event('show-after-win'));
   };
 
   transformToCheck = () => {
     this.continueButton.setStyles({ display: 'none' });
     this.checkButton.setStyles({ display: '' });
     this.checkButton.addClass('disabled');
+
+    const switches = document.querySelector<HTMLElement>('.switches');
+    if (switches) switches.dispatchEvent(new Event('hide-after-win'));
   };
 }

@@ -8,7 +8,8 @@ import { CutElements, Sizes } from '../../../../utilits/types/types';
 import CheckButton from '../interaction-button/check-and-continue/check-button/check-button';
 import CheckAndContinue from '../interaction-button/check-and-continue/check-and-continue';
 import IDKButton from '../interaction-button/idk-button/idk-button';
-import Hints from '../../hints/hints-view';
+import Hints from '../../hints/hints-view/hints-view';
+import Switches from '../../hints/switches/switches';
 
 export default class RoundView extends BaseElement {
   sentenses: string[];
@@ -62,6 +63,8 @@ export default class RoundView extends BaseElement {
 
     const hints = new Hints(this.translate);
 
+    const switches = new Switches(hints.translateBlock);
+
     this.addListener('empty', () => {
       hints.updateHintsData();
       sources.updatePieces();
@@ -70,6 +73,13 @@ export default class RoundView extends BaseElement {
       checkAndContinue.transformToCheck();
     });
 
-    this.appendChildren(hints, field, sources, checkAndContinue, idkButton);
+    this.appendChildren(
+      switches,
+      hints,
+      field,
+      sources,
+      checkAndContinue,
+      idkButton
+    );
   }
 }

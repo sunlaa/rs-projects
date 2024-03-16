@@ -45,6 +45,10 @@ export class BaseElement<T extends HTMLElement = HTMLElement> {
     this.element.classList.remove(className);
   }
 
+  classList() {
+    return this.element.classList;
+  }
+
   getElement() {
     return this.element;
   }

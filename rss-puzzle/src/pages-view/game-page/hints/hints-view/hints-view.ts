@@ -1,5 +1,5 @@
-import Translate from './hints-view/translate/translate';
-import { BaseElement } from '../../../utilits/base-elements/base-element';
+import Translate from './translate/translate';
+import { BaseElement } from '../../../../utilits/base-elements/base-element';
 
 export default class Hints extends BaseElement {
   translateText: string[];
