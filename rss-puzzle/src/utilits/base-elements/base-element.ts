@@ -64,6 +64,11 @@ export class BaseElement<T extends HTMLElement = HTMLElement> {
     });
   }
 
+  getChildren(): Element[] {
+    const { children } = this.element;
+    return Array.from(children);
+  }
+
   remove() {
     this.element.remove();
   }

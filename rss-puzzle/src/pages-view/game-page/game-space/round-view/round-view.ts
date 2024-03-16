@@ -5,6 +5,7 @@ import ResultBlock from '../game-parts/result-block/result-block';
 import SourceBlock from '../game-parts/source-block/source-block';
 import Slicer from '../game-parts/source-block/piece-slicer/piece-slicer';
 import { CutElements, Sizes } from '../../../../utilits/types/types';
+import CheckButton from '../interaction-button/check-and-continue/check-button/check-button';
 
 export default class RoundView extends BaseElement {
   sentenses: string[];
@@ -27,7 +28,7 @@ export default class RoundView extends BaseElement {
   }
 
   draw() {
-    const sizes: Sizes = { blockWidth: 1000, blockHeight: 500 };
+    const sizes: Sizes = { blockWidth: 800, blockHeight: 400 };
 
     const slicer = new Slicer(sizes, this.sentenses);
     const cutElements: CutElements = slicer.cut();
@@ -38,7 +39,12 @@ export default class RoundView extends BaseElement {
       cutElements.lines,
       sizes.blockWidth
     );
+    const checkButton = new CheckButton(
+      cutElements.lines,
+      this.level,
+      this.round
+    );
 
-    this.appendChildren(field, sources);
+    this.appendChildren(field, sources, checkButton);
   }
 }

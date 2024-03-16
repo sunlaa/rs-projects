@@ -49,9 +49,13 @@ export default class ListenerHandler {
 
   private checkSourceBlock = () => {
     const picesInSources = [...this.sourceBlock.querySelectorAll('.wrapper')];
+    const checkButton = document.querySelector<HTMLElement>('.check-button');
+    if (!checkButton) throw new Error('No check-button!');
 
     if (picesInSources.length === 0) {
-      // CHECK EVENT
+      checkButton.classList.remove('disabled');
+    } else {
+      checkButton.classList.add('disabled');
     }
   };
 
