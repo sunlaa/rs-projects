@@ -8,9 +8,12 @@ import { CutElements, Sizes } from '../../../../utilits/types/types';
 import CheckButton from '../interaction-button/check-and-continue/check-button/check-button';
 import CheckAndContinue from '../interaction-button/check-and-continue/check-and-continue';
 import IDKButton from '../interaction-button/idk-button/idk-button';
+import Hints from '../../hints/hints-view';
 
 export default class RoundView extends BaseElement {
   sentenses: string[];
+
+  translate: string[];
 
   level: number;
 
@@ -22,6 +25,7 @@ export default class RoundView extends BaseElement {
     const roundData = new UserSelect(level, round);
 
     this.sentenses = roundData.getSentenses();
+    this.translate = roundData.getTranslate();
 
     this.level = level;
     this.round = round;
@@ -56,13 +60,16 @@ export default class RoundView extends BaseElement {
       checkButton
     );
 
+    const hints = new Hints(this.translate);
+
     this.addListener('empty', () => {
+      hints.updateHintsData();
       sources.updatePieces();
       idkButton.updateListener();
       checkButton.updateCounter();
       checkAndContinue.transformToCheck();
     });
 
-    this.appendChildren(field, sources, checkAndContinue, idkButton);
+    this.appendChildren(hints, field, sources, checkAndContinue, idkButton);
   }
 }
