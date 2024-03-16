@@ -3,10 +3,14 @@
   gap: 1rem;
 }
 
+.translate-block {
+  font-size: 0.9rem;
+}
+
 .audio-block {
   cursor: pointer;
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background-image: url('../../../../assets/note.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -26,4 +30,10 @@
   100% {
     transform: scale(1);
   }
+}
+
+.off {
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
 }

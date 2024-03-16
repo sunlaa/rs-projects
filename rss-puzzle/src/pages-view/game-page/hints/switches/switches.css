@@ -1,5 +1,7 @@
 .switches {
   align-self: flex-end;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .switch {
@@ -13,6 +15,10 @@
   background-image: url('../../../../assets/translate.png');
 }
 
+.audio-switch {
+  background-image: url('../../../../assets/audio.png');
+}
+
 .switch.disabled {
-  opacity: 0.5;
+  opacity: 0.3;
 }

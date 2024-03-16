@@ -66,7 +66,7 @@ export default class RoundView extends BaseElement {
 
     const hints = new Hints(this.translate, this.audioSrc);
 
-    const switches = new Switches(hints.translateBlock);
+    const switches = new Switches(hints.translateBlock, hints.audioBlock);
 
     this.addListener('empty', () => {
       hints.updateHintsData();

@@ -3,19 +3,28 @@ import { BaseElement } from '../../../../utilits/base-elements/base-element';
 import Translate from '../hints-view/translate/translate';
 import TranslateSwitch from './translate-switch/translate-switch';
 import { LocalStorage } from '../../../../utilits/servises/local-storage';
+import Audio from '../hints-view/audio/audio';
+import AudioSwitch from './audio-switch/audio-switch';
 
 export default class Switches extends BaseElement {
   translateBlock: Translate;
 
+  audioBlock: Audio;
+
   translateSwitch: TranslateSwitch;
 
-  constructor(translateBlock: Translate) {
+  audioSwitch: AudioSwitch;
+
+  constructor(translateBlock: Translate, audioBlock: Audio) {
     super({ tag: 'section', className: 'switches' });
 
     this.translateSwitch = new TranslateSwitch(translateBlock);
     this.translateBlock = translateBlock;
 
-    this.append(this.translateSwitch);
+    this.audioSwitch = new AudioSwitch(audioBlock);
+    this.audioBlock = audioBlock;
+
+    this.appendChildren(this.translateSwitch, this.audioSwitch);
 
     if (!LocalStorage.get('hints-data')) {
       LocalStorage.save('hints-data', {
@@ -30,12 +39,16 @@ export default class Switches extends BaseElement {
   }
 
   showHints = () => {
-    this.translateBlock.setStyles({ opacity: '1' });
+    this.translateBlock.removeClass('off');
+    this.audioBlock.removeClass('off');
   };
 
   hideHints = () => {
     if (LocalStorage.get('hints-data')?.translate === 'false') {
-      this.translateBlock.setStyles({ opacity: '0' });
+      this.translateBlock.addClass('off');
+    }
+    if (LocalStorage.get('hints-data')?.audio === 'false') {
+      this.audioBlock.addClass('off');
     }
   };
 }

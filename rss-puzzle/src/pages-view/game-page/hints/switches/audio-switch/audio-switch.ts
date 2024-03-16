@@ -1,21 +1,21 @@
 import Div from '../../../../../utilits/base-elements/div-element/div';
 import { LocalStorage } from '../../../../../utilits/servises/local-storage';
-import Translate from '../../hints-view/translate/translate';
+import Audio from '../../hints-view/audio/audio';
 
-export default class TranslateSwitch extends Div {
-  translateBlock: Translate;
+export default class AudioSwitch extends Div {
+  audioBlock: Audio;
 
-  constructor(translateBlock: Translate) {
+  constructor(audioBlock: Audio) {
     super({ className: 'switch' });
 
-    this.addClass('translate-switch');
+    this.addClass('audio-switch');
 
-    this.translateBlock = translateBlock;
-    this.addListener('click', this.translateToogle);
+    this.audioBlock = audioBlock;
+    this.addListener('click', this.audioToogle);
 
-    if (LocalStorage.get('hints-data')?.translate === 'false') {
+    if (LocalStorage.get('hints-data')?.audio === 'false') {
       this.classList().add('disabled');
-      this.translateBlock.addClass('off');
+      this.audioBlock.addClass('off');
     }
   }
 
@@ -25,19 +25,19 @@ export default class TranslateSwitch extends Div {
     if (!switchData) throw new Error('No data about hints!');
 
     if (this.classList().contains('disabled')) {
-      switchData.translate = 'false';
+      switchData.audio = 'false';
     } else {
-      switchData.translate = 'true';
+      switchData.audio = 'true';
     }
     LocalStorage.save('hints-data', switchData);
   }
 
-  translateToogle = () => {
+  audioToogle = () => {
     if (this.classList().contains('disabled')) {
-      this.translateBlock.removeClass('off');
+      this.audioBlock.removeClass('off');
       this.classList().remove('disabled');
     } else {
-      this.translateBlock.addClass('off');
+      this.audioBlock.addClass('off');
       this.classList().add('disabled');
     }
     this.updateLocalStorage();
