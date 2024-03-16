@@ -16,6 +16,8 @@ export default class Audio extends Div {
     }
 
     this.addListener('click', this.play);
+    this.audio.addEventListener('play', this.setAnimation);
+    this.audio.addEventListener('ended', this.removeAnimation);
   }
 
   updateSrc(newSrc: string) {
@@ -24,5 +26,13 @@ export default class Audio extends Div {
 
   play = () => {
     this.audio.play();
+  };
+
+  setAnimation = () => {
+    this.addClass('animated');
+  };
+
+  removeAnimation = () => {
+    this.removeClass('animated');
   };
 }
