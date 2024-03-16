@@ -1,5 +1,6 @@
 import './source-block.css';
 import Div from '../../../../../utilits/base-elements/div-element/div';
+import ListenerHandler from './listener-handler/listener-handler';
 
 const gaps = 100;
 
@@ -13,6 +14,8 @@ export default class SourceBlock extends Div {
   currentLine: Div;
 
   counter: number;
+
+  listenerHandler: ListenerHandler;
 
   constructor(pieces: Div[][], lines: Div[], blockWidth: number) {
     super({
@@ -29,6 +32,12 @@ export default class SourceBlock extends Div {
 
     this.currentPieces = pieces[this.counter];
     this.currentLine = lines[this.counter];
+
+    this.listenerHandler = new ListenerHandler(
+      this.currentPieces,
+      this.currentLine,
+      this.element
+    );
 
     this.addPieces();
   }
@@ -52,6 +61,8 @@ export default class SourceBlock extends Div {
   addPieces = () => {
     const randomPieces = this.random();
 
+    this.addEvents();
+
     this.element.innerHTML = '';
     this.appendChildren(...randomPieces);
 
@@ -60,6 +71,21 @@ export default class SourceBlock extends Div {
   };
 
   updatePieces = () => {
+    this.removeEvents();
+
     this.addPieces();
   };
+
+  addEvents() {
+    this.listenerHandler = new ListenerHandler(
+      this.currentPieces,
+      this.currentLine,
+      this.element
+    );
+    this.listenerHandler.addListeners();
+  }
+
+  removeEvents() {
+    this.listenerHandler.removeListeners();
+  }
 }
