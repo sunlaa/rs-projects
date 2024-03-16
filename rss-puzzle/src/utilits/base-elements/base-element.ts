@@ -77,6 +77,10 @@ export class BaseElement<T extends HTMLElement = HTMLElement> {
     this.element.addEventListener(event, callback);
   }
 
+  removeListener(event: string, callback: (e: Event) => void) {
+    this.element.removeEventListener(event, callback);
+  }
+
   setAttribute(attribute: string, value: string) {
     this.element.setAttribute(attribute, value);
   }

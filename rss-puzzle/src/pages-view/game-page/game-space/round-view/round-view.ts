@@ -7,6 +7,7 @@ import Slicer from '../game-parts/source-block/piece-slicer/piece-slicer';
 import { CutElements, Sizes } from '../../../../utilits/types/types';
 import CheckButton from '../interaction-button/check-and-continue/check-button/check-button';
 import CheckAndContinue from '../interaction-button/check-and-continue/check-and-continue';
+import IDKButton from '../interaction-button/idk-button/idk-button';
 
 export default class RoundView extends BaseElement {
   sentenses: string[];
@@ -48,12 +49,20 @@ export default class RoundView extends BaseElement {
 
     const checkAndContinue = new CheckAndContinue(checkButton);
 
+    const idkButton = new IDKButton(
+      cutElements.pieces,
+      cutElements.lines,
+      sources,
+      checkButton
+    );
+
     this.addListener('empty', () => {
       sources.updatePieces();
+      idkButton.updateListener();
       checkButton.updateCounter();
       checkAndContinue.transformToCheck();
     });
 
-    this.appendChildren(field, sources, checkAndContinue);
+    this.appendChildren(field, sources, checkAndContinue, idkButton);
   }
 }

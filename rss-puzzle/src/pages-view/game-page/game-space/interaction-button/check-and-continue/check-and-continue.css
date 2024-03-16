@@ -13,9 +13,10 @@
   justify-content: center;
   border-radius: 10px;
   transition: all linear 200ms;
+  color: white;
 }
 .check-button {
-  background-color: aliceblue;
+  background-color: rgb(168, 199, 227);
 }
 
 .check-button.disabled {
