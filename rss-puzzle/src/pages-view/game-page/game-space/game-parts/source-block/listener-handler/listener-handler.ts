@@ -26,6 +26,30 @@ function createEmptyPlace(from: HTMLElement, element: HTMLElement) {
   from.replaceChild(placeholder.getElement(), element);
 }
 
+function getAfterElement(line: HTMLDivElement, x: number) {
+  const lineInnerPieces = [...line.querySelectorAll('.wrapper:not(.dragging)')];
+  const placeholders = [...line.querySelectorAll('.placeholder')];
+
+  const lineInner = [...lineInnerPieces, ...placeholders];
+
+  const res: { offset: number; element?: HTMLElement } = lineInner.reduce(
+    (closest, piece) => {
+      const picesSize = piece.getBoundingClientRect();
+      const offset = x - picesSize.left - picesSize.width / 2;
+
+      if (offset < 0 && offset > closest.offset) {
+        return { offset, element: piece };
+      }
+      return closest;
+    },
+    { offset: Number.NEGATIVE_INFINITY }
+  );
+  if (res.element) {
+    return res.element;
+  }
+  return null;
+}
+
 export default class ListenerHandler {
   currentPieces: Div[];
 
@@ -64,14 +88,76 @@ export default class ListenerHandler {
   addListeners() {
     this.currentPieces.forEach((piece) => {
       if (piece) {
+        const puzzle = piece.getElement();
+        puzzle.draggable = true;
         piece.addListener('click', this.click);
+        piece.addListener('dragstart', this.dragstart);
+        piece.addListener('dragend', this.dragend);
       }
     });
+
+    this.sourceBlock.addEventListener('dragover', this.dropOnSource);
+
+    this.currentLine.addEventListener('dragover', this.dropOnLine);
   }
 
   removeListeners() {
     this.currentLine.style.pointerEvents = 'none';
+
+    this.sourceBlock.removeEventListener('dragover', this.dropOnSource);
+
+    this.currentLine.removeEventListener('dragover', this.dropOnLine);
   }
+
+  private dragstart = (event: Event) => {
+    const draggable = event.currentTarget as HTMLElement;
+    this.currentDraggble = draggable;
+
+    draggable.classList.add('dragging');
+  };
+
+  private dragend = () => {
+    if (this.currentDraggble) this.currentDraggble.classList.remove('dragging');
+    this.checkSourceBlock();
+  };
+
+  private dropOnLine = (event: MouseEvent) => {
+    event.preventDefault();
+    if (!this.currentDraggble) throw new Error('No dragble element!');
+
+    const parent = this.currentDraggble.parentElement;
+
+    if (parent) {
+      if (parent.classList.contains('line')) {
+        const afterElem = getAfterElement(this.currentLine, event.clientX);
+        if (afterElem === null) {
+          this.currentLine.append(this.currentDraggble);
+        } else {
+          this.currentLine.insertBefore(this.currentDraggble, afterElem);
+        }
+        return;
+      }
+    }
+
+    createEmptyPlace(this.sourceBlock, this.currentDraggble);
+
+    dropOnEmptyPlace(this.currentLine, this.currentDraggble);
+  };
+
+  private dropOnSource = (event: Event) => {
+    event.preventDefault();
+    if (!this.currentDraggble) throw new Error('No dragble element!');
+
+    if (
+      this.currentDraggble.parentElement?.classList.contains('source-block')
+    ) {
+      return;
+    }
+
+    createEmptyPlace(this.currentLine, this.currentDraggble);
+
+    dropOnEmptyPlace(this.sourceBlock, this.currentDraggble);
+  };
 
   private click = (event: Event) => {
     const clickedPiece = event.currentTarget as HTMLElement;
