@@ -13,6 +13,13 @@ export default class Game extends BaseElement {
 
     const selectMenu = new SelectMenu(this);
 
+    this.element.addEventListener('next-round', (event) => {
+      const customEvent = event as CustomEvent;
+      const { level } = customEvent.detail;
+      const { round } = customEvent.detail;
+      selectMenu.drawRound(level, round);
+    });
+
     this.append(selectMenu);
   }
 }

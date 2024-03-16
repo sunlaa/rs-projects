@@ -48,6 +48,12 @@ export default class RoundView extends BaseElement {
 
     const checkAndContinue = new CheckAndContinue(checkButton);
 
+    this.addListener('empty', () => {
+      sources.updatePieces();
+      checkButton.updateCounter();
+      checkAndContinue.transformToCheck();
+    });
+
     this.appendChildren(field, sources, checkAndContinue);
   }
 }
