@@ -18,7 +18,7 @@ export default class App {
   }
 
   public run() {
-    this.router.navigate('start-page');
+    this.router.navigate('game-page');
   }
 
   createRoutes() {

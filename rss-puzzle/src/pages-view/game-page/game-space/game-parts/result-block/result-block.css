@@ -1,0 +1,39 @@
+.result-block {
+  border: 10px solid rgb(77, 37, 13);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin: 10px;
+  color: #2a30a5;
+}
+
+.line {
+  display: flex;
+  gap: 1.2px;
+}
+
+.wrapper {
+  user-select: none;
+  position: relative;
+  transition: all 200ms linear;
+}
+
+.piece {
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-shadow: 1px 1px 10px rgb(129, 129, 129);
+  font-size: 28px;
+  transition: all 200ms linear;
+}
+
+.bulge {
+  z-index: -10;
+  position: absolute;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
