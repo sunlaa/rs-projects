@@ -10,6 +10,7 @@ import CheckAndContinue from '../interaction-button/check-and-continue/check-and
 import IDKButton from '../interaction-button/idk-button/idk-button';
 import Hints from '../../hints/hints-view/hints-view';
 import Switches from '../../hints/switches/switches';
+import Pic from '../../game-logic/pic';
 
 export default class RoundView extends BaseElement {
   sentenses: string[];
@@ -17,6 +18,8 @@ export default class RoundView extends BaseElement {
   translate: string[];
 
   audioSrc: string[];
+
+  imgSrc: string;
 
   level: number;
 
@@ -30,17 +33,30 @@ export default class RoundView extends BaseElement {
     this.sentenses = roundData.getSentenses();
     this.translate = roundData.getTranslate();
     this.audioSrc = roundData.getAudioSrc();
+    this.imgSrc = roundData.getImgSrc();
 
     this.level = level;
     this.round = round;
 
-    this.draw();
+    this.draw(800);
   }
 
-  draw() {
-    const sizes: Sizes = { blockWidth: 800, blockHeight: 400 };
+  private async getSizes(desiredWidth: number) {
+    const picture = new Pic(this.imgSrc);
+    const sizes = await picture.getSizes();
+    this.imgSrc = picture.src;
 
-    const slicer = new Slicer(sizes, this.sentenses);
+    const desiredHeight = (desiredWidth / sizes.blockWidth) * sizes.blockHeight;
+    return {
+      blockWidth: desiredWidth,
+      blockHeight: desiredHeight,
+    };
+  }
+
+  async draw(desiredWidth: number) {
+    const sizes: Sizes = await this.getSizes(desiredWidth);
+
+    const slicer = new Slicer(sizes, this.sentenses, this.imgSrc);
     const cutElements: CutElements = slicer.cut();
 
     const field = new ResultBlock(sizes, ...cutElements.lines);

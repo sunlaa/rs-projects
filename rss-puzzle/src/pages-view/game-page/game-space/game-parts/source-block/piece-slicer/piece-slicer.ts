@@ -11,10 +11,21 @@ export default class Slicer {
 
   sentenses: string[];
 
-  constructor({ blockWidth, blockHeight }: Sizes, sentenses: string[]) {
+  imgSrc: string;
+
+  backSize: string;
+
+  constructor(
+    { blockWidth, blockHeight }: Sizes,
+    sentenses: string[],
+    imgSrc: string
+  ) {
     this.blockWidth = blockWidth;
     this.blockHeight = blockHeight;
     this.sentenses = sentenses;
+    this.imgSrc = imgSrc;
+
+    this.backSize = `${this.blockWidth}px ${this.blockHeight}px`;
   }
 
   private getSentenseArr(index: number): string[] {
@@ -46,6 +57,8 @@ export default class Slicer {
 
       const sentenseCharCount = this.getSentenseCharCount(y);
 
+      let passedWidth = 0;
+
       const line = new Div({
         className: 'line',
         styles: { height: `${this.blockHeight / rows}px` },
@@ -73,6 +86,9 @@ export default class Slicer {
             height: `${pieceHeight}px`,
             width: `${pieceWidth}px`,
             backgroundColor: '#2a30a5',
+            backgroundImage: `url('${this.imgSrc}')`,
+            backgroundSize: this.backSize,
+            backgroundPosition: `-${passedWidth}px ${(this.blockHeight / rows) * -y}px`,
           },
         });
 
@@ -86,8 +102,13 @@ export default class Slicer {
             top: `${topValue}px`,
             left: `-${bulgeSize / 2}px`,
             backgroundColor: '#2a30a5',
+            backgroundImage: `url('${this.imgSrc}')`,
+            backgroundSize: this.backSize,
+            backgroundPosition: `-${passedWidth - bulgeSize / 2}px ${(this.blockHeight / rows) * -y - topValue}px`,
           },
         });
+
+        passedWidth += pieceWidth;
 
         switch (x) {
           case 0: {
@@ -116,7 +137,7 @@ export default class Slicer {
           }
         }
 
-        line.append(wrapper);
+        // line.append(wrapper);
         wrapper.append(piece);
 
         pieces[y][x] = wrapper;
