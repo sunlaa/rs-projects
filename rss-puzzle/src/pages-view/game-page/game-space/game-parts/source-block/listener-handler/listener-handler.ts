@@ -54,6 +54,8 @@ export default class ListenerHandler {
 
     if (picesInSources.length === 0) {
       checkButton.classList.remove('disabled');
+
+      checkButton.dispatchEvent(new Event('check'));
     } else {
       checkButton.classList.add('disabled');
     }

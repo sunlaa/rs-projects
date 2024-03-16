@@ -1,4 +1,3 @@
-import './check-button.css';
 import Div from '../../../../../../utilits/base-elements/div-element/div';
 import { LocalStorage } from '../../../../../../utilits/servises/local-storage';
 
@@ -27,7 +26,26 @@ export default class CheckButton extends Div {
     this.addClass('disabled');
 
     this.addListener('click', this.showCheck);
+
+    this.addListener('check', () => {
+      this.transformToContinue();
+    });
   }
+
+  transformToContinue = () => {
+    const isAllCorrect = !this.check().includes(false);
+
+    if (isAllCorrect) {
+      this.currentLine.setStyles({ pointerEvents: 'none' });
+
+      this.element.dispatchEvent(
+        new CustomEvent('to-continue', {
+          bubbles: true,
+          detail: { count: this.count, level: this.level, round: this.round },
+        })
+      );
+    }
+  };
 
   check(): boolean[] {
     const userLine = this.getUserLine();

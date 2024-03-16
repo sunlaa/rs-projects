@@ -6,6 +6,7 @@ import SourceBlock from '../game-parts/source-block/source-block';
 import Slicer from '../game-parts/source-block/piece-slicer/piece-slicer';
 import { CutElements, Sizes } from '../../../../utilits/types/types';
 import CheckButton from '../interaction-button/check-and-continue/check-button/check-button';
+import CheckAndContinue from '../interaction-button/check-and-continue/check-and-continue';
 
 export default class RoundView extends BaseElement {
   sentenses: string[];
@@ -45,6 +46,8 @@ export default class RoundView extends BaseElement {
       this.round
     );
 
-    this.appendChildren(field, sources, checkButton);
+    const checkAndContinue = new CheckAndContinue(checkButton);
+
+    this.appendChildren(field, sources, checkAndContinue);
   }
 }
