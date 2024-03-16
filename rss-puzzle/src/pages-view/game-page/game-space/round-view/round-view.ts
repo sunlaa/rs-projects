@@ -16,6 +16,8 @@ export default class RoundView extends BaseElement {
 
   translate: string[];
 
+  audioSrc: string[];
+
   level: number;
 
   round: number;
@@ -27,6 +29,7 @@ export default class RoundView extends BaseElement {
 
     this.sentenses = roundData.getSentenses();
     this.translate = roundData.getTranslate();
+    this.audioSrc = roundData.getAudioSrc();
 
     this.level = level;
     this.round = round;
@@ -61,7 +64,7 @@ export default class RoundView extends BaseElement {
       checkButton
     );
 
-    const hints = new Hints(this.translate);
+    const hints = new Hints(this.translate, this.audioSrc);
 
     const switches = new Switches(hints.translateBlock);
 
