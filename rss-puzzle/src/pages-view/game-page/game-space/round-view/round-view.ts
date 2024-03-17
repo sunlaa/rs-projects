@@ -84,7 +84,6 @@ export default class RoundView extends BaseElement {
       cutElements.lines,
       this.level,
       this.round,
-      sources,
       statistics
     );
 

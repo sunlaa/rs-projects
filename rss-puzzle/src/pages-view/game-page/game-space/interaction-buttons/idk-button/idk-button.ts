@@ -1,7 +1,7 @@
 import './idk-button.css';
 import Div from '../../../../../utilits/base-elements/div-element/div';
-import SourceBlock from '../../game-parts/source-block/source-block';
-import CheckButton from '../check-and-continue/check-button/check-button';
+import CheckAndContinue from '../check-and-continue/check-and-continue';
+import { sources } from '../../../game-logic/user-select';
 
 export default class IDKButton extends Div {
   pieces: Div[][];
@@ -12,17 +12,20 @@ export default class IDKButton extends Div {
 
   currentLine: Div;
 
-  sourceBlock: SourceBlock;
-
-  checkButton: CheckButton;
+  checkAndContinue: CheckAndContinue;
 
   count: number;
+
+  level: number;
+
+  round: number;
 
   constructor(
     pieces: Div[][],
     lines: Div[],
-    sourceBlock: SourceBlock,
-    checkButton: CheckButton
+    checkAndContinue: CheckAndContinue,
+    level: number,
+    round: number
   ) {
     super({ className: 'idk-button', content: "I don't know" });
 
@@ -30,9 +33,10 @@ export default class IDKButton extends Div {
     this.lines = lines;
 
     this.count = 0;
+    this.level = level;
+    this.round = round;
 
-    this.checkButton = checkButton;
-    this.sourceBlock = sourceBlock;
+    this.checkAndContinue = checkAndContinue;
     this.currentPieces = this.pieces[this.count];
     this.currentLine = this.lines[this.count];
 
@@ -44,12 +48,40 @@ export default class IDKButton extends Div {
 
     this.currentLine.appendChildren(...this.currentPieces);
 
-    this.checkButton.check();
+    this.checkAndContinue.transformToContinue(
+      this.count,
+      this.level,
+      this.round
+    );
+
+    this.addTotheStatistics();
 
     if (this.count === 9) {
       this.removeListener('click', this.fillLine);
+      this.element.dispatchEvent(
+        new Event('show-result-button', { bubbles: true })
+      );
     }
   };
+
+  private addTotheStatistics() {
+    const currentData =
+      sources[this.level - 1].rounds[this.round - 1].words[this.count];
+    const sentense = currentData.textExample;
+
+    const statistic = document.querySelector<HTMLElement>('.statistics');
+
+    if (statistic) {
+      statistic.dispatchEvent(
+        new CustomEvent('add-wrong', {
+          bubbles: true,
+          detail: {
+            sentense,
+          },
+        })
+      );
+    }
+  }
 
   updateListener = () => {
     this.count += 1;

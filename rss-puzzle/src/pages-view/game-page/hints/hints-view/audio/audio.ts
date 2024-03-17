@@ -6,7 +6,7 @@ export default class Audio extends Div {
   constructor(audioSrc: string) {
     super({ className: 'audio-block' });
     this.audio = document.createElement('audio');
-    this.audio.src = audioSrc;
+    this.audio.src = `https://raw.githubusercontent.com/rolling-scopes-school/rss-puzzle-data/main/${audioSrc}`;
 
     this.append(this.audio);
 

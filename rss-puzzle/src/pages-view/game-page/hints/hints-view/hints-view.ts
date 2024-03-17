@@ -18,9 +18,7 @@ export default class Hints extends BaseElement {
     super({ tag: 'section', className: 'hints' });
 
     this.translateBlock = new Translate(translateText[0]);
-    this.audioBlock = new Audio(
-      `https://raw.githubusercontent.com/rolling-scopes-school/rss-puzzle-data/main/${audioSrc[0]}`
-    );
+    this.audioBlock = new Audio(audioSrc[0]);
 
     this.count = 1;
 
@@ -34,9 +32,7 @@ export default class Hints extends BaseElement {
     const currentAudioSrc = this.audioSrc[this.count];
 
     this.translateBlock.updateTranslate(currentTranslate);
-    this.audioBlock.updateSrc(
-      `https://raw.githubusercontent.com/rolling-scopes-school/rss-puzzle-data/main/${currentAudioSrc}`
-    );
+    this.audioBlock.updateSrc(currentAudioSrc);
 
     this.count += 1;
   }

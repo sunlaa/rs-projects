@@ -1,6 +1,5 @@
 import './interaction-button.css';
 import Div from '../../../../utilits/base-elements/div-element/div';
-import SourceBlock from '../game-parts/source-block/source-block';
 import Statistics from '../game-parts/statistics/statistics';
 import CheckAndContinue from './check-and-continue/check-and-continue';
 import CheckButton from './check-and-continue/check-button/check-button';
@@ -21,14 +20,19 @@ export default class InteractButtons extends Div {
     lines: Div[],
     level: number,
     round: number,
-    sources: SourceBlock,
     statistics: Statistics
   ) {
     super({ className: 'interact-buttons' });
 
     this.checkButton = new CheckButton(lines, level, round);
     this.checkAndContinue = new CheckAndContinue(this.checkButton);
-    this.idkButton = new IDKButton(pieces, lines, sources, this.checkButton);
+    this.idkButton = new IDKButton(
+      pieces,
+      lines,
+      this.checkAndContinue,
+      level,
+      round
+    );
     this.resultButton = new ResultButton(statistics);
 
     this.appendChildren(this.idkButton, this.checkAndContinue);

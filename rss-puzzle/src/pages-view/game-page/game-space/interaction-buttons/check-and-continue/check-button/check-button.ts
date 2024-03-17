@@ -1,5 +1,6 @@
 import Div from '../../../../../../utilits/base-elements/div-element/div';
 import { LocalStorage } from '../../../../../../utilits/servises/local-storage';
+import { sources } from '../../../../game-logic/user-select';
 
 export default class CheckButton extends Div {
   lines: Div[];
@@ -51,18 +52,42 @@ export default class CheckButton extends Div {
         })
       );
 
-      if (this.count === 9) {
-        const field = document.querySelector<HTMLElement>('.result-block');
-        if (field) {
-          field.dispatchEvent(new Event('end-of-round'));
-        }
-
-        this.element.dispatchEvent(
-          new Event('show-result-button', { bubbles: true })
-        );
-      }
+      this.addTotheStatistics();
+      this.endOfRound();
     }
   };
+
+  private endOfRound() {
+    if (this.count === 9) {
+      const field = document.querySelector<HTMLElement>('.result-block');
+      if (field) {
+        field.dispatchEvent(new Event('end-of-round'));
+      }
+
+      this.element.dispatchEvent(
+        new Event('show-result-button', { bubbles: true })
+      );
+    }
+  }
+
+  private addTotheStatistics() {
+    const currentData =
+      sources[this.level - 1].rounds[this.round - 1].words[this.count];
+    const sentense = currentData.textExample;
+
+    const statistic = document.querySelector<HTMLElement>('.statistics');
+
+    if (statistic) {
+      statistic.dispatchEvent(
+        new CustomEvent('add-correct', {
+          bubbles: true,
+          detail: {
+            sentense,
+          },
+        })
+      );
+    }
+  }
 
   private getIncorrectPlaces(): boolean[] {
     const userLine = this.getUserLine();
