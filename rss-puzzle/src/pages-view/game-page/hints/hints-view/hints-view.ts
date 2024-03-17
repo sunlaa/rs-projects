@@ -32,7 +32,9 @@ export default class Hints extends BaseElement {
     const currentAudioSrc = this.audioSrc[this.count];
 
     this.translateBlock.updateTranslate(currentTranslate);
-    this.audioBlock.updateSrc(currentAudioSrc);
+    this.audioBlock.updateSrc(
+      `https://raw.githubusercontent.com/rolling-scopes-school/rss-puzzle-data/main/${currentAudioSrc}`
+    );
 
     this.count += 1;
   }
