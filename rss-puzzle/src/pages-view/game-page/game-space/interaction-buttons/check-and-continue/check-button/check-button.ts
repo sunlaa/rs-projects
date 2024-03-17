@@ -74,6 +74,7 @@ export default class CheckButton extends Div {
     const currentData =
       sources[this.level - 1].rounds[this.round - 1].words[this.count];
     const sentense = currentData.textExample;
+    const audioSrc = currentData.audioExample;
 
     const statistic = document.querySelector<HTMLElement>('.statistics');
 
@@ -83,6 +84,7 @@ export default class CheckButton extends Div {
           bubbles: true,
           detail: {
             sentense,
+            audioSrc,
           },
         })
       );

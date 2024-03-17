@@ -1,6 +1,7 @@
 import './statistics.css';
 import Div from '../../../../../utilits/base-elements/div-element/div';
 import { BaseElement } from '../../../../../utilits/base-elements/base-element';
+import Audio from '../../../hints/hints-view/audio/audio';
 
 export default class Statistics extends Div {
   continueButton: Div;
@@ -42,6 +43,7 @@ export default class Statistics extends Div {
     );
 
     this.continueButton.addListener('click', this.continue);
+
     this.appendChildren(
       this.correctSentenses,
       this.wrongSentenses,
@@ -51,13 +53,15 @@ export default class Statistics extends Div {
     this.element.addEventListener('add-correct', (event) => {
       const customEvent = event as CustomEvent;
       const { sentense } = customEvent.detail;
-      this.addSentenceCorrect(sentense);
+      const { audioSrc } = customEvent.detail;
+      this.addSentenceCorrect(sentense, audioSrc);
     });
 
     this.element.addEventListener('add-wrong', (event) => {
       const customEvent = event as CustomEvent;
       const { sentense } = customEvent.detail;
-      this.addSentenceWrong(sentense);
+      const { audioSrc } = customEvent.detail;
+      this.addSentenceWrong(sentense, audioSrc);
     });
   }
 
@@ -68,15 +72,23 @@ export default class Statistics extends Div {
         detail: { level: this.level, round: this.round + 1 },
       })
     );
+    const backdrop = document.querySelector('.backdrop');
+    if (backdrop) backdrop.remove();
   };
 
-  addSentenceCorrect = (string: string) => {
-    const sentense = new Div({ content: string, className: 'sentense' });
+  addSentenceCorrect = (string: string, audioSrc: string) => {
+    const sentense = new Div(
+      { content: string, className: 'sentense' },
+      new Audio(audioSrc)
+    );
     this.correctSentenses.append(sentense);
   };
 
-  addSentenceWrong = (string: string) => {
-    const sentense = new Div({ content: string, className: 'sentense' });
+  addSentenceWrong = (string: string, audioSrc: string) => {
+    const sentense = new Div(
+      { content: string, className: 'sentense' },
+      new Audio(audioSrc)
+    );
     this.wrongSentenses.append(sentense);
   };
 }
