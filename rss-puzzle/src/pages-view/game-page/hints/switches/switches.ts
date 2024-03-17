@@ -27,6 +27,14 @@ export default class Switches extends BaseElement {
   ) {
     super({ tag: 'section', className: 'switches' });
 
+    if (!LocalStorage.get('hints-data')) {
+      LocalStorage.save('hints-data', {
+        translate: 'true',
+        audio: 'true',
+        image: 'true',
+      });
+    }
+
     this.translateSwitch = new TranslateSwitch(translateBlock);
     this.translateBlock = translateBlock;
 
@@ -40,14 +48,6 @@ export default class Switches extends BaseElement {
       this.audioSwitch,
       this.imageSwitch
     );
-
-    if (!LocalStorage.get('hints-data')) {
-      LocalStorage.save('hints-data', {
-        translate: 'true',
-        audio: 'true',
-        image: 'true',
-      });
-    }
 
     this.addListener('show-after-win', this.showHints);
     this.addListener('hide-after-win', this.hideHints);

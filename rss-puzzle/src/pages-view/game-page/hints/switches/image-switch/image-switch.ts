@@ -25,27 +25,16 @@ export default class ImageSwitch extends Div {
     }
   }
 
-  showImageOnLine() {
-    const line = this.pieces[this.count];
-
-    line.forEach((elem) => {
-      if (elem) {
-        const piece = elem.getElement();
-        const base = piece.querySelector<HTMLElement>('.piece');
-        const bulge = piece.querySelector<HTMLElement>('.bulge');
-        if (bulge) {
-          bulge.style.backgroundImage = `url('${this.imgSrc}')`;
-        }
-        if (base) {
-          base.style.backgroundImage = `url('${this.imgSrc}')`;
-        }
-      }
-    });
-  }
-
-  updateCount() {
-    this.count += 1;
-  }
+  imageToogle = () => {
+    if (this.classList().contains('disabled')) {
+      this.setImage();
+      this.classList().remove('disabled');
+    } else {
+      this.removeImage();
+      this.classList().add('disabled');
+    }
+    this.updateLocalStorage();
+  };
 
   removeImage() {
     const pieces = this.pieces.reduce((acc, elem, i) => {
@@ -85,7 +74,29 @@ export default class ImageSwitch extends Div {
     });
   }
 
-  updateLocalStorage() {
+  showImageOnLine() {
+    const line = this.pieces[this.count];
+
+    line.forEach((elem) => {
+      if (elem) {
+        const piece = elem.getElement();
+        const base = piece.querySelector<HTMLElement>('.piece');
+        const bulge = piece.querySelector<HTMLElement>('.bulge');
+        if (bulge) {
+          bulge.style.backgroundImage = `url('${this.imgSrc}')`;
+        }
+        if (base) {
+          base.style.backgroundImage = `url('${this.imgSrc}')`;
+        }
+      }
+    });
+  }
+
+  updateCount() {
+    this.count += 1;
+  }
+
+  private updateLocalStorage() {
     const switchData = LocalStorage.get('hints-data');
 
     if (!switchData) throw new Error('No data about hints!');
@@ -97,15 +108,4 @@ export default class ImageSwitch extends Div {
     }
     LocalStorage.save('hints-data', switchData);
   }
-
-  imageToogle = () => {
-    if (this.classList().contains('disabled')) {
-      this.setImage();
-      this.classList().remove('disabled');
-    } else {
-      this.removeImage(); // не должны убираться картинки со всех кусочков, а только с тех которые ещё не были на поле
-      this.classList().add('disabled');
-    }
-    this.updateLocalStorage();
-  };
 }

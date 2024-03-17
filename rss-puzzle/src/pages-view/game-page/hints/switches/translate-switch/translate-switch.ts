@@ -19,7 +19,18 @@ export default class TranslateSwitch extends Div {
     }
   }
 
-  updateLocalStorage() {
+  translateToogle = () => {
+    if (this.classList().contains('disabled')) {
+      this.translateBlock.removeClass('off');
+      this.classList().remove('disabled');
+    } else {
+      this.translateBlock.addClass('off');
+      this.classList().add('disabled');
+    }
+    this.updateLocalStorage();
+  };
+
+  private updateLocalStorage() {
     const switchData = LocalStorage.get('hints-data');
 
     if (!switchData) throw new Error('No data about hints!');
@@ -31,15 +42,4 @@ export default class TranslateSwitch extends Div {
     }
     LocalStorage.save('hints-data', switchData);
   }
-
-  translateToogle = () => {
-    if (this.classList().contains('disabled')) {
-      this.translateBlock.removeClass('off');
-      this.classList().remove('disabled');
-    } else {
-      this.translateBlock.addClass('off');
-      this.classList().add('disabled');
-    }
-    this.updateLocalStorage();
-  };
 }

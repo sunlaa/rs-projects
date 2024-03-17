@@ -19,7 +19,18 @@ export default class AudioSwitch extends Div {
     }
   }
 
-  updateLocalStorage() {
+  audioToogle = () => {
+    if (this.classList().contains('disabled')) {
+      this.audioBlock.removeClass('off');
+      this.classList().remove('disabled');
+    } else {
+      this.audioBlock.addClass('off');
+      this.classList().add('disabled');
+    }
+    this.updateLocalStorage();
+  };
+
+  private updateLocalStorage() {
     const switchData = LocalStorage.get('hints-data');
 
     if (!switchData) throw new Error('No data about hints!');
@@ -31,15 +42,4 @@ export default class AudioSwitch extends Div {
     }
     LocalStorage.save('hints-data', switchData);
   }
-
-  audioToogle = () => {
-    if (this.classList().contains('disabled')) {
-      this.audioBlock.removeClass('off');
-      this.classList().remove('disabled');
-    } else {
-      this.audioBlock.addClass('off');
-      this.classList().add('disabled');
-    }
-    this.updateLocalStorage();
-  };
 }
