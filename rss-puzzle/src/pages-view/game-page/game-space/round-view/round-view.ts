@@ -77,7 +77,7 @@ export default class RoundView extends BaseElement {
       sizes.blockWidth
     );
 
-    const statistics = new Statistics();
+    const statistics = new Statistics(this.level, this.round);
 
     const interactButtons = new InteractButtons(
       cutElements.pieces,

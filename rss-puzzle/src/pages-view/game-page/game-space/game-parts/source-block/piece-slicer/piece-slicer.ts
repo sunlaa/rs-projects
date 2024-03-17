@@ -137,7 +137,6 @@ export default class Slicer {
           }
         }
 
-        // line.append(wrapper);
         wrapper.append(piece);
 
         pieces[y][x] = wrapper;

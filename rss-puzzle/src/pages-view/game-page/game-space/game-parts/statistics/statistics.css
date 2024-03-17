@@ -1,12 +1,31 @@
 .statistics {
   z-index: 20;
   position: absolute;
-  width: 40rem;
-  height: 30rem;
+  width: 60%;
+  height: 90%;
   top: -50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
   border-radius: 30px;
+  border: solid 1px rgb(208, 205, 205);
+  display: flex;
+  box-sizing: border-box;
+  padding: 1rem;
+  flex-direction: column;
   transition: all linear 300ms;
+}
+
+.statistics .continue-button {
+  align-self: flex-end;
+  margin-top: auto;
+  cursor: pointer;
+  width: 7rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: all linear 200ms;
+  color: white;
 }
