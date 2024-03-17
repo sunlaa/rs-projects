@@ -38,7 +38,7 @@ export default class RoundView extends BaseElement {
     this.level = level;
     this.round = round;
 
-    this.draw(800);
+    this.draw(600);
   }
 
   private async getSizes(desiredWidth: number) {
@@ -82,7 +82,12 @@ export default class RoundView extends BaseElement {
 
     const hints = new Hints(this.translate, this.audioSrc);
 
-    const switches = new Switches(hints.translateBlock, hints.audioBlock);
+    const switches = new Switches(
+      hints.translateBlock,
+      hints.audioBlock,
+      this.imgSrc,
+      cutElements.pieces
+    );
 
     this.addListener('empty', () => {
       hints.updateHintsData();
@@ -90,6 +95,7 @@ export default class RoundView extends BaseElement {
       idkButton.updateListener();
       checkButton.updateCounter();
       checkAndContinue.transformToCheck();
+      // switches.imageSwitch.updateCount();
     });
 
     this.appendChildren(

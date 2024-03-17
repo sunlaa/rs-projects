@@ -53,9 +53,13 @@ export default class IDKButton extends Div {
       return;
     }
 
-    this.sourceBlock
-      .getElement()
-      .dispatchEvent(new Event('empty', { bubbles: true }));
+    const checkButton = document.querySelector<HTMLElement>('.check-button');
+    if (!checkButton) throw new Error('No check-button!');
+
+    checkButton.dispatchEvent(new Event('check'));
+
+    const switches = document.querySelector<HTMLElement>('.switches');
+    if (switches) switches.dispatchEvent(new Event('show-after-win'));
   };
 
   updateListener = () => {

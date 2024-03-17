@@ -5,6 +5,8 @@ import TranslateSwitch from './translate-switch/translate-switch';
 import { LocalStorage } from '../../../../utilits/servises/local-storage';
 import Audio from '../hints-view/audio/audio';
 import AudioSwitch from './audio-switch/audio-switch';
+import ImageSwitch from './image-switch/image-switch';
+import Div from '../../../../utilits/base-elements/div-element/div';
 
 export default class Switches extends BaseElement {
   translateBlock: Translate;
@@ -15,7 +17,14 @@ export default class Switches extends BaseElement {
 
   audioSwitch: AudioSwitch;
 
-  constructor(translateBlock: Translate, audioBlock: Audio) {
+  imageSwitch: ImageSwitch;
+
+  constructor(
+    translateBlock: Translate,
+    audioBlock: Audio,
+    imgSrc: string,
+    pieces: Div[][]
+  ) {
     super({ tag: 'section', className: 'switches' });
 
     this.translateSwitch = new TranslateSwitch(translateBlock);
@@ -24,7 +33,13 @@ export default class Switches extends BaseElement {
     this.audioSwitch = new AudioSwitch(audioBlock);
     this.audioBlock = audioBlock;
 
-    this.appendChildren(this.translateSwitch, this.audioSwitch);
+    this.imageSwitch = new ImageSwitch(imgSrc, pieces);
+
+    this.appendChildren(
+      this.translateSwitch,
+      this.audioSwitch,
+      this.imageSwitch
+    );
 
     if (!LocalStorage.get('hints-data')) {
       LocalStorage.save('hints-data', {
@@ -41,6 +56,8 @@ export default class Switches extends BaseElement {
   showHints = () => {
     this.translateBlock.removeClass('off');
     this.audioBlock.removeClass('off');
+    this.imageSwitch.showImageOnLine();
+    this.imageSwitch.updateCount();
   };
 
   hideHints = () => {

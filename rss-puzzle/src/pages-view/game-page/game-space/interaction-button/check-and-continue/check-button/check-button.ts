@@ -36,6 +36,12 @@ export default class CheckButton extends Div {
     const isAllCorrect = !this.check().includes(false);
 
     if (isAllCorrect) {
+      const rightPieces = this.getRightLine();
+      rightPieces.forEach((elem) => {
+        if (elem instanceof HTMLElement) {
+          this.currentLine.append(elem);
+        }
+      });
       this.currentLine.setStyles({ pointerEvents: 'none' });
 
       this.element.dispatchEvent(

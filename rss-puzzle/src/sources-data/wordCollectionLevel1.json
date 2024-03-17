@@ -121,7 +121,7 @@
         {
           "audioExample": "files/01_0014_example.mp3",
           "textExample": "January is the first month of the year",
-          "textExampleTranslate": "январь - первый месяц года",
+          "textExampleTranslate": "Январь - первый месяц года",
           "id": 14,
           "word": "month",
           "wordTranslate": "месяц"
