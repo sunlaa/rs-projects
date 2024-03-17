@@ -1,0 +1,12 @@
+.statistics {
+  z-index: 20;
+  position: absolute;
+  width: 40rem;
+  height: 30rem;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 30px;
+  transition: all linear 300ms;
+}

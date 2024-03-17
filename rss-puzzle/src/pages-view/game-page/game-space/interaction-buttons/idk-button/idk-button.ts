@@ -44,11 +44,10 @@ export default class IDKButton extends Div {
 
     this.currentLine.appendChildren(...this.currentPieces);
 
-    this.checkButton.transformToContinue();
+    this.checkButton.check();
 
     if (this.count === 9) {
       this.removeListener('click', this.fillLine);
-      // console.log('vin in idk!');
     }
   };
 

@@ -28,12 +28,12 @@ export default class CheckButton extends Div {
     this.addListener('click', this.showCheck);
 
     this.addListener('check', () => {
-      this.transformToContinue();
+      this.check();
     });
   }
 
-  transformToContinue = () => {
-    const isAllCorrect = !this.check().includes(false);
+  check = () => {
+    const isAllCorrect = !this.getIncorrectPlaces().includes(false);
 
     if (isAllCorrect) {
       const rightPieces = this.getRightLine();
@@ -56,12 +56,15 @@ export default class CheckButton extends Div {
         if (field) {
           field.dispatchEvent(new Event('end-of-round'));
         }
-        // console.log('win in fact!');
+
+        this.element.dispatchEvent(
+          new Event('show-result-button', { bubbles: true })
+        );
       }
     }
   };
 
-  check(): boolean[] {
+  private getIncorrectPlaces(): boolean[] {
     const userLine = this.getUserLine();
     const rightLine = this.getRightLine();
 
@@ -75,9 +78,9 @@ export default class CheckButton extends Div {
     return isCorrectArr;
   }
 
-  showCheck = () => {
+  private showCheck = () => {
     const userLine = this.getUserLine();
-    const places = this.check();
+    const places = this.getIncorrectPlaces();
 
     userLine.forEach((elem, i) => {
       const wrapper = elem as HTMLElement;

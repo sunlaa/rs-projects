@@ -1,4 +1,4 @@
-.idk-button {
+.result-button {
   user-select: none;
   cursor: pointer;
   width: 7rem;
@@ -8,6 +8,6 @@
   justify-content: center;
   border-radius: 10px;
   transition: all linear 200ms;
-  background-color: rgb(195, 158, 229);
+  background-color: rgb(49, 131, 219);
   color: white;
 }

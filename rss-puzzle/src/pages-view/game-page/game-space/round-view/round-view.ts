@@ -5,12 +5,11 @@ import ResultBlock from '../game-parts/result-block/result-block';
 import SourceBlock from '../game-parts/source-block/source-block';
 import Slicer from '../game-parts/source-block/piece-slicer/piece-slicer';
 import { CutElements, Sizes } from '../../../../utilits/types/types';
-import CheckButton from '../interaction-buttons/check-and-continue/check-button/check-button';
-import CheckAndContinue from '../interaction-buttons/check-and-continue/check-and-continue';
-import IDKButton from '../interaction-buttons/idk-button/idk-button';
 import Hints from '../../hints/hints-view/hints-view';
 import Switches from '../../hints/switches/switches';
 import Pic from '../../game-logic/pic';
+import Statistics from '../game-parts/statistics/statistics';
+import InteractButtons from '../interaction-buttons/interaction-buttons';
 
 export default class RoundView extends BaseElement {
   sentenses: string[];
@@ -77,19 +76,16 @@ export default class RoundView extends BaseElement {
       cutElements.lines,
       sizes.blockWidth
     );
-    const checkButton = new CheckButton(
-      cutElements.lines,
-      this.level,
-      this.round
-    );
 
-    const checkAndContinue = new CheckAndContinue(checkButton);
+    const statistics = new Statistics();
 
-    const idkButton = new IDKButton(
+    const interactButtons = new InteractButtons(
       cutElements.pieces,
       cutElements.lines,
+      this.level,
+      this.round,
       sources,
-      checkButton
+      statistics
     );
 
     const hints = new Hints(this.translate, this.audioSrc);
@@ -104,9 +100,9 @@ export default class RoundView extends BaseElement {
     this.addListener('empty', () => {
       hints.updateHintsData();
       sources.updatePieces();
-      idkButton.updateListener();
-      checkButton.updateCounter();
-      checkAndContinue.transformToCheck();
+      interactButtons.idkButton.updateListener();
+      interactButtons.checkButton.updateCounter();
+      interactButtons.checkAndContinue.transformToCheck();
     });
 
     this.appendChildren(
@@ -114,8 +110,8 @@ export default class RoundView extends BaseElement {
       hints,
       field,
       sources,
-      checkAndContinue,
-      idkButton
+      interactButtons,
+      statistics
     );
   }
 }

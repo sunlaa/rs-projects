@@ -1,0 +1,12 @@
+.interact-buttons {
+  display: flex;
+  width: 70%;
+}
+
+.check-continue {
+  margin-left: 1rem;
+}
+
+.result-button {
+  margin-left: auto;
+}
