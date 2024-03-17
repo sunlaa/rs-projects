@@ -58,6 +58,10 @@ export default class IDKButton extends Div {
 
     if (this.count === 9) {
       this.removeListener('click', this.fillLine);
+      const field = document.querySelector<HTMLElement>('.result-block');
+      if (field) {
+        field.dispatchEvent(new Event('end-of-round'));
+      }
       this.element.dispatchEvent(
         new Event('show-result-button', { bubbles: true })
       );

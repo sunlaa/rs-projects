@@ -14,7 +14,7 @@ export default class Statistics extends Div {
 
   round: number;
 
-  constructor(level: number, round: number) {
+  constructor(level: number, round: number, imgSrc: string) {
     super({ className: 'statistics' });
 
     this.continueButton = new Div({
@@ -24,6 +24,12 @@ export default class Statistics extends Div {
 
     this.level = level;
     this.round = round;
+
+    const image = new BaseElement<HTMLImageElement>({
+      tag: 'img',
+      className: 'image',
+      src: imgSrc,
+    });
 
     this.correctSentenses = new Div(
       { className: 'category' },
@@ -45,6 +51,7 @@ export default class Statistics extends Div {
     this.continueButton.addListener('click', this.continue);
 
     this.appendChildren(
+      image,
       this.correctSentenses,
       this.wrongSentenses,
       this.continueButton
