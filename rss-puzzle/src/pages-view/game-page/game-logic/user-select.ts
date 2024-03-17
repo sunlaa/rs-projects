@@ -66,6 +66,14 @@ export default class UserSelect {
     return this.roundData.levelData.imageSrc;
   }
 
+  getImageTitle(): string {
+    return this.roundData.levelData.name;
+  }
+
+  getImageAuthorAndYear(): string {
+    return `${this.roundData.levelData.author}, ${this.roundData.levelData.year}`;
+  }
+
   getSentenses(): string[] {
     return this.sentensesData.map((elem) => elem.textExample);
   }

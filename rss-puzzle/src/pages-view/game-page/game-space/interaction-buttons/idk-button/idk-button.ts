@@ -40,26 +40,16 @@ export default class IDKButton extends Div {
   }
 
   fillLine = () => {
-    this.checkButton.addClass('disabled');
-
     this.currentPieces.sort((a, b) => +a.getElement().id - +b.getElement().id);
 
     this.currentLine.appendChildren(...this.currentPieces);
 
+    this.checkButton.transformToContinue();
+
     if (this.count === 9) {
-      this.checkButton.transformToContinue();
-      this.checkButton.removeClass('disabled');
       this.removeListener('click', this.fillLine);
-      return;
+      // console.log('vin in idk!');
     }
-
-    const checkButton = document.querySelector<HTMLElement>('.check-button');
-    if (!checkButton) throw new Error('No check-button!');
-
-    checkButton.dispatchEvent(new Event('check'));
-
-    const switches = document.querySelector<HTMLElement>('.switches');
-    if (switches) switches.dispatchEvent(new Event('show-after-win'));
   };
 
   updateListener = () => {

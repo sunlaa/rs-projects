@@ -50,6 +50,14 @@ export default class CheckButton extends Div {
           detail: { count: this.count, level: this.level, round: this.round },
         })
       );
+
+      if (this.count === 9) {
+        const field = document.querySelector<HTMLElement>('.result-block');
+        if (field) {
+          field.dispatchEvent(new Event('end-of-round'));
+        }
+        // console.log('win in fact!');
+      }
     }
   };
 

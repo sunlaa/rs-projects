@@ -5,9 +5,9 @@ import ResultBlock from '../game-parts/result-block/result-block';
 import SourceBlock from '../game-parts/source-block/source-block';
 import Slicer from '../game-parts/source-block/piece-slicer/piece-slicer';
 import { CutElements, Sizes } from '../../../../utilits/types/types';
-import CheckButton from '../interaction-button/check-and-continue/check-button/check-button';
-import CheckAndContinue from '../interaction-button/check-and-continue/check-and-continue';
-import IDKButton from '../interaction-button/idk-button/idk-button';
+import CheckButton from '../interaction-buttons/check-and-continue/check-button/check-button';
+import CheckAndContinue from '../interaction-buttons/check-and-continue/check-and-continue';
+import IDKButton from '../interaction-buttons/idk-button/idk-button';
 import Hints from '../../hints/hints-view/hints-view';
 import Switches from '../../hints/switches/switches';
 import Pic from '../../game-logic/pic';
@@ -20,6 +20,10 @@ export default class RoundView extends BaseElement {
   audioSrc: string[];
 
   imgSrc: string;
+
+  imgTitle: string;
+
+  imgAuthor: string;
 
   level: number;
 
@@ -34,6 +38,8 @@ export default class RoundView extends BaseElement {
     this.translate = roundData.getTranslate();
     this.audioSrc = roundData.getAudioSrc();
     this.imgSrc = roundData.getImgSrc();
+    this.imgTitle = roundData.getImageTitle();
+    this.imgAuthor = roundData.getImageAuthorAndYear();
 
     this.level = level;
     this.round = round;
@@ -59,7 +65,13 @@ export default class RoundView extends BaseElement {
     const slicer = new Slicer(sizes, this.sentenses, this.imgSrc);
     const cutElements: CutElements = slicer.cut();
 
-    const field = new ResultBlock(sizes, ...cutElements.lines);
+    const field = new ResultBlock(
+      sizes,
+      this.imgSrc,
+      this.imgTitle,
+      this.imgAuthor,
+      ...cutElements.lines
+    );
     const sources = new SourceBlock(
       cutElements.pieces,
       cutElements.lines,
@@ -95,7 +107,6 @@ export default class RoundView extends BaseElement {
       idkButton.updateListener();
       checkButton.updateCounter();
       checkAndContinue.transformToCheck();
-      // switches.imageSwitch.updateCount();
     });
 
     this.appendChildren(
