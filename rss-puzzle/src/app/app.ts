@@ -39,7 +39,7 @@ export default class App {
       {
         path: 'start-page',
         callback: () => {
-          this.setContent(new StartPage());
+          this.setContent(new StartPage(this.router));
         },
       },
       {

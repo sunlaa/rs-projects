@@ -1,14 +1,14 @@
 import './game-page.css';
 import { BaseElement } from '../../utilits/base-elements/base-element';
 import Router from '../../utilits/servises/router';
-// import RoundView from './game-space/round-view/round-view';
 import SelectMenu from './select-menu/select-menu';
+import ExitButton from './exit/exit-button';
 
 export default class Game extends BaseElement {
   router: Router;
 
   constructor(router: Router) {
-    super({ tag: 'section', className: 'game-page' });
+    super({ tag: 'section', className: 'game-page' }, new ExitButton(router));
     this.router = router;
 
     const selectMenu = new SelectMenu(this);
