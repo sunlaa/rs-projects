@@ -1,4 +1,5 @@
 .interact-buttons {
+  margin-top: 1rem;
   display: flex;
   width: 70%;
 }
@@ -9,4 +10,66 @@
 
 .result-button {
   margin-left: auto;
+}
+
+.check-button,
+.continue-button {
+  user-select: none;
+  cursor: pointer;
+  width: 7rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: all linear 200ms;
+  color: black;
+}
+.check-button {
+  background-color: white;
+  border: solid 1px rgb(219, 219, 219);
+}
+
+.check-button.disabled {
+  pointer-events: none;
+  cursor: default;
+  background-color: #d8d3d3;
+  color: #bcb9b9;
+  border: solid 1px #bcb9b9;
+}
+
+.continue-button {
+  border: solid 1px #77b33c;
+  background-color: #91d74a;
+  color: white;
+}
+
+.idk-button {
+  user-select: none;
+  cursor: pointer;
+  width: 7rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all linear 200ms;
+  background-color: #000000;
+  color: white;
+}
+
+.result-button {
+  user-select: none;
+  cursor: pointer;
+  width: 7rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: solid 1px #c9c9c9;
+  transition: all linear 200ms;
+  background-color: #ffffff;
+  color: #000000;
 }

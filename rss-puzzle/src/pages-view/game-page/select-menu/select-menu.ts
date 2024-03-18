@@ -32,7 +32,8 @@ export default class SelectMenu extends Div {
 
     this.levelSelect = new BaseSelect(levelCount);
     this.roundSelect = new BaseSelect(sources[0].roundsCount);
-    this.roundSelect.addIds(sources[0].roundsCount);
+    this.roundSelect.addIds(sources[0].roundsCount, 'round');
+    this.levelSelect.addIds(levelCount, 'level');
 
     this.roundView = null;
 
@@ -53,6 +54,7 @@ export default class SelectMenu extends Div {
         +userLevel.round + 1
       );
 
+      this.level = level;
       this.roundView = new RoundView(level, round);
 
       this.updateValue(`${level}`, `${round}`);
@@ -62,11 +64,43 @@ export default class SelectMenu extends Div {
     }
 
     this.page.append(this.roundView);
+    this.markPassedLevel();
+    this.markPassedRound();
   }
 
   private updateValue(level: string, round: string) {
     this.levelSelect.currentOption.setContent(`Level ${level}`);
     this.roundSelect.currentOption.setContent(`Round ${round}`);
+  }
+
+  private markPassedLevel() {
+    const passed = LocalStorage.get(`passed-level-${this.level}`);
+    if (passed) {
+      const passedRounds = Object.keys(passed).length;
+      const levelOptions = this.levelSelect.getOptions();
+
+      if (passedRounds === sources[this.level - 1].roundsCount) {
+        const level = levelOptions.find(
+          (elem) => elem.id === `level-${this.level}`
+        );
+        if (level) level.classList.add('passed');
+      }
+    }
+  }
+
+  private markPassedRound() {
+    const passed = LocalStorage.get(`passed-level-${this.level}`);
+    if (passed) {
+      const passedRounds = Object.keys(passed);
+      const roundOptions = this.roundSelect.getOptions();
+
+      passedRounds.forEach((round) => {
+        const option = roundOptions.find(
+          (elem) => elem.id === `round-${round}`
+        );
+        if (option) option.classList.add('passed');
+      });
+    }
   }
 
   private chooseLevel = (event: Event) => {
@@ -75,6 +109,9 @@ export default class SelectMenu extends Div {
 
     this.level = Number(clickedOption.textContent);
     const roundCount = sources[this.level - 1].roundsCount;
+
+    this.markPassedLevel();
+    this.markPassedRound();
 
     this.updateRoundList(roundCount);
     this.drawRound(this.level, 1);
@@ -90,7 +127,8 @@ export default class SelectMenu extends Div {
 
   private updateRoundList(roundCount: number) {
     this.roundSelect.updateOption(roundCount);
-    this.roundSelect.addIds(roundCount);
+    this.roundSelect.addIds(roundCount, 'round');
+    this.markPassedRound();
   }
 
   drawRound(givenLevel: number, gitvenRound: number) {

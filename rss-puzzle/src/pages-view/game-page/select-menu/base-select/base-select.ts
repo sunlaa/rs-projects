@@ -29,13 +29,19 @@ export default class BaseSelect extends Div {
     }
   }
 
-  addIds(optionCount: number) {
+  addIds(optionCount: number, type: 'round' | 'level') {
     const options = [
       ...this.dropDown.getElement().querySelectorAll<HTMLElement>('.option'),
     ];
 
     for (let i = 0; i < optionCount; i += 1) {
-      options[i].id = `option-${i + 1}`;
+      options[i].id = `${type}-${i + 1}`;
     }
+  }
+
+  getOptions() {
+    return [
+      ...this.dropDown.getElement().querySelectorAll<HTMLElement>('.option'),
+    ];
   }
 }

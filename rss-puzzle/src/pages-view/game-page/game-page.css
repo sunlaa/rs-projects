@@ -5,8 +5,12 @@
   display: flex;
   flex-direction: column;
 }
-.selection-menu {
-  order: 1
+.game-header {
+  margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  order: 1;
 }
 
 .round-view {

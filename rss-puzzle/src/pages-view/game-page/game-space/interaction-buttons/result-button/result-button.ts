@@ -1,4 +1,3 @@
-import './result-button.css';
 import Div from '../../../../../utilits/base-elements/div-element/div';
 import Statistics from '../../game-parts/statistics/statistics';
 

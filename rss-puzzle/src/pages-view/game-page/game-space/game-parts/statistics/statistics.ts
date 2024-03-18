@@ -80,12 +80,9 @@ export default class Statistics extends Div {
         detail: { level: this.level, round: this.round + 1 },
       })
     );
-    const option = document.querySelector<HTMLElement>(`#option-${this.round}`);
-    if (option) option.classList.add('passed');
-    LocalStorage.save('level-data', {
-      level: `${this.level}`,
-      round: `${this.round}`,
-    });
+
+    this.saveAndMarkPassed();
+
     const backdrop = document.querySelector('.backdrop');
     if (backdrop) backdrop.remove();
   };
@@ -105,4 +102,24 @@ export default class Statistics extends Div {
     );
     this.wrongSentenses.append(sentense);
   };
+
+  saveAndMarkPassed() {
+    const option = document.querySelector<HTMLElement>(`#round-${this.round}`);
+    if (option) option.classList.add('passed');
+
+    const passedLevel = LocalStorage.get(`passed-level-${this.level}`);
+    if (passedLevel) {
+      passedLevel[this.round] = 'passed';
+      LocalStorage.save(`passed-level-${this.level}`, passedLevel);
+    } else {
+      LocalStorage.save(`passed-level-${this.level}`, {
+        [this.round]: 'passed',
+      });
+    }
+
+    LocalStorage.save('level-data', {
+      level: `${this.level}`,
+      round: `${this.round}`,
+    });
+  }
 }

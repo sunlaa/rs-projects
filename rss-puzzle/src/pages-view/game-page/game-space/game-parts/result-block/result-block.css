@@ -1,6 +1,6 @@
 .result-block {
   overflow: hidden;
-  border: 10px solid rgb(77, 37, 13);
+  border: 10px solid #3a1e0c;
   border-radius: 15px;
   display: flex;
   flex-direction: column;

@@ -33,16 +33,7 @@ export default class ContinueButton extends Div {
         })
       );
 
-      const option = document.querySelector<HTMLElement>(
-        `#option-${this.round}`
-      );
-
-      if (option) option.classList.add('passed');
-
-      LocalStorage.save('level-data', {
-        level: `${this.level}`,
-        round: `${this.round}`,
-      });
+      this.saveAndMarkPassedRound();
 
       return;
     }
@@ -50,4 +41,24 @@ export default class ContinueButton extends Div {
     if (idkButton) idkButton.style.pointerEvents = '';
     this.element.dispatchEvent(new Event('empty', { bubbles: true }));
   };
+
+  saveAndMarkPassedRound() {
+    const option = document.querySelector<HTMLElement>(`#round-${this.round}`);
+    if (option) option.classList.add('passed');
+
+    const passedLevel = LocalStorage.get(`passed-level-${this.level}`);
+    if (passedLevel) {
+      passedLevel[this.round] = 'passed';
+      LocalStorage.save(`passed-level-${this.level}`, passedLevel);
+    } else {
+      LocalStorage.save(`passed-level-${this.level}`, {
+        [this.round]: 'passed',
+      });
+    }
+
+    LocalStorage.save('level-data', {
+      level: `${this.level}`,
+      round: `${this.round}`,
+    });
+  }
 }

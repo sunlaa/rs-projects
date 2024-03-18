@@ -1,4 +1,3 @@
-import './check-and-continue.css';
 import Div from '../../../../../utilits/base-elements/div-element/div';
 import CheckButton from './check-button/check-button';
 import ContinueButton from './continue-button/continue-button';

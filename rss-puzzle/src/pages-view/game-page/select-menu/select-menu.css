@@ -38,8 +38,8 @@
 }
 
 .option.passed {
-  color: rgb(201, 201, 201);
-  background-color: rgb(192, 190, 190);
+  color: #a9a8a8;
+  background-color: #dedddd;
 }
 
 .option:hover {
@@ -48,4 +48,9 @@
 
 .select:hover .drop-down {
   display: block;
+}
+
+.selection-menu > :first-child .drop-down .option.passed {
+  color: #a9a8a8;
+  background-color: #dedddd;
 }

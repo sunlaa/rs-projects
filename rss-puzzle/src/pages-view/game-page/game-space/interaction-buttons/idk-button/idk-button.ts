@@ -1,4 +1,3 @@
-import './idk-button.css';
 import Div from '../../../../../utilits/base-elements/div-element/div';
 import CheckAndContinue from '../check-and-continue/check-and-continue';
 import { sources } from '../../../game-logic/user-select';
