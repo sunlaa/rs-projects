@@ -20,7 +20,7 @@
   border-radius: 10px;
   width: 50%;
   min-width: 400px;
-  max-width: 550px;
+  max-width: 500px;
   height: 40%;
   display: flex;
   flex-direction: column;
@@ -30,13 +30,17 @@
 }
 
 .entry-page .label {
+  position: relative;
   border: 1px black;
   font-size: 1.2rem;
 }
 
 .entry-page input[type='text'] {
+  font-family: 'Madimi One', sans-serif;
+  font-size: 1rem;
   border-radius: 5px;
-  border: 1.5px solid rgb(200, 198, 198);
+  width: 30%;
+  border: 1px solid rgb(177, 174, 174);
   height: 1rem;
   background-color: transparent;
 }
@@ -51,7 +55,7 @@
 }
 
 .entry-page input[type='submit'] {
-  font-family: 'Dongle', sans-serif;
+  font-family: 'Madimi One', sans-serif;
   cursor: pointer;
   font-size: 1rem;
   border-radius: 5px;
@@ -60,4 +64,37 @@
   color: white;
   background-color: rgb(22, 22, 23);
   margin-top: 0.5rem;
+}
+
+.input-message {
+  background-color: rgb(216, 199, 167);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: solid 0.5px rgb(177, 146, 103);
+  position: absolute;
+  font-size: 0.6rem;
+  width: 50%;
+  transition: all linear 200ms;
+  opacity: 0;
+}
+
+.input-message ul {
+  padding-left: 0.5rem;
+  margin: 0;
+}
+
+.input-message.name {
+  bottom: 105%;
+}
+
+.input-message.surname {
+  top: 105%;
+}
+
+.vissible {
+  opacity: 1;
 }

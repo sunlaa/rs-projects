@@ -1,9 +1,10 @@
 import './global.css';
 import { BaseElement } from '../utilits/base-elements/base-element';
 import StartPage from '../pages-view/start-page/start-page';
-// import EntryPage from '../pages-view/entry-page/entry-page';
+import EntryPage from '../pages-view/entry-page/entry-page';
 import Game from '../pages-view/game-page/game-page';
 import Router from '../utilits/servises/router';
+import { LocalStorage } from '../utilits/servises/local-storage';
 
 export default class App {
   container: HTMLElement;
@@ -18,11 +19,23 @@ export default class App {
   }
 
   public run() {
-    this.router.navigate('game-page');
+    const userData = LocalStorage.get('user-data');
+    if (userData) {
+      this.router.navigate('start-page');
+    } else {
+      this.router.navigate('entry-page');
+    }
   }
 
   createRoutes() {
     return [
+      {
+        path: 'entry-page',
+        callback: () => {
+          LocalStorage.clear();
+          this.setContent(new EntryPage(this.router));
+        },
+      },
       {
         path: 'start-page',
         callback: () => {
