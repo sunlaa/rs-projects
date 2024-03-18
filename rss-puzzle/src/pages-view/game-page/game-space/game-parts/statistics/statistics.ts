@@ -2,6 +2,7 @@ import './statistics.css';
 import Div from '../../../../../utilits/base-elements/div-element/div';
 import { BaseElement } from '../../../../../utilits/base-elements/base-element';
 import Audio from '../../../hints/hints-view/audio/audio';
+import { LocalStorage } from '../../../../../utilits/servises/local-storage';
 
 export default class Statistics extends Div {
   continueButton: Div;
@@ -80,8 +81,11 @@ export default class Statistics extends Div {
       })
     );
     const option = document.querySelector<HTMLElement>(`#option-${this.round}`);
-
     if (option) option.classList.add('passed');
+    LocalStorage.save('level-data', {
+      level: `${this.level}`,
+      round: `${this.round}`,
+    });
     const backdrop = document.querySelector('.backdrop');
     if (backdrop) backdrop.remove();
   };

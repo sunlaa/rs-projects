@@ -1,4 +1,5 @@
 import Div from '../../../../../../utilits/base-elements/div-element/div';
+import { LocalStorage } from '../../../../../../utilits/servises/local-storage';
 
 export default class ContinueButton extends Div {
   count: number;
@@ -37,6 +38,11 @@ export default class ContinueButton extends Div {
       );
 
       if (option) option.classList.add('passed');
+
+      LocalStorage.save('level-data', {
+        level: `${this.level}`,
+        round: `${this.round}`,
+      });
 
       return;
     }

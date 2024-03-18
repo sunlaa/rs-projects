@@ -48,9 +48,14 @@ export default class SelectMenu extends Div {
     const userLevel = LocalStorage.get('level-data');
 
     if (userLevel) {
-      this.roundView = new RoundView(+userLevel.level, +userLevel.round);
+      const { level, round } = this.getCorrectRound(
+        +userLevel.level,
+        +userLevel.round + 1
+      );
 
-      this.updateValue(userLevel.level, userLevel.round);
+      this.roundView = new RoundView(level, round);
+
+      this.updateValue(`${level}`, `${round}`);
     } else {
       this.roundView = new RoundView(1, 1);
       this.updateValue('1', '1');
@@ -88,24 +93,32 @@ export default class SelectMenu extends Div {
     this.roundSelect.addIds(roundCount);
   }
 
-  drawRound(level: number, round: number) {
+  drawRound(givenLevel: number, gitvenRound: number) {
     if (!this.roundView) throw new Error('No RoundView');
     this.roundView.remove();
 
-    if (round > sources[level - 1].roundsCount && level === 6) {
-      this.roundView = new RoundView(1, 1);
+    const { level, round } = this.getCorrectRound(givenLevel, gitvenRound);
 
-      this.updateValue('1', '1');
-    } else if (round > sources[level - 1].roundsCount) {
-      this.roundView = new RoundView(level + 1, 1);
-
-      this.updateValue(`${level + 1}`, '1');
-    } else {
-      this.roundView = new RoundView(level, round);
-
-      this.updateValue(`${level}`, `${round}`);
-    }
+    this.roundView = new RoundView(level, round);
 
     this.page.append(this.roundView);
+  }
+
+  private getCorrectRound(
+    level: number,
+    round: number
+  ): { level: number; round: number } {
+    if (round > sources[level - 1].roundsCount && level === 6) {
+      this.updateValue('1', '1');
+
+      return { level: 1, round: 1 };
+    }
+    if (round > sources[level - 1].roundsCount) {
+      this.updateValue(`${level + 1}`, '1');
+      return { level: level + 1, round: 1 };
+    }
+    this.updateValue(`${level}`, `${round}`);
+
+    return { level, round };
   }
 }
