@@ -2,7 +2,7 @@ import Div from '../../../../../../utilits/base-elements/div-element/div';
 import { CutElements, Sizes } from '../../../../../../utilits/types/types';
 
 const bulgeSize = 20;
-const fontSize = 10;
+const expectedCharSize = 10;
 
 export default class Slicer {
   blockWidth: number;
@@ -42,10 +42,13 @@ export default class Slicer {
   }
 
   private getPadding(sentenseCharCount: number, countPiecesInLine: number) {
-    return (this.blockWidth - sentenseCharCount * fontSize) / countPiecesInLine;
+    return (
+      (this.blockWidth - sentenseCharCount * expectedCharSize) /
+      countPiecesInLine
+    );
   }
 
-  cut(): CutElements {
+  cut(fontSize: number): CutElements {
     const rows = this.sentenses.length;
 
     const lines: Div[] = [];
@@ -67,7 +70,7 @@ export default class Slicer {
       lines.push(line);
 
       for (let x = 0; x < countPiecesInLine; x += 1) {
-        const pieceTextWidth = sentense[x].length * fontSize;
+        const pieceTextWidth = sentense[x].length * expectedCharSize;
 
         const padding = this.getPadding(sentenseCharCount, countPiecesInLine);
 
@@ -85,7 +88,7 @@ export default class Slicer {
           styles: {
             height: `${pieceHeight}px`,
             width: `${pieceWidth}px`,
-            backgroundColor: '#2a30a5',
+            fontSize: `${fontSize}rem`,
             backgroundImage: `url('${this.imgSrc}')`,
             backgroundSize: this.backSize,
             backgroundPosition: `-${passedWidth}px ${(this.blockHeight / rows) * -y}px`,
@@ -101,7 +104,6 @@ export default class Slicer {
             height: `${bulgeSize}px`,
             top: `${topValue}px`,
             left: `-${bulgeSize / 2}px`,
-            backgroundColor: '#2a30a5',
             backgroundImage: `url('${this.imgSrc}')`,
             backgroundSize: this.backSize,
             backgroundPosition: `-${passedWidth - bulgeSize / 2}px ${(this.blockHeight / rows) * -y - topValue}px`,

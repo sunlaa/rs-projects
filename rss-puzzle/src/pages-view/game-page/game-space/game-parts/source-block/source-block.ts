@@ -2,8 +2,6 @@ import './source-block.css';
 import Div from '../../../../../utilits/base-elements/div-element/div';
 import ListenerHandler from './listener-handler/listener-handler';
 
-const gaps = 100;
-
 export default class SourceBlock extends Div {
   pieces: Div[][];
 
@@ -17,11 +15,17 @@ export default class SourceBlock extends Div {
 
   listenerHandler: ListenerHandler;
 
-  constructor(pieces: Div[][], lines: Div[], blockWidth: number) {
+  constructor(
+    pieces: Div[][],
+    lines: Div[],
+    blockWidth: number,
+    blockHeight: number
+  ) {
     super({
       className: 'source-block',
       styles: {
-        width: `${blockWidth + gaps}px`,
+        width: `${blockWidth}px`,
+        height: `${blockHeight / 5}px`,
       },
     });
 

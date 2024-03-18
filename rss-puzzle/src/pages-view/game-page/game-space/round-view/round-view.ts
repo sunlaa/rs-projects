@@ -43,7 +43,7 @@ export default class RoundView extends BaseElement {
     this.level = level;
     this.round = round;
 
-    this.draw(600);
+    this.draw(700, 0.9);
   }
 
   private async getSizes(desiredWidth: number) {
@@ -58,11 +58,11 @@ export default class RoundView extends BaseElement {
     };
   }
 
-  async draw(desiredWidth: number) {
+  async draw(desiredWidth: number, fontSize: number) {
     const sizes: Sizes = await this.getSizes(desiredWidth);
 
     const slicer = new Slicer(sizes, this.sentenses, this.imgSrc);
-    const cutElements: CutElements = slicer.cut();
+    const cutElements: CutElements = slicer.cut(fontSize);
 
     const field = new ResultBlock(
       sizes,
@@ -74,7 +74,8 @@ export default class RoundView extends BaseElement {
     const sources = new SourceBlock(
       cutElements.pieces,
       cutElements.lines,
-      sizes.blockWidth
+      sizes.blockWidth,
+      sizes.blockHeight
     );
 
     const statistics = new Statistics(this.level, this.round, this.imgSrc);

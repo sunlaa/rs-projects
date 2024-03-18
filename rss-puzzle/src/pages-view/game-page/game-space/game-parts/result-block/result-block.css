@@ -1,4 +1,5 @@
 .result-block {
+  overflow: hidden;
   border: 10px solid rgb(77, 37, 13);
   border-radius: 15px;
   display: flex;
@@ -28,12 +29,16 @@
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  text-shadow: 1px 1px 10px #818181;
-  font-size: 0.8rem;
+  text-shadow: 1px 1px 10px #c6c6c6;
+  font-size: 0.9rem;
+  background-color: #72d2f2;
   transition: all 200ms linear;
+  box-sizing: border-box;
+  padding-right: 7px;
 }
 
 .bulge {
+  background-color: #72d2f2;
   z-index: -10;
   position: absolute;
   border-top-left-radius: 50%;
