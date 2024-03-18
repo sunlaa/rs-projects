@@ -79,6 +79,9 @@ export default class Statistics extends Div {
         detail: { level: this.level, round: this.round + 1 },
       })
     );
+    const option = document.querySelector<HTMLElement>(`#option-${this.round}`);
+
+    if (option) option.classList.add('passed');
     const backdrop = document.querySelector('.backdrop');
     if (backdrop) backdrop.remove();
   };

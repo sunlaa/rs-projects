@@ -9,7 +9,7 @@ import { LocalStorage } from '../../../utilits/servises/local-storage';
 const levelCount = sources.length;
 
 export default class SelectMenu extends Div {
-  levelSelect: HTMLSelectElement;
+  levelSelect: BaseSelect;
 
   roundSelect: BaseSelect;
 
@@ -30,15 +30,16 @@ export default class SelectMenu extends Div {
     this.page = page;
     this.level = 1;
 
-    this.levelSelect = new BaseSelect(levelCount).getElement();
+    this.levelSelect = new BaseSelect(levelCount);
     this.roundSelect = new BaseSelect(sources[0].roundsCount);
+    this.roundSelect.addIds(sources[0].roundsCount);
 
     this.roundView = null;
 
     this.firstRender();
 
-    this.levelSelect.addEventListener('change', this.chooseLevel);
-    this.roundSelect.addListener('change', this.chooseRound);
+    this.levelSelect.dropDown.addListener('click', this.chooseLevel);
+    this.roundSelect.dropDown.addListener('click', this.chooseRound);
 
     this.appendChildren(this.levelSelect, this.roundSelect);
   }
@@ -52,31 +53,39 @@ export default class SelectMenu extends Div {
       this.updateValue(userLevel.level, userLevel.round);
     } else {
       this.roundView = new RoundView(1, 1);
+      this.updateValue('1', '1');
     }
 
     this.page.append(this.roundView);
   }
 
   private updateValue(level: string, round: string) {
-    this.levelSelect.value = level;
-    this.roundSelect.getElement().value = round;
+    this.levelSelect.currentOption.setContent(`Level ${level}`);
+    this.roundSelect.currentOption.setContent(`Round ${round}`);
   }
 
-  private chooseLevel = () => {
-    this.level = +this.levelSelect.value;
+  private chooseLevel = (event: Event) => {
+    const clickedOption = event.target as HTMLElement;
+    if (!clickedOption) throw new Error('No options');
+
+    this.level = Number(clickedOption.textContent);
     const roundCount = sources[this.level - 1].roundsCount;
 
     this.updateRoundList(roundCount);
     this.drawRound(this.level, 1);
   };
 
-  private chooseRound = () => {
-    const round = +this.roundSelect.getElement().value;
+  private chooseRound = (event: Event) => {
+    const clickedOption = event.target as HTMLElement;
+    if (!clickedOption) throw new Error('No options');
+
+    const round = Number(clickedOption.textContent);
     this.drawRound(this.level, round);
   };
 
   private updateRoundList(roundCount: number) {
     this.roundSelect.updateOption(roundCount);
+    this.roundSelect.addIds(roundCount);
   }
 
   drawRound(level: number, round: number) {

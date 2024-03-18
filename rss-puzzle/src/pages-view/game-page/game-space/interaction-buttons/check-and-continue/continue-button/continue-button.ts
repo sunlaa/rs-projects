@@ -31,6 +31,13 @@ export default class ContinueButton extends Div {
           detail: { level: this.level, round: this.round + 1 },
         })
       );
+
+      const option = document.querySelector<HTMLElement>(
+        `#option-${this.round}`
+      );
+
+      if (option) option.classList.add('passed');
+
       return;
     }
     const idkButton = document.querySelector<HTMLElement>('.idk-button');

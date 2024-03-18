@@ -6,7 +6,7 @@
 }
 
 .statistics {
-  overflow: scroll;
+  overflow-y: scroll;
   z-index: 20;
   position: fixed;
   width: 35rem;
