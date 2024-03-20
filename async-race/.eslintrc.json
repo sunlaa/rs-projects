@@ -1,17 +1,18 @@
 {
   "extends": [
     "airbnb-base",
+    "prettier",
     "airbnb-typescript/base",
+    "plugin:prettier/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:@typescript-eslint/recommended"
   ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["prettier", "@typescript-eslint"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": ["error"]
   },
   "ignorePatterns": ["webpack.config.js", "dist", "node_modules"]
 }

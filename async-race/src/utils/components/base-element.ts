@@ -4,10 +4,12 @@ import { Params } from '../types/types';
 export default class BaseElement<T extends HTMLElement = HTMLElement> {
   protected element: T;
 
-  constructor(params: Params<T>, ...childs: (BaseElement | HTMLElement | null)[]) {
+  constructor(
+    params: Params<T>,
+    ...childs: (BaseElement | HTMLElement | null)[]
+  ) {
     let { tag } = params;
     if (!tag) tag = 'div';
-    
 
     const element = document.createElement(tag) as T;
 

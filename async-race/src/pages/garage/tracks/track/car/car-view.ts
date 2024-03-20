@@ -1,7 +1,21 @@
 import BaseElement from '../../../../../utils/components/base-element';
+import { CarData } from '../../../../../utils/types/types';
+import CarLogic from './car-logic';
 
 export default class Car extends BaseElement {
-  constructor() {
+  name: string;
+
+  color: string;
+
+  id: number;
+
+  startTime: number;
+
+  duration: number;
+
+  requestId: number;
+
+  constructor({ name, color, id }: CarData) {
     super({ className: ['car'] });
     this.element.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
@@ -13,7 +27,19 @@ export default class Car extends BaseElement {
       <path d="M 19.94 54.899 c -0.66 0 -1.31 -0.27 -1.77 -0.729 s -0.73 -1.11 -0.73 -1.771 c 0 -0.659 0.27 -1.3 0.73 -1.77 c 0.93 -0.93 2.61 -0.93 3.54 0 c 0.46 0.47 0.73 1.11 0.73 1.77 c 0 0.66 -0.27 1.301 -0.73 1.771 C 21.24 54.63 20.6 54.899 19.94 54.899 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
     </g>
     </svg>`;
+
+    this.name = name;
+    this.color = color;
+    this.id = id;
+
+    this.startTime = NaN;
+    this.duration = NaN;
+    this.requestId = NaN;
+
     this.changeColor('#1A3F');
+    this.setStyles({ position: 'absolute' });
+
+    this.addListener('click', this.drive.bind(this));
   }
 
   changeColor(color: string) {
@@ -22,5 +48,52 @@ export default class Car extends BaseElement {
     if (carBody) {
       carBody.style.fill = color;
     }
+
+    this.color = color;
+
+    CarLogic.updateCar(this.id, this.name, color);
   }
+
+  changeName(name: string) {
+    this.name = name;
+
+    CarLogic.updateCar(this.id, name, this.color);
+  }
+
+  async drive() {
+    const data = await CarLogic.startEngine(this.id);
+    if (data) {
+      this.duration = data.distance / data.velocity;
+    }
+
+    this.startAnimation(this.duration);
+    const isDrived = await CarLogic.drive(this.id);
+    if (!isDrived) {
+      this.stopAnimation();
+    }
+  }
+
+  moveCar = (timestamp: number) => {
+    const distance = window.innerWidth - this.element.offsetWidth;
+    if (Number.isNaN(this.startTime)) this.startTime = timestamp;
+    const progress = timestamp - this.startTime;
+    const percentage = Math.min(progress / this.duration, 1);
+
+    const shift = distance * percentage;
+    this.element.style.left = `${shift}px`;
+
+    if (percentage < 1) {
+      this.requestId = window.requestAnimationFrame(this.moveCar);
+    }
+  };
+
+  startAnimation = (duration: number) => {
+    this.duration = duration;
+    this.startTime = NaN;
+    this.requestId = window.requestAnimationFrame(this.moveCar);
+  };
+
+  stopAnimation = () => {
+    window.cancelAnimationFrame(this.requestId);
+  };
 }
