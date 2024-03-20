@@ -1,17 +1,15 @@
 import nonNullable from '../functions/non-nullable';
-
-type Params<T extends HTMLElement = HTMLElement> = Partial<Omit<T, 'tagName'>> & {
-  tag: keyof HTMLElementTagNameMap;
-  content?: string;
-  className?: string[];
-  styles?: Partial<CSSStyleDeclaration>;
-};
+import { Params } from '../types/types';
 
 export default class BaseElement<T extends HTMLElement = HTMLElement> {
   protected element: T;
 
   constructor(params: Params<T>, ...childs: (BaseElement | HTMLElement | null)[]) {
-    const element = document.createElement(params.tag) as T;
+    let { tag } = params;
+    if (!tag) tag = 'div';
+
+    const element = document.createElement(tag) as T;
+
     if (params.className) {
       params.className.forEach((name) => element.classList.add(name));
     }

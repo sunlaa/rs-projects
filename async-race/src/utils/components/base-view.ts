@@ -6,7 +6,7 @@ export default class View {
 
   view: BaseElement;
 
-  constructor(params: Params = { tag: 'section' }) {
+  constructor(params: Params = { tag: 'section', className: [''] }) {
     this.params = params;
     this.view = this.createView();
   }
