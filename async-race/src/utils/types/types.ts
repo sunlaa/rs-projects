@@ -1,4 +1,6 @@
-export type Params<T extends HTMLElement = HTMLElement> = Partial<Omit<T, 'tagName' | 'className'>> & {
+export type Params<T extends HTMLElement = HTMLElement> = Partial<
+  Omit<T, 'tagName' | 'className'>
+> & {
   tag?: keyof HTMLElementTagNameMap;
   content?: string;
   className?: string[];
@@ -14,3 +16,8 @@ export type CarData = {
 };
 
 export type CarsData = CarData[];
+
+export type EngineData = {
+  velocity: number;
+  distance: number;
+};
