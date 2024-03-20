@@ -7,6 +7,7 @@ export default class BaseElement<T extends HTMLElement = HTMLElement> {
   constructor(params: Params<T>, ...childs: (BaseElement | HTMLElement | null)[]) {
     let { tag } = params;
     if (!tag) tag = 'div';
+    
 
     const element = document.createElement(tag) as T;
 

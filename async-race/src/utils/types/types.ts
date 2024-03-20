@@ -7,10 +7,10 @@ export type Params<T extends HTMLElement = HTMLElement> = Partial<Omit<T, 'tagNa
 
 export type ParamsOmitTag = Omit<Params, 'tag'>;
 
-export type Car = {
+export type CarData = {
   name: string;
   color: string;
   id: number;
 };
 
-export type Cars = Car[];
+export type CarsData = CarData[];
