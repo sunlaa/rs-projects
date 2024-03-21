@@ -1,0 +1,20 @@
+.control-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.control {
+  user-select: none;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: solid 1px rgb(59, 54, 54);
+}
+
+.disabled {
+  cursor: default;
+  pointer-events: none;
+  background-color: rgb(164, 162, 162);
+}

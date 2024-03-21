@@ -3,6 +3,6 @@
 
 // export default class Track extends BaseElement {
 //   constructor(car: Car) {
-//     super({});
+//     super({ className: ['track'] });
 //   }
 // }

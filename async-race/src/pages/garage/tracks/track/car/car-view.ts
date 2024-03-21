@@ -36,21 +36,21 @@ export default class Car extends BaseElement {
     this.duration = NaN;
     this.requestId = NaN;
 
-    this.changeColor('#1A3F');
+    this.setColor(this.color);
     this.setStyles({ position: 'absolute' });
-
-    this.addListener('click', this.drive.bind(this));
   }
 
-  changeColor(color: string) {
+  setColor(color: string) {
     const carBody = this.element.firstElementChild?.firstElementChild
       ?.firstElementChild as HTMLElement;
     if (carBody) {
       carBody.style.fill = color;
     }
+  }
 
+  changeColor(color: string) {
+    this.setColor(color);
     this.color = color;
-
     CarLogic.updateCar(this.id, this.name, color);
   }
 
@@ -60,7 +60,7 @@ export default class Car extends BaseElement {
     CarLogic.updateCar(this.id, name, this.color);
   }
 
-  async drive() {
+  drive = async () => {
     const data = await CarLogic.startEngine(this.id);
     if (data) {
       this.duration = data.distance / data.velocity;
@@ -71,9 +71,15 @@ export default class Car extends BaseElement {
     if (!isDrived) {
       this.stopAnimation();
     }
-  }
+  };
 
-  moveCar = (timestamp: number) => {
+  stop = async () => {
+    this.stopAnimation();
+    this.element.style.left = '0';
+    await CarLogic.stopEngine(this.id);
+  };
+
+  private moveCar = (timestamp: number) => {
     const distance = window.innerWidth - this.element.offsetWidth;
     if (Number.isNaN(this.startTime)) this.startTime = timestamp;
     const progress = timestamp - this.startTime;
@@ -83,17 +89,17 @@ export default class Car extends BaseElement {
     this.element.style.left = `${shift}px`;
 
     if (percentage < 1) {
-      this.requestId = window.requestAnimationFrame(this.moveCar);
+      this.requestId = requestAnimationFrame(this.moveCar);
     }
   };
 
-  startAnimation = (duration: number) => {
+  private startAnimation = (duration: number) => {
     this.duration = duration;
     this.startTime = NaN;
-    this.requestId = window.requestAnimationFrame(this.moveCar);
+    this.requestId = requestAnimationFrame(this.moveCar);
   };
 
-  stopAnimation = () => {
-    window.cancelAnimationFrame(this.requestId);
+  private stopAnimation = () => {
+    cancelAnimationFrame(this.requestId);
   };
 }

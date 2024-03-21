@@ -13,13 +13,15 @@ export default class BaseElement<T extends HTMLElement = HTMLElement> {
 
     const element = document.createElement(tag) as T;
 
-    if (params.className) {
-      params.className.forEach((name) => element.classList.add(name));
-    }
     if (params.styles) Object.assign(element.style, params.styles);
     if (params.content) element.textContent = params.content;
     Object.assign(element, params);
     this.element = element;
+
+    if (params.className) {
+      params.className.forEach((name) => this.element.classList.add(name));
+    }
+
     if (childs) {
       this.appendChildren(...childs);
     }
