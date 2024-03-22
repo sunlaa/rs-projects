@@ -26,7 +26,7 @@ function createEmptyPlace(from: HTMLElement, element: HTMLElement) {
   from.replaceChild(placeholder.getElement(), element);
 }
 
-function getAfterElement(line: HTMLDivElement, x: number) {
+function getAfterElement(line: HTMLDivElement, offsetX: number) {
   const lineInnerPieces = [...line.querySelectorAll('.wrapper:not(.dragging)')];
   const placeholders = [...line.querySelectorAll('.placeholder')];
 
@@ -35,7 +35,7 @@ function getAfterElement(line: HTMLDivElement, x: number) {
   const res: { offset: number; element?: HTMLElement } = lineInner.reduce(
     (closest, piece) => {
       const picesSize = piece.getBoundingClientRect();
-      const offset = x - picesSize.left - picesSize.width / 2;
+      const offset = offsetX - picesSize.left - picesSize.width / 2;
 
       if (offset < 0 && offset > closest.offset) {
         return { offset, element: piece };
@@ -162,7 +162,7 @@ export default class ListenerHandler {
   private click = (event: Event) => {
     const clickedPiece = event.currentTarget as HTMLElement;
     const parent = clickedPiece.parentElement;
-    if (!parent) throw new Error('No pices parent!');
+    if (!parent) throw new Error('No pieces parent!');
 
     if (parent.classList.contains('source-block')) {
       createEmptyPlace(this.sourceBlock, clickedPiece);

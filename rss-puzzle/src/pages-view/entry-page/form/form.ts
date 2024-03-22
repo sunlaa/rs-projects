@@ -1,16 +1,16 @@
 import { BaseElement } from '../../../utilits/base-elements/base-element';
-import Label from './label/label';
+import Label from '../../../utilits/base-elements/label/label';
 import Div from '../../../utilits/base-elements/div-element/div';
 import {
   LocalStorage,
   LocalData,
 } from '../../../utilits/servises/local-storage';
 import Router from '../../../utilits/servises/router';
-import ValidationMessage from '../validation/validation';
+import ValidationMessage from '../validation-message/validation-message';
 
 const regExp: RegExp = /^[A-Z][\\-a-zA-z]+$/;
 
-class Form extends BaseElement<HTMLFormElement> {
+export default class Form extends BaseElement<HTMLFormElement> {
   userData: LocalData;
 
   router: Router;
@@ -134,5 +134,3 @@ class Form extends BaseElement<HTMLFormElement> {
     return false;
   }
 }
-
-export default Form;

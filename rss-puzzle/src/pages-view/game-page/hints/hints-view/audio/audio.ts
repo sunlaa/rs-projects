@@ -19,15 +19,15 @@ export default class Audio extends Div {
     this.audio.src = newSrc;
   }
 
-  play = () => {
+  private play = () => {
     this.audio.play();
   };
 
-  setAnimation = () => {
+  private setAnimation = () => {
     this.addClass('animated');
   };
 
-  removeAnimation = () => {
+  private removeAnimation = () => {
     this.removeClass('animated');
   };
 }

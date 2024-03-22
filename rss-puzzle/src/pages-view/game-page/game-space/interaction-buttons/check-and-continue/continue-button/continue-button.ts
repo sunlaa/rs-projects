@@ -39,7 +39,7 @@ export default class ContinueButton extends Div {
     }
     const idkButton = document.querySelector<HTMLElement>('.idk-button');
     if (idkButton) idkButton.style.pointerEvents = '';
-    this.element.dispatchEvent(new Event('empty', { bubbles: true }));
+    this.element.dispatchEvent(new Event('next-sentense', { bubbles: true }));
   };
 
   saveAndMarkPassedRound() {

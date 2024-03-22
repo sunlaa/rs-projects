@@ -1,7 +1,4 @@
-import {
-  BaseElement,
-  ParamsOmitTag,
-} from '../../../../utilits/base-elements/base-element';
+import { BaseElement, ParamsOmitTag } from '../base-element';
 
 class Label extends BaseElement<HTMLLabelElement> {
   constructor(

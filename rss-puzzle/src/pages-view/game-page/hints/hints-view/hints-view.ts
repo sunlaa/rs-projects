@@ -2,11 +2,10 @@ import './hints-view.css';
 import Translate from './translate/translate';
 import { BaseElement } from '../../../../utilits/base-elements/base-element';
 import Audio from './audio/audio';
+import { ChoosenSentensesData } from '../../../../utilits/types/types';
 
 export default class Hints extends BaseElement {
-  translateText: string[];
-
-  audioSrc: string[];
+  sentenseData: ChoosenSentensesData;
 
   translateBlock: Translate;
 
@@ -14,22 +13,21 @@ export default class Hints extends BaseElement {
 
   count: number;
 
-  constructor(translateText: string[], audioSrc: string[]) {
+  constructor(sentenseData: ChoosenSentensesData) {
     super({ tag: 'section', className: 'hints' });
 
-    this.translateBlock = new Translate(translateText[0]);
-    this.audioBlock = new Audio(audioSrc[0]);
+    this.translateBlock = new Translate(sentenseData.translate[0]);
+    this.audioBlock = new Audio(sentenseData.audioSrc[0]);
 
     this.count = 1;
 
-    this.translateText = translateText;
-    this.audioSrc = audioSrc;
+    this.sentenseData = sentenseData;
     this.appendChildren(this.translateBlock, this.audioBlock);
   }
 
   updateHintsData() {
-    const currentTranslate = this.translateText[this.count];
-    const currentAudioSrc = this.audioSrc[this.count];
+    const currentTranslate = this.sentenseData.translate[this.count];
+    const currentAudioSrc = this.sentenseData.audioSrc[this.count];
 
     this.translateBlock.updateTranslate(currentTranslate);
     this.audioBlock.updateSrc(

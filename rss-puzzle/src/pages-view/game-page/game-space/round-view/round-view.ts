@@ -4,25 +4,24 @@ import UserSelect from '../../game-logic/user-select';
 import ResultBlock from '../game-parts/result-block/result-block';
 import SourceBlock from '../game-parts/source-block/source-block';
 import Slicer from '../game-parts/source-block/piece-slicer/piece-slicer';
-import { CutElements, Sizes } from '../../../../utilits/types/types';
+import {
+  ChoosenSentensesData,
+  CutElements,
+  Sizes,
+  ImageData,
+} from '../../../../utilits/types/types';
 import Hints from '../../hints/hints-view/hints-view';
 import Switches from '../../hints/switches/switches';
-import Pic from '../../game-logic/pic';
+import PicSizes from '../../game-logic/pic-sizes';
 import Statistics from '../game-parts/statistics/statistics';
 import InteractButtons from '../interaction-buttons/interaction-buttons';
 
+const fieldWidth = 700;
+
 export default class RoundView extends BaseElement {
-  sentenses: string[];
+  sentensesData: ChoosenSentensesData;
 
-  translate: string[];
-
-  audioSrc: string[];
-
-  imgSrc: string;
-
-  imgTitle: string;
-
-  imgAuthor: string;
+  imageData: ImageData;
 
   level: number;
 
@@ -31,25 +30,46 @@ export default class RoundView extends BaseElement {
   constructor(level: number, round: number) {
     super({ tag: 'section', className: 'round-view' });
 
-    const roundData = new UserSelect(level, round);
-
-    this.sentenses = roundData.getSentenses();
-    this.translate = roundData.getTranslate();
-    this.audioSrc = roundData.getAudioSrc();
-    this.imgSrc = roundData.getImgSrc();
-    this.imgTitle = roundData.getImageTitle();
-    this.imgAuthor = roundData.getImageAuthorAndYear();
-
     this.level = level;
     this.round = round;
 
-    this.draw(700, 0.9);
+    this.sentensesData = this.getSentensesData();
+    this.imageData = this.getImageData();
+
+    this.draw(fieldWidth);
+  }
+
+  private getSentensesData(): ChoosenSentensesData {
+    const roundData = new UserSelect(this.level, this.round);
+    return {
+      sentenses: roundData.getSentenses(),
+      translate: roundData.getTranslate(),
+      audioSrc: roundData.getAudioSrc(),
+    };
+  }
+
+  private getImageData(): ImageData {
+    const roundData = new UserSelect(this.level, this.round);
+    return {
+      imgSrc: roundData.getImgSrc(),
+      imgTitle: roundData.getImageTitle(),
+      imgAuthor: roundData.getImageAuthorAndYear(),
+    };
+  }
+
+  async draw(desiredWidth: number) {
+    const sizes: Sizes = await this.getSizes(desiredWidth);
+    const cutElements: CutElements = this.getCutElements(sizes);
+
+    const elements = this.initElements(sizes, cutElements);
+
+    this.appendChildren(...elements);
   }
 
   private async getSizes(desiredWidth: number) {
-    const picture = new Pic(this.imgSrc);
+    const picture = new PicSizes(this.imageData.imgSrc);
     const sizes = await picture.getSizes();
-    this.imgSrc = picture.src;
+    this.imageData.imgSrc = picture.src;
 
     const desiredHeight = (desiredWidth / sizes.blockWidth) * sizes.blockHeight;
     return {
@@ -58,28 +78,45 @@ export default class RoundView extends BaseElement {
     };
   }
 
-  async draw(desiredWidth: number, fontSize: number) {
-    const sizes: Sizes = await this.getSizes(desiredWidth);
-
-    const slicer = new Slicer(sizes, this.sentenses, this.imgSrc);
-    const cutElements: CutElements = slicer.cut(fontSize);
-
-    const field = new ResultBlock(
+  private getCutElements(sizes: Sizes): CutElements {
+    const slicer = new Slicer(
       sizes,
-      this.imgSrc,
-      this.imgTitle,
-      this.imgAuthor,
+      this.sentensesData.sentenses,
+      this.imageData.imgSrc
+    );
+    return slicer.cut();
+  }
+
+  private addUpdateListener(
+    hints: Hints,
+    sourceBlock: SourceBlock,
+    interactButtons: InteractButtons
+  ) {
+    this.addListener('next-sentense', () => {
+      hints.updateHintsData();
+      sourceBlock.updatePieces();
+      interactButtons.idkButton.updateListener();
+      interactButtons.checkButton.updateCounter();
+      interactButtons.checkAndContinue.transformToCheck();
+    });
+  }
+
+  private initElements(sizes: Sizes, cutElements: CutElements) {
+    const resultBlock = new ResultBlock(
+      sizes,
+      this.imageData,
       ...cutElements.lines
     );
-    const sources = new SourceBlock(
+    const sourceBlock = new SourceBlock(
       cutElements.pieces,
       cutElements.lines,
-      sizes.blockWidth,
-      sizes.blockHeight
+      sizes
     );
-
-    const statistics = new Statistics(this.level, this.round, this.imgSrc);
-
+    const statistics = new Statistics(
+      this.level,
+      this.round,
+      this.imageData.imgSrc
+    );
     const interactButtons = new InteractButtons(
       cutElements.pieces,
       cutElements.lines,
@@ -88,30 +125,24 @@ export default class RoundView extends BaseElement {
       statistics
     );
 
-    const hints = new Hints(this.translate, this.audioSrc);
+    const hints = new Hints(this.sentensesData);
 
     const switches = new Switches(
       hints.translateBlock,
       hints.audioBlock,
-      this.imgSrc,
+      this.imageData.imgSrc,
       cutElements.pieces
     );
 
-    this.addListener('empty', () => {
-      hints.updateHintsData();
-      sources.updatePieces();
-      interactButtons.idkButton.updateListener();
-      interactButtons.checkButton.updateCounter();
-      interactButtons.checkAndContinue.transformToCheck();
-    });
+    this.addUpdateListener(hints, sourceBlock, interactButtons);
 
-    this.appendChildren(
+    return [
       switches,
       hints,
-      field,
-      sources,
+      resultBlock,
+      sourceBlock,
       interactButtons,
-      statistics
-    );
+      statistics,
+    ];
   }
 }

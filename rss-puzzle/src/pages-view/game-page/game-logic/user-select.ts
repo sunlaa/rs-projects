@@ -1,3 +1,4 @@
+import { SentenseData, RoundData, Sources } from '../../../utilits/types/types';
 import level1 from '../../../sources-data/wordCollectionLevel1.json';
 import level2 from '../../../sources-data/wordCollectionLevel2.json';
 import level3 from '../../../sources-data/wordCollectionLevel3.json';
@@ -13,32 +14,6 @@ export const sources: Sources[] = [
   level5,
   level6,
 ];
-
-type SentenseData = {
-  audioExample: string;
-  textExample: string;
-  textExampleTranslate: string;
-  id: number;
-  word: string;
-  wordTranslate: string;
-};
-
-type RoundData = {
-  levelData: {
-    id: string;
-    name: string;
-    imageSrc: string;
-    cutSrc: string;
-    author: string;
-    year: string;
-  };
-  words: SentenseData[];
-};
-
-type Sources = {
-  rounds: RoundData[];
-  roundsCount: number;
-};
 
 export default class UserSelect {
   level: number;

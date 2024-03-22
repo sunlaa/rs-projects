@@ -22,11 +22,11 @@ export default class ValidationMessage extends Div {
       })
     );
 
-    this.addRequirement(input);
+    this.createMessage(input);
     this.append(this.requirementList);
   }
 
-  addRequirement(input: 'name' | 'surname') {
+  createMessage(input: 'name' | 'surname') {
     const li: BaseElement<HTMLLIElement> = new BaseElement<HTMLLIElement>({
       tag: 'li',
     });

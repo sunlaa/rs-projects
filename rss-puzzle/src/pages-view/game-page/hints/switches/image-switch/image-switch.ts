@@ -36,6 +36,10 @@ export default class ImageSwitch extends Div {
     this.updateLocalStorage();
   };
 
+  updateCount() {
+    this.count += 1;
+  }
+
   removeImage() {
     const pieces = this.pieces.reduce((acc, elem, i) => {
       if (i >= this.count) return acc.concat(elem);
@@ -90,10 +94,6 @@ export default class ImageSwitch extends Div {
         }
       }
     });
-  }
-
-  updateCount() {
-    this.count += 1;
   }
 
   private updateLocalStorage() {

@@ -1,20 +1,19 @@
 import './result-block.css';
 import Div from '../../../../../utilits/base-elements/div-element/div';
 import { BaseElement } from '../../../../../utilits/base-elements/base-element';
-import { Sizes } from '../../../../../utilits/types/types';
+import { Sizes, ImageData } from '../../../../../utilits/types/types';
 
 export default class ResultBlock extends Div {
-  imgSrc: string;
+  // imgSrc: string;
 
-  imgTitle: string;
+  // imgTitle: string;
 
-  imgAuthor: string;
+  // imgAuthor: string;
+  imageData: ImageData;
 
   constructor(
     { blockWidth, blockHeight }: Sizes,
-    imgSrc: string,
-    imgTitle: string,
-    imgAuthor: string,
+    imageData: ImageData,
     ...child: (BaseElement | HTMLElement | null)[]
   ) {
     super(
@@ -27,21 +26,19 @@ export default class ResultBlock extends Div {
       },
       ...child
     );
-    this.imgSrc = imgSrc;
-    this.imgTitle = imgTitle;
-    this.imgAuthor = imgAuthor;
 
+    this.imageData = imageData;
     this.addListener('end-of-round', this.showImage);
   }
 
-  showImage = () => {
+  private showImage = () => {
     this.getElement().innerHTML = '';
-    this.setStyles({ backgroundImage: `url('${this.imgSrc}')` });
+    this.setStyles({ backgroundImage: `url('${this.imageData.imgSrc}')` });
     this.append(
       new Div(
         { className: 'pic-brief' },
-        new Div({ content: `"${this.imgTitle}"` }),
-        new Div({ content: this.imgAuthor })
+        new Div({ content: `"${this.imageData.imgTitle}"` }),
+        new Div({ content: this.imageData.imgAuthor })
       )
     );
   };

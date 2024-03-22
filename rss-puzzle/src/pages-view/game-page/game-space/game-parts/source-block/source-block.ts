@@ -1,6 +1,9 @@
 import './source-block.css';
 import Div from '../../../../../utilits/base-elements/div-element/div';
 import ListenerHandler from './listener-handler/listener-handler';
+import { Sizes } from '../../../../../utilits/types/types';
+
+const halfOfRows = 5;
 
 export default class SourceBlock extends Div {
   pieces: Div[][];
@@ -15,17 +18,12 @@ export default class SourceBlock extends Div {
 
   listenerHandler: ListenerHandler;
 
-  constructor(
-    pieces: Div[][],
-    lines: Div[],
-    blockWidth: number,
-    blockHeight: number
-  ) {
+  constructor(pieces: Div[][], lines: Div[], sizes: Sizes) {
     super({
       className: 'source-block',
       styles: {
-        width: `${blockWidth}px`,
-        height: `${blockHeight / 5}px`,
+        width: `${sizes.blockWidth}px`,
+        height: `${sizes.blockHeight / halfOfRows}px`,
       },
     });
 
@@ -46,12 +44,30 @@ export default class SourceBlock extends Div {
     this.addPieces();
   }
 
-  updateCurrentElements() {
+  updatePieces = () => {
+    this.removeEvents();
+
+    this.addPieces();
+  };
+
+  private addPieces = () => {
+    const randomPieces = this.random();
+
+    this.addEvents();
+
+    this.element.innerHTML = '';
+    this.appendChildren(...randomPieces);
+
+    this.counter += 1;
+    this.updateCurrentPieces();
+  };
+
+  private updateCurrentPieces() {
     this.currentPieces = this.pieces[this.counter];
     this.currentLine = this.lines[this.counter];
   }
 
-  random = () => {
+  private random = () => {
     for (let i = this.currentPieces.length; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [this.currentPieces[i], this.currentPieces[j]] = [
@@ -62,25 +78,7 @@ export default class SourceBlock extends Div {
     return this.currentPieces;
   };
 
-  addPieces = () => {
-    const randomPieces = this.random();
-
-    this.addEvents();
-
-    this.element.innerHTML = '';
-    this.appendChildren(...randomPieces);
-
-    this.counter += 1;
-    this.updateCurrentElements();
-  };
-
-  updatePieces = () => {
-    this.removeEvents();
-
-    this.addPieces();
-  };
-
-  addEvents() {
+  private addEvents() {
     this.listenerHandler = new ListenerHandler(
       this.currentPieces,
       this.currentLine,
@@ -89,7 +87,7 @@ export default class SourceBlock extends Div {
     this.listenerHandler.addListeners();
   }
 
-  removeEvents() {
+  private removeEvents() {
     this.listenerHandler.removeListeners();
   }
 }

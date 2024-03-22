@@ -3,6 +3,7 @@ import Div from '../../../../../utilits/base-elements/div-element/div';
 import { BaseElement } from '../../../../../utilits/base-elements/base-element';
 import Audio from '../../../hints/hints-view/audio/audio';
 import { LocalStorage } from '../../../../../utilits/servises/local-storage';
+import Category from './category/category';
 
 export default class Statistics extends Div {
   continueButton: Div;
@@ -18,36 +19,21 @@ export default class Statistics extends Div {
   constructor(level: number, round: number, imgSrc: string) {
     super({ className: 'statistics' });
 
-    this.continueButton = new Div({
-      className: 'continue-button',
-      content: 'Continue',
-    });
-
-    this.level = level;
-    this.round = round;
-
     const image = new BaseElement<HTMLImageElement>({
       tag: 'img',
       className: 'image',
       src: imgSrc,
     });
 
-    this.correctSentenses = new Div(
-      { className: 'category' },
-      new BaseElement({
-        tag: 'h1',
-        className: 'category-title',
-        content: 'I know',
-      })
-    );
-    this.wrongSentenses = new Div(
-      { className: 'category' },
-      new BaseElement({
-        tag: 'h1',
-        className: 'category-title',
-        content: "I don't know",
-      })
-    );
+    this.level = level;
+    this.round = round;
+
+    this.correctSentenses = new Category('I know');
+    this.wrongSentenses = new Category("I don't know");
+    this.continueButton = new Div({
+      className: 'continue-button',
+      content: 'Continue',
+    });
 
     this.continueButton.addListener('click', this.continue);
 
@@ -58,6 +44,10 @@ export default class Statistics extends Div {
       this.continueButton
     );
 
+    this.addCategoryListeners();
+  }
+
+  private addCategoryListeners() {
     this.element.addEventListener('add-correct', (event) => {
       const customEvent = event as CustomEvent;
       const { sentense } = customEvent.detail;
@@ -73,7 +63,7 @@ export default class Statistics extends Div {
     });
   }
 
-  continue = () => {
+  private continue = () => {
     this.element.dispatchEvent(
       new CustomEvent('next-round', {
         bubbles: true,
@@ -87,7 +77,7 @@ export default class Statistics extends Div {
     if (backdrop) backdrop.remove();
   };
 
-  addSentenceCorrect = (string: string, audioSrc: string) => {
+  private addSentenceCorrect = (string: string, audioSrc: string) => {
     const sentense = new Div(
       { content: string, className: 'sentense' },
       new Audio(audioSrc)
@@ -95,7 +85,7 @@ export default class Statistics extends Div {
     this.correctSentenses.append(sentense);
   };
 
-  addSentenceWrong = (string: string, audioSrc: string) => {
+  private addSentenceWrong = (string: string, audioSrc: string) => {
     const sentense = new Div(
       { content: string, className: 'sentense' },
       new Audio(audioSrc)
@@ -103,7 +93,7 @@ export default class Statistics extends Div {
     this.wrongSentenses.append(sentense);
   };
 
-  saveAndMarkPassed() {
+  private saveAndMarkPassed() {
     const option = document.querySelector<HTMLElement>(`#round-${this.round}`);
     if (option) option.classList.add('passed');
 
