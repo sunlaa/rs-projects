@@ -1,4 +1,4 @@
-import BaseElement from '../../utils/components/base-element';
+import BaseElement from '../../../../utils/components/base-element';
 
 export default class PageCounter extends BaseElement {
   constructor() {

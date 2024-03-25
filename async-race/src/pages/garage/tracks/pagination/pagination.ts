@@ -1,6 +1,6 @@
-import BaseElement from '../../utils/components/base-element';
-import { CarsData } from '../../utils/types/types';
-import Tracks from '../garage/tracks/tracks';
+import BaseElement from '../../../../utils/components/base-element';
+import { CarsData } from '../../../../utils/types/types';
+import Tracks from '../tracks';
 import PageCounter from './page-counter';
 
 export default class Pagination extends BaseElement {

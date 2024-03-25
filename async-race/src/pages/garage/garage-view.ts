@@ -1,7 +1,7 @@
 import View from '../../utils/components/base-view';
 import { CarsData } from '../../utils/types/types';
-import PageCounter from '../pagination/page-counter';
-import Pagination from '../pagination/pagination';
+import PageCounter from './tracks/pagination/page-counter';
+import Pagination from './tracks/pagination/pagination';
 import Tracks from './tracks/tracks';
 
 export default class Garage extends View {

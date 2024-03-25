@@ -1,3 +1,4 @@
+import './track.css';
 import BaseElement from '../../../../utils/components/base-element';
 import ControlButtons from './buttons/control-buttons';
 import CarName from './car-name/car-name';
@@ -8,10 +9,9 @@ export default class Track extends BaseElement {
     super(
       {
         className: ['track'],
-        styles: { position: 'relative', height: '300px' },
       },
-      car,
       new CarName(car.name),
+      car,
       new ControlButtons(car)
     );
   }
