@@ -16,12 +16,12 @@ export default class Pagination extends BaseElement {
 
   currentPage: number = 0;
 
-  constructor(carsData: CarsData, tracks: Tracks, pageCounter: PageCounter) {
+  constructor(carsData: CarsData, tracks: Tracks) {
     super({ className: ['pagination'] });
 
     this.carsData = carsData;
     this.tracks = tracks;
-    this.pageCounter = pageCounter;
+    this.pageCounter = new PageCounter();
 
     this.pageTurns = new PageTurns();
     const { prev } = this.pageTurns;
@@ -31,7 +31,6 @@ export default class Pagination extends BaseElement {
     next.addListener('click', this.next);
 
     this.appendChildren(tracks.getElementView());
-    this.render(0);
   }
 
   async getPagesCount() {
@@ -41,6 +40,7 @@ export default class Pagination extends BaseElement {
   }
 
   render(pageNum: number) {
+    this.currentPage = pageNum;
     const startIndex = pageNum * 7;
     const endIndex = startIndex + 7;
     this.tracks.updateCars(this.carsData.slice(startIndex, endIndex));

@@ -1,7 +1,11 @@
-import BaseElement from "../../../../../utils/components/base-element";
+import BaseElement from '../../../../../utils/components/base-element';
 
 export default class CarName extends BaseElement {
   constructor(name: string) {
-    super({className: ['car-name'], content: name})
+    super({ className: ['car-name'], content: name });
+  }
+
+  updateName(newName: string) {
+    this.element.textContent = newName;
   }
 }

@@ -1,13 +1,13 @@
 import { CarData, CarsData, EngineData } from '../../../../../utils/types/types';
 
 export default class CarLogic {
-  static async getAllCars(): Promise<CarsData | null> {
+  static async getAllCars(): Promise<CarsData> {
     try {
       const response = await fetch(`http://127.0.0.1:3000/garage`);
       const data = await response.json();
       return data;
     } catch (err) {
-      return null;
+      throw err;
     }
   }
 
@@ -21,12 +21,18 @@ export default class CarLogic {
     }
   }
 
-  static async createCar(name: string, color: string) {
-    await fetch(`http://127.0.0.1:3000/garage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, color }),
-    });
+  static async createCar(name: string, color: string): Promise<CarData> {
+    try {
+      const response =await fetch(`http://127.0.0.1:3000/garage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, color }),
+      });
+      const data: CarData = await response.json();
+      return data;
+    } catch (err) {
+      throw err;
+    }
   }
 
   static async deleteCar(id: number) {

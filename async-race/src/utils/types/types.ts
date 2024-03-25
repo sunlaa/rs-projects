@@ -21,3 +21,5 @@ export type EngineData = {
   velocity: number;
   distance: number;
 };
+
+export type ForRedo = { name?: string; color?: string };

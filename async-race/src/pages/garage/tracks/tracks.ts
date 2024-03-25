@@ -6,7 +6,7 @@ import Track from './track/track';
 
 export default class Tracks extends View {
   constructor() {
-    super({ tag: 'div' });
+    super({ tag: 'div', className: ['tracks'] });
   }
 
   updateCars(carsData: CarsData) {

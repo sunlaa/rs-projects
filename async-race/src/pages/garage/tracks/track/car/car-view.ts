@@ -1,8 +1,11 @@
 import BaseElement from '../../../../../utils/components/base-element';
 import { CarData } from '../../../../../utils/types/types';
+import CarName from '../car-name/car-name';
 import CarLogic from './car-logic';
 
 export default class Car extends BaseElement {
+  carName: CarName;
+
   name: string;
 
   color: string;
@@ -29,6 +32,8 @@ export default class Car extends BaseElement {
     </svg>`;
 
     this.name = name;
+    this.carName = new CarName(this.name);
+
     this.color = color;
     this.id = id;
 
@@ -55,7 +60,7 @@ export default class Car extends BaseElement {
 
   changeName(name: string) {
     this.name = name;
-
+    this.carName.updateName(this.name);
     CarLogic.updateCar(this.id, name, this.color);
   }
 
