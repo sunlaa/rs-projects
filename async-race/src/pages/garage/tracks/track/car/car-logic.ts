@@ -30,7 +30,7 @@ export default class CarLogic {
   }
 
   static async deleteCar(id: number) {
-    await fetch(`http://127.0.0.1:3000/garage?id=${id}`, { method: 'DELETE' });
+    await fetch(`http://127.0.0.1:3000/garage/${id}`, { method: 'DELETE' });
   }
 
   static async updateCar(id: number, name: string, color: string) {

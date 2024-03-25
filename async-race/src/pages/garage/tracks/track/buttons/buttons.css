@@ -1,11 +1,4 @@
-.control-buttons {
-  width: 4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.control {
+.button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,10 +6,17 @@
   cursor: pointer;
   font-family: sans-serif;
   font-weight: 600;
-  padding: 0.5rem 0;
+  padding: 0.2rem 0;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   transition: all linear 200ms;
+}
+
+.control-buttons {
+  width: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .disabled {
@@ -28,4 +28,8 @@
 
 .control:hover {
   background-color: rgb(217, 217, 217);
+}
+
+.remove {
+  width: 4.5rem;
 }

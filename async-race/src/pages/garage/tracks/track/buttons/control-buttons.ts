@@ -10,18 +10,18 @@ export default class ControlButtons extends BaseElement {
   stopButton: BaseElement;
 
   constructor(car: Car) {
-    super({ className: ['control-buttons']});
+    super({ className: ['control-buttons'] });
 
     this.car = car;
 
     this.startButton = new BaseElement({
       tag: 'span',
-      className: ['control', 'start-button'],
+      className: ['control', 'start-button', 'button'],
       content: 'Start',
     });
     this.stopButton = new BaseElement({
       tag: 'span',
-      className: ['control', 'stop-button'],
+      className: ['control', 'disabled', 'stop-button', 'button'],
       content: 'Stop',
     });
 
@@ -32,11 +32,13 @@ export default class ControlButtons extends BaseElement {
 
   start = () => {
     this.startButton.addClass('disabled');
+    this.stopButton.removeClass('disabled');
     this.car.drive();
   };
 
-  stop = () => {
-    this.car.stop();
+  stop = async () => {
+    this.stopButton.addClass('disabled');
+    await this.car.stop();
     this.startButton.removeClass('disabled');
   };
 

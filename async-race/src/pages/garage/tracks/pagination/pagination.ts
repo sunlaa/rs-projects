@@ -1,5 +1,6 @@
 import BaseElement from '../../../../utils/components/base-element';
 import { CarsData } from '../../../../utils/types/types';
+import CarLogic from '../track/car/car-logic';
 import Tracks from '../tracks';
 import PageCounter from './page-counter';
 import PageTurns from './page-turns';
@@ -33,8 +34,10 @@ export default class Pagination extends BaseElement {
     this.render(0);
   }
 
-  getPagesCount() {
-    return Math.floor(this.carsData.length / 7);
+  async getPagesCount() {
+    const data = await CarLogic.getAllCars();
+    if (data) this.carsData = data;
+    return Math.ceil(this.carsData.length / 7);
   }
 
   render(pageNum: number) {
@@ -44,18 +47,20 @@ export default class Pagination extends BaseElement {
     this.pageCounter.setPage(`Page №${this.currentPage + 1}`);
   }
 
-  next = () => {
+  next = async () => {
     this.currentPage += 1;
-    if (this.currentPage > this.getPagesCount()) {
+    const pagesCount = await this.getPagesCount();
+    if (this.currentPage > pagesCount - 1) {
       this.currentPage = 0;
     }
     this.render(this.currentPage);
   };
 
-  prev = () => {
+  prev = async () => {
     this.currentPage -= 1;
+    const pagesCount = await this.getPagesCount();
     if (this.currentPage < 0) {
-      this.currentPage = this.getPagesCount();
+      this.currentPage = pagesCount - 1;
     }
     this.render(this.currentPage);
   };
