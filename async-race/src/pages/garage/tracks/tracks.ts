@@ -1,19 +1,18 @@
-// import View from '../../../utils/components/base-view';
-// import { CarsData } from '../../../utils/types/types';
+import View from '../../../utils/components/base-view';
+import { CarsData } from '../../../utils/types/types';
+import Car from './track/car/car-view';
+import Track from './track/track';
 
-// export default class Tracks extends View {
-//   cars: CarsData;
+export default class Tracks extends View {
+  constructor() {
+    super({ tag: 'div' });
+  }
 
-//   constructor(cars: CarsData) {
-//     super({ tag: 'div' });
-
-//     this.cars = cars;
-//   }
-
-//   createTrack() {
-//     this.cars.forEach((car) => {
-//       // const track = new Track(car.color, car.name, car.id)
-//       // this.append(track)
-//     });
-//   }
-// }
+  updateCars(carsData: CarsData) {
+    this.view.getElement().innerHTML = '';
+    carsData.forEach((carData) => {
+      const track = new Track(new Car(carData));
+      this.view.append(track);
+    });
+  }
+}

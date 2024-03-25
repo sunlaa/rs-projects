@@ -10,7 +10,7 @@ export default class ControlButtons extends BaseElement {
   stopButton: BaseElement;
 
   constructor(car: Car) {
-    super({ className: ['control-buttons'] });
+    super({ className: ['control-buttons']});
 
     this.car = car;
 

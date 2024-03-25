@@ -1,9 +1,12 @@
-import ControlButtons from './pages/garage/tracks/track/buttons/control-buttons';
-import Car from './pages/garage/tracks/track/car/car-view';
+import Garage from './pages/garage/garage-view';
+import CarLogic from './pages/garage/tracks/track/car/car-logic';
 
-const car = new Car({ name: 'Ford', color: '#ef3c40', id: 4 });
-const buttons = new ControlButtons(car);
+async function render() {
+  const data = await CarLogic.getAllCars();
+  if (data) {
+    const garage = new Garage(data);
+    document.body.append(garage.view.getElement());
+  }
+}
 
-document.body.append(buttons.getElement());
-
-document.body.append(car.getElement());
+render();

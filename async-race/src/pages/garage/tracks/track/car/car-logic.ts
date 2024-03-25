@@ -1,6 +1,16 @@
-import { CarData, EngineData } from '../../../../../utils/types/types';
+import { CarData, CarsData, EngineData } from '../../../../../utils/types/types';
 
 export default class CarLogic {
+  static async getAllCars(): Promise<CarsData | null> {
+    try {
+      const response = await fetch(`http://127.0.0.1:3000/garage`);
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      return null;
+    }
+  }
+
   static async getCar(id: number): Promise<CarData | null> {
     try {
       const response = await fetch(`http://127.0.0.1:3000/garage?id=${id}`);

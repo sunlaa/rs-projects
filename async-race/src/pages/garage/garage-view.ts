@@ -1,8 +1,16 @@
-// import View from '../../utils/components/base-view';
-// import { Cars } from '../../utils/types/types';
+import View from '../../utils/components/base-view';
+import { CarsData } from '../../utils/types/types';
+import PageCounter from '../pagination/page-counter';
+import Pagination from '../pagination/pagination';
+import Tracks from './tracks/tracks';
 
-// export default class Garage extends View {
-//   constructor(cars: Cars) {
-//     super({ className: ['garage'] });
-//   }
-// }
+export default class Garage extends View {
+  constructor(cars: CarsData) {
+    super({ className: ['garage'] });
+
+    const pageCounter = new PageCounter();
+    const page = new Pagination(cars, new Tracks(), pageCounter);
+
+    this.view.appendChildren(pageCounter, page);
+  }
+}
