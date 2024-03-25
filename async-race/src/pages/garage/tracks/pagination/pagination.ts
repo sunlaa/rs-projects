@@ -2,6 +2,7 @@ import BaseElement from '../../../../utils/components/base-element';
 import { CarsData } from '../../../../utils/types/types';
 import Tracks from '../tracks';
 import PageCounter from './page-counter';
+import PageTurns from './page-turns';
 
 export default class Pagination extends BaseElement {
   carsData: CarsData;
@@ -9,6 +10,8 @@ export default class Pagination extends BaseElement {
   tracks: Tracks;
 
   pageCounter: PageCounter;
+
+  pageTurns: PageTurns;
 
   currentPage: number = 0;
 
@@ -19,18 +22,14 @@ export default class Pagination extends BaseElement {
     this.tracks = tracks;
     this.pageCounter = pageCounter;
 
-    const prev = new BaseElement({
-      content: 'prev',
-      styles: { userSelect: 'none' },
-    });
-    const next = new BaseElement({
-      content: 'next',
-      styles: { userSelect: 'none' },
-    });
+    this.pageTurns = new PageTurns();
+    const { prev } = this.pageTurns;
+    const { next } = this.pageTurns;
+
     prev.addListener('click', this.prev);
     next.addListener('click', this.next);
 
-    this.appendChildren(prev, next, tracks.getElementView());
+    this.appendChildren(tracks.getElementView());
     this.render(0);
   }
 
@@ -42,7 +41,7 @@ export default class Pagination extends BaseElement {
     const startIndex = pageNum * 7;
     const endIndex = startIndex + 7;
     this.tracks.updateCars(this.carsData.slice(startIndex, endIndex));
-    this.pageCounter.setPage(`${this.currentPage + 1}`);
+    this.pageCounter.setPage(`Page №${this.currentPage + 1}`);
   }
 
   next = () => {

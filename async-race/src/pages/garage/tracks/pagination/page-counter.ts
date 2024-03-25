@@ -3,7 +3,7 @@ import BaseElement from '../../../../utils/components/base-element';
 export default class PageCounter extends BaseElement {
   constructor() {
     super({ className: ['page-counter'] });
-    this.setPage('1');
+    this.setPage('Page №1');
   }
 
   setPage(x: string) {

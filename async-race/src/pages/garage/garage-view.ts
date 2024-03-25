@@ -10,7 +10,8 @@ export default class Garage extends View {
 
     const pageCounter = new PageCounter();
     const page = new Pagination(cars, new Tracks(), pageCounter);
+    const pageTurn = page.pageTurns;
 
-    this.view.appendChildren(pageCounter, page);
+    this.view.appendChildren(pageCounter, page, pageTurn);
   }
 }

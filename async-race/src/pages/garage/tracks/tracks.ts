@@ -1,3 +1,4 @@
+import './tracks.css';
 import View from '../../../utils/components/base-view';
 import { CarsData } from '../../../utils/types/types';
 import Car from './track/car/car-view';
