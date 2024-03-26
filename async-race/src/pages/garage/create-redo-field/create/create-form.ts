@@ -3,7 +3,7 @@ import Form from '../form/form';
 
 export default class CreateForm extends Form {
   constructor() {
-    super();
+    super({ className: ['create-form', 'form'] });
     this.addListener('submit', this.createCar);
   }
 

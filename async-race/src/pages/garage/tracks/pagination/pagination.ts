@@ -40,6 +40,7 @@ export default class Pagination extends BaseElement {
   }
 
   render(pageNum: number) {
+    // Fix when all cars are removed!!
     this.currentPage = pageNum;
     const startIndex = pageNum * 7;
     const endIndex = startIndex + 7;

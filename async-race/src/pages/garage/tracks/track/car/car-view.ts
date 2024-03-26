@@ -52,16 +52,20 @@ export default class Car extends BaseElement {
     }
   }
 
-  changeColor(color: string) {
-    this.setColor(color);
-    this.color = color;
-    CarLogic.updateCar(this.id, this.name, color);
-  }
+  // changeColor(color: string) {
+  //   this.setColor(color);
+  //   this.color = color;
+  //   CarLogic.updateCar(this.id, this.name, color);
+  // }
 
-  changeName(name: string) {
-    this.name = name;
-    this.carName.updateName(this.name);
-    CarLogic.updateCar(this.id, name, this.color);
+  // changeName(name: string) {
+  //   this.name = name;
+  //   this.carName.updateName(this.name);
+  //   CarLogic.updateCar(this.id, name, this.color);
+  // }
+  static async updateCar(id: number, name: string, color: string) {
+    await CarLogic.updateCar(id, name, color);
+    Car.updateTracksPage();
   }
 
   static async createCar(name: string, color: string) {

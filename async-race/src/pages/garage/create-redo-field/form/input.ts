@@ -4,4 +4,12 @@ export default class Input extends BaseElement<HTMLInputElement> {
   constructor(type: string, name?: string) {
     super({ tag: 'input', type, name });
   }
+
+  disable() {
+    this.element.disabled = true;
+  }
+
+  enable() {
+    this.element.disabled = false;
+  }
 }
