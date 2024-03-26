@@ -1,5 +1,4 @@
 import './tracks.css';
-import { CarsData } from '../../../utils/types/types';
 import Car from './track/car/car-view';
 import Track from './track/track';
 import Pagination from './pagination/pagination';
@@ -10,6 +9,8 @@ export default class Tracks extends BaseElement {
   pagination: Pagination;
 
   pageTurns: PageTurns;
+
+  cars: Car[] = [];
 
   constructor(pagination: Pagination) {
     super({ tag: 'div', className: ['tracks'] });
@@ -26,15 +27,21 @@ export default class Tracks extends BaseElement {
 
     const index = this.pagination.render(pageNum);
 
-    const carsData: CarsData = this.pagination.carsData.slice(
+    const currentCarsData = this.pagination.carsData.slice(
       index.start,
       index.end
     );
 
-    carsData.forEach((carData) => {
-      const track = new Track(new Car(carData));
+    this.cars = [];
+
+    currentCarsData.forEach((carData) => {
+      const car = new Car(carData);
+      this.cars.push(car);
+      const track = new Track(car);
       this.append(track);
     });
+
+    this.updateRaceData();
   }
 
   private prev = () => {
@@ -54,5 +61,16 @@ export default class Tracks extends BaseElement {
 
     prev.addListener('click', this.prev);
     next.addListener('click', this.next);
+  }
+
+  updateRaceData() {
+    const raseButton = document.querySelector('.race-buttons');
+    if (raseButton) {
+      raseButton.dispatchEvent(
+        new CustomEvent('update-race-data', {
+          detail: { cars: this.cars },
+        })
+      );
+    }
   }
 }

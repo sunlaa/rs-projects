@@ -5,6 +5,8 @@ import CarLogic from './track/car/car-logic';
 import Tracks from './tracks';
 
 export default class TracksPage extends BaseElement {
+  page: Pagination = new Pagination([]);
+
   constructor() {
     super({ className: ['tracks-page'] });
 
@@ -22,13 +24,14 @@ export default class TracksPage extends BaseElement {
 
     const carsData = await CarLogic.getAllCars();
 
-    const page = new Pagination(carsData);
-    const tracks = new Tracks(page);
-    const totalCounter = new TotalCount(page.carsData.length);
-    const { pageCounter } = page;
+    this.page = new Pagination(carsData);
+    const tracks = new Tracks(this.page);
+    const totalCounter = new TotalCount(this.page.carsData.length);
+    const { pageCounter } = this.page;
     const pageTurn = tracks.pageTurns;
 
     tracks.renderCars(pageNum);
+    tracks.updateRaceData();
 
     this.appendChildren(totalCounter, pageCounter, tracks, pageTurn);
   };

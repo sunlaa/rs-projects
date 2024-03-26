@@ -52,17 +52,6 @@ export default class Car extends BaseElement {
     }
   }
 
-  // changeColor(color: string) {
-  //   this.setColor(color);
-  //   this.color = color;
-  //   CarLogic.updateCar(this.id, this.name, color);
-  // }
-
-  // changeName(name: string) {
-  //   this.name = name;
-  //   this.carName.updateName(this.name);
-  //   CarLogic.updateCar(this.id, name, this.color);
-  // }
   static async updateCar(id: number, name: string, color: string) {
     await CarLogic.updateCar(id, name, color);
     Car.updateTracksPage();
@@ -78,11 +67,20 @@ export default class Car extends BaseElement {
     Car.updateTracksPage();
   }
 
-  drive = async () => {
+  getDuration = async () => {
     const data = await CarLogic.startEngine(this.id);
     if (data) {
       this.duration = data.distance / data.velocity;
     }
+    return data;
+  };
+
+  // isFinished = async () => {
+
+  // }
+
+  drive = async () => {
+    await this.getDuration();
 
     this.startAnimation(this.duration);
     const isDrived = await CarLogic.drive(this.id);
@@ -111,13 +109,13 @@ export default class Car extends BaseElement {
     }
   };
 
-  private startAnimation = (duration: number) => {
+  startAnimation = (duration: number) => {
     this.duration = duration;
     this.startTime = NaN;
     this.requestId = requestAnimationFrame(this.moveCar);
   };
 
-  private stopAnimation = () => {
+  stopAnimation = () => {
     cancelAnimationFrame(this.requestId);
   };
 
