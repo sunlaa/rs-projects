@@ -17,7 +17,11 @@ export default class SelectButton extends BaseElement {
       editForm.dispatchEvent(
         new CustomEvent('edit-car', {
           bubbles: true,
-          detail: { id: this.car.id },
+          detail: {
+            id: this.car.id,
+            name: this.car.name,
+            color: this.car.color,
+          },
         })
       );
     }

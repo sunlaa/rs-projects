@@ -11,6 +11,7 @@ export default class CreateForm extends Form {
     e.preventDefault();
     const data = this.getFormData();
     if (data) {
+      if (!this.hasName()) return; // Shoow hint
       await Car.createCar(`${data.name}`, `${data.color}`);
     }
   };

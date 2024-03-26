@@ -1,3 +1,4 @@
+import './form.css';
 import BaseElement from '../../../../utils/components/base-element';
 import { ForRedo, ParamsOmitTag } from '../../../../utils/types/types';
 import Input from './input';
@@ -9,6 +10,8 @@ export default class Form extends BaseElement<HTMLFormElement> {
 
   submit: Input;
 
+  hint: BaseElement;
+
   data: ForRedo = {};
 
   constructor(params?: ParamsOmitTag) {
@@ -17,7 +20,12 @@ export default class Form extends BaseElement<HTMLFormElement> {
     this.color = new Input('color', 'car-color');
     this.text = new Input('text', 'car-name');
     this.submit = new Input('submit');
-    this.appendChildren(this.text, this.color, this.submit);
+
+    this.hint = new BaseElement({
+      className: ['input-hint'],
+      content: 'Please enter a name.',
+    });
+    this.appendChildren(this.text, this.color, this.submit, this.hint);
   }
 
   getFormData(): ForRedo {
@@ -25,6 +33,13 @@ export default class Form extends BaseElement<HTMLFormElement> {
     this.data.color = `${formData.get('car-color')}`;
     this.data.name = `${formData.get('car-name')}`;
     return this.data;
+  }
+
+  hasName() {
+    if (this.data.name === '') {
+      return false;
+    }
+    return true;
   }
 
   off() {
