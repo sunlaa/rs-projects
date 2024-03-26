@@ -23,3 +23,5 @@ export type EngineData = {
 };
 
 export type ForRedo = { name?: string; color?: string };
+
+export type CarsOnPageData = { start: number; end: number };

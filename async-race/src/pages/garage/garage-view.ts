@@ -1,11 +1,11 @@
-import View from '../../utils/components/base-view';
+import BaseElement from '../../utils/components/base-element';
 import CreateForm from './create-redo-field/create/create-form';
 import EditForm from './create-redo-field/edit/edit-form';
 import TracksPage from './tracks/tracks-page';
 
-export default class Garage extends View {
+export default class Garage extends BaseElement {
   constructor() {
-    super({ className: ['garage'] });
+    super({ tag: 'section', className: ['garage'] });
 
     const create = new CreateForm();
     const edit = new EditForm();
@@ -13,6 +13,6 @@ export default class Garage extends View {
     const tracksPage = new TracksPage();
     tracksPage.drawTracks(0);
 
-    this.view.appendChildren(create, edit, tracksPage);
+    this.appendChildren(create, edit, tracksPage);
   }
 }

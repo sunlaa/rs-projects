@@ -12,8 +12,4 @@ export default class PageCounter extends BaseElement {
     this.page = +x[6] - 1;
     this.setContent(x);
   }
-
-  // getPage() {
-  //   return this.page - 1;
-  // }
 }

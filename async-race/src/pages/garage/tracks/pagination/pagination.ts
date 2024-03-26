@@ -1,68 +1,44 @@
-import BaseElement from '../../../../utils/components/base-element';
-import { CarsData } from '../../../../utils/types/types';
-import CarLogic from '../track/car/car-logic';
-import Tracks from '../tracks';
+import { CarsData, CarsOnPageData } from '../../../../utils/types/types';
 import PageCounter from './page-counter';
-import PageTurns from './page-turns';
 
-export default class Pagination extends BaseElement {
+export default class Pagination {
   carsData: CarsData;
-
-  tracks: Tracks;
 
   pageCounter: PageCounter;
 
-  pageTurns: PageTurns;
-
   currentPage: number = 0;
 
-  constructor(carsData: CarsData, tracks: Tracks) {
-    super({ className: ['pagination'] });
-
+  constructor(carsData: CarsData) {
     this.carsData = carsData;
-    this.tracks = tracks;
     this.pageCounter = new PageCounter();
-
-    this.pageTurns = new PageTurns();
-    const { prev } = this.pageTurns;
-    const { next } = this.pageTurns;
-
-    prev.addListener('click', this.prev);
-    next.addListener('click', this.next);
-
-    this.appendChildren(tracks.getElementView());
   }
 
-  async getPagesCount() {
-    const data = await CarLogic.getAllCars();
-    if (data) this.carsData = data;
+  getPagesCount() {
     return Math.ceil(this.carsData.length / 7);
   }
 
-  render(pageNum: number) {
-    // Fix when all cars are removed!!
+  render(pageNum: number): CarsOnPageData {
     this.currentPage = pageNum;
     const startIndex = pageNum * 7;
     const endIndex = startIndex + 7;
-    this.tracks.updateCars(this.carsData.slice(startIndex, endIndex));
     this.pageCounter.setPage(`Page №${this.currentPage + 1}`);
+    return { start: startIndex, end: endIndex };
   }
 
-  next = async () => {
+  next() {
     this.currentPage += 1;
-    const pagesCount = await this.getPagesCount();
-    if (this.currentPage > pagesCount - 1) {
+    const pagesCount = this.getPagesCount();
+    if (this.currentPage > pagesCount - 1 || this.carsData.length === 0) {
       this.currentPage = 0;
     }
-    this.render(this.currentPage);
-  };
+  }
 
-  prev = async () => {
+  prev() {
     this.currentPage -= 1;
-    const pagesCount = await this.getPagesCount();
+    const pagesCount = this.getPagesCount();
     if (this.currentPage < 0) {
       this.currentPage = pagesCount - 1;
     }
-    this.render(this.currentPage);
-  };
+    if (this.carsData.length === 0) this.currentPage = 0;
+  }
 }

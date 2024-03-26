@@ -21,12 +21,13 @@ export default class TracksPage extends BaseElement {
 
     const carsData = await CarLogic.getAllCars();
 
-    const page = new Pagination(carsData, new Tracks());
+    const page = new Pagination(carsData);
+    const tracks = new Tracks(page);
     const { pageCounter } = page;
-    const pageTurn = page.pageTurns;
+    const pageTurn = tracks.pageTurns;
 
-    page.render(pageNum);
+    tracks.renderCars(pageNum);
 
-    this.appendChildren(pageCounter, page, pageTurn);
+    this.appendChildren(pageCounter, tracks, pageTurn);
   };
 }
