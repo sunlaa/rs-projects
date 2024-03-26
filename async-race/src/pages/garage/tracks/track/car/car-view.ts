@@ -64,13 +64,14 @@ export default class Car extends BaseElement {
     CarLogic.updateCar(this.id, name, this.color);
   }
 
+  static async createCar(name: string, color: string) {
+    await CarLogic.createCar(name, color);
+    Car.updateTracksPage();
+  }
+
   removeCar() {
     CarLogic.deleteCar(this.id);
-
-    const track = this.element.parentElement;
-    if (track) {
-      track.remove();
-    }
+    Car.updateTracksPage();
   }
 
   drive = async () => {
@@ -115,4 +116,21 @@ export default class Car extends BaseElement {
   private stopAnimation = () => {
     cancelAnimationFrame(this.requestId);
   };
+
+  static updateTracksPage() {
+    const pageCounter = document.querySelector('.page-counter');
+    if (pageCounter) {
+      const page = pageCounter.textContent ? +pageCounter.textContent[6] : 0;
+
+      const tracksPage = document.querySelector('.tracks-page');
+      if (tracksPage) {
+        tracksPage.dispatchEvent(
+          new CustomEvent('change-server-data', {
+            bubbles: true,
+            detail: { pageNum: page - 1 },
+          })
+        );
+      }
+    }
+  }
 }

@@ -9,9 +9,8 @@ export default class Garage extends View {
     const tracksPage = new TracksPage();
     tracksPage.drawTracks(0);
 
-    const create = new CreateForm(tracksPage.pageCounter);
+    const create = new CreateForm();
 
     this.view.appendChildren(create, tracksPage);
-    // tracksPage.addUpdateListener();
   }
 }
