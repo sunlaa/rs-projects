@@ -1,3 +1,4 @@
-import render from './app/app';
+import App from './app/app';
 
-render();
+const app = new App();
+app.run();
