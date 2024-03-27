@@ -1,21 +1,32 @@
 import BaseElement from '../../../utils/components/base-element';
+import CarLogic from '../tracks/track/car/car-logic';
+import Car from '../tracks/track/car/car-view';
+import { getColorArray, getNamesArray } from './random-source';
 
 export default class GenerationButton extends BaseElement {
+  requests: Promise<void>[] = [];
+
   constructor() {
-    super({ className: ['generation-button'] });
+    super({
+      className: ['generation-button', 'button'],
+      content: 'Generate cars',
+    });
+
+    this.addListener('click', this.generation);
   }
 
-  static getRandomColor() {
-    const red = `${Math.floor(Math.random() * 256)}`;
-    const green = `${Math.floor(Math.random() * 256)}`;
-    const blue = `${Math.floor(Math.random() * 256)}`;
-
-    const normalize = (val: string) => (val.length < 2 ? `0${val}` : val);
-
-    return `#${normalize(red)}${normalize(green)}${normalize(blue)}`;
+  makeRequests() {
+    const colors = getColorArray();
+    const names = getNamesArray();
+    for (let i = 0; i < 100; i += 1) {
+      this.requests.push(CarLogic.createCar(names[i], colors[i]));
+    }
   }
 
-  // generation = async () => {
+  generation = async () => {
+    this.makeRequests();
+    await Promise.all(this.requests);
 
-  // }
+    Car.updateTracksPage();
+  };
 }

@@ -3,7 +3,7 @@ import Car from '../tracks/track/car/car-view';
 import StartRaceButton from './start-race/start-race';
 import StopRaceButton from './stop-race/stop-race';
 
-export default class RaceButton extends BaseElement {
+export default class RaceButtons extends BaseElement {
   currentCars: Car[] = [];
 
   constructor() {

@@ -21,14 +21,12 @@ export default class CarLogic {
     }
   }
 
-  static async createCar(name: string, color: string): Promise<CarData> {
-    const response = await fetch(`http://127.0.0.1:3000/garage`, {
+  static async createCar(name: string, color: string) {
+    await fetch(`http://127.0.0.1:3000/garage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, color }),
     });
-    const data: CarData = await response.json();
-    return data;
   }
 
   static async deleteCar(id: number) {

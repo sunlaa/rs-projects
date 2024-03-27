@@ -7,7 +7,7 @@
   cursor: pointer;
   padding: 0.2rem 0.5rem;
   background-color: #3b35b0;
-  color: #e1dede;
+  color: #ffffff;
   font-size: 1.1rem;
   text-shadow: 1px 1px 0 black;
   border-radius: 10px;
@@ -78,8 +78,13 @@
   background-color: #cf903f;
 }
 
-.race-buttons {
+.interact-with-cars {
   margin: 1rem 0 0 0.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.race-buttons {
   display: flex;
   gap: 0.5rem;
 }
@@ -108,6 +113,15 @@
 
 .stop-race:hover {
   background-color: #78d7e3;
+}
+
+.generation-button {
+  background-color: #c50c94;
+  border-color: #720655;
+}
+
+.generation-button:hover {
+  background-color: #d720a6;
 }
 
 .disabled {

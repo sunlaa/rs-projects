@@ -1,6 +1,7 @@
 import BaseElement from '../../utils/components/base-element';
 import CreateRedoBlock from './create-redo-field/create-redo';
-import RaceButton from './race/race-buttons';
+import GenerationButton from './generation-cars/generation-button';
+import RaceButtons from './race/race-buttons';
 import TracksPage from './tracks/tracks-page';
 
 export default class Garage extends BaseElement {
@@ -8,11 +9,17 @@ export default class Garage extends BaseElement {
     super({ tag: 'section', className: ['garage'] });
 
     const createRedoBlock = new CreateRedoBlock();
-    const raceButton = new RaceButton();
+    const interactWithCars = new BaseElement(
+      {
+        className: ['interact-with-cars'],
+      },
+      new RaceButtons(),
+      new GenerationButton()
+    );
 
     const tracksPage = new TracksPage();
     tracksPage.drawTracks(0);
 
-    this.appendChildren(createRedoBlock, raceButton, tracksPage);
+    this.appendChildren(createRedoBlock, interactWithCars, tracksPage);
   }
 }
