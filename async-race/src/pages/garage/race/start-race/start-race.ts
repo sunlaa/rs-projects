@@ -1,14 +1,15 @@
 import BaseElement from '../../../../utils/components/base-element';
 import { EngineData } from '../../../../utils/types/types';
-// import { EngineData } from '../../../../utils/types/types';
 import Car from '../../tracks/track/car/car-view';
 
 export default class StartRaceButton extends BaseElement {
   cars: Car[] = [];
 
+  winnerId: number = 0;
+
   constructor() {
     super({ className: ['start-race', 'button'], content: 'Start race' });
-    this.addListener('click', this.startCars);
+    this.addListener('click', this.startRace);
   }
 
   updateData(newCars: Car[]) {
@@ -21,34 +22,43 @@ export default class StartRaceButton extends BaseElement {
     return urls;
   }
 
-  // async getTime() {
-  //   const urls = this.makeIdArray();
-  //   const requests = urls.map((id) =>
-  //     fetch(`http://127.0.0.1:3000/engine?id=${id}&status=started`, {
-  //       method: 'PATCH',
-  //     })
-  //   );
-  //   const times: number[] = [];
+  startRace = async () => {
+    await this.startEngines().then((times) => this.driveAll(times));
+  };
 
-  //   const responses = await Promise.all(requests);
-  //   const promises: Promise<EngineData>[] = responses.map((elem) =>
-  //     elem.json()
-  //   );
+  driveAll = async (times: number[]) => {
+    const urls = this.makeIdArray();
+    const requests = urls.map((id, i) =>
+      fetch(`http://127.0.0.1:3000/engine?id=${id}&status=drive`, {
+        method: 'PATCH',
+      })
+        .then((response) => {
+          if (!response.ok) {
+            this.cars[i].stopAnimation();
+          }
+        })
+        .then(() => id)
+    );
 
-  //   await Promise.all(promises).then((engineData: EngineData[]) =>
-  //     engineData.forEach((data) => times.push(data.distance / data.velocity))
-  //   );
+    this.cars.forEach((car, i) => car.startAnimation(times[i]));
 
-  //   return times;
-  // }
+    this.winnerId = await Promise.any(requests);
+  };
 
-  // async startAllCars() {
-
-  // }
-
-  startCars = async () => {
+  startEngines = async (): Promise<number[]> => {
     const promises: Promise<EngineData | null>[] = [];
+
     this.cars.forEach((elem) => promises.push(elem.getDuration()));
-    await Promise.all(promises).then((elem) => elem.forEach((el) => el));
+    const times = await Promise.all(promises);
+
+    const number: number[] = [];
+
+    times.filter((elem) => elem !== null);
+    times.forEach((elem) => {
+      if (elem?.distance && elem?.velocity) {
+        number.push(elem.distance / elem.velocity);
+      }
+    });
+    return number;
   };
 }

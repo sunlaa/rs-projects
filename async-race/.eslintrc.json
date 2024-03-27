@@ -14,5 +14,10 @@
   "rules": {
     "prettier/prettier": ["error"]
   },
-  "ignorePatterns": ["webpack.config.js", "dist", "node_modules"]
+  "ignorePatterns": [
+    "webpack.config.js",
+    "tsconfig.json",
+    "dist",
+    "node_modules"
+  ]
 }
