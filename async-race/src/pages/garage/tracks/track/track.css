@@ -1,6 +1,6 @@
 .track {
   position: relative;
-  border-bottom: dashed 0.8rem rgb(255, 255, 255);
+  border-bottom: dashed 0.8rem #ffffff;
   background-color: #bbb7b7;
   overflow: hidden;
   height: 110px;

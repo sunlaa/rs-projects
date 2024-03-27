@@ -3,16 +3,18 @@ import Garage from '../pages/garage/garage-view';
 import Router from '../utils/servises/router';
 import BaseElement from '../utils/components/base-element';
 import Winners from '../pages/winners/winners';
+import Navigation from '../navigation/navigate-header';
 
 export default class App {
-  container: HTMLElement;
+  main: BaseElement;
 
   router: Router;
 
   constructor() {
-    this.container = document.body;
-    const routes = this.createRoutes();
+    this.main = new BaseElement({ tag: 'main', className: ['main'] });
+    document.body.append(new Navigation().getElement(), this.main.getElement());
 
+    const routes = this.createRoutes();
     this.router = new Router(routes);
   }
 
@@ -38,11 +40,7 @@ export default class App {
   }
 
   private setContent(content: BaseElement) {
-    const main = this.container.lastElementChild;
-    if (main) {
-      main.remove();
-      this.container.append(content.getElement());
-    }
-    this.container.append(content.getElement());
+    this.main.getElement().innerHTML = '';
+    this.main.append(content);
   }
 }

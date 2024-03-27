@@ -48,11 +48,11 @@
 
 .form input[type='submit'] {
   cursor: pointer;
-  padding: 0.2rem 0.7rem;
+  width: 5rem;
   font-family: 'Racing Sans One', sans-serif;
-  background-color: #b98137;
-  border: solid 1px #8e642d;
-  border-bottom: 6px #8e642d solid;
+  background-color: #752ed1;
+  border: solid 1px #3b146e;
+  border-bottom: 6px #3b146e solid;
   color: white;
   text-shadow: 1px 1px 0 black;
   border-radius: 5px;

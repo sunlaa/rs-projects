@@ -5,7 +5,7 @@
 }
 
 .total-car-counter {
-  margin: 2rem  0 0 0.5rem;;
+  margin: 2rem 0 0 0.5rem;
   font-size: 2rem;
   align-self: flex-start;
   color: #f9f8f8;
@@ -21,7 +21,7 @@
 }
 
 .tracks {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
-
-

@@ -124,6 +124,18 @@
   background-color: #d720a6;
 }
 
+.navigation-button {
+  font-size: 1.2rem;
+  text-decoration: none;
+  background-color: #b98137;
+  border-color: #8e642d;
+  border-bottom: 6px #8e642d solid;
+}
+
+.navigation-button:hover {
+  background-color: #cf903f;
+}
+
 .disabled {
   cursor: default;
   pointer-events: none;

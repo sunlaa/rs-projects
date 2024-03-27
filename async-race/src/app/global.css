@@ -10,3 +10,9 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.navigation {
+  margin: 0.5rem 0 1rem 1rem;
+  display: flex;
+  gap: 1rem;
+}
