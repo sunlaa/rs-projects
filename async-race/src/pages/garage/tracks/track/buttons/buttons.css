@@ -9,6 +9,7 @@
   background-color: #3b35b0;
   color: #e1dede;
   font-size: 1.1rem;
+  text-shadow: 1px 1px 0 black;
   border-radius: 10px;
   border: solid 1px #110286;
   border-bottom: 4px solid #5953da;
@@ -31,6 +32,7 @@
   border-radius: 20px;
   font-size: 1.1rem;
   padding: 0.25rem 0.5rem;
+  text-shadow: none;
 }
 
 .start-button {
@@ -55,10 +57,64 @@
   color: #000000;
 }
 
+.page-turns {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.page-turn {
+  font-size: 1.5rem;
+  text-shadow: 0 1px 1px black;
+  padding: 0.3rem 1.5rem;
+  background-color: #b98137;
+  border-color: #8e642d;
+  border-bottom: 6px #8e642d solid;
+  border-radius: 10px;
+  color: white;
+}
+
+.page-turn:hover {
+  background-color: #cf903f;
+}
+
+.race-buttons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.start-race,
+.stop-race {
+  font-size: 1.3rem;
+}
+
+.start-race {
+  background-color: #e90909;
+  color: white;
+  border-color: #810909;
+  padding: 0.2rem 1rem;
+}
+
+.start-race:hover {
+  background-color: #eb3f3f;
+}
+
+.stop-race {
+  background-color: #6ccad6;
+  color: white;
+  border-color: #528890;
+}
+
+.stop-race:hover {
+  background-color: #78d7e3;
+}
+
 .disabled {
   cursor: default;
   pointer-events: none;
   background-color: #bbb9b9;
   color: #525151;
   border-color: grey;
+  text-shadow: none;
 }

@@ -1,3 +1,4 @@
+import './tracks-page.css';
 import BaseElement from '../../../utils/components/base-element';
 import Pagination from './pagination/pagination';
 import TotalCount from './pagination/total-count';

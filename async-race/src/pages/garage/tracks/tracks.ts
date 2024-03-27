@@ -1,4 +1,3 @@
-import './tracks.css';
 import Car from './track/car/car-view';
 import Track from './track/track';
 import Pagination from './pagination/pagination';

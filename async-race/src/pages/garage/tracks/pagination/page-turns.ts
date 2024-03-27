@@ -9,12 +9,12 @@ export default class PageTurns extends BaseElement {
     super({ className: ['page-turns'] });
 
     this.prev = new BaseElement({
-      className: ['button', 'prev'],
+      className: ['page-turn', 'button', 'prev'],
       content: 'Prev',
     });
 
     this.next = new BaseElement({
-      className: ['button', 'next'],
+      className: ['page-turn', 'button', 'next'],
       content: 'Next',
     });
 

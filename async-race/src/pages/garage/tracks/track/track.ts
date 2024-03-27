@@ -7,12 +7,9 @@ import SelectButton from './buttons/select-button';
 
 export default class Track extends BaseElement {
   constructor(car: Car) {
-    super(
-      {
-        className: ['track'],
-      },
-      car
-    );
+    super({
+      className: ['track'],
+    });
 
     const redoButtons = new BaseElement(
       { className: ['manipulation'] },
@@ -26,6 +23,6 @@ export default class Track extends BaseElement {
       car.carName
     );
 
-    this.appendChildren(interactionBlock, new ControlButtons(car));
+    this.appendChildren(interactionBlock, new ControlButtons(car), car);
   }
 }

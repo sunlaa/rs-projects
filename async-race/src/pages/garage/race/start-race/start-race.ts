@@ -5,26 +5,44 @@ import Car from '../../tracks/track/car/car-view';
 export default class StartRaceButton extends BaseElement {
   cars: Car[] = [];
 
+  stopButtons: HTMLElement[] = [];
+
+  startButtons: HTMLElement[] = [];
+
   winnerId: number = 0;
 
   constructor() {
-    super({ className: ['start-race', 'button'], content: 'Start race' });
+    super({ className: ['start-race', 'button'], content: 'Go!' });
     this.addListener('click', this.startRace);
   }
 
   updateData(newCars: Car[]) {
     this.cars = newCars;
+    this.cars.forEach((car) => {
+      const contolButtons = car.getElement().previousElementSibling;
+      const startButton = contolButtons?.firstElementChild as HTMLElement;
+      const stopButton = contolButtons?.lastChild as HTMLElement;
+      this.startButtons.push(startButton);
+      this.stopButtons.push(stopButton);
+    });
   }
+
+  startRace = async () => {
+    const stopRace = this.element.nextElementSibling;
+    if (stopRace && stopRace instanceof HTMLElement) {
+      stopRace.classList.remove('disabled');
+    }
+    this.stopButtons.forEach((elem) => elem.classList.remove('disabled'));
+    this.addClass('disabled');
+    this.startButtons.forEach((elem) => elem.classList.add('disabled'));
+    await this.startEngines().then((times) => this.driveAll(times));
+  };
 
   makeIdArray() {
     const urls: number[] = [];
     this.cars.forEach((elem) => urls.push(elem.id));
     return urls;
   }
-
-  startRace = async () => {
-    await this.startEngines().then((times) => this.driveAll(times));
-  };
 
   driveAll = async (times: number[]) => {
     const urls = this.makeIdArray();
