@@ -17,12 +17,12 @@ export default class ControlButtons extends BaseElement {
     this.startButton = new BaseElement({
       tag: 'span',
       className: ['control', 'start-button', 'button'],
-      content: 'Start',
+      content: 'A',
     });
     this.stopButton = new BaseElement({
       tag: 'span',
       className: ['control', 'disabled', 'stop-button', 'button'],
-      content: 'Stop',
+      content: 'B',
     });
 
     this.addHandler();

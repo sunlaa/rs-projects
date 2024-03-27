@@ -75,10 +75,6 @@ export default class Car extends BaseElement {
     return data;
   };
 
-  // isFinished = async () => {
-
-  // }
-
   drive = async () => {
     await this.getDuration();
 
@@ -92,17 +88,17 @@ export default class Car extends BaseElement {
   stop = async () => {
     await CarLogic.stopEngine(this.id);
     this.stopAnimation();
-    this.element.style.left = '5rem';
+    this.element.style.left = '25px';
   };
 
   private moveCar = (timestamp: number) => {
-    const distance = window.innerWidth - this.element.offsetWidth - 130;
+    const distance = window.innerWidth - this.element.offsetWidth - 130; // что за 130
     if (Number.isNaN(this.startTime)) this.startTime = timestamp;
     const progress = timestamp - this.startTime;
     const percentage = Math.min(progress / this.duration, 1);
 
     const shift = distance * percentage;
-    this.element.style.left = `${shift + 80}px`;
+    this.element.style.left = `${shift + 25}px`;
 
     if (percentage < 1) {
       this.requestId = requestAnimationFrame(this.moveCar);
@@ -122,7 +118,7 @@ export default class Car extends BaseElement {
   static updateTracksPage() {
     const pageCounter = document.querySelector('.page-counter');
     if (pageCounter) {
-      const page = pageCounter.textContent ? +pageCounter.textContent[6] : 0;
+      const page = pageCounter.textContent ? +pageCounter.textContent[5] : 0;
 
       const tracksPage = document.querySelector('.tracks-page');
       if (tracksPage) {

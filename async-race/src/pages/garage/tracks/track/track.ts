@@ -11,11 +11,21 @@ export default class Track extends BaseElement {
       {
         className: ['track'],
       },
-      car.carName,
-      car,
-      new ControlButtons(car),
+      car
+    );
+
+    const redoButtons = new BaseElement(
+      { className: ['manipulation'] },
       new RemoveButton(car),
       new SelectButton(car)
     );
+
+    const interactionBlock = new BaseElement(
+      { className: ['interaction'] },
+      redoButtons,
+      car.carName
+    );
+
+    this.appendChildren(interactionBlock, new ControlButtons(car));
   }
 }

@@ -21,7 +21,7 @@ export default class Pagination {
     this.currentPage = pageNum;
     const startIndex = pageNum * 7;
     const endIndex = startIndex + 7;
-    this.pageCounter.setPage(`Page №${this.currentPage + 1}`);
+    this.pageCounter.setPage(`Page ${this.currentPage + 1}`);
     return { start: startIndex, end: endIndex };
   }
 
