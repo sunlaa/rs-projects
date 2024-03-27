@@ -24,6 +24,8 @@ export default class SelectButton extends BaseElement {
           },
         })
       );
+
+      editForm.scrollIntoView({ behavior: 'smooth' });
     }
   };
 }
