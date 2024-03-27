@@ -1,4 +1,3 @@
-import './form.css';
 import BaseElement from '../../../../utils/components/base-element';
 import { ForRedo, ParamsOmitTag } from '../../../../utils/types/types';
 import Input from './input';
@@ -18,6 +17,7 @@ export default class Form extends BaseElement<HTMLFormElement> {
     super({ tag: 'form', ...params });
 
     this.color = new Input('color', 'car-color');
+    this.color.getElement().value = '#ffffff';
     this.text = new Input('text', 'car-name');
     this.submit = new Input('submit');
 
@@ -25,7 +25,7 @@ export default class Form extends BaseElement<HTMLFormElement> {
       className: ['input-hint'],
       content: 'Please enter a name.',
     });
-    this.appendChildren(this.text, this.color, this.submit, this.hint);
+    this.appendChildren(this.text, this.color, this.submit);
   }
 
   getFormData(): ForRedo {

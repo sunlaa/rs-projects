@@ -19,6 +19,7 @@ export default class EditForm extends Form {
       enable(id, name, color);
     });
     this.addListener('submit', this.updateCar);
+    this.submit.getElement().value = 'Confirm';
   }
 
   enable = (id: number, name: string, color: string) => {
@@ -27,6 +28,7 @@ export default class EditForm extends Form {
     this.colorName = color;
     this.on();
     this.color.getElement().value = color;
+    this.text.getElement().value = name;
   };
 
   updateCar = async (e: Event) => {

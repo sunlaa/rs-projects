@@ -79,7 +79,7 @@
 }
 
 .race-buttons {
-  margin-top: 1rem;
+  margin: 1rem 0 0 0.5rem;
   display: flex;
   gap: 0.5rem;
 }

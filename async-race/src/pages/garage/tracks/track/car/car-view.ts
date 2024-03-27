@@ -62,8 +62,8 @@ export default class Car extends BaseElement {
     Car.updateTracksPage();
   }
 
-  removeCar() {
-    CarLogic.deleteCar(this.id);
+  async removeCar() {
+    await CarLogic.deleteCar(this.id);
     Car.updateTracksPage();
   }
 
