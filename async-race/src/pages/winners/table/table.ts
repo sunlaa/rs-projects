@@ -7,7 +7,7 @@ export default class WinTable extends BaseElement<HTMLTableElement> {
   tbody: BaseElement = new BaseElement({ tag: 'tbody' });
 
   constructor() {
-    super({ tag: 'table', className: ['table'] });
+    super({ tag: 'table', className: ['win-table'] });
     this.appendChildren(new HeadRow(), this.tbody);
   }
 

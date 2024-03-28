@@ -19,7 +19,7 @@ export default class Row extends BaseElement<HTMLTableRowElement> {
       car.addClass('car-cell');
       const name = new Cell(carData.name, 'td');
       const winsCount = new Cell(wins, 'td');
-      const bestTime = new Cell(time, 'td');
+      const bestTime = new Cell(`${time} sec`, 'td');
       this.appendChildren(place, car, name, winsCount, bestTime);
     }
   }
