@@ -30,3 +30,11 @@ export type Route = {
   path: string;
   callback: () => void;
 };
+
+export type WinnerData = {
+  id: number;
+  wins: number;
+  time: number;
+};
+
+export type WinnersData = WinnerData[];

@@ -28,7 +28,7 @@
   font-size: 1.3rem;
 }
 
-.car {
+.track .car {
   z-index: 3;
   bottom: 25px;
   left: 40px;
