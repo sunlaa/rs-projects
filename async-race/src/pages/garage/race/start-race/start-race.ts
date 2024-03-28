@@ -9,7 +9,7 @@ export default class StartRaceButton extends BaseElement {
 
   startButtons: HTMLElement[] = [];
 
-  winnerId: number = 0;
+  winnerData: { id: number; time: number } = { id: 0, time: 0 };
 
   constructor() {
     super({ className: ['start-race', 'button'], content: 'Go!' });
@@ -55,12 +55,14 @@ export default class StartRaceButton extends BaseElement {
             this.cars[i].stopAnimation();
           }
         })
-        .then(() => id)
+        .then(() => {
+          return { id, time: times[i] };
+        })
     );
 
     this.cars.forEach((car, i) => car.startAnimation(times[i]));
 
-    this.winnerId = await Promise.any(requests);
+    this.winnerData = await Promise.any(requests);
   };
 
   startEngines = async (): Promise<number[]> => {

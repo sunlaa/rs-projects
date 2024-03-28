@@ -4,17 +4,11 @@ import HeadRow from './row/head-row';
 import Row from './row/row';
 
 export default class WinTable extends BaseElement<HTMLTableElement> {
-  winners: WinnersData;
+  tbody: BaseElement = new BaseElement({ tag: 'tbody' });
 
-  tbody: BaseElement;
-
-  constructor(winners: WinnersData) {
+  constructor() {
     super({ tag: 'table', className: ['table'] });
-
-    this.winners = winners;
-    this.tbody = new BaseElement({ tag: 'tbody' });
     this.appendChildren(new HeadRow(), this.tbody);
-    this.redrawTable(winners);
   }
 
   redrawTable(data: WinnersData) {
