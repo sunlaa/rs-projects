@@ -8,7 +8,7 @@ export default class TotalCounter extends BaseElement {
     this.countName = countName;
   }
 
-  updateCounter(num: number) {
+  updateCounter(num: string) {
     this.setContent(`${this.countName}: ${num}`);
   }
 }
