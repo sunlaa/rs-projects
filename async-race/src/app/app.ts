@@ -19,7 +19,7 @@ export default class App {
   }
 
   public run() {
-    this.router.navigate('winners');
+    this.router.navigate('garage');
   }
 
   createRoutes() {

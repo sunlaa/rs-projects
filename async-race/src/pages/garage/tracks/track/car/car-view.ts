@@ -1,6 +1,6 @@
 import CarElement from '../../../../../utils/components/car-element';
 import { CarData } from '../../../../../utils/types/types';
-import CarName from '../car-name/car-name';
+import CarName from './car-name';
 import CarLogic from './car-logic';
 
 export default class Car extends CarElement {
@@ -96,19 +96,9 @@ export default class Car extends CarElement {
   };
 
   static updateTracksPage() {
-    const pageCounter = document.querySelector('.page-counter');
-    if (pageCounter) {
-      const page = pageCounter.textContent ? +pageCounter.textContent[5] : 0;
-
-      const tracksPage = document.querySelector('.tracks-page');
-      if (tracksPage) {
-        tracksPage.dispatchEvent(
-          new CustomEvent('change-server-data', {
-            bubbles: true,
-            detail: { pageNum: page - 1 },
-          })
-        );
-      }
+    const tracksPage = document.querySelector('.tracks-page');
+    if (tracksPage) {
+      tracksPage.dispatchEvent(new CustomEvent('change-server-data'));
     }
   }
 }

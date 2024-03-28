@@ -1,39 +1,70 @@
 import './tracks-page.css';
 import BaseElement from '../../../utils/components/base-element';
-import Pagination from './pagination/pagination';
-import TotalCount from './pagination/total-count';
-import CarLogic from './track/car/car-logic';
 import Tracks from './tracks';
+import Pagination from '../../../utils/components/page-elements/pagination';
+import TotalCounter from '../../../utils/components/page-elements/total-counter';
+import PageCounter from '../../../utils/components/page-elements/page-counter';
+import PageTurns from '../../../utils/components/page-elements/page-turns';
+import { CarsData } from '../../../utils/types/types';
 
 export default class TracksPage extends BaseElement {
-  page: Pagination = new Pagination([]);
+  page: Pagination;
+
+  tracks: Tracks;
+
+  totalCounter: TotalCounter;
+
+  pageCounter: PageCounter;
+
+  pageTurns: PageTurns;
 
   constructor() {
     super({ className: ['tracks-page'] });
 
-    const draw = this.drawTracks.bind(this);
+    this.tracks = new Tracks();
 
-    this.addListener('change-server-data', (event) => {
-      const customEvent = event as CustomEvent;
-      const { pageNum } = customEvent.detail;
-      draw(pageNum);
-    });
+    this.page = new Pagination('garage', 7, 'Total Cars');
+    this.totalCounter = this.page.totalCounter;
+    this.pageCounter = this.page.pageCounter;
+    this.pageTurns = this.page.pageTurns;
+
+    const draw = this.updateTracks.bind(this);
+
+    this.addListener('change-server-data', draw);
+
+    this.addTurnListeners();
+
+    this.updateTracks();
+
+    this.appendChildren(
+      this.totalCounter,
+      this.pageCounter,
+      this.tracks,
+      this.pageTurns
+    );
   }
 
-  drawTracks = async (pageNum: number) => {
-    this.element.innerHTML = '';
+  updateTracks = async () => {
+    this.tracks.getElement().innerHTML = '';
 
-    const carsData = await CarLogic.getAllCars();
+    const data = (await this.page.getDataForPageDraw()) as CarsData;
+    this.totalCounter.updateCounter(this.page.totalEntities);
+    this.pageCounter.updatePage(this.page.currentPage);
+    this.tracks.renderCars(data);
+  };
 
-    this.page = new Pagination(carsData);
-    const tracks = new Tracks(this.page);
-    const totalCounter = new TotalCount(this.page.carsData.length);
-    const { pageCounter } = this.page;
-    const pageTurn = tracks.pageTurns;
+  private addTurnListeners() {
+    this.pageTurns.prev.addListener('click', this.prev);
+    this.pageTurns.next.addListener('click', this.next);
+  }
 
-    tracks.renderCars(pageNum);
-    tracks.updateRaceData();
+  private prev = () => {
+    this.page.prev();
+    this.updateTracks();
+  };
 
-    this.appendChildren(totalCounter, pageCounter, tracks, pageTurn);
+  private next = async () => {
+    await this.page.next();
+    this.updateTracks();
   };
 }

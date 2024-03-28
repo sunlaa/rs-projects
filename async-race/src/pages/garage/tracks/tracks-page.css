@@ -1,23 +1,6 @@
 .tracks-page {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.total-car-counter {
-  margin: 2rem 0 0 0.5rem;
-  font-size: 2rem;
-  align-self: flex-start;
-  color: #f9f8f8;
-  text-shadow: 1px 2px 0px black;
-}
-
-.page-counter {
-  margin: 1rem 0 0 0.5rem;
-  color: #f9f8f8;
-  text-shadow: 1px 2px 0px black;
-  font-size: 1.5rem;
-  align-self: flex-start;
 }
 
 .tracks {

@@ -18,7 +18,6 @@ export default class Garage extends BaseElement {
     );
 
     const tracksPage = new TracksPage();
-    tracksPage.drawTracks(0);
 
     this.appendChildren(createRedoBlock, interactWithCars, tracksPage);
   }
