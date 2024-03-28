@@ -2,6 +2,7 @@ import {
   CarData,
   CarsData,
   EngineData,
+  WinnerData,
 } from '../../../../../utils/types/types';
 
 export default class CarLogic {
@@ -76,5 +77,34 @@ export default class CarLogic {
     } catch (err) {
       return null;
     }
+  }
+
+  static async getWinner(id: number): Promise<WinnerData | null> {
+    try {
+      const response = await fetch(`http://127.0.0.1:3000/winners/${id}`);
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  static async updateWinner(id: number, wins: number, time: number) {
+    await fetch(`http://127.0.0.1:3000/winners/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        wins,
+        time,
+      }),
+    });
+  }
+
+  static async createWinner(id: number, wins: number, time: number) {
+    await fetch(`http://127.0.0.1:3000/winners`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, wins, time }),
+    });
   }
 }
