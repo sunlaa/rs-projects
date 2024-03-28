@@ -13,8 +13,8 @@ export default class WinTable extends BaseElement<HTMLTableElement> {
 
   redrawTable(data: WinnersData) {
     this.tbody.getElement().innerHTML = '';
-    data.forEach((elem) => {
-      this.tbody.append(new Row(elem));
+    data.forEach((elem, i) => {
+      this.tbody.append(new Row(elem, i));
     });
   }
 }

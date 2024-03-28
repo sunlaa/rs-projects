@@ -5,18 +5,16 @@ import CarLogic from '../../../garage/tracks/track/car/car-logic';
 import Cell from '../ceil/ceil';
 
 export default class Row extends BaseElement<HTMLTableRowElement> {
-  place: number = 0;
-
-  constructor(winData: WinnerData) {
+  constructor(winData: WinnerData, place: number) {
     super({ tag: 'tr' });
 
-    this.fillRow(winData);
+    this.fillRow(winData, place);
   }
 
-  async fillRow({ id, wins, time }: WinnerData) {
+  async fillRow({ id, wins, time }: WinnerData, placeNum: number) {
     const carData = await CarLogic.getCar(id);
     if (carData) {
-      const place = new Cell(this.place + 1, 'td');
+      const place = new Cell(placeNum + 1, 'td');
       const car = new Cell(new CarElement(carData.color), 'td');
       car.addClass('car-cell');
       const name = new Cell(carData.name, 'td');
@@ -24,6 +22,5 @@ export default class Row extends BaseElement<HTMLTableRowElement> {
       const bestTime = new Cell(time, 'td');
       this.appendChildren(place, car, name, winsCount, bestTime);
     }
-    this.place = 0;
   }
 }

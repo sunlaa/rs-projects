@@ -37,16 +37,16 @@ export default class Pagination {
     return data;
   }
 
-  prev = () => {
+  prev() {
     this.currentPage -= 1;
     if (this.currentPage <= 0) this.currentPage = 1;
-  };
+  }
 
-  next = async () => {
+  async next() {
     this.currentPage += 1;
     const newData = await this.getDataForPageDraw();
     if (newData.length === 0) {
       this.currentPage -= 1;
     }
-  };
+  }
 }
