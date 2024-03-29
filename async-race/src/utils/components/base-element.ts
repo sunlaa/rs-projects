@@ -43,6 +43,13 @@ export default class BaseElement<T extends HTMLElement = HTMLElement> {
     return this.element.classList;
   }
 
+  containClass(className: string): boolean {
+    if (this.element.classList.contains(className)) {
+      return true;
+    }
+    return false;
+  }
+
   getElement() {
     return this.element;
   }

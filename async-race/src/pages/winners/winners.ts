@@ -21,9 +21,10 @@ export default class Winners extends BaseElement {
   constructor() {
     super({ tag: 'section', className: ['winners'] });
 
-    this.table = new WinTable();
-
     this.page = new Pagination('winners', 10, 'Winners');
+
+    this.table = new WinTable(this.page);
+
     this.totalCounter = this.page.totalCounter;
     this.pageCounter = this.page.pageCounter;
     this.pageTurns = this.page.pageTurns;
@@ -37,6 +38,8 @@ export default class Winners extends BaseElement {
       this.table,
       this.pageTurns
     );
+
+    this.addListener('sort-table', this.updatePage);
   }
 
   private addTurnListeners() {
@@ -47,7 +50,10 @@ export default class Winners extends BaseElement {
   updatePage = async () => {
     this.table.tbody.getElement().innerHTML = '';
 
+    // check if (table.row.wins.containClass('asc' || 'desc'))
+    // this.table.headRow.getURLSotred('wins', 'ASC' | 'DESC')
     const data = (await this.page.getDataForPageDraw()) as WinnersData;
+
     this.totalCounter.updateCounter(this.page.totalEntities);
     this.pageCounter.updatePage(this.page.currentPage);
     this.table.redrawTable(data);

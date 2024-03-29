@@ -1,4 +1,5 @@
 import BaseElement from '../../../utils/components/base-element';
+import Pagination from '../../../utils/components/page-elements/pagination';
 import { WinnersData } from '../../../utils/types/types';
 import HeadRow from './row/head-row';
 import Row from './row/row';
@@ -6,15 +7,19 @@ import Row from './row/row';
 export default class WinTable extends BaseElement<HTMLTableElement> {
   tbody: BaseElement = new BaseElement({ tag: 'tbody' });
 
-  constructor() {
+  headRow: HeadRow;
+
+  constructor(page: Pagination) {
     super({ tag: 'table', className: ['win-table'] });
-    this.appendChildren(new HeadRow(), this.tbody);
+
+    this.headRow = new HeadRow(page);
+    this.appendChildren(this.headRow, this.tbody);
   }
 
-  redrawTable(data: WinnersData) {
+  redrawTable = (data: WinnersData) => {
     this.tbody.getElement().innerHTML = '';
     data.forEach((elem, i) => {
       this.tbody.append(new Row(elem, i));
     });
-  }
+  };
 }

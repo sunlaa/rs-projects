@@ -91,7 +91,7 @@ export default class StartRaceButton extends BaseElement {
 
     this.cars.forEach((car, i) => car.startAnimation(times[i]));
 
-    Promise.any(requests)
+    await Promise.any(requests)
       .then((data) => {
         this.winnerData = data;
         this.showWinner();

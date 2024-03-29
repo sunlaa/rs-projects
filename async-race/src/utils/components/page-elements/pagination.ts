@@ -18,6 +18,8 @@ export default class Pagination {
 
   totalEntities: string = '';
 
+  currentURL: string = '';
+
   constructor(page: 'garage' | 'winners', limit: number, countName: string) {
     this.page = page;
     this.limit = limit;
@@ -25,12 +27,15 @@ export default class Pagination {
     this.pageTurns = new PageTurns();
     this.totalCounter = new TotalCounter(countName);
     this.pageCounter = new PageCounter();
+    this.currentURL = `http://127.0.0.1:3000/${this.page}?_limit=${this.limit}&_page=${this.currentPage}`;
+  }
+
+  updateURL() {
+    this.currentURL = `http://127.0.0.1:3000/${this.page}?_limit=${this.limit}&_page=${this.currentPage}`;
   }
 
   async getDataForPageDraw() {
-    const response = await fetch(
-      `http://127.0.0.1:3000/${this.page}?_limit=${this.limit}&_page=${this.currentPage}`
-    );
+    const response = await fetch(this.currentURL);
     const totalCount = response.headers.get('X-Total-Count');
     if (totalCount) this.totalEntities = totalCount;
     const data: CarsData | WinnersData = await response.json();
@@ -40,13 +45,16 @@ export default class Pagination {
   prev() {
     this.currentPage -= 1;
     if (this.currentPage <= 0) this.currentPage = 1;
+    this.updateURL();
   }
 
   async next() {
     this.currentPage += 1;
+    this.updateURL();
     const newData = await this.getDataForPageDraw();
     if (newData.length === 0) {
       this.currentPage -= 1;
     }
+    this.updateURL();
   }
 }
