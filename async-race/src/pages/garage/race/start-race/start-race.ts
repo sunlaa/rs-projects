@@ -10,10 +10,13 @@ export default class StartRaceButton extends BaseElement {
 
   startButtons: HTMLElement[] = [];
 
-  winnerData: { id: number; time: number } = { id: 0, time: 0 };
+  winnerData: { id: number; time: number } | null = null;
+
+  controller: AbortController = new AbortController();
 
   constructor() {
     super({ className: ['start-race', 'button'], content: 'Go!' });
+
     this.addListener('click', this.startRace);
   }
 
@@ -45,13 +48,30 @@ export default class StartRaceButton extends BaseElement {
     return urls;
   }
 
+  createSignal() {
+    this.controller = new AbortController();
+
+    const stopRace = document.querySelector('.stop-race');
+    if (stopRace) {
+      stopRace.dispatchEvent(
+        new CustomEvent('update-controller', {
+          detail: { controller: this.controller },
+        })
+      );
+    }
+  }
+
   driveAll = async (times: number[]) => {
+    this.createSignal();
+    const { signal } = this.controller;
+
     const urls = this.makeIdArray();
     const requests = urls.map(
       (id, i) =>
         new Promise<{ id: number; time: number }>((resolve, reject) => {
           fetch(`http://127.0.0.1:3000/engine?id=${id}&status=drive`, {
             method: 'PATCH',
+            signal,
           })
             .then((response) => {
               if (!response.ok) {
@@ -70,9 +90,13 @@ export default class StartRaceButton extends BaseElement {
     );
 
     this.cars.forEach((car, i) => car.startAnimation(times[i]));
-    this.winnerData = await Promise.any(requests);
 
-    this.showWinner();
+    Promise.any(requests)
+      .then((data) => {
+        this.winnerData = data;
+        this.showWinner();
+      })
+      .catch(() => {});
   };
 
   startEngines = async (): Promise<number[]> => {
@@ -93,7 +117,10 @@ export default class StartRaceButton extends BaseElement {
   };
 
   showWinner() {
-    const banner = new WinnerBanner(this.winnerData);
-    banner.show();
+    if (this.winnerData) {
+      const banner = new WinnerBanner(this.winnerData);
+      banner.addContentAndTabulate();
+      banner.show();
+    }
   }
 }

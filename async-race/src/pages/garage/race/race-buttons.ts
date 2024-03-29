@@ -9,8 +9,8 @@ export default class RaceButtons extends BaseElement {
   constructor() {
     super({ className: ['race-buttons'] });
 
-    const startRace = new StartRaceButton();
     const stopRace = new StopRaceButton();
+    const startRace = new StartRaceButton();
 
     this.addListener('update-race-data', (event) => {
       const customEvent = event as CustomEvent;

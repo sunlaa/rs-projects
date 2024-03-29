@@ -8,10 +8,25 @@ export default class StopRaceButton extends BaseElement {
 
   startButtons: HTMLElement[] = [];
 
+  controller: AbortController;
+
   constructor() {
     super({ className: ['stop-race', 'button', 'disabled'], content: 'Reset' });
+
+    this.controller = new AbortController();
+
     this.addListener('click', this.returnAllCars);
+
+    this.addListener('update-controller', (event) => {
+      const customEvent = event as CustomEvent;
+      const { controller } = customEvent.detail;
+      this.updateController(controller);
+    });
   }
+
+  updateController = (controller: AbortController) => {
+    this.controller = controller;
+  };
 
   updateData(newCars: Car[]) {
     this.cars = newCars;
@@ -27,6 +42,7 @@ export default class StopRaceButton extends BaseElement {
   returnAllCars = async () => {
     this.addClass('disabled');
     this.stopButtons.forEach((elem) => elem.classList.add('disabled'));
+    this.controller.abort();
     const requests = this.cars.map((car) => car.stop());
     await Promise.all(requests);
     const startRace = this.element.previousElementSibling;

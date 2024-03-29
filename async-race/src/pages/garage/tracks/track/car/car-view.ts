@@ -44,6 +44,7 @@ export default class Car extends CarElement {
 
   async removeCar() {
     await CarLogic.deleteCar(this.id);
+    await CarLogic.deleteWinner(this.id);
     Car.updateTracksPage();
   }
 

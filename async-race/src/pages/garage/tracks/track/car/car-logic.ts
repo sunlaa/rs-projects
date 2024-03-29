@@ -90,6 +90,14 @@ export default class CarLogic {
     }
   }
 
+  static async createWinner(id: number, wins: number, time: number) {
+    await fetch(`http://127.0.0.1:3000/winners`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, wins, time }),
+    });
+  }
+
   static async updateWinner(id: number, wins: number, time: number) {
     await fetch(`http://127.0.0.1:3000/winners/${id}`, {
       method: 'PUT',
@@ -101,11 +109,7 @@ export default class CarLogic {
     });
   }
 
-  static async createWinner(id: number, wins: number, time: number) {
-    await fetch(`http://127.0.0.1:3000/winners`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, wins, time }),
-    });
+  static async deleteWinner(id: number) {
+    await fetch(`http://127.0.0.1:3000/winners/${id}`, { method: 'DELETE' });
   }
 }

@@ -30,18 +30,17 @@ export default class WinnerBanner extends BaseElement {
 
     this.time = roundTime(time);
 
-    this.addContentAndTabulate();
     document.body.append(this.element);
   }
 
   show() {
-    setTimeout(() => this.setStyles({ opacity: '1' }), 100);
+    setTimeout(() => this.setStyles({ opacity: '1' }), 400);
     setTimeout(() => this.setStyles({ opacity: '0' }), 3000);
 
-    setTimeout(() => this.remove(), 5000);
+    setTimeout(() => this.remove(), 4000);
   }
 
-  private async addContentAndTabulate() {
+  async addContentAndTabulate() {
     await this.getCarName();
     this.setContent(`${this.name} wins by ${this.time} sec!`);
     await this.tabulate();
