@@ -82,6 +82,7 @@ export default class CarLogic {
   static async getWinner(id: number): Promise<WinnerData | null> {
     try {
       const response = await fetch(`http://127.0.0.1:3000/winners/${id}`);
+      if (response.status === 404) return null;
       const data = await response.json();
       return data;
     } catch (err) {

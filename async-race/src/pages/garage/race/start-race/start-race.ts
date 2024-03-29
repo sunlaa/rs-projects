@@ -1,6 +1,7 @@
 import BaseElement from '../../../../utils/components/base-element';
 import { EngineData } from '../../../../utils/types/types';
 import Car from '../../tracks/track/car/car-view';
+import WinnerBanner from '../show-winner/show-winner';
 
 export default class StartRaceButton extends BaseElement {
   cars: Car[] = [];
@@ -46,23 +47,32 @@ export default class StartRaceButton extends BaseElement {
 
   driveAll = async (times: number[]) => {
     const urls = this.makeIdArray();
-    const requests = urls.map((id, i) =>
-      fetch(`http://127.0.0.1:3000/engine?id=${id}&status=drive`, {
-        method: 'PATCH',
-      })
-        .then((response) => {
-          if (!response.ok) {
-            this.cars[i].stopAnimation();
-          }
-        })
-        .then(() => {
-          return { id, time: times[i] };
+    const requests = urls.map(
+      (id, i) =>
+        new Promise<{ id: number; time: number }>((resolve, reject) => {
+          fetch(`http://127.0.0.1:3000/engine?id=${id}&status=drive`, {
+            method: 'PATCH',
+          })
+            .then((response) => {
+              if (!response.ok) {
+                this.cars[i].stopAnimation();
+                throw new Error('The End!');
+              }
+              return { id, time: times[i] };
+            })
+            .then((winnerData) => {
+              resolve(winnerData);
+            })
+            .catch((err) => {
+              reject(err);
+            });
         })
     );
 
     this.cars.forEach((car, i) => car.startAnimation(times[i]));
-
     this.winnerData = await Promise.any(requests);
+
+    this.showWinner();
   };
 
   startEngines = async (): Promise<number[]> => {
@@ -81,4 +91,9 @@ export default class StartRaceButton extends BaseElement {
     });
     return number;
   };
+
+  showWinner() {
+    const banner = new WinnerBanner(this.winnerData);
+    banner.show();
+  }
 }
