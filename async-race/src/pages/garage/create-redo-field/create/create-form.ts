@@ -1,3 +1,4 @@
+import StopRaceButton from '../../race/stop-race/stop-race';
 import Car from '../../tracks/track/car/car-view';
 import Form from '../form/form';
 
@@ -17,6 +18,8 @@ export default class CreateForm extends Form {
         this.showHint();
         return;
       }
+
+      StopRaceButton.resetButton();
       await Car.createCar(`${data.name}`, `${data.color}`);
     }
     this.text.getElement().value = '';

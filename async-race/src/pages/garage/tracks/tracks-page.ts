@@ -23,7 +23,7 @@ export default class TracksPage extends BaseElement {
 
     this.tracks = new Tracks();
 
-    this.page = new Pagination('garage', 7, 'Total Cars');
+    this.page = new Pagination('garage', 7, 'Garage');
     this.totalCounter = this.page.totalCounter;
     this.pageCounter = this.page.pageCounter;
     this.pageTurns = this.page.pageTurns;

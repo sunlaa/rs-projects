@@ -65,10 +65,6 @@ export default class Winners extends BaseElement {
     const data = (await this.page.getDataForPageDraw()) as WinnersData;
 
     this.totalCounter.updateCounter(this.page.totalEntities);
-    if (+this.page.totalEntities <= 10) {
-      this.pageTurns.prev.addClass('disabled');
-      this.pageTurns.next.addClass('disabled');
-    }
     this.pageCounter.updatePage(this.page.currentPage);
     this.table.redrawTable(data);
   };

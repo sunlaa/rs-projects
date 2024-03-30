@@ -1,4 +1,5 @@
 import BaseElement from '../../../utils/components/base-element';
+import StopRaceButton from '../race/stop-race/stop-race';
 import CarLogic from '../tracks/track/car/car-logic';
 import Car from '../tracks/track/car/car-view';
 import { getColorArray, getNamesArray } from './random-source';
@@ -24,6 +25,8 @@ export default class GenerationButton extends BaseElement {
   }
 
   generation = async () => {
+    StopRaceButton.resetButton();
+
     this.makeRequests();
     await Promise.all(this.requests);
 

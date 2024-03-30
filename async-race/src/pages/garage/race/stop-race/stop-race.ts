@@ -40,6 +40,11 @@ export default class StopRaceButton extends BaseElement {
   }
 
   returnAllCars = async () => {
+    const prevBtn = document.querySelectorAll('.garage .page-turn');
+    prevBtn.forEach((elem) => {
+      elem.classList.remove('disabled');
+    });
+
     this.addClass('disabled');
     this.stopButtons.forEach((elem) => elem.classList.add('disabled'));
     this.controller.abort();
@@ -51,4 +56,11 @@ export default class StopRaceButton extends BaseElement {
     }
     this.startButtons.forEach((elem) => elem.classList.remove('disabled'));
   };
+
+  static resetButton() {
+    const raceStop = document.querySelector('.stop-race');
+    if (raceStop) {
+      raceStop.dispatchEvent(new CustomEvent('click'));
+    }
+  }
 }

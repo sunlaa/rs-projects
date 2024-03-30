@@ -1,4 +1,5 @@
 import WinTable from '../../../winners/table/table';
+import StopRaceButton from '../../race/stop-race/stop-race';
 import Car from '../../tracks/track/car/car-view';
 import Form from '../form/form';
 
@@ -20,6 +21,10 @@ export default class EditForm extends Form {
       enable(id, name, color);
     });
     this.addListener('submit', this.updateCar);
+    this.addListener('clear-for-removed', () => {
+      this.off();
+    });
+
     this.submit.getElement().value = 'Confirm';
   }
 
@@ -34,6 +39,8 @@ export default class EditForm extends Form {
 
   updateCar = async (e: Event) => {
     e.preventDefault();
+    StopRaceButton.resetButton();
+
     const data = this.getFormData();
     if (data) {
       if (!this.hasName()) data.name = this.name;
