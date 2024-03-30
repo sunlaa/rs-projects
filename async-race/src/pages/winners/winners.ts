@@ -38,8 +38,6 @@ export default class Winners extends BaseElement {
       this.table,
       this.pageTurns
     );
-
-    this.addListener('sort-table', this.updatePage);
   }
 
   private addTurnListeners() {
@@ -50,11 +48,25 @@ export default class Winners extends BaseElement {
   updatePage = async () => {
     this.table.tbody.getElement().innerHTML = '';
 
-    // check if (table.row.wins.containClass('asc' || 'desc'))
-    // this.table.headRow.getURLSotred('wins', 'ASC' | 'DESC')
+    const hRow = this.table.headRow;
+
+    if (hRow.wins.containClass('asc')) {
+      hRow.getURLForSort('wins', 'ASC');
+    } else if (hRow.wins.containClass('desc')) {
+      hRow.getURLForSort('wins', 'DESC');
+    } else if (hRow.time.containClass('asc')) {
+      hRow.getURLForSort('time', 'ASC');
+    } else if (hRow.time.containClass('desc')) {
+      hRow.getURLForSort('time', 'DESC');
+    }
+
     const data = (await this.page.getDataForPageDraw()) as WinnersData;
 
     this.totalCounter.updateCounter(this.page.totalEntities);
+    if (+this.page.totalEntities <= 10) {
+      this.pageTurns.prev.addClass('disabled');
+      this.pageTurns.next.addClass('disabled');
+    }
     this.pageCounter.updatePage(this.page.currentPage);
     this.table.redrawTable(data);
   };

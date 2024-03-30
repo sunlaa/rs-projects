@@ -8,18 +8,28 @@ import Navigation from '../navigation/navigate-header';
 export default class App {
   main: BaseElement;
 
+  winners: BaseElement;
+
+  garage: BaseElement;
+
   router: Router;
 
   constructor() {
     this.main = new BaseElement({ tag: 'main', className: ['main'] });
-    document.body.append(new Navigation().getElement(), this.main.getElement());
+    this.garage = new Garage();
+    this.winners = new Winners();
+    document.body.append(
+      new Navigation().getElement(),
+      this.garage.getElement(),
+      this.winners.getElement()
+    );
 
     const routes = this.createRoutes();
     this.router = new Router(routes);
   }
 
   public run() {
-    this.router.navigate('winners');
+    this.router.navigate('garage');
   }
 
   createRoutes() {
@@ -27,20 +37,20 @@ export default class App {
       {
         path: 'garage',
         callback: () => {
-          this.setContent(new Garage());
+          App.setContent(this.garage, this.winners);
         },
       },
       {
         path: 'winners',
         callback: () => {
-          this.setContent(new Winners());
+          App.setContent(this.winners, this.garage);
         },
       },
     ];
   }
 
-  private setContent(content: BaseElement) {
-    this.main.getElement().innerHTML = '';
-    this.main.append(content);
+  static setContent(page: BaseElement, previousPage: BaseElement) {
+    previousPage.setStyles({ display: 'none' });
+    page.setStyles({ display: 'block' });
   }
 }

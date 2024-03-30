@@ -27,7 +27,7 @@ export default class Pagination {
     this.pageTurns = new PageTurns();
     this.totalCounter = new TotalCounter(countName);
     this.pageCounter = new PageCounter();
-    this.currentURL = `http://127.0.0.1:3000/${this.page}?_limit=${this.limit}&_page=${this.currentPage}`;
+    this.updateURL();
   }
 
   updateURL() {

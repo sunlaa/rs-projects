@@ -38,3 +38,66 @@ td {
 .winners .page-turns {
   align-self: center;
 }
+
+.sort-cell {
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+}
+
+.asc::after,
+.asc::before,
+.desc::after,
+.desc::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 2px;
+  background-color: #000000;
+  top: 50%;
+  transition: all linear 400ms;
+}
+
+.asc::after {
+  transform: rotate(45deg);
+  right: 8px;
+}
+
+.asc::before {
+  transform: rotate(-45deg);
+  right: 4px;
+}
+
+.desc::after {
+  transform: rotate(-45deg);
+  right: 8px;
+}
+
+.desc::before {
+  transform: rotate(45deg);
+  right: 4px;
+}
+
+@media screen and (max-width: 700px) {
+  .win-table th {
+    height: 80px;
+  }
+
+  .asc::after,
+  .asc::before,
+  .desc::after,
+  .desc::before {
+    top: 60px;
+  }
+
+  .asc::before,
+  .desc::before {
+    right: 30px;
+  }
+
+  .asc::after,
+  .desc::after {
+    right: 34px;
+  }
+}

@@ -14,6 +14,12 @@ export default class WinTable extends BaseElement<HTMLTableElement> {
 
     this.headRow = new HeadRow(page);
     this.appendChildren(this.headRow, this.tbody);
+
+    this.addListener('sort-table', (event) => {
+      const customEvent = event as CustomEvent;
+      const { data } = customEvent.detail;
+      this.redrawTable(data);
+    });
   }
 
   redrawTable = (data: WinnersData) => {
