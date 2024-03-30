@@ -1,5 +1,6 @@
 import BaseElement from '../../../../utils/components/base-element';
 import { WinnerData } from '../../../../utils/types/types';
+import WinTable from '../../../winners/table/table';
 import CarLogic from '../../tracks/track/car/car-logic';
 
 function roundTime(time: number): number {
@@ -44,6 +45,7 @@ export default class WinnerBanner extends BaseElement {
     await this.getCarName();
     this.setContent(`${this.name} wins by ${this.time} sec!`);
     await this.tabulate();
+    WinTable.updateTable();
   }
 
   private async getCarName() {

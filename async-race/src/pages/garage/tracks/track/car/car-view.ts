@@ -2,6 +2,7 @@ import CarElement from '../../../../../utils/components/car-element';
 import { CarData } from '../../../../../utils/types/types';
 import CarName from './car-name';
 import CarLogic from './car-logic';
+import WinTable from '../../../../winners/table/table';
 
 export default class Car extends CarElement {
   carName: CarName;
@@ -46,6 +47,7 @@ export default class Car extends CarElement {
     await CarLogic.deleteCar(this.id);
     await CarLogic.deleteWinner(this.id);
     Car.updateTracksPage();
+    WinTable.updateTable();
   }
 
   getDuration = async () => {

@@ -28,4 +28,11 @@ export default class WinTable extends BaseElement<HTMLTableElement> {
       this.tbody.append(new Row(elem, i));
     });
   };
+
+  static updateTable() {
+    const winnerPage = document.querySelector('.winners');
+    if (winnerPage) {
+      winnerPage.dispatchEvent(new CustomEvent('update-table'));
+    }
+  }
 }

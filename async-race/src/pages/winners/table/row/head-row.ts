@@ -40,6 +40,7 @@ export default class HeadRow extends BaseElement<HTMLTableRowElement> {
   }
 
   async getURLForSort(sortColumn: 'wins' | 'time', sortOrder: 'ASC' | 'DESC') {
+    this.page.updateURL();
     const { currentURL } = this.page;
     this.page.currentURL = `${currentURL}&_sort=${sortColumn}&_order=${sortOrder}`;
   }
@@ -64,12 +65,10 @@ export default class HeadRow extends BaseElement<HTMLTableRowElement> {
     } else if (sortCell.containClass('desc')) {
       sortCell.removeClass('desc');
       sortCell.addClass('asc');
-      this.page.updateURL();
       this.getURLForSort(columnName, 'ASC');
     } else if (sortCell.containClass('no-sort')) {
       sortCell.removeClass('no-sort');
       sortCell.addClass('desc');
-      this.page.updateURL();
       this.getURLForSort(columnName, 'DESC');
     }
     secondSortCell.removeClass('asc');

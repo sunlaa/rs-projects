@@ -38,6 +38,8 @@ export default class Winners extends BaseElement {
       this.table,
       this.pageTurns
     );
+
+    this.addListener('update-table', this.updatePage);
   }
 
   private addTurnListeners() {
