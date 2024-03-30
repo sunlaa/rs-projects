@@ -32,7 +32,7 @@ export default class HeadRow extends BaseElement<HTMLTableRowElement> {
   }
 
   fillRow() {
-    const place = new Cell('Place', 'th');
+    const place = new Cell('Number', 'th');
     const car = new Cell('Car', 'th');
     const name = new Cell('Name', 'th');
 

@@ -28,10 +28,10 @@
 }
 
 .button.control {
-  width: 1rem;
+  width: 0.8rem;
   border-radius: 20px;
   font-size: 1.1rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.2rem 0.5rem;
   text-shadow: none;
 }
 

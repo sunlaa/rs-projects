@@ -1,6 +1,7 @@
 .winners {
   display: flex;
   flex-direction: column;
+  padding: 1rem;
 }
 
 table,
@@ -15,7 +16,6 @@ td {
   align-self: center;
   width: 100%;
   max-width: 800px;
-  margin: 1rem;
 }
 
 .win-table td {
