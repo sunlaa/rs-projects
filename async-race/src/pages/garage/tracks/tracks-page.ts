@@ -50,6 +50,12 @@ export default class TracksPage extends BaseElement {
     const data = (await this.page.getDataForPageDraw()) as CarsData;
     this.totalCounter.updateCounter(this.page.totalEntities);
     this.pageCounter.updatePage(this.page.currentPage);
+    if (+this.page.totalEntities === 0) {
+      const startRace = document.querySelector('.start-race');
+      if (startRace) {
+        startRace.classList.add('disabled');
+      }
+    }
     this.tracks.renderCars(data);
   };
 
