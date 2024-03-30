@@ -9,9 +9,12 @@ export default class WinTable extends BaseElement<HTMLTableElement> {
 
   headRow: HeadRow;
 
+  page: Pagination;
+
   constructor(page: Pagination) {
     super({ tag: 'table', className: ['win-table'] });
 
+    this.page = page;
     this.headRow = new HeadRow(page);
     this.appendChildren(this.headRow, this.tbody);
 
@@ -25,7 +28,8 @@ export default class WinTable extends BaseElement<HTMLTableElement> {
   redrawTable = (data: WinnersData) => {
     this.tbody.getElement().innerHTML = '';
     data.forEach((elem, i) => {
-      this.tbody.append(new Row(elem, i));
+      const place = (this.page.currentPage - 1) * 10 + i;
+      this.tbody.append(new Row(elem, place));
     });
   };
 
