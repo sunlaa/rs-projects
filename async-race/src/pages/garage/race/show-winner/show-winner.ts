@@ -75,7 +75,7 @@ export default class WinnerBanner extends BaseElement {
   }
 
   private updateTime(previousTime: number) {
-    if (previousTime * 1000 < this.time) {
+    if (previousTime < this.time) {
       this.time = previousTime;
     }
   }
