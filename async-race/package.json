@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier . --write",
+    "ci:format": "prettier . --check",
     "build": "webpack --mode production",
     "serve": "webpack-dev-server"
   },
