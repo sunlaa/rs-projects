@@ -28,7 +28,7 @@ export default class EditForm extends Form {
     this.submit.getElement().value = 'Confirm';
   }
 
-  enable = (id: number, name: string, color: string) => {
+  private enable = (id: number, name: string, color: string) => {
     this.id = id;
     this.name = name;
     this.colorName = color;
@@ -37,7 +37,7 @@ export default class EditForm extends Form {
     this.text.getElement().value = name;
   };
 
-  updateCar = async (e: Event) => {
+  private updateCar = async (e: Event) => {
     e.preventDefault();
     StopRaceButton.resetButton();
 

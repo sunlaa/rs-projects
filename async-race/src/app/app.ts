@@ -6,8 +6,6 @@ import Winners from '../pages/winners/winners';
 import Navigation from '../navigation/navigate-header';
 
 export default class App {
-  main: BaseElement;
-
   winners: BaseElement;
 
   garage: BaseElement;
@@ -15,7 +13,6 @@ export default class App {
   router: Router;
 
   constructor() {
-    this.main = new BaseElement({ tag: 'main', className: ['main'] });
     this.garage = new Garage();
     this.winners = new Winners();
     document.body.append(
@@ -28,11 +25,11 @@ export default class App {
     this.router = new Router(routes);
   }
 
-  public run() {
+  run() {
     this.router.navigate('garage');
   }
 
-  createRoutes() {
+  private createRoutes() {
     return [
       {
         path: 'garage',

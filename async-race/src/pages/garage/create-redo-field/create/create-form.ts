@@ -10,7 +10,7 @@ export default class CreateForm extends Form {
     this.submit.getElement().value = 'Create';
   }
 
-  createCar = async (e: Event) => {
+  private createCar = async (e: Event) => {
     e.preventDefault();
     const data = this.getFormData();
     if (data) {
@@ -25,7 +25,7 @@ export default class CreateForm extends Form {
     this.text.getElement().value = '';
   };
 
-  showHint() {
+  private showHint() {
     this.hint.setStyles({ opacity: '1' });
     setTimeout(() => this.hint.setStyles({ opacity: '0' }), 3000);
   }

@@ -24,7 +24,7 @@ export default class StopRaceButton extends BaseElement {
     });
   }
 
-  updateController = (controller: AbortController) => {
+  private updateController = (controller: AbortController) => {
     this.controller = controller;
   };
 
@@ -39,7 +39,7 @@ export default class StopRaceButton extends BaseElement {
     });
   }
 
-  returnAllCars = async () => {
+  private returnAllCars = async () => {
     const prevBtn = document.querySelectorAll('.garage .page-turn');
     prevBtn.forEach((elem) => {
       elem.classList.remove('disabled');

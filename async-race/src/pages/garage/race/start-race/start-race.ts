@@ -31,7 +31,7 @@ export default class StartRaceButton extends BaseElement {
     });
   }
 
-  startRace = async () => {
+  private startRace = async () => {
     const prevBtn = document.querySelectorAll('.garage .page-turn');
     prevBtn.forEach((elem) => {
       elem.classList.add('disabled');
@@ -48,13 +48,13 @@ export default class StartRaceButton extends BaseElement {
     await this.startEngines().then((times) => this.driveAll(times));
   };
 
-  makeIdArray() {
+  private makeIdArray() {
     const urls: number[] = [];
     this.cars.forEach((elem) => urls.push(elem.id));
     return urls;
   }
 
-  createSignal() {
+  private createSignal() {
     this.controller = new AbortController();
 
     const stopRace = document.querySelector('.stop-race');
@@ -67,7 +67,7 @@ export default class StartRaceButton extends BaseElement {
     }
   }
 
-  driveAll = async (times: number[]) => {
+  private driveAll = async (times: number[]) => {
     this.createSignal();
     const { signal } = this.controller;
 
@@ -105,7 +105,7 @@ export default class StartRaceButton extends BaseElement {
       .catch(() => {});
   };
 
-  startEngines = async (): Promise<number[]> => {
+  private startEngines = async (): Promise<number[]> => {
     const promises: Promise<EngineData | null>[] = [];
 
     this.cars.forEach((elem) => promises.push(elem.getDuration()));
@@ -122,7 +122,7 @@ export default class StartRaceButton extends BaseElement {
     return number;
   };
 
-  showWinner() {
+  private showWinner() {
     if (this.winnerData) {
       const banner = new WinnerBanner(this.winnerData);
       banner.addContentAndTabulate();

@@ -30,19 +30,19 @@ export default class ControlButtons extends BaseElement {
     this.appendChildren(this.startButton, this.stopButton);
   }
 
-  start = () => {
+  private start = () => {
     this.startButton.addClass('disabled');
     this.stopButton.removeClass('disabled');
     this.car.drive();
   };
 
-  stop = async () => {
+  private stop = async () => {
     this.stopButton.addClass('disabled');
     await this.car.stop();
     this.startButton.removeClass('disabled');
   };
 
-  addHandler() {
+  private addHandler() {
     this.startButton.addListener('click', this.start);
     this.stopButton.addListener('click', this.stop);
   }

@@ -11,7 +11,7 @@ export default class Row extends BaseElement<HTMLTableRowElement> {
     this.fillRow(winData, place);
   }
 
-  async fillRow({ id, wins, time }: WinnerData, placeNum: number) {
+  private async fillRow({ id, wins, time }: WinnerData, placeNum: number) {
     const carData = await CarLogic.getCar(id);
     if (carData) {
       const place = new Cell(placeNum + 1, 'td');

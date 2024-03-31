@@ -2,7 +2,7 @@ import BaseElement from '../../../utils/components/base-element';
 import StopRaceButton from '../race/stop-race/stop-race';
 import CarLogic from '../tracks/track/car/car-logic';
 import Car from '../tracks/track/car/car-view';
-import { getColorArray, getNamesArray } from './random-source';
+import { getColorArray, getNamesArray } from '../../../utils/functions/random-source';
 
 export default class GenerationButton extends BaseElement {
   requests: Promise<void>[] = [];
@@ -16,7 +16,7 @@ export default class GenerationButton extends BaseElement {
     this.addListener('click', this.generation);
   }
 
-  makeRequests() {
+  private makeRequests() {
     const colors = getColorArray();
     const names = getNamesArray();
     for (let i = 0; i < 100; i += 1) {
@@ -24,7 +24,7 @@ export default class GenerationButton extends BaseElement {
     }
   }
 
-  generation = async () => {
+  private generation = async () => {
     StopRaceButton.resetButton();
 
     this.makeRequests();

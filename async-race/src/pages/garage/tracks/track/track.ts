@@ -25,6 +25,6 @@ export default class Track extends BaseElement {
 
     const flag = new BaseElement({ className: ['flag'] });
 
-    this.appendChildren(interactionBlock, new ControlButtons(car), car, flag); // не менять порядок элементов!
+    this.appendChildren(interactionBlock, new ControlButtons(car), car, flag);
   }
 }

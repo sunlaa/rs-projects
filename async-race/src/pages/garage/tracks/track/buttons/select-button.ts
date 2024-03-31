@@ -11,7 +11,7 @@ export default class SelectButton extends BaseElement {
     this.addListener('click', this.focusOnForm);
   }
 
-  focusOnForm = () => {
+  private focusOnForm = () => {
     const editForm = document.querySelector('.edit-form');
     if (editForm) {
       editForm.dispatchEvent(

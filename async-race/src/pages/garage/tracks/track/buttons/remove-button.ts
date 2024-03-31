@@ -12,7 +12,7 @@ export default class RemoveButton extends BaseElement {
     this.addListener('click', this.removeCar);
   }
 
-  removeCar = () => {
+  private removeCar = () => {
     this.car.removeCar();
     const editForm = document.querySelector('.edit-form');
     if (editForm) {

@@ -31,7 +31,7 @@ export default class HeadRow extends BaseElement<HTMLTableRowElement> {
     });
   }
 
-  fillRow() {
+  private fillRow() {
     const place = new Cell('Number', 'th');
     const car = new Cell('Car', 'th');
     const name = new Cell('Name', 'th');
@@ -45,7 +45,7 @@ export default class HeadRow extends BaseElement<HTMLTableRowElement> {
     this.page.currentURL = `${currentURL}&_sort=${sortColumn}&_order=${sortOrder}`;
   }
 
-  async redraw() {
+  private async redraw() {
     const data = (await this.page.getDataForPageDraw()) as WinnersData;
     const table = this.element.parentElement;
     if (table) {
@@ -53,7 +53,7 @@ export default class HeadRow extends BaseElement<HTMLTableRowElement> {
     }
   }
 
-  sort = async (
+  private sort = async (
     sortCell: Cell,
     secondSortCell: Cell,
     columnName: 'wins' | 'time'

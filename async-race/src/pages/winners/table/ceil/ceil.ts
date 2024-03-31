@@ -8,7 +8,7 @@ export default class Cell extends BaseElement<HTMLTableCellElement> {
     this.fillCell(content);
   }
 
-  fillCell(content: string | CarElement | number) {
+  private fillCell(content: string | CarElement | number) {
     if (typeof content === 'string') {
       this.setContent(content);
     } else if (typeof content === 'number') {

@@ -47,7 +47,7 @@ export default class Winners extends BaseElement {
     this.pageTurns.next.addListener('click', this.next);
   }
 
-  updatePage = async () => {
+  private updatePage = async () => {
     this.table.tbody.getElement().innerHTML = '';
 
     const hRow = this.table.headRow;

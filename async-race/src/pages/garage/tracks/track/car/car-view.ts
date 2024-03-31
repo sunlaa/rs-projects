@@ -4,6 +4,8 @@ import CarName from './car-name';
 import CarLogic from './car-logic';
 import WinTable from '../../../../winners/table/table';
 
+const trackMargin = 160;
+
 export default class Car extends CarElement {
   carName: CarName;
 
@@ -78,7 +80,7 @@ export default class Car extends CarElement {
   };
 
   private moveCar = (timestamp: number) => {
-    const distance = window.innerWidth - this.element.offsetWidth - 160; // что за 155
+    const distance = window.innerWidth - this.element.offsetWidth - trackMargin;
     if (Number.isNaN(this.startTime)) this.startTime = timestamp;
     const progress = timestamp - this.startTime;
     const percentage = Math.min(progress / this.duration, 1);

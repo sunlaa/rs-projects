@@ -12,7 +12,6 @@ export default class Tracks extends BaseElement {
 
   renderCars(currentCarsData: CarsData) {
     this.element.innerHTML = '';
-    // Fix when all cars are removed!!
 
     this.cars = [];
 
@@ -26,7 +25,7 @@ export default class Tracks extends BaseElement {
     this.updateRaceData();
   }
 
-  updateRaceData() {
+  protected updateRaceData() {
     const raseButton = document.querySelector('.race-buttons');
     if (raseButton) {
       raseButton.dispatchEvent(

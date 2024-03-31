@@ -21,7 +21,7 @@ const brands: string[] = [
   'Land Rover',
 ];
 
-const models = [
+const models: string[] = [
   'Camry',
   'Accord',
   'F-150',

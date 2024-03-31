@@ -2,7 +2,7 @@ import BaseElement from '../../../../utils/components/base-element';
 import { ForRedo, ParamsOmitTag } from '../../../../utils/types/types';
 import Input from './input';
 
-export default class Form extends BaseElement<HTMLFormElement> {
+export default abstract class Form extends BaseElement<HTMLFormElement> {
   color: Input;
 
   text: Input;
@@ -28,33 +28,33 @@ export default class Form extends BaseElement<HTMLFormElement> {
     this.appendChildren(this.text, this.color, this.submit);
   }
 
-  getFormData(): ForRedo {
+  protected getFormData(): ForRedo {
     const formData = new FormData(this.element);
     this.data.color = `${formData.get('car-color')}`;
     this.data.name = `${formData.get('car-name')}`;
     return this.data;
   }
 
-  hasName() {
+  protected hasName() {
     if (this.data.name === '') {
       return false;
     }
     return true;
   }
 
-  off() {
+  protected off() {
     this.color.disable();
     this.text.disable();
     this.submit.disable();
   }
 
-  on() {
+  protected on() {
     this.color.enable();
     this.text.enable();
     this.submit.enable();
   }
 
-  clearField() {
+  protected clearField() {
     this.text.getElement().value = '';
   }
 }
