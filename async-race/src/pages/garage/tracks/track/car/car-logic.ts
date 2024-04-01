@@ -5,6 +5,8 @@ import {
   WinnerData,
 } from '../../../../../utils/types/types';
 
+let controller = new AbortController();
+
 export default class CarLogic {
   static async getAllCars(): Promise<CarsData> {
     const response = await fetch(`http://127.0.0.1:3000/garage`);
@@ -59,16 +61,19 @@ export default class CarLogic {
   }
 
   static async stopEngine(id: number) {
+    controller.abort();
     await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=stopped`, {
       method: 'PATCH',
     });
   }
 
   static async drive(id: number): Promise<boolean | null> {
+    controller = new AbortController();
+    const { signal } = controller;
     try {
       const response = await fetch(
         `http://127.0.0.1:3000/engine?id=${id}&status=drive`,
-        { method: 'PATCH' }
+        { method: 'PATCH', signal }
       );
       if (response.ok) {
         return true;

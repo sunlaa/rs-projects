@@ -21,6 +21,8 @@ export default class Car extends CarElement {
 
   requestId: number;
 
+  controller: AbortController = new AbortController();
+
   constructor({ name, color, id }: CarData) {
     super(color);
 
@@ -64,6 +66,7 @@ export default class Car extends CarElement {
   };
 
   drive = async () => {
+    this.controller = new AbortController();
     await this.getDuration();
 
     this.startAnimation(this.duration);
@@ -74,8 +77,8 @@ export default class Car extends CarElement {
   };
 
   stop = async () => {
-    await CarLogic.stopEngine(this.id);
     this.stopAnimation();
+    await CarLogic.stopEngine(this.id);
     this.element.style.left = '40px';
   };
 

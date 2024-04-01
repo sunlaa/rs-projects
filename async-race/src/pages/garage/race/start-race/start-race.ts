@@ -108,12 +108,11 @@ export default class StartRaceButton extends BaseElement {
   private startEngines = async (): Promise<number[]> => {
     const promises: Promise<EngineData | null>[] = [];
 
-    this.cars.forEach((elem) => promises.push(elem.getDuration()));
+    this.cars.forEach((car) => promises.push(car.getDuration()));
     const times = await Promise.all(promises);
 
     const number: number[] = [];
 
-    times.filter((elem) => elem !== null);
     times.forEach((elem) => {
       if (elem?.distance && elem?.velocity) {
         number.push(elem.distance / elem.velocity);
