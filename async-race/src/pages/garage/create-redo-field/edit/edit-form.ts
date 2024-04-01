@@ -1,4 +1,3 @@
-import WinTable from '../../../winners/table/table';
 import StopRaceButton from '../../race/stop-race/stop-race';
 import Car from '../../tracks/track/car/car-view';
 import Form from '../form/form';
@@ -45,7 +44,6 @@ export default class EditForm extends Form {
     if (data) {
       if (!this.hasName()) data.name = this.name;
       await Car.updateCar(this.id, `${data.name}`, `${data.color}`);
-      WinTable.updateTable();
     }
     this.off();
     this.clearField();

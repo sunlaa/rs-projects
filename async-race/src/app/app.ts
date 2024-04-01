@@ -1,25 +1,22 @@
 import './global.css';
 import Garage from '../pages/garage/garage-view';
 import Router from '../utils/servises/router';
-import BaseElement from '../utils/components/base-element';
 import Winners from '../pages/winners/winners';
 import Navigation from '../navigation/navigate-header';
 
 export default class App {
-  winners: BaseElement;
+  container: HTMLElement = document.body;
 
-  garage: BaseElement;
+  winners: HTMLElement;
+
+  garage: HTMLElement;
 
   router: Router;
 
   constructor() {
-    this.garage = new Garage();
-    this.winners = new Winners();
-    document.body.append(
-      new Navigation().getElement(),
-      this.garage.getElement(),
-      this.winners.getElement()
-    );
+    this.garage = new Garage().getElement();
+    this.winners = new Winners().getElement();
+    this.container.append(new Navigation(this.winners).getElement());
 
     const routes = this.createRoutes();
     this.router = new Router(routes);
@@ -34,20 +31,17 @@ export default class App {
       {
         path: 'garage',
         callback: () => {
-          App.setContent(this.garage, this.winners);
+          this.winners.remove();
+          this.container.append(this.garage);
         },
       },
       {
         path: 'winners',
         callback: () => {
-          App.setContent(this.winners, this.garage);
+          this.garage.remove();
+          this.container.append(this.winners);
         },
       },
     ];
-  }
-
-  static setContent(page: BaseElement, previousPage: BaseElement) {
-    previousPage.setStyles({ display: 'none' });
-    page.setStyles({ display: 'block' });
   }
 }

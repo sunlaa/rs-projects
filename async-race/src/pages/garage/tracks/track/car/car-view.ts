@@ -2,7 +2,6 @@ import CarElement from '../../../../../utils/components/car-element';
 import { CarData } from '../../../../../utils/types/types';
 import CarName from './car-name';
 import CarLogic from './car-logic';
-import WinTable from '../../../../winners/table/table';
 
 const trackMargin = 160;
 
@@ -54,7 +53,6 @@ export default class Car extends CarElement {
     }
     await CarLogic.deleteCar(this.id);
     Car.updateTracksPage();
-    WinTable.updateTable();
   }
 
   getDuration = async () => {
