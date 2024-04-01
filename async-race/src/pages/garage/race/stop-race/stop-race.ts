@@ -45,6 +45,9 @@ export default class StopRaceButton extends BaseElement {
       elem.classList.remove('disabled');
     });
 
+    const removeBtns = document.querySelectorAll('.remove');
+    removeBtns.forEach((elem) => elem.classList.remove('disabled'));
+
     this.addClass('disabled');
     this.stopButtons.forEach((elem) => elem.classList.add('disabled'));
     this.controller.abort();

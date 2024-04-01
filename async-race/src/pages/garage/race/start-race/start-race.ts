@@ -32,10 +32,13 @@ export default class StartRaceButton extends BaseElement {
   }
 
   private startRace = async () => {
-    const prevBtn = document.querySelectorAll('.garage .page-turn');
-    prevBtn.forEach((elem) => {
+    const pageTurns = document.querySelectorAll('.garage .page-turn');
+    pageTurns.forEach((elem) => {
       elem.classList.add('disabled');
     });
+
+    const removeBtns = document.querySelectorAll('.remove');
+    removeBtns.forEach((elem) => elem.classList.add('disabled'));
 
     const stopRace = this.element.nextElementSibling;
     if (stopRace && stopRace instanceof HTMLElement) {
