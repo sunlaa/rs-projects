@@ -67,16 +67,19 @@ export default class Car extends CarElement {
 
   drive = async () => {
     this.controller = new AbortController();
+
     await this.getDuration();
 
     this.startAnimation(this.duration);
-    const isDrived = await CarLogic.drive(this.id);
+    const isDrived = await CarLogic.drive(this.id, this.controller);
     if (!isDrived) {
       this.stopAnimation();
     }
   };
 
   stop = async () => {
+    this.controller.abort();
+
     this.stopAnimation();
     await CarLogic.stopEngine(this.id);
     this.element.style.left = '40px';
