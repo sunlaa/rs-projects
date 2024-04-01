@@ -2,7 +2,10 @@ import BaseElement from '../../../utils/components/base-element';
 import StopRaceButton from '../race/stop-race/stop-race';
 import CarLogic from '../tracks/track/car/car-logic';
 import Car from '../tracks/track/car/car-view';
-import { getColorArray, getNamesArray } from '../../../utils/functions/random-source';
+import {
+  getColorArray,
+  getNamesArray,
+} from '../../../utils/functions/random-source';
 
 export default class GenerationButton extends BaseElement {
   requests: Promise<void>[] = [];
