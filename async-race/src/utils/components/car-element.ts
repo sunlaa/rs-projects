@@ -18,7 +18,7 @@ export default class CarElement extends BaseElement {
     this.setColor(color);
   }
 
-  private setColor(color: string) {
+  protected setColor(color: string) {
     const carBody = this.element.firstElementChild?.firstElementChild
       ?.firstElementChild as HTMLElement;
     if (carBody) {

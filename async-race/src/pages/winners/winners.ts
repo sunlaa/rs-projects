@@ -48,8 +48,6 @@ export default class Winners extends BaseElement {
   }
 
   private updatePage = async () => {
-    this.table.tbody.getElement().innerHTML = '';
-
     const hRow = this.table.headRow;
 
     if (hRow.wins.containClass('asc')) {

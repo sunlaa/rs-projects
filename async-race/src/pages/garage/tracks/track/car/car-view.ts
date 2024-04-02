@@ -24,6 +24,7 @@ export default class Car extends CarElement {
 
   constructor({ name, color, id }: CarData) {
     super(color);
+    this.element.id = `${id}`;
 
     this.name = name;
     this.carName = new CarName(this.name);
@@ -34,6 +35,12 @@ export default class Car extends CarElement {
     this.startTime = NaN;
     this.duration = NaN;
     this.requestId = NaN;
+
+    this.addListener('update-color', (event) => {
+      const customEvent = event as CustomEvent;
+      const { clr } = customEvent.detail;
+      this.updateColor(clr);
+    });
   }
 
   static async updateCar(id: number, name: string, color: string) {
@@ -45,6 +52,10 @@ export default class Car extends CarElement {
     await CarLogic.createCar(name, color);
     Car.updateTracksPage();
   }
+
+  private updateColor = (color: string) => {
+    this.setColor(color);
+  };
 
   async removeCar() {
     const data = await CarLogic.getWinner(this.id);

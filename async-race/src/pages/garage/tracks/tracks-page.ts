@@ -45,8 +45,6 @@ export default class TracksPage extends BaseElement {
   }
 
   updateTracks = async () => {
-    this.tracks.getElement().innerHTML = '';
-
     const data = (await this.page.getDataForPageDraw()) as CarsData;
     this.totalCounter.updateCounter(this.page.totalEntities);
     this.pageCounter.updatePage(this.page.currentPage);

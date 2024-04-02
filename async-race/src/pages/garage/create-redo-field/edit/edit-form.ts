@@ -19,6 +19,9 @@ export default class EditForm extends Form {
       const { id, name, color } = customEvent.detail;
       enable(id, name, color);
     });
+
+    this.color.addListener('input', this.updateCarView);
+
     this.addListener('submit', this.updateCar);
     this.addListener('clear-for-removed', () => {
       this.off();
@@ -26,6 +29,16 @@ export default class EditForm extends Form {
 
     this.submit.getElement().value = 'Confirm';
   }
+
+  updateCarView = async () => {
+    const data = this.getFormData();
+    if (data) {
+      const clr = data.color;
+      const car = document.getElementById(`${this.id}`);
+      car?.dispatchEvent(new CustomEvent('update-color', { detail: { clr } }));
+      await Car.updateCar(this.id, `${data.name}`, `${data.color}`);
+    }
+  };
 
   private enable = (id: number, name: string, color: string) => {
     this.id = id;

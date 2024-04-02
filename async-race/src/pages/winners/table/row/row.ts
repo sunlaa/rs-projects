@@ -5,13 +5,11 @@ import CarLogic from '../../../garage/tracks/track/car/car-logic';
 import Cell from '../ceil/ceil';
 
 export default class Row extends BaseElement<HTMLTableRowElement> {
-  constructor(winData: WinnerData, place: number) {
+  constructor() {
     super({ tag: 'tr' });
-
-    this.fillRow(winData, place);
   }
 
-  private async fillRow({ id, wins, time }: WinnerData, placeNum: number) {
+  async fillRow({ id, wins, time }: WinnerData, placeNum: number) {
     const carData = await CarLogic.getCar(id);
     if (carData) {
       const place = new Cell(placeNum + 1, 'td');

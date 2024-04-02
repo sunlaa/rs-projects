@@ -11,16 +11,19 @@ export default class Tracks extends BaseElement {
   }
 
   renderCars(currentCarsData: CarsData) {
-    this.element.innerHTML = '';
-
     this.cars = [];
+
+    const tracks: Track[] = [];
 
     currentCarsData.forEach((carData) => {
       const car = new Car(carData);
       this.cars.push(car);
       const track = new Track(car);
-      this.append(track);
+      tracks.push(track);
     });
+
+    this.element.innerHTML = '';
+    this.appendChildren(...tracks);
 
     this.updateRaceData();
   }

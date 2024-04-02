@@ -25,12 +25,18 @@ export default class WinTable extends BaseElement<HTMLTableElement> {
     });
   }
 
-  redrawTable = (data: WinnersData) => {
-    this.tbody.getElement().innerHTML = '';
-    data.forEach((elem, i) => {
+  redrawTable = async (winData: WinnersData) => {
+    const rowsPromises = winData.map(async (data, i) => {
       const place = (this.page.currentPage - 1) * 10 + i;
-      this.tbody.append(new Row(elem, place));
+      const row = new Row();
+      await row.fillRow(data, place);
+      return row;
     });
+
+    const rows = await Promise.all(rowsPromises);
+
+    this.tbody.getElement().innerHTML = '';
+    this.tbody.appendChildren(...rows);
   };
 
   static updateTable() {
