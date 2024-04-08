@@ -5,4 +5,8 @@ export default class Input extends BaseElement<HTMLInputElement> {
   constructor(params?: ParamsOmitTag<HTMLInputElement>) {
     super({ tag: 'input', ...params });
   }
+
+  getData(): string {
+    return this.element.value;
+  }
 }

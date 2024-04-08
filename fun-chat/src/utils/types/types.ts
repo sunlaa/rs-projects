@@ -16,3 +16,22 @@ export type Route = {
   path: string;
   callback: () => void;
 };
+
+export interface Subject {
+  attach(observer: Observer): void;
+
+  detach(observer: Observer): void;
+
+  notify(): void;
+
+  users: User[];
+}
+
+export interface Observer {
+  update(subject: Subject): void;
+}
+
+export type User = {
+  login: string;
+  isLogined: boolean;
+};
