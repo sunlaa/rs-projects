@@ -7,7 +7,10 @@ export type Params<T extends HTMLElement = HTMLElement> = Partial<
   styles?: Partial<CSSStyleDeclaration>;
 };
 
-export type ParamsOmitTag = Omit<Params, 'tag'>;
+export type ParamsOmitTag<T extends HTMLElement = HTMLElement> = Omit<
+  Params<T>,
+  'tag'
+>;
 
 export type Route = {
   path: string;
