@@ -1,6 +1,7 @@
 import BaseElement from '@/utils/components/base-element';
 import Input from '@/utils/components/input';
 import Label from '@/utils/components/label';
+import Hint from '../hint';
 
 export default class InputField extends BaseElement {
   input: Input;
@@ -11,13 +12,15 @@ export default class InputField extends BaseElement {
 
   passwordRegExp = /.*[A-Z].*/;
 
-  constructor(label: Label, hint: BaseElement) {
+  constructor(label: Label, hint: Hint) {
     super({ className: ['authentication-form__field'] });
 
     this.input = label.input;
     this.hint = hint;
 
     this.input.addListener('input', this.showDemands);
+
+    this.appendChildren(label, hint);
   }
 
   showDemands = (event: Event) => {
