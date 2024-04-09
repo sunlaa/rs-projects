@@ -1,8 +1,9 @@
 import BaseElement from '@/utils/components/base-element';
-import { Subject } from '@/utils/types/types';
+import { User } from '@/utils/types/types';
+import { WSocket } from '@/web-socket/web-socket';
 
 export default class UserPage extends BaseElement {
-  allUsers: string[] = [];
+  allUsers: User[] = [];
 
   login: string;
 
@@ -11,10 +12,9 @@ export default class UserPage extends BaseElement {
     this.login = login;
   }
 
-  update(ws: Subject) {
+  update(ws: WSocket) {
     ws.users.forEach((user) => {
-      this.allUsers.push(user.login);
+      this.allUsers.push(user);
     });
-    // console.log('in user', this.allUsers);
   }
 }

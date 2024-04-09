@@ -1,34 +1,26 @@
-import { Observer, Subject, User } from '@/utils/types/types';
+import Observable from '@/utils/services/observable';
+import Router from '@/utils/services/router';
+import { Observer, User } from '@/utils/types/types';
 
-class WSoket implements Subject {
-  socket: WebSocket = new WebSocket('ws://localhost:8080');
+export class WSocket extends Observable {
+  socket: WebSocket = new WebSocket('ws://localhost:4000');
 
   observers: Observer[] = [];
 
   users: User[] = [];
 
+  loginErorr: string = '';
+
+  router: Router | null = null;
+
   constructor() {
+    super();
     this.socket.addEventListener('message', this.hearMessages);
   }
 
-  attach(observer: Observer): void {
-    this.observers.push(observer);
-  }
-
-  detach(observer: Observer): void {
-    const observerIndex = this.observers.indexOf(observer);
-    this.observers.splice(observerIndex, 1);
-  }
-
-  notify(): void {
-    this.observers.forEach((observer) => {
-      observer.update(this);
-    });
-  }
-
-  log(login: string, password: string) {
+  log(login: string, password: string, router: Router) {
     const request = {
-      id: '1',
+      id: 'user-login',
       type: 'USER_LOGIN',
       payload: {
         user: {
@@ -38,13 +30,13 @@ class WSoket implements Subject {
       },
     };
 
+    this.router = router;
     this.socket.send(JSON.stringify(request));
-    this.getAllUsers();
   }
 
-  getAllUsers() {
+  getAllAuthenticatedUsers() {
     const request = {
-      id: '1',
+      id: 'get-authenticated-users',
       type: 'USER_ACTIVE',
       payload: null,
     };
@@ -53,14 +45,31 @@ class WSoket implements Subject {
   }
 
   hearMessages = (event: MessageEvent) => {
-    const data: { id: string; type: string; payload: { users: [] } } =
-      JSON.parse(event.data);
+    const data: {
+      id: string;
+      type: string;
+      payload: { users: []; error: string };
+    } = JSON.parse(event.data);
 
     switch (data.type) {
       case 'USER_ACTIVE': {
         this.users = data.payload.users;
-        // console.log('in websocket', this.users);
         this.notify();
+        break;
+      }
+      case 'USER_LOGIN': {
+        if (this.router) {
+          this.router.navigate('chat');
+        }
+        this.getAllAuthenticatedUsers();
+        break;
+      }
+      case 'ERROR': {
+        if (data.id === 'user-login') {
+          const errorMessage = data.payload.error;
+          this.loginErorr = `${errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1)}.`;
+          this.notify();
+        }
         break;
       }
       default: {
@@ -70,5 +79,5 @@ class WSoket implements Subject {
   };
 }
 
-const ws = new WSoket();
+const ws = new WSocket();
 export default ws;

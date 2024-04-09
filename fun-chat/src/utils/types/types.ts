@@ -23,15 +23,43 @@ export interface Subject {
   detach(observer: Observer): void;
 
   notify(): void;
-
-  users: User[];
 }
 
 export interface Observer {
   update(subject: Subject): void;
 }
 
+export type WSData = {
+  id: string | null;
+  type: string;
+  payload: object;
+};
+
+export type AuthenticationData = {
+  user: {
+    login: string;
+    password: string;
+  };
+};
+
+export const loginRegExp = /^[A-Z]/;
+
+export const passwordRegExp = /.*[A-Z].*/;
+
 export type User = {
   login: string;
   isLogined: boolean;
+};
+
+export type Message = {
+  id: string;
+  from: string;
+  to: string;
+  text: string;
+  datetime: number;
+  status: {
+    isDelivered: boolean;
+    isReaded: boolean;
+    isEdited: boolean;
+  };
 };

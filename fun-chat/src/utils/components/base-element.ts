@@ -80,6 +80,13 @@ export default class BaseElement<T extends HTMLElement = HTMLElement> {
     return childElements;
   }
 
+  removeChildren() {
+    const children = this.getChildren();
+    children.forEach((child) => {
+      child.remove();
+    });
+  }
+
   remove() {
     this.element.remove();
   }

@@ -26,7 +26,7 @@ export default class Hint extends BaseElement {
         this.requirementList.appendChildren(
           li('The English letters'),
           li('First letter in uppercase'),
-          li('The minimum login length is 4 characters')
+          li('The minimum login length is 3 characters')
         );
         break;
       }
