@@ -1,4 +1,3 @@
-import '../authentication.css';
 import BaseElement from '@/utils/components/base-element';
 import Input from '@/utils/components/input';
 import Label from '@/utils/components/label';
@@ -36,9 +35,9 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
   router: Router;
 
   constructor(router: Router) {
-    super({ tag: 'form', className: ['authentication-form'] });
+    super({ tag: 'form', className: ['entry-page__authentication-form'] });
 
-    this.addListener('submit', this.getEntryData);
+    this.addListener('submit', this.entry);
     this.appendChildren(
       this.login,
       this.password,
@@ -63,12 +62,12 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
     );
   }
 
-  getEntryData() {
+  getEntryData = () => {
     const login = this.login.input.getData();
     const password = this.password.input.getData();
 
     return { login, password };
-  }
+  };
 
   entry = (event: Event) => {
     event.preventDefault();

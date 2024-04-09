@@ -1,4 +1,4 @@
-import AuthenticationForm from '@/pages/authentication-page/entry-form/entry-form';
+import EntryPage from '@/pages/authentication-page/entry-page';
 import ChatPage from '@/pages/chat-page/chat-page';
 import Router from '@/utils/services/router';
 
@@ -22,9 +22,7 @@ export default class App {
         path: 'entry',
         callback: () => {
           this.container.innerHTML = '';
-          this.container.append(
-            new AuthenticationForm(this.router).getElement()
-          );
+          this.container.append(new EntryPage(this.router).getElement());
         },
       },
       {
