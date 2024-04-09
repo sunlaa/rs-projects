@@ -1,6 +1,76 @@
+/* Стилизовать error mesage*/
+.entry-page {
+  width: 90%;
+  min-width: 300px;
+  max-width: 500px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.entry-page__title {
+  text-align: center;
+  color: #260d2f;
+  text-shadow: 1px 2px 5px #7b3795;
+  font-size: 3rem;
+}
+
+.entry-page__authentication-form {
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 0 1px 2px rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.001);
+  backdrop-filter: blur(5px);
+  border: solid 3px white;
+  border-radius: 9px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.authentication-form__title {
+  align-self: center;
+  margin-bottom: 1rem;
+}
+
+.authentication-form__field {
+  position: relative;
+}
+
+.authentication-form__label {
+  width: 100%;
+  margin-left: 1rem;
+  font-size: 1em;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.authentication-form__label input {
+  text-shadow: 0 1px 2px rgb(0, 0, 0);
+  width: 30%;
+  color: #ffffff;
+  font-family: 'Concert One', sans-serif;
+  font-size: 1.1em;
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 1px #ffffff;
+}
+
+.authentication-form__label input:focus-visible {
+  outline: none;
+}
+
 .authentication-form__hint {
-  border: 1px solid black;
-  border-radius: 4px;
+  z-index: -1;
+  position: absolute;
+  bottom: 30px;
+  background: linear-gradient(270deg, #72467bca, #641769bc);
+  border-radius: 10px;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
   display: flex;
@@ -9,14 +79,57 @@
   width: fit-content;
   padding: 0.5rem;
   opacity: 0;
+  transition: all linear 200ms;
 }
 
 .authentication-form__hint.visible {
+  z-index: 2;
   opacity: 1;
 }
 
 .hint__list {
+  font-size: 0.8rem;
   margin: 0;
   padding-left: 0.5rem;
   list-style-position: inside;
+}
+
+#submit {
+  color: white;
+  font-family: 'Concert One', sans-serif;
+  font-size: 0.8em;
+  align-self: flex-end;
+  margin-right: 1rem;
+  border-radius: 10px;
+  padding: 0.3em 1.7em;
+  background-color: #260d2f;
+  border: none;
+  transition: all linear 200ms;
+}
+
+#submit:hover {
+  cursor: pointer;
+  text-shadow: 0 1px 3px #ffffff;
+  background-color: #3a1547;
+}
+
+.authentication-form_error-container {
+  text-align: center;
+  color: white;
+  text-shadow: 0 1px 2px rgb(0, 0, 0);
+  height: 25px;
+  padding-bottom: 5px;
+}
+
+.authentication-form__error {
+  opacity: 0;
+  animation: fade 200ms forwards 100ms;
+  transition: all linear 100ms;
+}
+
+
+@media screen and (max-width: 500px) {
+  .entry-page__authentication-form {
+    font-size: 1rem;
+  }
 }

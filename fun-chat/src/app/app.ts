@@ -1,3 +1,4 @@
+import './global.css';
 import EntryPage from '@/pages/authentication-page/entry-page';
 import ChatPage from '@/pages/chat-page/chat-page';
 import Router from '@/utils/services/router';

@@ -37,8 +37,16 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
   constructor(router: Router) {
     super({ tag: 'form', className: ['entry-page__authentication-form'] });
 
+    const title = new BaseElement({
+      // заменить на fieldset и legened
+      tag: 'h2',
+      textContent: 'Login',
+      className: ['authentication-form__title'],
+    });
+
     this.addListener('submit', this.entry);
     this.appendChildren(
+      title,
       this.login,
       this.password,
       this.submit,
@@ -57,7 +65,7 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
     return (
       login.length > 2 &&
       loginRegExp.test(login) &&
-      password.length > 8 &&
+      password.length > 7 &&
       passwordRegExp.test(password)
     );
   }
