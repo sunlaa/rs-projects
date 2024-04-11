@@ -127,7 +127,6 @@
   transition: all linear 100ms;
 }
 
-
 @media screen and (max-width: 500px) {
   .entry-page__authentication-form {
     font-size: 1rem;
