@@ -26,7 +26,12 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
     new Hint('password')
   );
 
-  submit: Input = new Input({ type: 'submit', id: 'submit', value: 'Log in' });
+  submit: Input = new Input({
+    type: 'submit',
+    id: 'submit',
+    value: 'Log in',
+    className: ['button'],
+  });
 
   errorContainer: BaseElement = new BaseElement({
     className: ['authentication-form_error-container'],

@@ -8,6 +8,9 @@ export default class EntryPage extends BaseElement {
   constructor(router: Router) {
     super({ tag: 'section', className: ['entry-page'] });
     const authentication = new AuthenticationForm(router);
-    this.appendChildren(new Title('Welcome to Fun Chat!'), authentication);
+    this.appendChildren(
+      new Title('Welcome to Fun Chat!', ['entry-page__title']),
+      authentication
+    );
   }
 }

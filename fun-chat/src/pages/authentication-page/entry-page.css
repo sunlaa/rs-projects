@@ -20,9 +20,9 @@
 
 .entry-page__authentication-form {
   font-size: 1.5rem;
-  color: white;
-  text-shadow: 0 1px 2px rgb(0, 0, 0);
-  background-color: rgba(255, 255, 255, 0.001);
+  color: #ffffff;
+  text-shadow: 0 2px 2px #62345f;
+  background-color: #00000015;
   backdrop-filter: blur(5px);
   border: solid 3px white;
   border-radius: 9px;
@@ -95,22 +95,14 @@
 }
 
 #submit {
+  cursor: pointer;
   color: white;
   font-family: 'Concert One', sans-serif;
   font-size: 0.8em;
   align-self: flex-end;
   margin-right: 1rem;
-  border-radius: 10px;
   padding: 0.3em 1.7em;
-  background-color: #260d2f;
   border: none;
-  transition: all linear 200ms;
-}
-
-#submit:hover {
-  cursor: pointer;
-  text-shadow: 0 1px 3px #ffffff;
-  background-color: #3a1547;
 }
 
 .authentication-form_error-container {
