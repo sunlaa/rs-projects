@@ -5,16 +5,17 @@ import { WSocket } from '@/web-socket/web-socket';
 export default class UserPage extends BaseElement {
   allUsers: User[] = [];
 
-  login: string;
+  login: string = '';
 
-  constructor(login: string) {
+  constructor() {
     super({});
-    this.login = login;
   }
 
   update(ws: WSocket) {
-    ws.users.forEach((user) => {
-      this.allUsers.push(user);
-    });
+    // ws.users.forEach((user) => {
+    //   this.allUsers.push(user);
+    // });
+
+    this.login = ws.user;
   }
 }

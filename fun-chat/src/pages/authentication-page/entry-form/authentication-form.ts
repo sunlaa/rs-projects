@@ -1,9 +1,9 @@
 import BaseElement from '@/utils/components/base-element';
+import SessionStorage from '@/utils/services/session-storage';
 import Input from '@/utils/components/input';
 import Label from '@/utils/components/label';
 import ws, { WSocket } from '@/web-socket/web-socket';
 import Router from '@/utils/services/router';
-import UserPage from '@/pages/chat-page/main/user-page';
 import { loginRegExp, passwordRegExp } from '@/utils/types/types';
 import InputField from './input-field';
 import Hint from './hint';
@@ -82,12 +82,11 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
     const userData = this.getEntryData();
     const { login } = userData;
     const { password } = userData;
-    const userPage = new UserPage(login);
 
     ws.attach(this);
-    ws.attach(userPage);
     if (AuthenticationForm.validate(login, password)) {
-      ws.log(login, password, this.router);
+      ws.logIn(login, password);
+      SessionStorage.save('user-data', { login, password });
     }
   };
 }

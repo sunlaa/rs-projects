@@ -1,7 +1,9 @@
 import './global.css';
+import ws from '@/web-socket/web-socket';
 import EntryPage from '@/pages/authentication-page/entry-page';
 import ChatPage from '@/pages/chat-page/chat-page';
 import Router from '@/utils/services/router';
+import UserInfo from '@/pages/chat-page/user-info/user-info';
 
 export default class App {
   container = document.body;
@@ -14,6 +16,7 @@ export default class App {
   }
 
   run() {
+    ws.router = this.router;
     this.router.navigate('entry');
   }
 
@@ -30,7 +33,9 @@ export default class App {
         path: 'chat',
         callback: () => {
           this.container.innerHTML = '';
-          this.container.append(new ChatPage().getElement());
+          const userInfo = new UserInfo();
+          ws.attach(userInfo);
+          this.container.append(new ChatPage(this.router).getElement());
         },
       },
     ];

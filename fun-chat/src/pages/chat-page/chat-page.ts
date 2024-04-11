@@ -1,11 +1,18 @@
 import BaseElement from '@/utils/components/base-element';
+import Router from '@/utils/services/router';
+import HeaderChat from './header/header';
 
 export default class ChatPage extends BaseElement {
-  constructor() {
-    super({
-      tag: 'section',
-      textContent: 'Chaaaaat!',
-      styles: { textAlign: 'center' },
-    });
+  router: Router;
+
+  constructor(router: Router) {
+    super(
+      {
+        tag: 'section',
+      },
+      new HeaderChat()
+    );
+
+    this.router = router;
   }
 }
