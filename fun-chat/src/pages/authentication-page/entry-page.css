@@ -114,6 +114,7 @@
 }
 
 .authentication-form__error {
+  font-size: 0.8em;
   opacity: 0;
   animation: fade 200ms forwards 100ms;
   transition: all linear 100ms;

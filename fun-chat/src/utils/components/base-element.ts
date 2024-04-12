@@ -63,6 +63,15 @@ export default class BaseElement<T extends HTMLElement = HTMLElement> {
     }
   }
 
+  prepend(child: BaseElement | HTMLElement) {
+    if (child instanceof BaseElement) {
+      const elem = child.getElement();
+      this.element.prepend(elem);
+    } else {
+      this.element.prepend(child);
+    }
+  }
+
   appendChildren(...children: (BaseElement | HTMLElement | null)[]): void {
     children.filter(nonNullable).forEach((elem) => {
       this.append(elem);

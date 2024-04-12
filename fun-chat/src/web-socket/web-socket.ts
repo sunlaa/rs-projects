@@ -10,9 +10,11 @@ export class WSocket extends Observable {
 
   user: string = '';
 
-  authenticatedUsers: User[] = [];
+  externalUser: User | null = null;
 
-  unauthorizedUsers: User[] = [];
+  authenticatedUsers: User[] | null = null;
+
+  unauthorizedUsers: User[] | null = null;
 
   loginErorr: string = '';
 
@@ -25,6 +27,8 @@ export class WSocket extends Observable {
       const data = SessionStorage.get('user-data');
       if (data) {
         this.logIn(data.login, data.password);
+      } else if (this.router) {
+        this.router.navigate('entry');
       }
     });
   }
@@ -78,7 +82,7 @@ export class WSocket extends Observable {
     this.socket.send(JSON.stringify(request));
   }
 
-  getAllUsers() {
+  async getAllUsers() {
     this.getAllAuthenticatedUsers();
     this.getAllUnauthorizedUsers();
   }
@@ -114,6 +118,16 @@ export class WSocket extends Observable {
           this.router.navigate('entry');
         }
         SessionStorage.clear();
+        break;
+      }
+      case 'USER_EXTERNAL_LOGIN': {
+        this.externalUser = data.payload.user;
+        this.notify();
+        break;
+      }
+      case 'USER_EXTERNAL_LOGOUT': {
+        this.externalUser = data.payload.user;
+        this.notify();
         break;
       }
       case 'ERROR': {
