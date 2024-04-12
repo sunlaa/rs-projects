@@ -1,6 +1,6 @@
 import BaseElement from '@/utils/components/base-element';
-import { User } from '@/utils/types/types';
 import { WSocket } from '@/web-socket/web-socket';
+import { User } from '@/utils/types/types';
 import UserItem from './user-item';
 
 export default class UsersList extends BaseElement<HTMLUListElement> {
@@ -35,13 +35,24 @@ export default class UsersList extends BaseElement<HTMLUListElement> {
   }
 
   update(ws: WSocket) {
+    const wSocket = ws;
     if (ws.externalUser) {
-      const wsocket = ws;
       const status = ws.externalUser.isLogined ? 'online' : 'offline';
       const { login } = ws.externalUser;
       this.findByName(login)?.remove();
       this.addUser(status, login);
-      wsocket.externalUser = null;
+      wSocket.externalUser = null;
+      return;
+    }
+    if (ws.authenticatedUsers && ws.unauthorizedUsers) {
+      this.removeChildren();
+      const authenticatedUsers = ws.authenticatedUsers.filter(
+        (user) => user.login !== ws.user
+      );
+      this.fillAuthenticatedUsers(authenticatedUsers);
+      this.fillUnauthorizedUsers(ws.unauthorizedUsers);
+      wSocket.authenticatedUsers = null;
+      wSocket.unauthorizedUsers = null;
     }
   }
 }

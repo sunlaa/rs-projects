@@ -10,6 +10,5 @@ export default class UserName extends BaseElement {
 
   update(ws: WSocket) {
     this.setContent(`User: ${ws.user}`);
-    ws.detach(this);
   }
 }

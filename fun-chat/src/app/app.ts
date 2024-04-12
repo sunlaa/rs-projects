@@ -36,6 +36,8 @@ export default class App {
         path: 'chat',
         callback: () => {
           // доступ только авторизованым!
+          // this.container.innerHTML = '';
+          // this.container.append(new ChatPage(this.router).getElement());
           this.setContent(this.chatPage);
         },
       },

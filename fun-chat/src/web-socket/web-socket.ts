@@ -97,7 +97,6 @@ export class WSocket extends Observable {
     switch (data.type) {
       case 'USER_ACTIVE': {
         this.authenticatedUsers = data.payload.users;
-        this.notify();
         break;
       }
       case 'USER_INACTIVE': {
