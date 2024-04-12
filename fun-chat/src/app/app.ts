@@ -16,7 +16,7 @@ export default class App {
     const routes = this.createRoutes();
     this.router = new Router(routes);
 
-    this.chatPage = new ChatPage(this.router);
+    this.chatPage = new ChatPage();
   }
 
   run() {
@@ -35,9 +35,7 @@ export default class App {
       {
         path: 'chat',
         callback: () => {
-          // доступ только авторизованым!
-          // this.container.innerHTML = '';
-          // this.container.append(new ChatPage(this.router).getElement());
+          // доступ только авторизованым при роутинге через url строку!
           this.setContent(this.chatPage);
         },
       },

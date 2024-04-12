@@ -1,7 +1,7 @@
 import './user-section.css';
 import BaseElement from '@/utils/components/base-element';
 import ws from '@/web-socket/web-socket';
-import UsersList from './user-list';
+import UsersList from './users/user-list';
 
 export default class UsersSection extends BaseElement {
   list: UsersList;
