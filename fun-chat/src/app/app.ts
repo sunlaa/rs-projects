@@ -4,6 +4,7 @@ import EntryPage from '@/pages/authentication-page/entry-page';
 import ChatPage from '@/pages/chat-page/chat-page';
 import Router from '@/utils/services/router';
 import BaseElement from '@/utils/components/base-element';
+import SessionStorage from '@/utils/services/session-storage';
 
 export default class App {
   container = document.body;
@@ -28,6 +29,12 @@ export default class App {
       {
         path: 'entry',
         callback: () => {
+          const data = SessionStorage.get('user-data');
+          if (!data) {
+            this.container.append(new EntryPage(this.router).getElement());
+          }
+
+          ws.logOut();
           this.container.innerHTML = '';
           this.container.append(new EntryPage(this.router).getElement());
         },
