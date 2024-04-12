@@ -1,3 +1,4 @@
+import './main.css';
 import BaseElement from '@/utils/components/base-element';
 import UsersSection from './users-section/user-section';
 import MessageSection from './message-section/message-section';

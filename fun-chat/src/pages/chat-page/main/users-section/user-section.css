@@ -1,13 +1,44 @@
-.indicator {
-  width: 10px;
-  height: 10px;
+.main__users-section {
+  padding: 0.6rem;
+  background-color: #00000015;
   border-radius: 5px;
+  width: 30%;
+  font-size: 1.3rem;
+  color: #ffffff;
+  text-shadow: 0 1px 2px #62345f;
+}
+
+.users-section__list {
+  padding: 0;
+  list-style: none;
+}
+
+.user-section__item {
+  cursor: pointer;
+  padding: 0 0 0.2rem 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: all linear 100ms;
+}
+
+.user-section__item:hover {
+  background-color: rgba(0, 0, 0, 0.054);
+}
+
+.indicator {
+  box-shadow: 0 1px 2px #62345f;
+  width: 7px;
+  height: 7px;
+  border-radius: 5px;
+  border: solid 0.5px rgb(46, 46, 46);
 }
 
 .indicator.offline {
-  background-color: red;
+  background-color: #a4a4a4;
 }
 
 .indicator.online {
-  background-color: green;
+  background-color: rgb(65, 191, 65);
 }

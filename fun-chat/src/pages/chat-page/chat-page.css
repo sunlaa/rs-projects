@@ -1,10 +1,12 @@
 .chat-page {
+  height: 100%;
   width: 90%;
   min-width: 300px;
   max-width: 1000px;
   padding: 1rem;
   margin: 1rem;
   display: flex;
+  gap: 0.6rem;
   flex-direction: column;
   align-items: center;
 }
