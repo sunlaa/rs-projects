@@ -9,12 +9,8 @@
   backdrop-filter: blur(5px);
   border-radius: 5px;
   color: #ffffff;
-  text-shadow: 0 1px 2px #62345f;
+  text-shadow: 0 1px 2px #888787;
   font-size: 1.3rem;
-}
-
-.header__title {
-  font-size: 1.3em;
 }
 
 .header__nav-buttons {
@@ -22,8 +18,11 @@
   gap: 1em;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .header {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+  }
+  .header__nav-buttons {
+    gap: 0.5em;
   }
 }

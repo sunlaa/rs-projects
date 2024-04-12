@@ -37,7 +37,7 @@ export default class InputField extends BaseElement {
           break;
         }
         case 'password': {
-          if (passwordRegExp.test(value) && value.length > 7) {
+          if (passwordRegExp.test(value) && value.length > 3) {
             this.hint.removeClass('visible');
           } else {
             this.hint.addClass('visible');

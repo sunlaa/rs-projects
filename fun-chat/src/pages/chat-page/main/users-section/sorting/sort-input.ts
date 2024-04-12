@@ -5,7 +5,11 @@ export default class SortInput extends Input {
   list: UsersList;
 
   constructor(list: UsersList) {
-    super({ type: 'text', placeholder: 'Search...' });
+    super({
+      className: ['user-section__input'],
+      type: 'text',
+      placeholder: 'Search...',
+    });
     this.list = list;
     this.addListener('input', this.sort);
   }

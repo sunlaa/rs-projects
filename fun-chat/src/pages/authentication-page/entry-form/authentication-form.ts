@@ -70,7 +70,7 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
     return (
       login.length > 2 &&
       loginRegExp.test(login) &&
-      password.length > 7 &&
+      password.length > 3 &&
       passwordRegExp.test(password)
     );
   }
