@@ -18,8 +18,8 @@ export default class BaseElement<T extends HTMLElement = HTMLElement> {
     Object.assign(element, params);
     this.element = element;
 
-    if (params.className) {
-      params.className.forEach((name) => this.element.classList.add(name));
+    if (params.classes) {
+      params.classes.forEach((name) => this.element.classList.add(name));
     }
 
     if (childs) {

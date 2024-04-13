@@ -10,7 +10,7 @@ export default class UsersSection extends BaseElement {
   constructor() {
     super({
       tag: 'aside',
-      className: ['main__users-section', 'user-section', 'section'],
+      classes: ['main__users-section', 'user-section', 'section'],
     });
     this.list = new UsersList();
     ws.attach(this.list);

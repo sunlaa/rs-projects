@@ -12,7 +12,7 @@ import ErrorMessage from './error-message';
 export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
   login: InputField = new InputField(
     new Label(new Input({ type: 'text', id: 'login' }), {
-      className: ['authentication-form__label'],
+      classes: ['authentication-form__label'],
       textContent: 'Enter your login: ',
     }),
     new Hint('login')
@@ -20,7 +20,7 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
 
   password: InputField = new InputField(
     new Label(new Input({ type: 'password', id: 'password' }), {
-      className: ['authentication-form__label'],
+      classes: ['authentication-form__label'],
       textContent: 'Enter you password: ',
     }),
     new Hint('password')
@@ -30,23 +30,23 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
     type: 'submit',
     id: 'submit',
     value: 'Log in',
-    className: ['button'],
+    classes: ['button'],
   });
 
   errorContainer: BaseElement = new BaseElement({
-    className: ['authentication-form_error-container'],
+    classes: ['authentication-form_error-container'],
   });
 
   router: Router;
 
   constructor(router: Router) {
-    super({ tag: 'form', className: ['entry-page__authentication-form'] });
+    super({ tag: 'form', classes: ['entry-page__authentication-form'] });
 
     const title = new BaseElement({
       // заменить на fieldset и legened
       tag: 'h2',
       textContent: 'Login',
-      className: ['authentication-form__title'],
+      classes: ['authentication-form__title'],
     });
 
     this.addListener('submit', this.entry);

@@ -1,7 +1,7 @@
 import Observable from '@/utils/services/observable';
 import Router from '@/utils/services/router';
 import SessionStorage from '@/utils/services/session-storage';
-import { Observer, User } from '@/utils/types/types';
+import { Message, Observer, User } from '@/utils/types/types';
 
 export class WSocket extends Observable {
   socket: WebSocket = new WebSocket('ws://localhost:4000');
@@ -15,6 +15,10 @@ export class WSocket extends Observable {
   authenticatedUsers: User[] | null = null;
 
   unauthorizedUsers: User[] | null = null;
+
+  myMessage: Message | null = null;
+
+  notMyMessage: Message | null = null;
 
   loginErorr: string = '';
 
@@ -82,16 +86,31 @@ export class WSocket extends Observable {
     this.socket.send(JSON.stringify(request));
   }
 
-  async getAllUsers() {
+  getAllUsers() {
     this.getAllAuthenticatedUsers();
     this.getAllUnauthorizedUsers();
+  }
+
+  sendMessage(to: string, text: string) {
+    const request = {
+      id: 'send-message',
+      type: 'MSG_SEND',
+      payload: {
+        message: {
+          to,
+          text,
+        },
+      },
+    };
+
+    this.socket.send(JSON.stringify(request));
   }
 
   hearMessages = (event: MessageEvent) => {
     const data: {
       id: string;
       type: string;
-      payload: { users: []; error: string; user: User };
+      payload: { users: []; error: string; user: User; message: Message };
     } = JSON.parse(event.data);
 
     switch (data.type) {
@@ -127,6 +146,16 @@ export class WSocket extends Observable {
       case 'USER_EXTERNAL_LOGOUT': {
         this.externalUser = data.payload.user;
         this.notify();
+        break;
+      }
+      case 'MSG_SEND': {
+        if (data.payload.message.from === this.user) {
+          this.myMessage = data.payload.message;
+          this.notify();
+        } else {
+          this.notMyMessage = data.payload.message;
+          this.notify();
+        }
         break;
       }
       case 'ERROR': {

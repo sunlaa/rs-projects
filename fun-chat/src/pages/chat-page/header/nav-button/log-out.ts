@@ -6,7 +6,7 @@ export default class LogOut extends BaseElement<HTMLAnchorElement> {
       tag: 'a',
       href: '#entry',
       textContent: 'Log Out',
-      className: ['header__log-out', 'button'],
+      classes: ['header__log-out', 'button'],
     });
   }
 }

@@ -4,6 +4,6 @@ import LogOut from './log-out';
 
 export default class NavButtons extends BaseElement {
   constructor() {
-    super({ className: ['header__nav-buttons'] }, new Info(), new LogOut());
+    super({ classes: ['header__nav-buttons'] }, new Info(), new LogOut());
   }
 }

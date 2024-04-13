@@ -5,7 +5,7 @@ export default class UserName extends BaseElement {
   name: string = '';
 
   constructor() {
-    super({ tag: 'p', className: ['header__user-name'] });
+    super({ tag: 'p', classes: ['header__user-name'] });
   }
 
   update(ws: WSocket) {

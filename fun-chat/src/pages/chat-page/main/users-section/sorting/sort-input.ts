@@ -6,7 +6,7 @@ export default class SortInput extends Input {
 
   constructor(list: UsersList) {
     super({
-      className: ['user-section__input', 'main-input'],
+      classes: ['user-section__input', 'main-input'],
       type: 'text',
       placeholder: 'Search...',
     });

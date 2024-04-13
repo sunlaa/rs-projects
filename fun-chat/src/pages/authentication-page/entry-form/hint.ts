@@ -5,12 +5,12 @@ export default class Hint extends BaseElement {
 
   constructor(input: 'login' | 'password') {
     super({
-      className: ['authentication-form__hint', 'hint'],
+      classes: ['authentication-form__hint', 'hint'],
       textContent: 'You should match this requirements:',
     });
     this.requirementList = new BaseElement({
       tag: 'ul',
-      className: ['hint__list'],
+      classes: ['hint__list'],
     });
     this.createList(input);
 

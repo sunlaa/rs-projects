@@ -3,7 +3,7 @@ export type Params<T extends HTMLElement = HTMLElement> = Partial<
 > & {
   tag?: keyof HTMLElementTagNameMap;
   content?: string;
-  className?: string[];
+  classes?: string[];
   styles?: Partial<CSSStyleDeclaration>;
 };
 
@@ -57,9 +57,11 @@ export type Message = {
   to: string;
   text: string;
   datetime: number;
-  status: {
-    isDelivered: boolean;
-    isReaded: boolean;
-    isEdited: boolean;
-  };
+  status: Status;
+};
+
+export type Status = {
+  isDelivered: boolean;
+  isReaded: boolean;
+  isEdited: boolean;
 };

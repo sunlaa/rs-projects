@@ -6,7 +6,7 @@ import Title from '../../utils/components/title';
 
 export default class EntryPage extends BaseElement {
   constructor(router: Router) {
-    super({ tag: 'section', className: ['entry-page'] });
+    super({ tag: 'section', classes: ['entry-page'] });
     const authentication = new AuthenticationForm(router);
     this.appendChildren(
       new Title('Welcome to Fun Chat!', ['entry-page__title']),

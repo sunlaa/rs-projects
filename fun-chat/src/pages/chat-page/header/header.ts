@@ -7,7 +7,7 @@ import NavButtons from './nav-button/nav-buttons';
 
 export default class HeaderChat extends BaseElement {
   constructor() {
-    super({ tag: 'header', className: ['chat-page__header', 'header'] });
+    super({ tag: 'header', classes: ['chat-page__header', 'header'] });
     const name = new UserName();
     ws.attach(name);
     this.appendChildren(

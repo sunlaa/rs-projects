@@ -3,7 +3,7 @@ import Title from '@/utils/components/title';
 
 export default class MessageHeader extends BaseElement {
   constructor() {
-    super({ className: ['message-section__header'] });
+    super({ classes: ['message-section__header'] });
   }
 
   addContent(status: string, login: string) {

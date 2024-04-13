@@ -2,7 +2,6 @@
   display: flex;
   gap: 1%;
   width: 90%;
-  height: 90%;
+  height: 70%;
   min-height: 300px;
-  overflow-y: scroll;
 }

@@ -8,7 +8,7 @@ export default class ChatPage extends BaseElement {
     super(
       {
         tag: 'section',
-        className: ['chat-page'],
+        classes: ['chat-page'],
       },
       new HeaderChat(),
       new MainChat()

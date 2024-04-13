@@ -8,7 +8,7 @@ export default class UsersList extends BaseElement<HTMLUListElement> {
   messageSection: MessageSection | null = null;
 
   constructor() {
-    super({ tag: 'ul', className: ['users-section__list'] });
+    super({ tag: 'ul', classes: ['users-section__list'] });
   }
 
   addUser(status: 'online' | 'offline', login: string) {

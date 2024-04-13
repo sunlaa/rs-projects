@@ -9,4 +9,8 @@ export default class Input extends BaseElement<HTMLInputElement> {
   getData(): string {
     return this.element.value;
   }
+
+  clear() {
+    this.element.value = '';
+  }
 }

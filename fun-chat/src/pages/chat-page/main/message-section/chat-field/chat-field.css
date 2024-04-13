@@ -1,0 +1,22 @@
+.chat-field__message {
+  font-size: 0.75em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.chat-field__message.mine {
+  align-self: flex-end;
+}
+
+.chat-field__message.not-mine {
+  align-self: flex-start;
+}
+
+.message__text {
+  font-size: 1.3em;
+}
+
+.message__status {
+  order: 3;
+}

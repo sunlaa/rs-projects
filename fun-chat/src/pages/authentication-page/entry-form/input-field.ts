@@ -10,7 +10,7 @@ export default class InputField extends BaseElement {
   hint: BaseElement;
 
   constructor(label: Label, hint: Hint) {
-    super({ className: ['authentication-form__field'] });
+    super({ classes: ['authentication-form__field'] });
 
     this.input = label.input;
     this.hint = hint;
