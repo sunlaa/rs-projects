@@ -15,7 +15,10 @@ export default class ChatForm extends BaseElement<HTMLFormElement> {
   });
 
   constructor() {
-    super({ className: ['message-section__chat-form', 'chat-form'] });
+    super({
+      tag: 'form',
+      className: ['message-section__chat-form', 'chat-form'],
+    });
     this.appendChildren(this.messageField, this.sendButton);
   }
 }

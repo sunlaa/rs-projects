@@ -3,7 +3,7 @@ import BaseElement from '@/utils/components/base-element';
 export default class Title extends BaseElement {
   constructor(textContent: string, className: string[]) {
     super({
-      tag: 'p',
+      tag: 'span',
       className,
       textContent,
     });
