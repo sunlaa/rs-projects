@@ -22,6 +22,9 @@ export default class ChatForm extends BaseElement<HTMLFormElement> {
       tag: 'form',
       classes: ['message-section__chat-form', 'chat-form'],
     });
+
+    this.disable();
+
     this.appendChildren(this.messageField, this.sendButton);
     this.addListener('submit', this.sendMessage);
   }
@@ -32,4 +35,14 @@ export default class ChatForm extends BaseElement<HTMLFormElement> {
     ws.sendMessage(this.to, text);
     this.messageField.clear();
   };
+
+  disable() {
+    this.messageField.off();
+    this.sendButton.off();
+  }
+
+  enable() {
+    this.messageField.on();
+    this.sendButton.on();
+  }
 }

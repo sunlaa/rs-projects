@@ -21,15 +21,13 @@ export default class MessageStatus extends BaseElement {
     this.editStatus.setContent('Edited');
   }
 
-  changeDeliveryStatus(isDelivered: boolean) {
+  changeDeliveryStatus(isDelivered: boolean, isReaded?: boolean) {
     if (isDelivered) {
       this.deliveryStatus.setContent('Delivered');
+    } else if (isReaded) {
+      this.deliveryStatus.setContent('Read');
     } else {
       this.deliveryStatus.setContent('Sent');
     }
-  }
-
-  changeReadStatus() {
-    this.deliveryStatus.setContent('Read');
   }
 }

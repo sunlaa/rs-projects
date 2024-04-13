@@ -1,4 +1,4 @@
-import { WSocket } from '@/web-socket/web-socket';
+import ws, { WSocket } from '@/web-socket/web-socket';
 import './chat-field.css';
 import BaseElement from '@/utils/components/base-element';
 import { Message } from '@/utils/types/types';
@@ -9,6 +9,8 @@ export default class ChatField extends BaseElement {
 
   notMyMessage: Message | null = null;
 
+  fetchedMessages: Message[] | null = null;
+
   constructor() {
     super({
       tag: 'div',
@@ -17,14 +19,15 @@ export default class ChatField extends BaseElement {
     });
   }
 
-  update(ws: WSocket) {
-    const wSocket = ws;
+  update(socket: WSocket) {
+    const wSocket = socket;
     this.myMessage = wSocket.myMessage;
     this.notMyMessage = wSocket.notMyMessage;
+    this.fetchedMessages = wSocket.fetchedMessages;
 
     if (this.myMessage) {
       const message = new MessageElement(
-        'You',
+        ws.user,
         this.myMessage.datetime,
         this.myMessage.text,
         this.myMessage.id
@@ -34,6 +37,7 @@ export default class ChatField extends BaseElement {
         this.myMessage.status.isDelivered
       );
       this.append(message);
+      this.element.scrollTop = this.element.scrollHeight;
       wSocket.myMessage = null;
       return;
     }
@@ -48,6 +52,33 @@ export default class ChatField extends BaseElement {
 
       this.append(message);
       wSocket.notMyMessage = null;
+      return;
     }
+
+    if (this.fetchedMessages) {
+      this.drawMessageHistory(this.fetchedMessages);
+      wSocket.fetchedMessages = null;
+    }
+  }
+
+  drawMessageHistory(messages: Message[]) {
+    this.removeChildren();
+
+    messages.forEach((data) => {
+      const message = new MessageElement(
+        data.from,
+        data.datetime,
+        data.text,
+        data.id
+      );
+
+      if (data.from === ws.user)
+        message.statusFooter.changeDeliveryStatus(
+          data.status.isDelivered,
+          data.status.isReaded
+        );
+
+      this.append(message);
+    });
   }
 }

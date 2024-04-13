@@ -28,5 +28,7 @@ export default class MessageSection extends BaseElement {
     const data = event.detail;
     this.chatForm.to = data.login;
     this.chatHeader.addContent(data.status, data.login);
+    ws.fetchMessages(data.login);
+    this.chatForm.enable();
   };
 }

@@ -13,4 +13,12 @@ export default class Input extends BaseElement<HTMLInputElement> {
   clear() {
     this.element.value = '';
   }
+
+  off() {
+    this.element.disabled = true;
+  }
+
+  on() {
+    this.element.disabled = false;
+  }
 }

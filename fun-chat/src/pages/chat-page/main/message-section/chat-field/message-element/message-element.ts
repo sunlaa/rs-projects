@@ -1,4 +1,5 @@
 import BaseElement from '@/utils/components/base-element';
+import ws from '@/web-socket/web-socket';
 import MessageStatus from './status';
 
 export default class MessageElement extends BaseElement {
@@ -7,7 +8,7 @@ export default class MessageElement extends BaseElement {
   constructor(from: string, dateTime: number, text: string, id: string) {
     super({ classes: ['chat-field__message', 'message', 'section'], id });
 
-    if (from === 'You') {
+    if (from === ws.user) {
       this.addClass('mine');
     } else {
       this.addClass('not-mine');

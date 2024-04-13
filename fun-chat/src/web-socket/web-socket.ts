@@ -20,6 +20,8 @@ export class WSocket extends Observable {
 
   notMyMessage: Message | null = null;
 
+  fetchedMessages: Message[] | null = null;
+
   loginErorr: string = '';
 
   router: Router | null = null;
@@ -106,11 +108,31 @@ export class WSocket extends Observable {
     this.socket.send(JSON.stringify(request));
   }
 
+  fetchMessages(login: string) {
+    const request = {
+      id: 'fetch-message',
+      type: 'MSG_FROM_USER',
+      payload: {
+        user: {
+          login,
+        },
+      },
+    };
+
+    this.socket.send(JSON.stringify(request));
+  }
+
   hearMessages = (event: MessageEvent) => {
     const data: {
       id: string;
       type: string;
-      payload: { users: []; error: string; user: User; message: Message };
+      payload: {
+        users: [];
+        error: string;
+        user: User;
+        message: Message;
+        messages: Message[];
+      };
     } = JSON.parse(event.data);
 
     switch (data.type) {
@@ -156,6 +178,11 @@ export class WSocket extends Observable {
           this.notMyMessage = data.payload.message;
           this.notify();
         }
+        break;
+      }
+      case 'MSG_FROM_USER': {
+        this.fetchedMessages = data.payload.messages;
+        this.notify();
         break;
       }
       case 'ERROR': {

@@ -38,3 +38,12 @@
   font-size: 1em;
   flex-grow: 1;
 }
+
+.chat-form__submit:disabled {
+  cursor: default;
+  background-color: gray;
+}
+.chat-form__submit:disabled:hover {
+  color: white;
+  text-shadow: none;
+}
