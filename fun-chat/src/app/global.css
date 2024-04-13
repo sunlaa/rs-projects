@@ -32,8 +32,10 @@ body {
 }
 
 .button {
+  font-family: 'Concert One', sans-serif;
   cursor: pointer;
   border-radius: 10px;
+  border: none;
   padding: 0.3em 1em;
   color: #ffffff;
   background-color: #50245f;
@@ -44,4 +46,27 @@ body {
 .button:hover {
   text-shadow: 0 1px 3px #ffffff;
   background-color: #6c2f83;
+}
+
+.main-input {
+  color: #ffffff;
+  text-shadow: 0 1px 2px #a8a7a7;
+  box-shadow: 0 1px 2px #5c5b5b;
+  font-family: 'Concert One', sans-serif;
+  font-size: 0.9em;
+  background-color: transparent;
+  padding: 0.2em 0.4em;
+  border: none;
+  outline: solid 1px #a8a7a7;
+  border-radius: 5px;
+}
+
+.main-input:focus-visible {
+  outline: solid 1px #807e7e;
+  border: none;
+}
+
+.main-input::placeholder {
+  text-shadow: none;
+  color: #ababab;
 }
