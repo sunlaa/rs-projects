@@ -42,7 +42,9 @@ export default class App {
         path: 'chat',
         callback: () => {
           // доступ только авторизованым при роутинге через url строку!
-          this.setContent(this.chatPage);
+          // this.setContent(this.chatPage);
+          this.container.innerHTML = '';
+          this.container.append(new ChatPage().getElement());
         },
       },
     ];

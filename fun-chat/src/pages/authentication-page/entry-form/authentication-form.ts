@@ -2,7 +2,7 @@ import BaseElement from '@/utils/components/base-element';
 import SessionStorage from '@/utils/services/session-storage';
 import Input from '@/utils/components/input';
 import Label from '@/utils/components/label';
-import ws, { WSocket } from '@/web-socket/web-socket';
+import ws from '@/web-socket/web-socket';
 import Router from '@/utils/services/router';
 import { loginRegExp, passwordRegExp } from '@/utils/types/types';
 import InputField from './input-field';
@@ -59,12 +59,27 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
     );
 
     this.router = router;
+
+    ws.socket.addEventListener('message', this.showErrorMessage);
   }
 
-  update(socket: WSocket) {
-    const message = new ErrorMessage(socket.loginErorr);
-    message.showMessage(this.errorContainer);
-  }
+  showErrorMessage = (event: MessageEvent) => {
+    const data: {
+      id: string;
+      type: string;
+      payload: {
+        error: string;
+      };
+    } = JSON.parse(event.data);
+
+    if (data.type === 'ERROR' && data.id === 'user-login') {
+      SessionStorage.clear();
+      let errorMessage = data.payload.error;
+      errorMessage = `${errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1)}.`;
+      const message = new ErrorMessage(errorMessage);
+      message.showMessage(this.errorContainer);
+    }
+  };
 
   static validate(login: string, password: string): boolean {
     return (
@@ -88,7 +103,6 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
     const { login } = userData;
     const { password } = userData;
 
-    ws.attach(this);
     if (AuthenticationForm.validate(login, password)) {
       ws.logIn(login, password);
       SessionStorage.save('user-data', { login, password });

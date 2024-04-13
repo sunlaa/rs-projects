@@ -1,5 +1,5 @@
 import BaseElement from '@/utils/components/base-element';
-import { WSocket } from '@/web-socket/web-socket';
+import ws from '@/web-socket/web-socket';
 import { User } from '@/utils/types/types';
 import UserItem from './user-item';
 import MessageSection from '../../message-section/message-section';
@@ -9,6 +9,9 @@ export default class UsersList extends BaseElement<HTMLUListElement> {
 
   constructor() {
     super({ tag: 'ul', classes: ['users-section__list'] });
+
+    ws.socket.addEventListener('message', this.allUsers);
+    ws.socket.addEventListener('message', this.externalUser);
   }
 
   addUser(status: 'online' | 'offline', login: string) {
@@ -23,7 +26,7 @@ export default class UsersList extends BaseElement<HTMLUListElement> {
 
   fillAuthenticatedUsers(users: User[]) {
     users.forEach((user) => {
-      this.addUser('online', user.login);
+      if (user.login !== ws.user) this.addUser('online', user.login);
     });
   }
 
@@ -38,25 +41,47 @@ export default class UsersList extends BaseElement<HTMLUListElement> {
     return usersArr.find((elem) => elem.textContent === name);
   }
 
-  update(ws: WSocket) {
-    const wSocket = ws;
-    if (ws.externalUser) {
-      const status = ws.externalUser.isLogined ? 'online' : 'offline';
-      const { login } = ws.externalUser;
-      this.findByName(login)?.remove();
-      this.addUser(status, login);
-      wSocket.externalUser = null;
-      return;
+  allUsers = (event: MessageEvent) => {
+    const data: {
+      id: string;
+      type: string;
+      payload: {
+        users: User[];
+      };
+    } = JSON.parse(event.data);
+
+    if (data.type === 'USER_ACTIVE') {
+      this.fillAuthenticatedUsers(data.payload.users);
     }
-    if (ws.authenticatedUsers && ws.unauthorizedUsers) {
-      this.removeChildren();
-      const authenticatedUsers = ws.authenticatedUsers.filter(
-        (user) => user.login !== ws.user
-      );
-      this.fillAuthenticatedUsers(authenticatedUsers);
-      this.fillUnauthorizedUsers(ws.unauthorizedUsers);
-      wSocket.authenticatedUsers = null;
-      wSocket.unauthorizedUsers = null;
+    if (data.type === 'USER_INACTIVE') {
+      this.fillUnauthorizedUsers(data.payload.users);
     }
-  }
+  };
+
+  externalUser = (event: MessageEvent) => {
+    const data: {
+      id: string;
+      type: string;
+      payload: {
+        user: User;
+      };
+    } = JSON.parse(event.data);
+
+    if (
+      data.type === 'USER_EXTERNAL_LOGIN' ||
+      data.type === 'USER_EXTERNAL_LOGOUT'
+    ) {
+      const { login } = data.payload.user;
+      const { isLogined } = data.payload.user;
+      const prev = this.findByName(login);
+      if (prev) {
+        prev.remove();
+      }
+      if (isLogined) {
+        this.addUser('online', login);
+      } else {
+        this.addUser('offline', login);
+      }
+    }
+  };
 }

@@ -19,14 +19,15 @@ export default class MessageSection extends BaseElement {
     });
     this.addListener('open-chat', this.loadHistory);
 
-    ws.attach(this.chatField);
     this.appendChildren(this.chatHeader, this.chatField, this.chatForm);
   }
 
   loadHistory = (e: Event) => {
     const event = e as CustomEvent;
     const data = event.detail;
+
     this.chatForm.to = data.login;
+    this.chatField.currentUser = data.login;
     this.chatHeader.addContent(data.status, data.login);
     ws.fetchMessages(data.login);
     this.chatForm.enable();

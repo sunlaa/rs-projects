@@ -10,20 +10,6 @@ export class WSocket extends Observable {
 
   user: string = '';
 
-  externalUser: User | null = null;
-
-  authenticatedUsers: User[] | null = null;
-
-  unauthorizedUsers: User[] | null = null;
-
-  myMessage: Message | null = null;
-
-  notMyMessage: Message | null = null;
-
-  fetchedMessages: Message[] | null = null;
-
-  loginErorr: string = '';
-
   router: Router | null = null;
 
   constructor() {
@@ -136,20 +122,12 @@ export class WSocket extends Observable {
     } = JSON.parse(event.data);
 
     switch (data.type) {
-      case 'USER_ACTIVE': {
-        this.authenticatedUsers = data.payload.users;
-        break;
-      }
-      case 'USER_INACTIVE': {
-        this.unauthorizedUsers = data.payload.users;
-        this.notify();
-        break;
-      }
       case 'USER_LOGIN': {
         if (this.router) {
           this.router.navigate('chat');
         }
         this.user = data.payload.user.login;
+        this.notify();
         this.getAllUsers();
         break;
       }
@@ -160,40 +138,7 @@ export class WSocket extends Observable {
         }
         break;
       }
-      case 'USER_EXTERNAL_LOGIN': {
-        this.externalUser = data.payload.user;
-        this.notify();
-        break;
-      }
-      case 'USER_EXTERNAL_LOGOUT': {
-        this.externalUser = data.payload.user;
-        this.notify();
-        break;
-      }
-      case 'MSG_SEND': {
-        if (data.payload.message.from === this.user) {
-          this.myMessage = data.payload.message;
-          this.notify();
-        } else {
-          this.notMyMessage = data.payload.message;
-          this.notify();
-        }
-        break;
-      }
-      case 'MSG_FROM_USER': {
-        this.fetchedMessages = data.payload.messages;
-        this.notify();
-        break;
-      }
-      case 'ERROR': {
-        if (data.id === 'user-login') {
-          sessionStorage.clear();
-          const errorMessage = data.payload.error;
-          this.loginErorr = `${errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1)}.`;
-          this.notify();
-        }
-        break;
-      }
+
       default: {
         break;
       }
