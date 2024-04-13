@@ -5,10 +5,12 @@ import UsersList from './users/user-list';
 import SortInput from './sorting/sort-input';
 
 export default class UsersSection extends BaseElement {
+  list: UsersList;
+
   constructor() {
     super({ tag: 'aside', className: ['main__users-section', 'user-section'] });
-    const list = new UsersList();
-    ws.attach(list);
-    this.appendChildren(new SortInput(list), list);
+    this.list = new UsersList();
+    ws.attach(this.list);
+    this.appendChildren(new SortInput(this.list), this.list);
   }
 }

@@ -2,14 +2,18 @@ import BaseElement from '@/utils/components/base-element';
 import { WSocket } from '@/web-socket/web-socket';
 import { User } from '@/utils/types/types';
 import UserItem from './user-item';
+import MessageSection from '../../message-section/message-section';
 
 export default class UsersList extends BaseElement<HTMLUListElement> {
+  messageSection: MessageSection | null = null;
+
   constructor() {
     super({ tag: 'ul', className: ['users-section__list'] });
   }
 
   addUser(status: 'online' | 'offline', login: string) {
     const li = new UserItem(status, login);
+    li.messageSection = this.messageSection;
     if (status === 'offline') {
       this.append(li);
     } else {

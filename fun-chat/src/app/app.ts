@@ -31,12 +31,11 @@ export default class App {
         callback: () => {
           const data = SessionStorage.get('user-data');
           if (!data) {
+            this.container.innerHTML = '';
             this.container.append(new EntryPage(this.router).getElement());
+          } else {
+            ws.logOut();
           }
-
-          ws.logOut();
-          this.container.innerHTML = '';
-          this.container.append(new EntryPage(this.router).getElement());
         },
       },
       {

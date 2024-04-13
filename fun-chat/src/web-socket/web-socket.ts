@@ -113,10 +113,10 @@ export class WSocket extends Observable {
         break;
       }
       case 'USER_LOGOUT': {
+        SessionStorage.clear();
         if (this.router) {
           this.router.navigate('entry');
         }
-        SessionStorage.clear();
         break;
       }
       case 'USER_EXTERNAL_LOGIN': {
