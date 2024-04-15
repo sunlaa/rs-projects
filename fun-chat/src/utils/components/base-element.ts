@@ -2,7 +2,7 @@ import nonNullable from '../functions/non-nullable';
 import { Params } from '../types/types';
 
 export default class BaseElement<T extends HTMLElement = HTMLElement> {
-  protected element: T;
+  element: T;
 
   constructor(
     params: Params<T>,

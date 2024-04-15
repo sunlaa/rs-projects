@@ -111,3 +111,14 @@ export type ResponseDeliveredStatusData = ResponseData & {
     };
   };
 };
+
+export type ResponseReadStatusData = ResponseData & {
+  payload: {
+    message: {
+      id: string;
+      status: {
+        isReaded: boolean;
+      };
+    };
+  };
+};

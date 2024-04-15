@@ -8,6 +8,8 @@ export default class MessageElement extends BaseElement {
 
   id: string;
 
+  from: string;
+
   constructor(message: Message) {
     super({
       classes: ['chat-field__message', 'message', 'section'],
@@ -15,6 +17,8 @@ export default class MessageElement extends BaseElement {
     });
 
     this.id = message.id;
+
+    this.from = message.from;
 
     if (message.from === ws.user) {
       this.addClass('mine');
@@ -58,4 +62,12 @@ export default class MessageElement extends BaseElement {
       this.statusFooter.changeStatus(data.payload.message.status.isDelivered);
     }
   };
+
+  addStatus(data: Message) {
+    if (data.from === ws.user)
+      this.statusFooter.changeStatus(
+        data.status.isDelivered,
+        data.status.isReaded
+      );
+  }
 }

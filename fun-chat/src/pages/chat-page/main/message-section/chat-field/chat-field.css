@@ -1,3 +1,8 @@
+.chat-field__separator {
+  width: 100%;
+  background-color: black;
+}
+
 .chat-field__message {
   font-size: 0.75em;
   display: flex;

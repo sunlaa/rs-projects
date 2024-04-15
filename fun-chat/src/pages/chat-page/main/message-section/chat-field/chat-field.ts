@@ -6,14 +6,18 @@ import {
   Message,
   ResponseAllMessagesData,
   ResponseMessageData,
+  ResponseReadStatusData,
 } from '@/utils/types/types';
 import MessageElement from './message-element/message-element';
 import UserItem from '../../users-section/users/user-item/user-item';
+import MessageSeparator from './message-element/separator';
 
 export default class ChatField extends BaseElement {
   currentUser: string = '';
 
   userItems: UserItem[] = [];
+
+  unreadMessages: MessageElement[] = [];
 
   constructor() {
     super(
@@ -25,14 +29,9 @@ export default class ChatField extends BaseElement {
     );
 
     ws.socket.addEventListener('message', this.drawMessage);
-  }
+    ws.socket.addEventListener('message', this.markAsRead);
 
-  static addStatus(messageData: Message, message: MessageElement) {
-    if (messageData.from === ws.user)
-      message.statusFooter.changeStatus(
-        messageData.status.isDelivered,
-        messageData.status.isReaded
-      );
+    this.addListener('click', this.changeStatus);
   }
 
   drawMessage = (event: MessageEvent) => {
@@ -48,10 +47,14 @@ export default class ChatField extends BaseElement {
         this.currentUser === message.from
       ) {
         const messageElement = new MessageElement(message);
-        ChatField.addStatus(message, messageElement);
+        messageElement.addStatus(message);
+        this.unreadMessages.push(messageElement);
 
         this.append(messageElement);
-        this.element.scrollTop = this.element.scrollHeight;
+        messageElement.getElement().scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+        });
       }
       const item = this.userItems.find((li) => li.login === message.from);
 
@@ -69,11 +72,44 @@ export default class ChatField extends BaseElement {
 
     messages.forEach((data) => {
       const message = new MessageElement(data);
-
-      ChatField.addStatus(data, message);
+      message.addStatus(data);
 
       this.append(message);
+      if (!data.status.isReaded) this.unreadMessages.push(message);
     });
     this.element.scrollTop = this.element.scrollHeight;
+  }
+
+  markAsRead = (event: MessageEvent) => {
+    const data: ResponseReadStatusData = JSON.parse(event.data);
+
+    if (data.type === 'MSG_READ') {
+      this.unreadMessages.forEach((message) => {
+        if (message.from === ws.user) {
+          message.statusFooter.changeStatus(
+            true,
+            data.payload.message.status.isReaded
+          );
+        }
+      });
+
+      const item = this.userItems.find((li) => li.login === this.currentUser);
+      if (item) {
+        item.messageCounter.reset();
+      }
+
+      this.unreadMessages = [];
+    }
+  };
+
+  changeStatus = () => {
+    this.unreadMessages.forEach((message) => {
+      ws.changeReadStatus(message.id);
+    });
+  };
+
+  addSeparator(message: MessageElement) {
+    const messageElement = message.getElement();
+    this.element.insertBefore(new MessageSeparator().element, messageElement);
   }
 }

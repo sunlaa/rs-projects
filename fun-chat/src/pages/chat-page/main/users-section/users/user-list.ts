@@ -40,6 +40,8 @@ export default class UsersList extends BaseElement<HTMLUListElement> {
       const prev = this.findByName(login);
       if (prev) {
         prev.changeStatus(this, isLogined);
+      } else {
+        this.addUser('online', login);
       }
     }
   };

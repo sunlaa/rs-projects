@@ -22,12 +22,14 @@ export default class MessageStatus extends BaseElement {
   }
 
   changeStatus(isDelivered: boolean, isReaded?: boolean) {
+    if (isReaded) {
+      this.deliveryStatus.setContent('Read');
+      return;
+    }
     if (isDelivered) {
       this.deliveryStatus.setContent('Delivered');
-    } else if (isReaded) {
-      this.deliveryStatus.setContent('Read');
-    } else {
-      this.deliveryStatus.setContent('Sent');
+      return;
     }
+    this.deliveryStatus.setContent('Sent');
   }
 }

@@ -108,6 +108,20 @@ export class WSocket extends Observable {
     this.socket.send(JSON.stringify(request));
   }
 
+  changeReadStatus(id: string) {
+    const request = {
+      id: 'read-message',
+      type: 'MSG_READ',
+      payload: {
+        message: {
+          id,
+        },
+      },
+    };
+
+    this.socket.send(JSON.stringify(request));
+  }
+
   hearMessages = (event: MessageEvent) => {
     const data: ResponseUserData = JSON.parse(event.data);
 

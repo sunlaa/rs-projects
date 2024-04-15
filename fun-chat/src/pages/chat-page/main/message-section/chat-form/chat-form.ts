@@ -32,8 +32,10 @@ export default class ChatForm extends BaseElement<HTMLFormElement> {
   sendMessage = (event: Event) => {
     event.preventDefault();
     const text = this.messageField.getData();
-    ws.sendMessage(this.to, text);
-    this.messageField.clear();
+    if (text.length !== 0) {
+      ws.sendMessage(this.to, text);
+      this.messageField.clear();
+    }
   };
 
   disable() {
