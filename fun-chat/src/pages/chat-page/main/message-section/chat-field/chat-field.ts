@@ -2,11 +2,18 @@ import ws from '@/web-socket/web-socket';
 import './chat-field.css';
 import BaseElement from '@/utils/components/base-element';
 import Title from '@/utils/components/title';
-import { Message } from '@/utils/types/types';
+import {
+  Message,
+  ResponseAllMessagesData,
+  ResponseMessageData,
+} from '@/utils/types/types';
 import MessageElement from './message-element/message-element';
+import UserItem from '../../users-section/users/user-item';
 
 export default class ChatField extends BaseElement {
   currentUser: string = '';
+
+  userItems: UserItem[] = [];
 
   constructor() {
     super(
@@ -20,15 +27,18 @@ export default class ChatField extends BaseElement {
     ws.socket.addEventListener('message', this.drawMessage);
   }
 
+  static addStatus(messageData: Message, message: MessageElement) {
+    if (messageData.from === ws.user)
+      message.statusFooter.changeDeliveryStatus(
+        messageData.status.isDelivered,
+        messageData.status.isReaded
+      );
+  }
+
   drawMessage = (event: MessageEvent) => {
-    const data: {
-      id: string;
-      type: string;
-      payload: {
-        message: Message;
-        messages: Message[];
-      };
-    } = JSON.parse(event.data);
+    const data: ResponseMessageData & ResponseAllMessagesData = JSON.parse(
+      event.data
+    );
 
     const { message } = data.payload;
 
@@ -37,11 +47,19 @@ export default class ChatField extends BaseElement {
         this.currentUser === message.to ||
         this.currentUser === message.from
       ) {
-        this.append(new MessageElement(message));
+        const messageElement = new MessageElement(message);
+        ChatField.addStatus(message, messageElement);
+
+        this.append(messageElement);
         this.element.scrollTop = this.element.scrollHeight;
       }
+      const item = this.userItems.find((li) => li.login === message.from);
+
+      if (item) {
+        item.incrementMessageCounter();
+      }
     }
-    if (data.type === 'MSG_FROM_USER') {
+    if (data.type === 'MSG_FROM_USER' && data.id === 'get-specified-user') {
       this.drawMessageHistory(data.payload.messages);
     }
   };
@@ -52,11 +70,7 @@ export default class ChatField extends BaseElement {
     messages.forEach((data) => {
       const message = new MessageElement(data);
 
-      if (data.from === ws.user)
-        message.statusFooter.changeDeliveryStatus(
-          data.status.isDelivered,
-          data.status.isReaded
-        );
+      ChatField.addStatus(data, message);
 
       this.append(message);
     });

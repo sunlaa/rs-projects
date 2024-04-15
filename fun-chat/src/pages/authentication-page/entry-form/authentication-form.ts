@@ -4,7 +4,11 @@ import Input from '@/utils/components/input';
 import Label from '@/utils/components/label';
 import ws from '@/web-socket/web-socket';
 import Router from '@/utils/services/router';
-import { loginRegExp, passwordRegExp } from '@/utils/types/types';
+import {
+  ResponseLoginErrorData,
+  loginRegExp,
+  passwordRegExp,
+} from '@/utils/types/types';
 import InputField from './input-field';
 import Hint from './hint';
 import ErrorMessage from './error-message';
@@ -64,13 +68,7 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
   }
 
   showErrorMessage = (event: MessageEvent) => {
-    const data: {
-      id: string;
-      type: string;
-      payload: {
-        error: string;
-      };
-    } = JSON.parse(event.data);
+    const data: ResponseLoginErrorData = JSON.parse(event.data);
 
     if (data.type === 'ERROR' && data.id === 'user-login') {
       SessionStorage.clear();

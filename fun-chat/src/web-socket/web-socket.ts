@@ -1,14 +1,14 @@
 import Observable from '@/utils/services/observable';
 import Router from '@/utils/services/router';
 import SessionStorage from '@/utils/services/session-storage';
-import { Message, Observer, User } from '@/utils/types/types';
+import { Observer, ResponseUserData } from '@/utils/types/types';
 
 export class WSocket extends Observable {
   socket: WebSocket = new WebSocket('ws://localhost:4000');
 
   observers: Observer[] = [];
 
-  user: string = '';
+  user: string = 'test';
 
   router: Router | null = null;
 
@@ -94,9 +94,9 @@ export class WSocket extends Observable {
     this.socket.send(JSON.stringify(request));
   }
 
-  fetchMessages(login: string) {
+  fetchMessages(login: string, id: string) {
     const request = {
-      id: 'fetch-message',
+      id,
       type: 'MSG_FROM_USER',
       payload: {
         user: {
@@ -109,26 +109,18 @@ export class WSocket extends Observable {
   }
 
   hearMessages = (event: MessageEvent) => {
-    const data: {
-      id: string;
-      type: string;
-      payload: {
-        users: [];
-        error: string;
-        user: User;
-        message: Message;
-        messages: Message[];
-      };
-    } = JSON.parse(event.data);
+    const data: ResponseUserData = JSON.parse(event.data);
 
     switch (data.type) {
       case 'USER_LOGIN': {
+        // Не обновляется имя юзера!
         if (this.router) {
           this.router.navigate('chat');
         }
         this.user = data.payload.user.login;
-        this.notify();
         this.getAllUsers();
+        this.notify();
+
         break;
       }
       case 'USER_LOGOUT': {

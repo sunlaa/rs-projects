@@ -29,7 +29,7 @@ export default class MessageSection extends BaseElement {
     this.chatForm.to = data.login;
     this.chatField.currentUser = data.login;
     this.chatHeader.addContent(data.status, data.login);
-    ws.fetchMessages(data.login);
+    ws.fetchMessages(data.login, 'get-specified-user');
     this.chatForm.enable();
   };
 }

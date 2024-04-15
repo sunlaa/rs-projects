@@ -18,8 +18,14 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
-  gap: 0.5em;
+  justify-content: space-between;
   transition: all linear 100ms;
+}
+
+.item__name-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
 
 .user-section__item.invisible {
@@ -27,23 +33,40 @@
 }
 
 .user-section__item:hover {
-  background-color: rgba(0, 0, 0, 0.054);
+  background-color: #0000000e;
 }
 
-.indicator {
+.item__indicator {
   box-shadow: 0 1px 2px #62345f;
   width: 7px;
   height: 7px;
   border-radius: 5px;
-  border: solid 0.5px rgb(46, 46, 46);
+  border: solid 0.5px #2e2e2e;
 }
 
-.indicator.offline {
+.item__indicator.offline {
   background-color: #a4a4a4;
 }
 
-.indicator.online {
+.item__indicator.online {
   background-color: rgb(65, 191, 65);
+}
+
+.item__message-counter {
+  font-size: 0.6em;
+  text-shadow: 0 1px 2px #888787;
+  box-shadow: 0 1px 2px #62345f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background-color: #c296be;
+  width: 17px;
+  height: 17px;
+}
+
+.item__message-counter.invisible {
+  display: none;
 }
 
 @media screen and (max-width: 600px) {

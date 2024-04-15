@@ -12,7 +12,6 @@ export default class UsersSection extends BaseElement {
       classes: ['main__users-section', 'user-section', 'section'],
     });
     this.list = new UsersList();
-    // ws.attach(this.list);
     this.appendChildren(new SortInput(this.list), this.list);
   }
 }

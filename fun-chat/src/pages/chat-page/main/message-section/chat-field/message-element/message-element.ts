@@ -6,11 +6,15 @@ import MessageStatus from './status';
 export default class MessageElement extends BaseElement {
   statusFooter: MessageStatus;
 
+  id: string;
+
   constructor(message: Message) {
     super({
       classes: ['chat-field__message', 'message', 'section'],
       id: message.id,
     });
+
+    this.id = message.id;
 
     if (message.from === ws.user) {
       this.addClass('mine');
@@ -23,6 +27,8 @@ export default class MessageElement extends BaseElement {
     this.createMessage(message);
 
     this.append(this.statusFooter);
+
+    ws.socket.addEventListener('message', this.updateDeliveryStatus);
   }
 
   createMessage(message: Message) {
@@ -44,4 +50,25 @@ export default class MessageElement extends BaseElement {
 
     this.appendChildren(header, messageText);
   }
+
+  updateDeliveryStatus = (event: MessageEvent) => {
+    const data: {
+      id: null;
+      type: string;
+      payload: {
+        message: {
+          id: string;
+          status: {
+            isDelivered: boolean;
+          };
+        };
+      };
+    } = JSON.parse(event.data);
+
+    if (data.type === 'MSG_DELIVER' && data.payload.message.id === this.id) {
+      this.statusFooter.changeDeliveryStatus(
+        data.payload.message.status.isDelivered
+      );
+    }
+  };
 }

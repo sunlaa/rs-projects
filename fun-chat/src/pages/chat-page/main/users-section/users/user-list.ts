@@ -1,11 +1,14 @@
 import BaseElement from '@/utils/components/base-element';
 import ws from '@/web-socket/web-socket';
-import { User } from '@/utils/types/types';
+import {
+  ResponseAllUsersData,
+  ResponseUserData,
+  User,
+} from '@/utils/types/types';
 import UserItem from './user-item';
-import MessageSection from '../../message-section/message-section';
 
 export default class UsersList extends BaseElement<HTMLUListElement> {
-  messageSection: MessageSection | null = null;
+  userItems: UserItem[] = [];
 
   constructor() {
     super({ tag: 'ul', classes: ['users-section__list'] });
@@ -15,13 +18,14 @@ export default class UsersList extends BaseElement<HTMLUListElement> {
   }
 
   addUser(status: 'online' | 'offline', login: string) {
+    ws.fetchMessages(login, 'initial-request');
     const li = new UserItem(status, login);
-    li.messageSection = this.messageSection;
     if (status === 'offline') {
       this.append(li);
     } else {
       this.prepend(li);
     }
+    this.userItems.push(li);
   }
 
   fillAuthenticatedUsers(users: User[]) {
@@ -37,18 +41,11 @@ export default class UsersList extends BaseElement<HTMLUListElement> {
   }
 
   findByName(name: string) {
-    const usersArr = this.getChildren();
-    return usersArr.find((elem) => elem.textContent === name);
+    return this.userItems.find((li) => li.login === name);
   }
 
   allUsers = (event: MessageEvent) => {
-    const data: {
-      id: string;
-      type: string;
-      payload: {
-        users: User[];
-      };
-    } = JSON.parse(event.data);
+    const data: ResponseAllUsersData = JSON.parse(event.data);
 
     if (data.type === 'USER_ACTIVE') {
       this.fillAuthenticatedUsers(data.payload.users);
@@ -59,13 +56,7 @@ export default class UsersList extends BaseElement<HTMLUListElement> {
   };
 
   externalUser = (event: MessageEvent) => {
-    const data: {
-      id: string;
-      type: string;
-      payload: {
-        user: User;
-      };
-    } = JSON.parse(event.data);
+    const data: ResponseUserData = JSON.parse(event.data);
 
     if (
       data.type === 'USER_EXTERNAL_LOGIN' ||
@@ -75,12 +66,7 @@ export default class UsersList extends BaseElement<HTMLUListElement> {
       const { isLogined } = data.payload.user;
       const prev = this.findByName(login);
       if (prev) {
-        prev.remove();
-      }
-      if (isLogined) {
-        this.addUser('online', login);
-      } else {
-        this.addUser('offline', login);
+        prev.changeStatus(this, isLogined);
       }
     }
   };

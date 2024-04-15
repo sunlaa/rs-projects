@@ -9,8 +9,8 @@ export default class MainChat extends BaseElement {
 
     const userSection = new UsersSection();
     const messageSection = new MessageSection();
-    userSection.list.messageSection = messageSection;
 
+    userSection.list.userItems = messageSection.chatField.userItems;
     this.appendChildren(userSection, messageSection);
   }
 }

@@ -65,3 +65,38 @@ export type Status = {
   isReaded: boolean;
   isEdited: boolean;
 };
+
+export type ResponseData = {
+  id: string;
+  type: string;
+};
+
+export type ResponseLoginErrorData = ResponseData & {
+  payload: {
+    error: string;
+  };
+};
+
+export type ResponseUserData = ResponseData & {
+  payload: {
+    user: User;
+  };
+};
+
+export type ResponseAllUsersData = ResponseData & {
+  payload: {
+    users: User[];
+  };
+};
+
+export type ResponseMessageData = ResponseData & {
+  payload: {
+    message: Message;
+  };
+};
+
+export type ResponseAllMessagesData = ResponseData & {
+  payload: {
+    messages: Message[];
+  };
+};
