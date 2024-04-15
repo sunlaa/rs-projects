@@ -100,3 +100,14 @@ export type ResponseAllMessagesData = ResponseData & {
     messages: Message[];
   };
 };
+
+export type ResponseDeliveredStatusData = ResponseData & {
+  payload: {
+    message: {
+      id: string;
+      status: {
+        isDelivered: boolean;
+      };
+    };
+  };
+};

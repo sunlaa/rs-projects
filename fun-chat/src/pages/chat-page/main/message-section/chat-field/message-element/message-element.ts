@@ -1,5 +1,5 @@
 import BaseElement from '@/utils/components/base-element';
-import { Message } from '@/utils/types/types';
+import { Message, ResponseDeliveredStatusData } from '@/utils/types/types';
 import ws from '@/web-socket/web-socket';
 import MessageStatus from './status';
 
@@ -52,23 +52,10 @@ export default class MessageElement extends BaseElement {
   }
 
   updateDeliveryStatus = (event: MessageEvent) => {
-    const data: {
-      id: null;
-      type: string;
-      payload: {
-        message: {
-          id: string;
-          status: {
-            isDelivered: boolean;
-          };
-        };
-      };
-    } = JSON.parse(event.data);
+    const data: ResponseDeliveredStatusData = JSON.parse(event.data);
 
     if (data.type === 'MSG_DELIVER' && data.payload.message.id === this.id) {
-      this.statusFooter.changeDeliveryStatus(
-        data.payload.message.status.isDelivered
-      );
+      this.statusFooter.changeStatus(data.payload.message.status.isDelivered);
     }
   };
 }

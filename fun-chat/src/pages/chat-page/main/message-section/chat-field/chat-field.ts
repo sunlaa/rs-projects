@@ -8,7 +8,7 @@ import {
   ResponseMessageData,
 } from '@/utils/types/types';
 import MessageElement from './message-element/message-element';
-import UserItem from '../../users-section/users/user-item';
+import UserItem from '../../users-section/users/user-item/user-item';
 
 export default class ChatField extends BaseElement {
   currentUser: string = '';
@@ -29,7 +29,7 @@ export default class ChatField extends BaseElement {
 
   static addStatus(messageData: Message, message: MessageElement) {
     if (messageData.from === ws.user)
-      message.statusFooter.changeDeliveryStatus(
+      message.statusFooter.changeStatus(
         messageData.status.isDelivered,
         messageData.status.isReaded
       );
@@ -56,7 +56,7 @@ export default class ChatField extends BaseElement {
       const item = this.userItems.find((li) => li.login === message.from);
 
       if (item) {
-        item.incrementMessageCounter();
+        item.messageCounter.increment();
       }
     }
     if (data.type === 'MSG_FROM_USER' && data.id === 'get-specified-user') {
