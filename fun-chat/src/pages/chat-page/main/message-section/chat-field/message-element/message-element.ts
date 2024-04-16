@@ -63,6 +63,10 @@ export default class MessageElement extends BaseElement {
     }
   };
 
+  updateReadStatus() {
+    this.statusFooter.changeStatus(true, true);
+  }
+
   addStatus(data: Message) {
     if (data.from === ws.user)
       this.statusFooter.changeStatus(
