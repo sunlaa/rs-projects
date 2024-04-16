@@ -12,6 +12,11 @@ export default class UsersSection extends BaseElement {
       classes: ['main__users-section', 'user-section', 'section'],
     });
     this.list = new UsersList();
-    this.appendChildren(new SortInput(this.list), this.list);
+    this.appendChildren(new SortInput(this.list, this), this.list);
+    this.addListener('show-friends', this.showFriends);
   }
+
+  showFriends = () => {
+    this.setStyles({ display: 'block' });
+  };
 }

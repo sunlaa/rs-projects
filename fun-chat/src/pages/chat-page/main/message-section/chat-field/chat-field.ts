@@ -57,10 +57,17 @@ export default class ChatField extends BaseElement {
       ) {
         const messageElement = this.appendMessage(message);
 
-        messageElement.element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'end',
-        });
+        if (this.separator.element.parentElement === this.element) {
+          this.separator.element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        } else {
+          messageElement.element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+          });
+        }
       }
 
       const item = this.userItems.find((li) => li.login === message.from);
@@ -81,7 +88,11 @@ export default class ChatField extends BaseElement {
         });
       }
 
-      this.element.scrollTop = this.element.scrollHeight;
+      if (this.separator.element.parentElement === this.element) {
+        this.separator.element.scrollIntoView();
+      } else {
+        this.element.scrollTop = this.element.scrollHeight;
+      }
     }
   };
 

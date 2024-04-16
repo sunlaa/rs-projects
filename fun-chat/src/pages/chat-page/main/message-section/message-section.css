@@ -1,4 +1,4 @@
-.message-section {
+.main__message-section {
   width: 70%;
   height: 100%;
   display: flex;
@@ -48,4 +48,10 @@
 .chat-form__submit:disabled:hover {
   color: white;
   text-shadow: none;
+}
+
+@media screen and (max-width: 500px) {
+  .main__message-section {
+    width: 100%;
+  }
 }

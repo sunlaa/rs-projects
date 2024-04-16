@@ -22,8 +22,8 @@ export default class UserItem extends BaseElement<HTMLLIElement> {
 
     const loginStatus = new BaseElement(
       { classes: ['item__name-status'] },
-      new BaseElement({ textContent: login }),
-      this.indicator
+      this.indicator,
+      new BaseElement({ classes: ['item__name'], textContent: login })
     );
 
     this.messageCounter = new MessageCounter(login);
