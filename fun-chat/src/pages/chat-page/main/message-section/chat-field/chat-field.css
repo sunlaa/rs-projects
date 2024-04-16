@@ -1,13 +1,23 @@
 .chat-field__separator {
+  text-align: center;
+  font-size: 0.8em;
+  padding: 0 0.6em 0.1em 0.6em;
   width: 100%;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.255);
+  border-radius: 3px;
+  margin: 1.5rem 0;
 }
 
 .chat-field__message {
-  font-size: 0.75em;
+  font-size: 0.6em;
+  padding: 0.3rem 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  gap: 0.3rem;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.357);
+  border-radius: 15px;
 }
 
 .chat-field__message.mine {
@@ -18,10 +28,21 @@
   align-self: flex-start;
 }
 
+.message__header {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
 .message__text {
+  padding: 0.4em 0.6em;
   font-size: 1.3em;
+  background-color: rgba(151, 80, 144, 0.272);
+  border-radius: 5px;
 }
 
 .message__status {
-  order: 3;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

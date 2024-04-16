@@ -5,7 +5,10 @@ export default class MessageSeparator extends BaseElement {
   isFirst: boolean = true;
 
   constructor() {
-    super({ classes: ['chat-field__separator'], textContent: 'Unread' });
+    super({
+      classes: ['chat-field__separator'],
+      textContent: 'Unread messages',
+    });
   }
 
   add(chatField: BaseElement, message: MessageElement) {

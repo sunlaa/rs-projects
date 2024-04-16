@@ -16,7 +16,7 @@ export default class MessageElement extends BaseElement {
 
   constructor(message: Message) {
     super({
-      classes: ['chat-field__message', 'message', 'section'],
+      classes: ['chat-field__message', 'message'],
       id: message.id,
     });
 
@@ -46,9 +46,10 @@ export default class MessageElement extends BaseElement {
       timeStyle: 'medium',
     }).format(new Date(message.datetime));
 
+    const from = this.from === ws.user ? 'You' : this.from;
     const header = new BaseElement(
       { classes: ['message__header'] },
-      new BaseElement({ textContent: message.from }),
+      new BaseElement({ textContent: from }),
       new BaseElement({ textContent: time })
     );
 
