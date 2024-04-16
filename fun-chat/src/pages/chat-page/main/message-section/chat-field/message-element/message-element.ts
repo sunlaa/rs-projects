@@ -1,5 +1,9 @@
 import BaseElement from '@/utils/components/base-element';
-import { Message, ResponseDeliveredStatusData } from '@/utils/types/types';
+import {
+  Message,
+  ResponseDeliveredStatusData,
+  ResponseReadStatusData,
+} from '@/utils/types/types';
 import ws from '@/web-socket/web-socket';
 import MessageStatus from './status';
 
@@ -20,7 +24,7 @@ export default class MessageElement extends BaseElement {
 
     this.from = message.from;
 
-    if (message.from === ws.user) {
+    if (this.from === ws.user) {
       this.addClass('mine');
     } else {
       this.addClass('not-mine');
@@ -33,6 +37,7 @@ export default class MessageElement extends BaseElement {
     this.append(this.statusFooter);
 
     ws.socket.addEventListener('message', this.updateDeliveryStatus);
+    ws.socket.addEventListener('message', this.updateReadStatus);
   }
 
   createMessage(message: Message) {
@@ -63,9 +68,15 @@ export default class MessageElement extends BaseElement {
     }
   };
 
-  updateReadStatus() {
-    this.statusFooter.changeStatus(true, true);
-  }
+  updateReadStatus = (event: MessageEvent) => {
+    const data: ResponseReadStatusData = JSON.parse(event.data);
+
+    if (data.type === 'MSG_READ') {
+      if (this.id === data.payload.message.id && this.from === ws.user) {
+        this.statusFooter.changeStatus(true, true);
+      }
+    }
+  };
 
   addStatus(data: Message) {
     if (data.from === ws.user)

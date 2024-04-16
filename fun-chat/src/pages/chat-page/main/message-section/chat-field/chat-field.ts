@@ -15,11 +15,17 @@ import MessageSeparator from './message-element/separator';
 export default class ChatField extends BaseElement {
   currentUser: string = '';
 
+  firstMessage: Title = new Title('Write your first message!', [
+    'chat-field__title',
+  ]);
+
   userItems: UserItem[] = [];
 
   unreadMessages: MessageElement[] = [];
 
   separator: MessageSeparator = new MessageSeparator();
+
+  isFirstUnread: boolean = true;
 
   constructor() {
     super(
@@ -31,20 +37,10 @@ export default class ChatField extends BaseElement {
     );
 
     ws.socket.addEventListener('message', this.drawMessage);
-    ws.socket.addEventListener('message', this.markAsRead);
+    ws.socket.addEventListener('message', this.removeMessageCounter);
 
     this.addListener('click', this.changeStatus);
-    this.addListener('scroll', this.changeStatus);
-  }
-
-  appendMessage(message: Message) {
-    const messageElement = new MessageElement(message);
-    messageElement.addStatus(message);
-
-    this.append(messageElement);
-    this.addSeparator(messageElement);
-    if (!message.status.isReaded) this.unreadMessages.push(messageElement);
-    return messageElement;
+    this.addListener('wheel', this.changeStatus);
   }
 
   drawMessage = (event: MessageEvent) => {
@@ -73,35 +69,46 @@ export default class ChatField extends BaseElement {
       }
     }
     if (data.type === 'MSG_FROM_USER' && data.id === 'get-specified-user') {
-      this.drawMessageHistory(data.payload.messages);
+      this.removeChildren();
+      this.unreadMessages = [];
+      this.isFirstUnread = true;
+
+      if (data.payload.messages.length === 0) {
+        this.append(this.firstMessage);
+      } else {
+        data.payload.messages.forEach((messageData) => {
+          this.appendMessage(messageData);
+        });
+      }
+
+      this.element.scrollTop = this.element.scrollHeight;
     }
   };
 
-  drawMessageHistory(messages: Message[]) {
-    this.removeChildren();
-    this.unreadMessages = [];
+  private appendMessage(message: Message) {
+    this.firstMessage.remove();
+    const messageElement = new MessageElement(message);
+    messageElement.addStatus(message);
 
-    messages.forEach((message) => {
-      this.appendMessage(message);
-    });
-    this.element.scrollTop = this.element.scrollHeight;
+    this.append(messageElement);
+    if (!message.status.isReaded) {
+      this.addSeparator(messageElement);
+      this.unreadMessages.push(messageElement);
+    }
+    return messageElement;
   }
 
-  markAsRead = (event: MessageEvent) => {
+  private addSeparator(message: MessageElement) {
+    if (this.isFirstUnread && message.from === this.currentUser) {
+      this.separator.add(this, message);
+      this.isFirstUnread = false;
+    }
+  }
+
+  removeMessageCounter = (event: MessageEvent) => {
     const data: ResponseReadStatusData = JSON.parse(event.data);
 
     if (data.type === 'MSG_READ') {
-      const messageToRead = this.unreadMessages.find(
-        (message) => message.id === data.payload.message.id
-      );
-      if (messageToRead && messageToRead.from === ws.user) {
-        messageToRead.updateReadStatus();
-
-        this.unreadMessages = this.unreadMessages.filter(
-          (message) => message.id !== messageToRead.id
-        );
-      }
-
       const item = this.userItems.find((li) => li.login === this.currentUser);
       if (item) {
         item.messageCounter.reset();
@@ -113,13 +120,8 @@ export default class ChatField extends BaseElement {
     this.unreadMessages.forEach((message) => {
       ws.changeReadStatus(message.id);
     });
+    this.unreadMessages = [];
     this.separator.remove();
+    this.isFirstUnread = true;
   };
-
-  private addSeparator(message: MessageElement) {
-    console.log(this.unreadMessages.length, this.unreadMessages);
-    if (this.unreadMessages.length === 0 && message.from === this.currentUser) {
-      this.separator.add(this, message);
-    }
-  }
 }
