@@ -4,6 +4,7 @@
   padding: 0.6rem;
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
   align-items: center;
   background-color: #00000015;
   backdrop-filter: blur(5px);
@@ -11,6 +12,12 @@
   color: #ffffff;
   text-shadow: 0 1px 2px #888787;
   font-size: 1.3rem;
+}
+
+.header__user-data {
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
 }
 
 .header__nav-buttons {
@@ -21,11 +28,30 @@
   text-decoration: none;
 }
 
-@media screen and (max-width: 600px) {
+.header__friends {
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
   .header {
-    font-size: 0.95rem;
+    flex-direction: column;
   }
+  .header__user-data {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    font-size: 1.1rem;
+    flex-direction: column;
+  }
+
   .header__nav-buttons {
-    gap: 0.5em;
+    gap: 0.3em;
+  }
+
+  .header__friends {
+    display: block;
   }
 }

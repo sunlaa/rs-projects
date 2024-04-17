@@ -1,19 +1,17 @@
-import Observable from '@/utils/services/observable';
 import Router from '@/utils/services/router';
 import SessionStorage from '@/utils/services/session-storage';
 import { Observer, ResponseUserData } from '@/utils/types/types';
 
-export class WSocket extends Observable {
+export class WSocket {
   socket: WebSocket = new WebSocket('ws://localhost:4000');
 
   observers: Observer[] = [];
 
-  user: string = 'test';
+  user: string = '';
 
   router: Router | null = null;
 
   constructor() {
-    super();
     this.socket.addEventListener('message', this.hearMessages);
     this.socket.addEventListener('open', () => {
       const data = SessionStorage.get('user-data');
@@ -156,14 +154,11 @@ export class WSocket extends Observable {
 
     switch (data.type) {
       case 'USER_LOGIN': {
-        // Не обновляется имя юзера!
         if (this.router) {
           this.router.navigate('chat');
         }
         this.user = data.payload.user.login;
         this.getAllUsers();
-        this.notify();
-
         break;
       }
       case 'USER_LOGOUT': {

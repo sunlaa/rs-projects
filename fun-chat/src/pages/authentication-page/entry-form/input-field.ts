@@ -28,7 +28,11 @@ export default class InputField extends BaseElement {
 
       switch (input.id) {
         case 'login': {
-          if (!loginRegExp.test(value) || !(value.length > 2)) {
+          if (
+            !loginRegExp.test(value) ||
+            !(value.length > 2) ||
+            !(value.length < 16)
+          ) {
             this.hint.addClass('visible');
           } else {
             this.hint.removeClass('visible');

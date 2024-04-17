@@ -1,5 +1,6 @@
 import BaseElement from '@/utils/components/base-element';
 import SessionStorage from '@/utils/services/session-storage';
+import Title from '@/utils/components/title';
 import Input from '@/utils/components/input';
 import Label from '@/utils/components/label';
 import ws from '@/web-socket/web-socket';
@@ -46,12 +47,7 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
   constructor(router: Router) {
     super({ tag: 'form', classes: ['entry-page__authentication-form'] });
 
-    const title = new BaseElement({
-      // заменить на fieldset и legened
-      tag: 'h2',
-      textContent: 'Login',
-      classes: ['authentication-form__title'],
-    });
+    const title = new Title('Login', ['authentication-form__title']);
 
     this.addListener('submit', this.entry);
     this.appendChildren(
@@ -82,6 +78,7 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
   static validate(login: string, password: string): boolean {
     return (
       login.length > 2 &&
+      login.length < 16 &&
       loginRegExp.test(login) &&
       password.length > 3 &&
       passwordRegExp.test(password)

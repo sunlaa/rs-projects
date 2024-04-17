@@ -1,7 +1,7 @@
 import './user-section.css';
 import BaseElement from '@/utils/components/base-element';
 import UsersList from './users/user-list';
-import SortInput from './sorting/sort-input';
+import SortWrapper from './sorting/sort-wrapper';
 
 export default class UsersSection extends BaseElement {
   list: UsersList;
@@ -12,7 +12,7 @@ export default class UsersSection extends BaseElement {
       classes: ['main__users-section', 'user-section', 'section'],
     });
     this.list = new UsersList();
-    this.appendChildren(new SortInput(this.list, this), this.list);
+    this.appendChildren(new SortWrapper(this, this.list), this.list);
     this.addListener('show-friends', this.showFriends);
   }
 

@@ -7,6 +7,14 @@
   overflow-y: scroll;
 }
 
+.user-section__sort-div {
+  display: flex;
+}
+
+.user-section__input {
+  width: 100%;
+}
+
 .users-section__list {
   display: flex;
   flex-direction: column;
@@ -82,7 +90,7 @@
 
 @media screen and (max-width: 600px) {
   .main__users-section {
-    font-size: 1rem;
+    font-size: 1.1rem;
     padding: 0.4rem;
   }
 
@@ -103,18 +111,53 @@
 
 @media screen and (max-width: 500px) {
   .main__users-section {
-    /* display: none; */
+    font-size: 1.2rem;
+    display: none;
+    z-index: 4;
+    background-color: #a29a9a7b;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     height: fit-content;
-    width: 60%;
+    width: 80%;
+    height: 90%;
+    max-height: 400px;
+    min-height: 100px;
+  }
+
+  .user-section__sort-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .user-section__input {
+    width: 80%;
   }
 
   .user-section__close {
-    width: 50px;
-    height: 50px;
-    background-color: red;
+    position: relative;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+
+  .user-section__close::after,
+  .user-section__close::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 1.5px;
+    background-color: rgb(193, 192, 192);
+    top: 40%;
+    right: 15%;
+  }
+  .user-section__close::after {
+    transform: rotate(45deg);
+  }
+  .user-section__close::before {
+    transform: rotate(-45deg);
   }
 }

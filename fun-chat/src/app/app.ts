@@ -41,10 +41,13 @@ export default class App {
       {
         path: 'chat',
         callback: () => {
-          // доступ только авторизованым при роутинге через url строку!
-          // this.setContent(this.chatPage);
-          this.container.innerHTML = '';
-          this.container.append(new ChatPage().getElement());
+          const data = SessionStorage.get('user-data');
+          if (!data) {
+            this.router.navigate('entry');
+          } else {
+            this.container.innerHTML = '';
+            this.container.append(new ChatPage().getElement());
+          }
         },
       },
     ];

@@ -1,3 +1,4 @@
+import backdrop from '@/utils/components/backdrop';
 import BaseElement from '@/utils/components/base-element';
 
 export default class Friends extends BaseElement {
@@ -11,6 +12,7 @@ export default class Friends extends BaseElement {
     const frineds = document.querySelector('.user-section');
     if (frineds) {
       frineds.dispatchEvent(new CustomEvent('show-friends'));
+      backdrop.show();
     }
   }
 

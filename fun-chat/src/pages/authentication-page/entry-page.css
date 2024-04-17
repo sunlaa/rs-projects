@@ -32,8 +32,8 @@
 }
 
 .authentication-form__title {
+  font-size: 1.7em;
   align-self: center;
-  margin-bottom: 1rem;
 }
 
 .authentication-form__field {
