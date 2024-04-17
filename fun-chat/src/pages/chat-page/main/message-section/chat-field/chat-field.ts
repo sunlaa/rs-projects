@@ -5,6 +5,7 @@ import Title from '@/utils/components/title';
 import {
   Message,
   ResponseAllMessagesData,
+  ResponseDeleteMessageData,
   ResponseMessageData,
   ResponseReadStatusData,
 } from '@/utils/types/types';
@@ -38,6 +39,7 @@ export default class ChatField extends BaseElement {
 
     ws.socket.addEventListener('message', this.drawMessage);
     ws.socket.addEventListener('message', this.removeMessageCounter);
+    ws.socket.addEventListener('message', this.decreaseMessageCounter);
 
     this.addListener('click', this.changeStatus);
     this.addListener('wheel', this.changeStatus);
@@ -72,7 +74,7 @@ export default class ChatField extends BaseElement {
 
       const item = this.userItems.find((li) => li.login === message.from);
       if (item) {
-        item.messageCounter.increment();
+        item.messageCounter.increse();
       }
     }
     if (data.type === 'MSG_FROM_USER' && data.id === 'get-specified-user') {
@@ -123,6 +125,20 @@ export default class ChatField extends BaseElement {
       const item = this.userItems.find((li) => li.login === this.currentUser);
       if (item) {
         item.messageCounter.reset();
+      }
+    }
+  };
+
+  decreaseMessageCounter = (event: MessageEvent) => {
+    const data: ResponseDeleteMessageData = JSON.parse(event.data);
+
+    if (data.type === 'MSG_DELETE') {
+      const item = this.userItems.find((li) => li.login === this.currentUser);
+      if (item) {
+        item.messageCounter.decrese();
+        if (item.messageCounter.counter <= 0) {
+          this.separator.remove();
+        }
       }
     }
   };

@@ -122,6 +122,35 @@ export class WSocket extends Observable {
     this.socket.send(JSON.stringify(request));
   }
 
+  editMessage(id: string, text: string) {
+    const request = {
+      id: 'edit-message',
+      type: 'MSG_EDIT',
+      payload: {
+        message: {
+          id,
+          text,
+        },
+      },
+    };
+
+    this.socket.send(JSON.stringify(request));
+  }
+
+  deleteMessage(id: string) {
+    const request = {
+      id: 'delete-message',
+      type: 'MSG_DELETE',
+      payload: {
+        message: {
+          id,
+        },
+      },
+    };
+
+    this.socket.send(JSON.stringify(request));
+  }
+
   hearMessages = (event: MessageEvent) => {
     const data: ResponseUserData = JSON.parse(event.data);
 

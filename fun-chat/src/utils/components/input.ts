@@ -6,8 +6,16 @@ export default class Input extends BaseElement<HTMLInputElement> {
     super({ tag: 'input', autocomplete: 'off', ...params });
   }
 
-  getData(): string {
+  get value() {
     return this.element.value;
+  }
+
+  set value(text: string) {
+    this.element.value = text;
+  }
+
+  focus() {
+    this.element.focus();
   }
 
   clear() {

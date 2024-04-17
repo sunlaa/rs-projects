@@ -17,8 +17,10 @@ export default class MessageStatus extends BaseElement {
     this.appendChildren(this.editStatus, this.deliveryStatus);
   }
 
-  changeEditStatus() {
-    this.editStatus.setContent('Edited');
+  changeEditStatus(isEdit: boolean) {
+    if (isEdit) {
+      this.editStatus.setContent('Edited');
+    }
   }
 
   changeStatus(isDelivered: boolean, isReaded?: boolean) {

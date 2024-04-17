@@ -89,8 +89,8 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
   }
 
   getEntryData = () => {
-    const login = this.login.input.getData();
-    const password = this.password.input.getData();
+    const login = this.login.input.value;
+    const password = this.password.input.value;
 
     return { login, password };
   };

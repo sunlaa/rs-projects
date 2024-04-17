@@ -122,3 +122,26 @@ export type ResponseReadStatusData = ResponseData & {
     };
   };
 };
+
+export type ResponseEditStatusData = ResponseData & {
+  payload: {
+    message: {
+      id: string;
+      text: string;
+      status: {
+        isEdited: boolean;
+      };
+    };
+  };
+};
+
+export type ResponseDeleteMessageData = ResponseData & {
+  payload: {
+    message: {
+      id: string;
+      status: {
+        isDeleted: boolean;
+      };
+    };
+  };
+};

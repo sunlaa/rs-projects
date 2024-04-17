@@ -42,7 +42,7 @@ export default class SortInput extends Input {
   }
 
   sort = () => {
-    const value = this.getData().toLowerCase();
+    const value = this.value.toLowerCase();
     const childs = this.list.getChildren();
     childs.forEach((li) => {
       const name = li.textContent?.toLowerCase();

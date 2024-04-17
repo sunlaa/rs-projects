@@ -17,10 +17,19 @@ export default class MessageCounter extends BaseElement {
     ws.socket.addEventListener('message', this.setCounter);
   }
 
-  increment() {
+  increse() {
     this.counter += 1;
     this.setContent(`${this.counter}`);
     this.removeClass('invisible');
+  }
+
+  decrese() {
+    this.counter -= 1;
+    if (this.counter > 0) {
+      this.setContent(`${this.counter}`);
+    } else {
+      this.addClass('invisible');
+    }
   }
 
   reset() {
