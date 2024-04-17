@@ -50,7 +50,9 @@ export default class ChatForm extends BaseElement<HTMLFormElement> {
       this.chatField.separator.remove();
       this.chatField.changeStatus();
     } else if (this.isEdit) {
-      ws.editMessage(this.messageId, this.messageField.value);
+      if (text.length !== 0) {
+        ws.editMessage(this.messageId, this.messageField.value);
+      }
 
       this.isEdit = false;
       this.sendButton.value = 'Send';

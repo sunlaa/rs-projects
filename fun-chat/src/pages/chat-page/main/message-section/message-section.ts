@@ -4,6 +4,7 @@ import ws from '@/web-socket/web-socket';
 import MessageHeader from './chat-header/chat-header';
 import ChatForm from './chat-form/chat-form';
 import ChatField from './chat-field/chat-field';
+import actionMenu from './chat-field/message-element/action-menu';
 
 export default class MessageSection extends BaseElement {
   chatHeader: MessageHeader = new MessageHeader();
@@ -18,6 +19,7 @@ export default class MessageSection extends BaseElement {
       classes: ['main__message-section', 'message-section', 'section'],
     });
     this.addListener('open-chat', this.loadHistory);
+    this.addListener('click', MessageSection.removeActionMenu);
 
     this.appendChildren(this.chatHeader, this.chatField, this.chatForm);
   }
@@ -33,5 +35,12 @@ export default class MessageSection extends BaseElement {
 
     ws.fetchMessages(data.login, 'get-specified-user');
     this.chatForm.enable();
+  };
+
+  static removeActionMenu = (event: Event) => {
+    const elem = event.target as HTMLElement;
+    if (elem !== actionMenu.element) {
+      actionMenu.remove();
+    }
   };
 }

@@ -7,12 +7,12 @@ class ActionMenu extends BaseElement {
   text: string = '';
 
   delete: BaseElement = new BaseElement({
-    classes: ['action-menu__delete', 'action'],
+    classes: ['action-menu__delete', 'action-menu__action'],
     textContent: 'Delete',
   });
 
   edit: BaseElement = new BaseElement({
-    classes: ['action-menu__edit', 'action'],
+    classes: ['action-menu__edit', 'action-menu__action'],
     textContent: 'Edit',
   });
 
