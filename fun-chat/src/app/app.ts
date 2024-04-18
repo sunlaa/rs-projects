@@ -5,25 +5,19 @@ import ChatPage from '@/pages/chat-page/chat-page';
 import Router from '@/utils/services/router';
 import BaseElement from '@/utils/components/base-element';
 import SessionStorage from '@/utils/services/session-storage';
-import InfoPage from '@/pages/info-page/info-page';
 
 export default class App {
   container = document.body;
 
   router: Router;
 
-  chatPage: ChatPage;
-
   constructor() {
     const routes = this.createRoutes();
     this.router = new Router(routes);
-
-    this.chatPage = new ChatPage();
   }
 
   run() {
-    // ws.router = this.router;
-    this.container.append(new InfoPage().element);
+    ws.router = this.router;
   }
 
   private createRoutes() {
@@ -48,8 +42,14 @@ export default class App {
             this.router.navigate('entry');
           } else {
             this.container.innerHTML = '';
-            this.container.append(new ChatPage().getElement());
+            this.container.append(new ChatPage(this.router).element);
           }
+        },
+      },
+      {
+        path: 'info',
+        callback: () => {
+          this.container.innerHTML = '';
         },
       },
     ];

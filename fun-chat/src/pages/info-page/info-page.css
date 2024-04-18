@@ -1,34 +1,69 @@
 .info-page {
   padding: 1.5rem 4rem;
   width: 95%;
-  height: 50%;
   max-width: 1200px;
   min-width: 300px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 2rem;
 }
 
 .info-page__title {
-  font-size: 1.7em;
+  font-size: 2.2em;
   color: #260d2f;
   text-shadow: 1px 2px 5px #7b3795;
   align-self: center;
 }
 
 .info-pages__features {
-  background-color: #260d2f53;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  font-size: 1.1em;
+  background-color: #49275553;
   border-radius: 6px;
   padding: 10px;
 }
+.info-pages__list {
+  font-size: 0.8em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  list-style: circle;
+  padding-left: 1em;
+}
+.info-list__item {
+  margin: 0;
+  padding: 0;
+}
 
 .info-page__link {
-  color: #42224e;
-  text-shadow: 1px 2px 5px #8b4ba4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2em;
+  color: #ffffff;
+  border-bottom: solid 1px white;
+  text-shadow: none;
   transition: all linear 100ms;
 }
 .info-page__link:hover {
-  color: #703386;
-  text-shadow: 1px 2px 5px #a95dc7;
+  color: #d2d1d1;
+}
+.info-page__link:visited {
+  color: #d3d3d3;
+}
+.git-logo {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('./../../assets/github.svg');
+}
+
+.info-page__return {
+  width: fit-content;
+  align-self: center;
 }
