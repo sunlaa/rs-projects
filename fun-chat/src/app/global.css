@@ -12,11 +12,16 @@ li {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   font-family: 'Concert One', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-image: url(../assets/back.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -84,8 +89,10 @@ body {
 }
 
 .section {
+  box-sizing: border-box;
   padding: 0.6rem;
   background-color: #00000015;
+  backdrop-filter: blur(5px);
   border-radius: 5px;
   font-size: 1.3rem;
   color: #ffffff;

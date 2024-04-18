@@ -159,4 +159,9 @@
   .user-section__close::before {
     transform: rotate(-45deg);
   }
+
+  .item__message-counter {
+    width: 20px;
+    height: 20px;
+  }
 }

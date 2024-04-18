@@ -21,7 +21,7 @@
   justify-content: flex-end;
   gap: 0.3rem;
   width: 50%;
-  background-color: rgba(255, 255, 255, 0.357);
+  background-color: #ffffffa1;
   border-radius: 15px;
 }
 
@@ -39,15 +39,19 @@
   justify-content: space-around;
 }
 
+.message__header > :last-child {
+  font-size: 0.9em;
+}
+
 .message__text {
-  padding: 0.4em 0.6em;
+  padding: 0.7em;
   font-size: 1.3em;
-  background-color: rgba(151, 80, 144, 0.272);
+  background-color: rgba(189, 129, 183, 0.486);
   border-radius: 5px;
 }
 
 .message__status {
-  width: 100%;
+  width: 95%;
   display: flex;
   justify-content: space-between;
 }
@@ -60,7 +64,7 @@
   flex-direction: column;
   gap: 0.2em;
   width: 50%;
-  background-color: #7474745b;
+  background-color: #747474a2;
   padding: 0.3em;
   border-radius: 5px;
   font-size: 1.4em;
@@ -77,7 +81,7 @@
   background-color: rgba(98, 98, 98, 0.342);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   .chat-field__message {
     width: 70%;
   }
