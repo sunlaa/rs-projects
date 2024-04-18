@@ -1,4 +1,5 @@
 import BaseElement from '@/utils/components/base-element';
+import backdrop from '@/utils/components/backdrop';
 import MessageCounter from './message-counter';
 
 export default class UserItem extends BaseElement<HTMLLIElement> {
@@ -40,6 +41,13 @@ export default class UserItem extends BaseElement<HTMLLIElement> {
           detail: { status: this.status, login: this.login },
         })
       );
+    }
+    if (window.innerWidth <= 500) {
+      const users = document.querySelector('.user-section');
+      if (users instanceof HTMLElement) {
+        users.style.display = 'none';
+      }
+      backdrop.hide();
     }
   };
 

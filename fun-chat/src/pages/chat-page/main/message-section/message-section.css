@@ -54,4 +54,12 @@
   .main__message-section {
     width: 100%;
   }
+
+  .message-section__header {
+    font-size: 0.75em;
+  }
+
+  .message-section__chat-form {
+    font-size: 0.9em;
+  }
 }

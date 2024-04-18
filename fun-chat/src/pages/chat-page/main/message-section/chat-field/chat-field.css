@@ -1,3 +1,7 @@
+.chat-field__title {
+  margin-top: 10%;
+}
+
 .chat-field__separator {
   text-align: center;
   font-size: 0.8em;
@@ -71,4 +75,10 @@
 
 .action-menu__action:hover {
   background-color: rgba(98, 98, 98, 0.342);
+}
+
+@media screen and (max-width: 600px) {
+  .chat-field__message {
+    width: 70%;
+  }
 }
