@@ -5,6 +5,7 @@ import ChatPage from '@/pages/chat-page/chat-page';
 import Router from '@/utils/services/router';
 import BaseElement from '@/utils/components/base-element';
 import SessionStorage from '@/utils/services/session-storage';
+import InfoPage from '@/pages/info-page/info-page';
 
 export default class App {
   container = document.body;
@@ -21,7 +22,8 @@ export default class App {
   }
 
   run() {
-    ws.router = this.router;
+    // ws.router = this.router;
+    this.container.append(new InfoPage().element);
   }
 
   private createRoutes() {

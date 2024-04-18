@@ -9,6 +9,7 @@
 
 .user-section__sort-div {
   display: flex;
+  margin-bottom: 0.2rem;
 }
 
 .user-section__input {
