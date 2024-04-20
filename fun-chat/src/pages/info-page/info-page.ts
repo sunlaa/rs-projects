@@ -2,7 +2,7 @@ import './info-page.css';
 import BaseElement from '@/utils/components/base-element';
 import Anchor from '@/utils/components/anchor';
 import Title from '@/utils/components/title';
-import Brief from './info-page-parts/brief';
+import Brief from '../../utils/components/brief';
 import Features from './info-page-parts/features-list';
 import ReturnButton from './info-page-parts/return-button';
 

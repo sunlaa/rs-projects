@@ -6,7 +6,7 @@ export default class Brief extends BaseElement {
     classes?: string[],
     ...child: (BaseElement | HTMLElement | null)[]
   ) {
-    super({ tag: 'p', textContent, classes: ['intro-page__brief'] }, ...child);
+    super({ tag: 'p', textContent }, ...child);
     if (classes) {
       classes.forEach((className) => this.addClass(className));
     }

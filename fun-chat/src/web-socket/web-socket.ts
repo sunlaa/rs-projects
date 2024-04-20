@@ -1,3 +1,4 @@
+import Disconnect from '@/pages/disconnect-notification/disconnect';
 import Router from '@/utils/services/router';
 import SessionStorage from '@/utils/services/session-storage';
 import { Observer, ResponseUserData } from '@/utils/types/types';
@@ -11,7 +12,15 @@ export class WSocket {
 
   router: Router | null = null;
 
+  intervalID: number = 0;
+
+  disconnect: Disconnect = new Disconnect();
+
   constructor() {
+    this.initialization();
+  }
+
+  initialization() {
     this.socket.addEventListener('message', this.hearMessages);
     this.socket.addEventListener('open', () => {
       const data = SessionStorage.get('user-data');
@@ -20,8 +29,23 @@ export class WSocket {
       } else if (this.router) {
         this.router.navigate('entry');
       }
+
+      this.socket.addEventListener('close', () => {
+        this.disconnect.show();
+
+        this.reconnect();
+      });
     });
   }
+
+  reconnect = () => {
+    this.socket = new WebSocket('ws://localhost:4000');
+
+    this.socket.addEventListener('close', () => {
+      setTimeout(this.reconnect, 5000);
+    });
+    this.initialization();
+  };
 
   logIn(login: string, password: string) {
     const request = {
