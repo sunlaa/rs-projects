@@ -23,7 +23,7 @@ const appAuthor = 'It was developed as part of RSSchool course by ';
 const serverAuthor = 'Server developer - ';
 
 export default class InfoPage extends BaseElement {
-  constructor(prev: 'entry' | 'chat') {
+  constructor(prev: string) {
     super(
       { tag: 'section', classes: ['info-page', 'section'] },
       new Title('Fun Chat', ['info-page__title']),

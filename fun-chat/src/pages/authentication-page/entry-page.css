@@ -28,6 +28,7 @@
   width: 80%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 1rem;
 }
 
@@ -104,6 +105,13 @@
   margin-right: 1rem;
   padding: 0.3em 1.7em;
   border: none;
+}
+
+.authentication-form__buttons {
+  display: flex;
+  align-self: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .authentication-form_error-container {

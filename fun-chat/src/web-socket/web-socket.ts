@@ -157,8 +157,8 @@ export class WSocket {
         if (this.router) {
           this.router.navigate('chat');
         }
-        this.user = data.payload.user.login;
         this.getAllUsers();
+        this.user = data.payload.user.login;
         break;
       }
       case 'USER_LOGOUT': {

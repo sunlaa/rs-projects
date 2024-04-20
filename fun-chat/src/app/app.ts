@@ -5,11 +5,14 @@ import ChatPage from '@/pages/chat-page/chat-page';
 import Router from '@/utils/services/router';
 import BaseElement from '@/utils/components/base-element';
 import SessionStorage from '@/utils/services/session-storage';
+import InfoPage from '@/pages/info-page/info-page';
 
 export default class App {
   container = document.body;
 
   router: Router;
+
+  currentHref: 'entry' | 'chat' = 'entry';
 
   constructor() {
     const routes = this.createRoutes();
@@ -28,10 +31,11 @@ export default class App {
           const data = SessionStorage.get('user-data');
           if (!data) {
             this.container.innerHTML = '';
-            this.container.append(new EntryPage(this.router).getElement());
+            this.container.append(new EntryPage(this.router).element);
           } else {
             ws.logOut();
           }
+          this.currentHref = 'entry';
         },
       },
       {
@@ -42,7 +46,8 @@ export default class App {
             this.router.navigate('entry');
           } else {
             this.container.innerHTML = '';
-            this.container.append(new ChatPage(this.router).element);
+            this.container.append(new ChatPage().element);
+            this.currentHref = 'chat';
           }
         },
       },
@@ -50,6 +55,7 @@ export default class App {
         path: 'info',
         callback: () => {
           this.container.innerHTML = '';
+          this.container.append(new InfoPage(this.currentHref).element);
         },
       },
     ];

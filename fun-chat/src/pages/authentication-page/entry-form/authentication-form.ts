@@ -13,6 +13,7 @@ import {
 import InputField from './input-field';
 import Hint from './hint';
 import ErrorMessage from './error-message';
+import ButtonsOnStart from './buttons';
 
 export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
   login: InputField = new InputField(
@@ -31,13 +32,6 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
     new Hint('password')
   );
 
-  submit: Input = new Input({
-    type: 'submit',
-    id: 'submit',
-    value: 'Log in',
-    classes: ['button'],
-  });
-
   errorContainer: BaseElement = new BaseElement({
     classes: ['authentication-form_error-container'],
   });
@@ -54,7 +48,7 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
       title,
       this.login,
       this.password,
-      this.submit,
+      new ButtonsOnStart(),
       this.errorContainer
     );
 
@@ -99,8 +93,8 @@ export default class AuthenticationForm extends BaseElement<HTMLFormElement> {
     const { password } = userData;
 
     if (AuthenticationForm.validate(login, password)) {
-      ws.logIn(login, password);
       SessionStorage.save('user-data', { login, password });
+      ws.logIn(login, password);
     }
   };
 }

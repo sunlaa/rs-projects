@@ -11,14 +11,14 @@ export default class Router {
 
   navigate = (url: string | HashChangeEvent) => {
     if (typeof url === 'string') {
-      window.location.href = `${window.location.href.replace(/#(.*)$/, '')}#${url}`;
+      window.location.hash = url;
     }
     const hash = window.location.hash.slice(1);
 
     const route = this.routes.find((item) => item.path === hash);
 
     if (!route) {
-      throw new Error('page not found!');
+      throw new Error('Page not found!');
     }
 
     route.callback();

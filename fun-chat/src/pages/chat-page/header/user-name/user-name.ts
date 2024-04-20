@@ -11,7 +11,9 @@ export default class UserName extends BaseElement {
   }
 
   updateName = () => {
-    if (this.firstApply) this.setContent(`User: ${ws.user}`);
+    if (this.firstApply) {
+      this.setContent(`User: ${ws.user}`);
+    }
     this.firstApply = false;
   };
 }
