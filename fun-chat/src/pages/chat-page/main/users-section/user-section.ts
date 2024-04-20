@@ -20,7 +20,7 @@ export default class UsersSection extends BaseElement {
   }
 
   showFriends = () => {
-    this.setStyles({ display: 'block' });
+    this.setStyles({ display: 'flex' });
   };
 
   hideFriends = () => {

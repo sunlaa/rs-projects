@@ -41,7 +41,7 @@ export default class ChatForm extends BaseElement<HTMLFormElement> {
     event.preventDefault();
     if (!this.chatField) throw new Error('No chat field!');
 
-    const text = this.messageField.value;
+    const text = this.messageField.value.trim();
 
     if (text.length !== 0 && !this.isEdit) {
       ws.sendMessage(this.to, text);

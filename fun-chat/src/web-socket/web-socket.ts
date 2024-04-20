@@ -3,8 +3,12 @@ import Router from '@/utils/services/router';
 import SessionStorage from '@/utils/services/session-storage';
 import { Observer, ResponseUserData } from '@/utils/types/types';
 
+const WBURL = 'ws://localhost:4000';
+
 export class WSocket {
-  socket: WebSocket = new WebSocket('ws://localhost:4000');
+  isFirstLoader = true;
+
+  socket: WebSocket = new WebSocket(WBURL);
 
   observers: Observer[] = [];
 
@@ -20,31 +24,29 @@ export class WSocket {
     this.initialization();
   }
 
-  initialization() {
+  initialization = () => {
     this.socket.addEventListener('message', this.hearMessages);
+
     this.socket.addEventListener('open', () => {
+      this.disconnect.hide();
+      this.isFirstLoader = true;
+
       const data = SessionStorage.get('user-data');
       if (data) {
         this.logIn(data.login, data.password);
       } else if (this.router) {
         this.router.navigate('entry');
       }
-
-      this.socket.addEventListener('close', () => {
-        this.disconnect.show();
-
-        this.reconnect();
-      });
     });
-  }
-
-  reconnect = () => {
-    this.socket = new WebSocket('ws://localhost:4000');
 
     this.socket.addEventListener('close', () => {
-      setTimeout(this.reconnect, 5000);
+      if (this.isFirstLoader) {
+        this.disconnect.show();
+        this.isFirstLoader = false;
+      }
+      this.socket = new WebSocket(WBURL);
+      this.initialization();
     });
-    this.initialization();
   };
 
   logIn(login: string, password: string) {

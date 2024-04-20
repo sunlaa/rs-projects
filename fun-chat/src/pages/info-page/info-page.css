@@ -1,4 +1,6 @@
 .info-page {
+  margin: 1rem;
+  overflow-y: scroll;
   padding: 1.5rem 4rem;
   width: 95%;
   max-width: 1200px;
@@ -45,7 +47,6 @@
   gap: 0.2em;
   color: #ffffff;
   border-bottom: solid 1px white;
-  text-shadow: none;
   transition: all linear 100ms;
 }
 .info-page__link:hover {
@@ -66,4 +67,17 @@
 .info-page__return {
   width: fit-content;
   align-self: center;
+}
+
+@media screen and (max-width: 800px) {
+  .info-page {
+    gap: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .info-page {
+    font-size: 1rem;
+    padding: 1.5rem 2rem;
+  }
 }

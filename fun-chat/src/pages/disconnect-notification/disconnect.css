@@ -42,3 +42,16 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (max-width: 800px) {
+  .disconnect-banner__notification {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .disconnect-banner__notification {
+    width: 80%;
+    font-size: 0.7em;
+  }
+}
