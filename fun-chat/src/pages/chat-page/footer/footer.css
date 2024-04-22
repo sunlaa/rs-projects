@@ -40,3 +40,9 @@
 .footer__year {
   font-size: 0.9em;
 }
+
+@media screen and (max-width: 700px) {
+  .footer {
+    width: 95%;
+  }
+}

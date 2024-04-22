@@ -1,7 +1,7 @@
 import './user-section.css';
 import BaseElement from '@/utils/components/base-element';
 import backdrop from '@/utils/components/backdrop';
-
+import { widthToHideUsers } from '@/utils/types/types';
 import UsersList from './users/user-list';
 import SortWrapper from './sorting/sort-wrapper';
 
@@ -28,7 +28,7 @@ export default class UsersSection extends BaseElement {
   };
 
   resize = () => {
-    if (window.innerWidth > 500) {
+    if (window.innerWidth > widthToHideUsers) {
       this.showFriends();
     } else {
       this.hideFriends();

@@ -1,4 +1,5 @@
 import BaseElement from '@/utils/components/base-element';
+import { widthToHideUsers } from '@/utils/types/types';
 import backdrop from '@/utils/components/backdrop';
 import SortInput from './sort-input';
 import UsersList from '../users/user-list';
@@ -28,7 +29,7 @@ export default class SortWrapper extends BaseElement {
   }
 
   crossVisibility = () => {
-    if (window.innerWidth <= 500) {
+    if (window.innerWidth <= widthToHideUsers) {
       this.showCross();
     } else {
       this.hideCross();

@@ -1,5 +1,6 @@
 import backdrop from '@/utils/components/backdrop';
 import BaseElement from '@/utils/components/base-element';
+import { widthToHideUsers } from '@/utils/types/types';
 
 export default class Friends extends BaseElement {
   constructor() {
@@ -17,7 +18,7 @@ export default class Friends extends BaseElement {
   }
 
   private showBtn = () => {
-    if (window.innerWidth <= 500) {
+    if (window.innerWidth <= widthToHideUsers) {
       this.show();
     } else {
       this.hide();

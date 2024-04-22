@@ -19,6 +19,7 @@
   display: flex;
   overflow-y: scroll;
   overflow-x: hidden;
+  height: 90%;
   flex-direction: column;
   align-items: center;
   padding: 0;
@@ -99,18 +100,6 @@
     padding: 0.1rem 0.2rem 0.1rem 0;
   }
 
-  .item__indicator {
-    width: 5px;
-    height: 5px;
-  }
-
-  .item__message-counter {
-    width: 10px;
-    height: 10px;
-  }
-}
-
-@media screen and (max-width: 500px) {
   .main__users-section {
     font-size: 1.2rem;
     display: none;
@@ -135,7 +124,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin: 0.4rem;
   }
 
   .user-section__input {

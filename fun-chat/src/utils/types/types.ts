@@ -17,18 +17,6 @@ export type Route = {
   callback: () => void;
 };
 
-export interface Subject {
-  attach(observer: Observer): void;
-
-  detach(observer: Observer): void;
-
-  notify(): void;
-}
-
-export interface Observer {
-  update(subject: Subject): void;
-}
-
 export type WSData = {
   id: string | null;
   type: string;
@@ -145,3 +133,5 @@ export type ResponseDeleteMessageData = ResponseData & {
     };
   };
 };
+
+export const widthToHideUsers = 600;

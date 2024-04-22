@@ -50,7 +50,7 @@
   text-shadow: none;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .main__message-section {
     width: 100%;
   }

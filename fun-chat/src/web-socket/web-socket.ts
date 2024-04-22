@@ -1,7 +1,7 @@
 import Disconnect from '@/pages/disconnect-notification/disconnect';
 import Router from '@/utils/services/router';
 import SessionStorage from '@/utils/services/session-storage';
-import { Observer, ResponseUserData } from '@/utils/types/types';
+import { ResponseUserData } from '@/utils/types/types';
 
 const WBURL = 'ws://localhost:4000';
 
@@ -9,8 +9,6 @@ export class WSocket {
   isFirstLoader = true;
 
   socket: WebSocket = new WebSocket(WBURL);
-
-  observers: Observer[] = [];
 
   user: string = '';
 
