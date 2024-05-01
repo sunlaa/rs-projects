@@ -15,7 +15,7 @@
 
 ---
 #### Time to complete: 2 days ⌛️
-_Start: 01.05.2024_ 
+_Start: 01.05.2024_ \
 _End: 03.05.2024_
 
 ---
