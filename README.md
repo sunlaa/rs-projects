@@ -1,7 +1,6 @@
 (delete unnecessary)
 
 ## Title for the completed work/fix ✅/🛠
----
 
 📌 [Task](https://404team.atlassian.net/browse/EA-9?atlOrigin=eyJpIjoiOTgyYmFjNWI4ZjI1NGFjNzg3MzhmNmE0ZTNmNjAzMGEiLCJwIjoiaiJ9)
 
