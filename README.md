@@ -21,7 +21,7 @@ _End: 03.05.2024_
 ### Acceptance Criteria: ✍️ 
  - [x] Implement client-side validation for the login form, including email and password fields.
 
- - [x] Display clear error messages indicating any validation issues, such as an improperly formatted email
+ - [x] Display clear error messages indicating any validation issues, such as an improperly formatted email /
 
 > [!NOTE]
 > Important notes regarding this PR
